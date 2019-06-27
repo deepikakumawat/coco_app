@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        android:scrollbars="none">
+
+        <include layout="@layout/toolbar_product_grid_detail"/>
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#fff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/modelname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/apple_iphone_x_gold_32_gb"
+                android:textColor="@color/black"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginBottom="5.7dp"
+                android:textSize="13.3sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.3dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="22dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_dash"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/_1_34_900"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="#0f0d0d"
+                    android:textSize="14.3sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10.2dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/cutprice" />
+
+            </LinearLayout>
+
+            <!--viewpager is here-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14.7dp"
+                android:orientation="horizontal">
+
+
+
+                    <xyz.santeri.wvp.WrappingViewPager
+                        android:id="@+id/viewpager1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="330dp"
+                        android:layout_gravity="center"
+                        android:paddingStart="90dp"
+                        android:paddingEnd="90dp"
+                        android:clipToPadding="false" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="9dp"
+                    android:background="#f6f6f6"/>
+
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/tablayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="#ffffff"
+                        app:tabGravity="fill"
+                        app:tabIndicatorColor="#000000"
+                        app:tabIndicatorHeight="3dp"
+                        app:tabMode="scrollable"
+                        app:tabSelectedTextColor="#000000"
+                        app:tabTextAppearance="@style/MyMenuTextAppearance1"
+                        app:tabTextColor="#969eab" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#d7d7d7" />
+
+
+
+
+        <!--view pager is here-->
+
+
+        <xyz.santeri.wvp.WrappingViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewpagercoco">
+        </xyz.santeri.wvp.WrappingViewPager>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:paddingBottom="20dp">
+
+        <Button
+            android:layout_width="128dp"
+            android:layout_height="44.56dp"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="+   Add To Cart"
+            android:paddingLeft="10dp"
+            android:textAllCaps="false"
+            android:background="@drawable/floating_button"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

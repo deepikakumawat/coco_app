@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="17dp"
+        android:paddingLeft="18dp"
+        android:paddingTop="18dp">
+
+
+
+        <RadioButton
+            android:id="@+id/button1"
+            style="@style/radionbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:textColor="#666666"
+            android:textSize="12sp" />
+
+
+
+        <customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/paymentType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:letterSpacing="0.03"
+            android:paddingLeft="16.7dp"
+            android:text="Credit / Debit Card"
+            android:textColor="@color/blackTextColor"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="26dp"
+            android:src="@drawable/credit_card" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/viewline"
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginLeft="65dp"
+        android:background="@color/viewLineColor"
+        android:orientation="vertical" />
+
+</LinearLayout>

@@ -1,0 +1,139 @@
+<resources>
+    <string name="app_name">COCO_Ecommerce_UI_KIT</string>
+
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <string name="dg">D &amp; G</string>
+    <string name="offer"><u>$688</u></string>
+
+    <string name="Rs">\u20B9</string>
+    <string name="review">253 Ratings &amp; 50 Reviews</string>
+    <string name="qa">Q &amp; A</string>
+    <string name="search">Search Product &amp; Brands</string>
+    <string name="policy">Policies, Terms &amp; Condition</string>
+    <string name="top_rated_products">Top Rated Products</string>
+    <string name="you_may_like">You May Like</string>
+
+
+    <string name="coco_ecommerce">COCO Ecommerce</string>
+    <string name="brands">BRANDS</string>
+    <string name="black_ultrasonic_headphones">Black Ultrasonic Headphones</string>
+    <string name="_4_7">4.7</string>
+
+    <string name="_1_34_900">₹1,34,900</string>
+    <string name="_2">2</string>
+    <string name="days">Days</string>
+    <string name="_8">8</string>
+    <string name="hours">Hours</string>
+    <string name="_43">43</string>
+    <string name="min">Min.</string>
+    <string name="sec">Sec.</string>
+    <string name="_15902_people_claimed">15902 People Claimed</string>
+    <string name="claim_this_offer">Claim this offer</string>
+    <string name="puma">Puma</string>
+    <string name="iphone_6s_32gb_n_golden_and_silver">Iphone 6S, 32GB\n(Golden and Silver)</string>
+    <string name="_12">12</string>
+    <string name="_343">$ 343</string>
+
+
+    <string name="type_beauty_amp_personal_care"><![CDATA[Type :  Beauty & Personal Care]]></string>
+    <string name="search_care">Search : Care</string>
+
+
+    <string name="low_price">Low Price</string>
+    <string name="popular">Popular</string>
+    <string name="high_price">High Price</string>
+    <string name="sale">Sale</string>
+
+    <string name="mobiles">MOBILES</string>
+
+
+    <string name="rs">Apple iPhone X (Gold, 32 GB)</string>
+    <string name="mobileprice">Apple iPhone X (Gold, 32 GB)</string>
+    <string name="customer_review_and_q_amp_a"><![CDATA[Customer Review And Q&A]]></string>
+    <string name="_233_ratings_amp_54_reviews"><![CDATA[233 Ratings & 54 Reviews]]></string>
+    <string name="top_review">Top Review</string>
+    <string name="view_all_54_reviews">View All 54 Reviews</string>
+    <string name="product_details">Product Details</string>
+    <string name="a_pair_of_multicoloured_woven_mid_rise_printed_shorts_has_a_waistband_with_belt_loops_zip_fly_and_button_closure_pleat_detailing_below_the_waistband_on_the_front_two_slants_pockets_on_the_front_sides">A pair of multicoloured woven mid-rise printed shorts, has a waistband with belt loops, zip fly and button closure, pleat detailing below the waistband on the front, two slants pockets on the front sides</string>
+    <string name="material_care">Material Care</string>
+    <string name="select_size">SELECT SIZE</string>
+    <string name="titletxt">Apple iPhone X (Gold, 32 GB)</string>
+    <string name="the_model_height_5_8_is_wearing_a_size_28">The model (height 5’8’’) is wearing a size 28</string>
+    <string name="size_chart">Size Chart</string>
+    <string name="_999"><strike>₹999</strike></string>
+    <string name="beech_wood_legs_with_powder_coated_metal_accent_chair_legs_have_bush_attached_for_easy_noiseless_movement_refer_to_the_images_for_dimension_details_any_assembly_required_will_be_done_by_the_ul_team_at_the_time_of_delivery_indoor_use_only">- Beech wood legs, with powder coated metal accent\n - Chair legs have bush attached for easy, noiseless movement\n - Refer to the images for dimension details\n - Any assembly required will be done by the UL team at the time of delivery\n - Indoor use only</string>
+    <string name="properties">Properties</string>
+    <string name="sku_code">SKU Code:</string>
+    <string name="chair_type">Chair Type :</string>
+    <string name="chair_material">Chair Material :</string>
+    <string name="seating_capacity">Seating Capacity :</string>
+    <string name="fncomb81cl10219">FNCOMB81CL10219</string>
+    <string name="without_upholstery">Without Upholstery</string>
+    <string name="plastic">Plastic</string>
+    <string name="one">1</string>
+    <string name="more_details_gt_gt_gt"><![CDATA[More Details >>>]]></string>
+    <string name="model_number_12837jf21">Model number : 12837Jf21</string>
+    <string name="apple">APPLE</string>
+    <string name="_1_70_999"><strike>₹1,70,999</strike></string>
+    <string name="rs_16_1499">Rs. 16,1499</string>
+    <string name="additional_tax_may_apply_charged_at_checkout">Additional tax may apply, charged at checkout.</string>
+    <string name="select_color">Select color</string>
+    <string name="black">Black</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="storage">Storage</string>
+    <string name="_16_gb">16 GB</string>
+    <string name="_32_gb">32 GB</string>
+    <string name="_64_gb">64 GB</string>
+    <string name="_128_gb">128 GB</string>
+    <string name="iphone_6s_32gb_golden_and_silver">Iphone 6S, 32GB (Golden and Silver)</string>
+    <string name="cutprice"><strike>₹1,44,900</strike></string>
+    <string name="_60_off">60% Off</string>
+    <string name="_1_63_999"><strike>₹1,63,999</strike></string>
+    <string name="by_guest_on_24_march_2017">By Guest on 24 March 2017</string>
+    <string name="free_delivery_between_sep_18_sep_20">Free Delivery Between Sep 18 - Sep 20</string>
+
+
+    <string name="_764_ratings_amp_105_reviews">764 Ratings &amp; 105 Reviews></string>
+    <string name="apple_iphone_xs_max_space_grey_256_gb">Apple iPhone XS Max (Space Grey, \n256 GB)</string>
+
+
+    <string name="hello_world"><font fgcolor="#707070">We found 129 products by</font>
+    <font fgcolor="#f24b16">Care</font></string>
+    <string name="_764_ratings">764 Ratings</string>
+    <string name="refine">REFINE</string>
+    <string name="sort_by">SORT BY</string>
+    <string name="brand">BRANDS</string>
+
+
+    <string name="apple_iphone_xs_max_space_grey">Apple iPhone XS Max (Space Grey)</string>
+
+
+    <string name="great_diwali_gift">Great Diwali Gift</string>
+    <string name="verified_user">Verified User</string>
+    <string name="by_ruchi_on_24_march_2017">By Ruchi on 24 march 2017</string>
+    <string name="surprice_gift_to_my_sister_she_just_jumped_in_air_loved_it">Surprice Gift to my sister, she just jumped in air, loved it…</string>
+    <string name="reviews">Reviews</string>
+
+    <string name="apple_iphone_x_gold_32_gb">Apple iPhone X (Gold, 32 GB)</string>
+    <string name="str_categories">Categories</string>
+
+
+
+    <string name="email_validation_message">Email can\'t be blank!</string>
+    <string name="invalid_password">Password can\'t be blank!</string>
+    <string name="invalid_email">Invalid Email.</string>
+    <string name="network_connection">Please check internet connection</string>
+    <string name="first_name_validation_message">First name can\'t be blank!</string>
+    <string name="last_name_validation_message">Last name can\'t be blank!</string>
+    <string name="password_confirm_password">Confirm password should be same as password.</string>
+    <string name="invalid_mobile_number">Mobile number can\'t be blank!</string>
+    <string name="mobile_number">Incorrect mobile number.</string>
+    <string name="do_you_want_to_logout">Do you want to Log Out ?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+
+
+</resources>

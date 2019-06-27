@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11sp"
+            android:layout_marginTop="11sp"
+            android:layout_marginRight="11sp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="17dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="56dp"
+                            android:src="@drawable/iphnx"
+                            android:visibility="gone" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="vertical">
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:text="Name"
+                                android:textColor="@color/black"
+                                android:textSize="13.3sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal">
+
+                                <customfonts.MyTextView_Roboto_Bold
+                                    android:id="@+id/txtAddressType"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Address Type"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
+
+                                <customfonts.MyTextView_Roboto_Medium
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="(Cash On Delivery)"
+                                    android:textColor="@color/green"
+                                    android:textSize="12.3sp"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.7dp"
+                                android:layout_marginTop="15dp"
+                                android:background="#48707070" />
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtAddress1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10.5dp"
+                                android:text="Address1"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtAddress2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="Address2"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtLandmark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="LandMark"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtCity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="City"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtState"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="State"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtCountry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="Courntry"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtZipcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="Zipcode"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtPhone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3.5dp"
+                                android:text="Phone"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <customfonts.Button_Roboto_Medium
+                        android:layout_width="0dp"
+                        android:layout_height="33.3dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_gray_rect1"
+                        android:gravity="center"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="25dp"
+                        android:id="@+id/btnDelete"
+                        android:paddingBottom="8dp"
+                        android:text="Delete"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <customfonts.Button_Roboto_Medium
+                        android:layout_width="0dp"
+                        android:layout_height="33.3dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_gray_rect1"
+                        android:gravity="center"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="8dp"
+                        android:text="Update"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <customfonts.Button_Roboto_Medium
+                        android:layout_width="0dp"
+                        android:layout_height="33.3dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_gray_rect1"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="8dp"
+                        android:text="Cancel Order"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

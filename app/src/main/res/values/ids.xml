@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    <item type="id" name="RootAppbarLayout"/>
+    <item type="id" name="ToolbarExtensionLayout"/>
+    <item type="id" name="ToolbarInfoIcon"/>
+    <item type="id" name="Toolbar"/>
+    <item type="id" name="rootLayout"/>
+</resources>

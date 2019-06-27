@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="119.7dp"
+        app:cardElevation="2dp"
+        android:layout_marginBottom="7dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14.3dp"
+            android:layout_marginTop="14.7dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="23.3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/great"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/great_diwali_gift"
+                    android:textColor="@color/primarytext"
+                    android:textSize="12.7sp" />
+
+                <TextView
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verified_user"
+                    android:textColor="@color/green"
+                    android:textSize="11.3sp" />
+
+            </LinearLayout>
+
+            <RatingBar
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.8dp"
+                android:gravity="center_vertical"
+                android:isIndicator="false"
+                android:max="5"
+                android:numStars="5"
+                android:progressTint="@color/yellow"
+                android:rating="2.5"
+                android:stepSize="0.0" />
+
+
+            <TextView
+                android:fontFamily="@font/roboto_regular"
+                android:layout_marginTop="14.7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_ruchi_on_24_march_2017"
+                android:textColor="#95989a"
+                android:textSize="10.3sp" />
+
+            <TextView
+                android:layout_marginTop="4.7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surprice_gift_to_my_sister_she_just_jumped_in_air_loved_it"
+                android:textColor="#666666"
+                android:textSize="11.3sp"
+                android:fontFamily="@font/roboto_regular" />
+
+
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

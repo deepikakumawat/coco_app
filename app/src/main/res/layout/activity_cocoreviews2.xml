@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6f7"
+    android:orientation="vertical"
+    tools:context=".Cocoreviews2Activity">
+
+    <include layout="@layout/toolbar_product_grid_detail" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardElevation="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Great Diwali Gift"
+                            android:textColor="#0f0d0d"
+                            android:textSize="12.7sp" />
+
+                        <RatingBar
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:isIndicator="false"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="2.5"
+                            android:stepSize="0.0"
+                            android:theme="@style/RatingBar" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="By Ruchi on 24 march 2017"
+                        android:textColor="#95989a"
+                        android:textSize="10.3sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2.5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Surprice Gift to my sister, she just jumped in air, loved it…"
+                        android:textColor="#0f0d0d"
+                        android:textSize="13sp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Great Diwali Gift"
+                            android:textColor="#0f0d0d"
+                            android:textSize="12.7sp" />
+
+                        <RatingBar
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:isIndicator="false"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="2.5"
+                            android:stepSize="0.0"
+                            android:theme="@style/RatingBar" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="By Ruchi on 24 march 2017"
+                        android:textColor="#95989a"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="4.7dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Surprice Gift to my sister, she just jumped in air, loved it…"
+                        android:textColor="#0f0d0d"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/shadow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Great Diwali Gift"
+                            android:textColor="#0f0d0d"
+                            android:textSize="12.7sp" />
+
+                        <RatingBar
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:isIndicator="false"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="2.5"
+                            android:stepSize="0.0"
+                            android:theme="@style/RatingBar" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="By Ruchi on 24 march 2017"
+                        android:textColor="#95989a"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="4.7dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Surprice Gift to my sister, she just jumped in air, loved it…"
+                        android:textColor="#0f0d0d"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/shadow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Great Diwali Gift"
+                            android:textColor="#0f0d0d"
+                            android:textSize="12.7sp" />
+
+                        <RatingBar
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:isIndicator="false"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="2.5"
+                            android:stepSize="0.0"
+                            android:theme="@style/RatingBar" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="By Ruchi on 24 march 2017"
+                        android:textColor="#95989a"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="4.7dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Surprice Gift to my sister, she just jumped in air, loved it…"
+                        android:textColor="#0f0d0d"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/shadow" />
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="8dp"
+                app:cardElevation="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Great Diwali Gift"
+                            android:textColor="#0f0d0d"
+                            android:textSize="12.7sp" />
+
+                        <RatingBar
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:isIndicator="false"
+                            android:max="5"
+                            android:numStars="5"
+                            android:rating="2.5"
+                            android:stepSize="0.0"
+                            android:theme="@style/RatingBar" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="By Ruchi on 24 march 2017"
+                        android:textColor="#95989a"
+                        android:textSize="10.3sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2.5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Surprice Gift to my sister, she just jumped in air, loved it…"
+                        android:textColor="#0f0d0d"
+                        android:textSize="13sp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="70dp"
+                                android:layout_height="73.5dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="9dp"
+                                android:background="@drawable/rect_white_border"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img2" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

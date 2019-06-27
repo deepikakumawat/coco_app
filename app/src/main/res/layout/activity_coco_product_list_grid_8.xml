@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f5f6f7"
+    android:orientation="vertical"
+    tools:context=".Coco_product_list_grid_8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <include layout="@layout/toolbar_product_grid_detail" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="112dp"
+                            android:layout_height="112dp"
+                            android:layout_marginTop="15dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/image_160" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="11.7dp"
+                                android:layout_marginBottom="7dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Black Ultrasonic Headphones"
+                                android:textColor="#0f0d0d"
+                                android:textSize="14.3sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="18dp"
+                                    android:background="@drawable/green_rect_fill"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="4.7"
+                                        android:textColor="#ffffff"
+                                        android:textSize="10sp" />
+
+                                    <ImageView
+                                        android:layout_width="9.5dp"
+                                        android:layout_height="9.5dp"
+                                        android:tint="@color/white"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_star_black_24dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="6.2dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text="764 Ratings &amp; 105 Reviews"
+                                    android:textColor="#666666"
+                                    android:textSize="11.3sp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:background="@drawable/dashedline_rectangle_full"
+                                android:fontFamily="@font/roboto_bold"
+                                android:gravity="center"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="12dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="₹1,34,900"
+                                android:textColor="#0f0d0d"
+                                android:textSize="14.7sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="23dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <FrameLayout
+                                        android:layout_width="49dp"
+                                        android:layout_height="49dp"
+                                        android:layout_marginRight="5.7dp"
+                                        android:background="@drawable/dashedline_circle_grey">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/roboto_bold"
+                                            android:text="2"
+                                            android:textColor="#0f0d0d"
+                                            android:textSize="16.7sp" />
+
+
+                                    </FrameLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/roboto_regular"
+                                        android:text="Days"
+                                        android:textColor="#666666"
+                                        android:textSize="12.7sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <FrameLayout
+                                        android:layout_width="49dp"
+                                        android:layout_height="49dp"
+                                        android:layout_marginRight="5.7dp"
+                                        android:background="@drawable/dashedline_circle_grey">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:text="8"
+                                            android:textColor="#0f0d0d"
+                                            android:textSize="16.7sp" />
+
+
+                                    </FrameLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/roboto_regular"
+                                        android:text="Hours"
+                                        android:textColor="#666666"
+                                        android:textSize="12.7sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <FrameLayout
+                                        android:layout_width="49dp"
+                                        android:layout_height="49dp"
+                                        android:layout_marginRight="5.7dp"
+                                        android:background="@drawable/dashedline_circle_grey">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:text="43"
+                                            android:textColor="#0f0d0d"
+                                            android:textSize="16.7sp" />
+
+
+                                    </FrameLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/roboto_regular"
+                                        android:text="Min."
+                                        android:textColor="#666666"
+                                        android:textSize="12.7sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <FrameLayout
+                                        android:layout_width="49dp"
+                                        android:layout_height="49dp"
+                                        android:layout_marginRight="5.7dp"
+                                        android:background="@drawable/dashedline_circle_grey">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:text="12"
+                                            android:textColor="#0f0d0d"
+                                            android:textSize="16.7sp" />
+
+
+                                    </FrameLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/roboto_regular"
+                                        android:text="Sec."
+                                        android:textColor="#666666"
+                                        android:textSize="12.7sp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:elevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="46dp"
+                            android:orientation="horizontal"
+                            android:background="#fafafa"
+                            android:paddingLeft="12.3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="15902 People Claimed"
+                                android:textColor="#0f0d0d"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="123.5dp"
+                                android:layout_height="46dp"
+                                android:background="#c32818"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="center"
+                                android:text="Claim this offer"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:clipToPadding="false"
+                android:background="#f5f6f7" />
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/trans"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/filter" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
