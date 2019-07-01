@@ -15,10 +15,9 @@ import android.widget.TextView;
 import com.ws.design.coco_ecommerce_ui_kit.AddNewAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CategoryActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity;
-import com.ws.design.coco_ecommerce_ui_kit.CocoCart1Activity;
-import com.ws.design.coco_ecommerce_ui_kit.CocoCartActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoEcommerceHomeActivity;
-import com.ws.design.coco_ecommerce_ui_kit.CocoEmptyWhishListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoFilter1_Activity;
 import com.ws.design.coco_ecommerce_ui_kit.HomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoLogin1Activity;
@@ -52,7 +51,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.Navigation1;
 import com.ws.design.coco_ecommerce_ui_kit.NavigationActivity2;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.ProductDetailActivity;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailActivity;
 import com.ws.design.coco_ecommerce_ui_kit.ProductGridActivity;
 import com.ws.design.coco_ecommerce_ui_kit.ProductListActivity;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -183,13 +182,13 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, CocoAddNewAddress1Activity.class);
                     context.startActivity(i);
                 }else if (position == 19) {
-                    Intent i = new Intent(context, CocoCartActivity.class);
+                    Intent i = new Intent(context, CartActivity.class);
                     context.startActivity(i);
                 }else if (position == 20) {
-                    Intent i = new Intent(context, CocoCart1Activity.class);
-                    context.startActivity(i);
+//                    Intent i = new Intent(context, CocoCart1Activity.class);
+//                    context.startActivity(i);
                 } else if (position == 21) {
-                    Intent i = new Intent(context, CocoEmptyWhishListActivity.class);
+                    Intent i = new Intent(context, MyWishlistActivity.class);
                     context.startActivity(i);
                 }else if (position == 22) {
                     Intent i = new Intent(context, CocoLogin1Activity.class);

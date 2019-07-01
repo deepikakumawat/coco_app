@@ -6,8 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class ForgotPasswordResponse {
 
 
-
-
     @SerializedName("data")
     @Expose
     private ForgotPasswordData mForgotPasswordData;

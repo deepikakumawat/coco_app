@@ -51,7 +51,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
             holder.btnDelete.setTag(addressData);
             holder.btnDelete.setTag(R.id.btnDelete,position);
-
             holder.btnDelete.setOnClickListener( addressListActivity);
         }
 

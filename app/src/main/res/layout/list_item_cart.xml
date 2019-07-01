@@ -11,7 +11,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/phoneImage"
+            android:id="@+id/imgProduct"
             android:layout_width="28.2dp"
             android:layout_height="56.7dp"
             android:layout_marginLeft="29dp"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <customfonts.MyTextView_Roboto_Medium
-                android:id="@+id/phoneName"
+                android:id="@+id/txtProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.03"
@@ -49,7 +49,7 @@
 
 
                     <LinearLayout
-                        android:id="@+id/decrement"
+                        android:id="@+id/lyDecrement"
                         android:layout_width="22.6dp"
                         android:layout_height="22.6dp"
                         android:layout_gravity="center"
@@ -64,7 +64,7 @@
                     </LinearLayout>
 
                     <customfonts.MyTextView_Roboto_Medium
-                        android:id="@+id/display_inc_dec"
+                        android:id="@+id/txtIncDec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10.7dp"
@@ -74,7 +74,7 @@
                         android:textSize="14.3sp" />
 
                     <LinearLayout
-                        android:id="@+id/increment"
+                        android:id="@+id/lyIncrement"
                         android:layout_width="22.6dp"
                         android:layout_height="22.6dp"
                         android:background="@drawable/add_minus_rect"
@@ -90,13 +90,51 @@
                 </LinearLayout>
 
                 <customfonts.MyTextView_Roboto_Medium
-                    android:id="@+id/amount"
+                    android:id="@+id/txtProductPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="24.3dp"
                     android:text="$288"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.3dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+
+
+                    <customfonts.MyTextView_Roboto_Medium
+                        android:id="@+id/txtCross"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="24.3dp"
+                        android:text="Cross"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <customfonts.MyTextView_Roboto_Medium
+                        android:id="@+id/txtOneByOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="24.3dp"
+                        android:text="One By One"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 

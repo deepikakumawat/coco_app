@@ -27,6 +27,8 @@ public class ApiUtils {
     }
 
     public static final String BASE_URL = "https://richkart.com/api/";
+    public static final String HEADER_KEY = "a97d681eac458ea566383e312d6f0fe342b210ae";
+
 
     public static APIService getAPIService() {
 
@@ -64,7 +66,7 @@ public class ApiUtils {
                 }
             });
 
-            httpClient.addInterceptor(new Interceptor() {
+          /*  httpClient.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Interceptor.Chain chain) throws IOException {
                     Request original = chain.request();
@@ -72,7 +74,21 @@ public class ApiUtils {
                     Request request = requestBuilder.build();
                     return chain.proceed(request);
                 }
+            });*/
+
+
+
+            httpClient.addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Request original = chain.request();
+                    Request.Builder requestBuilder = original.newBuilder()
+                            .addHeader("authorization", HEADER_KEY);
+                    Request request = requestBuilder.build();
+                    return chain.proceed(request);
+                }
             });
+
 
 //            OkHttpClient client = httpClient.build();
 

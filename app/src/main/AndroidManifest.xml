@@ -38,9 +38,8 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Navigation1" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.AddNewAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoCartActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoCart1Activity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoEmptyWhishListActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Signup2Activity" />

@@ -27,7 +27,9 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 
@@ -90,13 +92,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 if (position == 0) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
                 } else if (position == 1) {
-                    startActivity(new Intent(DrawerActivity.this, CocoCartActivity.class));
+                    startActivity(new Intent(DrawerActivity.this, CartActivity.class));
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
                 } else if (position == 4) {
-//                    startActivity(new Intent(DrawerActivity.this, CocoEmptyWhishListActivity.class));
+                   startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
                 } else if (position == 5) {
                     startActivity(new Intent(DrawerActivity.this, MyAccountActivity.class));
                 } else if (position == 6) {
@@ -229,7 +231,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         toolbar.findViewById(R.id.btn_cart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DrawerActivity.this, CocoCartActivity.class));
+                startActivity(new Intent(DrawerActivity.this, CartActivity.class));
             }
         });
 
@@ -319,11 +321,20 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             builder.setMessage(getString(R.string.do_you_want_to_logout))
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            CocoPreferences.removeValueForKey(LoginResponse.KEY_USERID);
+                          /*  CocoPreferences.removeValueForKey(LoginResponse.KEY_USERID);
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_USEREMAIL);
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_USERPHONE);
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_FIRST_NAME);
-                            CocoPreferences.removeValueForKey(LoginResponse.KEY_LAST_NAME);
+                            CocoPreferences.removeValueForKey(LoginResponse.KEY_LAST_NAME);*/
+
+
+                            CocoPreferences.removeValueForKey("UserID");
+                            CocoPreferences.removeValueForKey("UserEmail");
+                            CocoPreferences.removeValueForKey("UserPhone");
+                            CocoPreferences.removeValueForKey("FirstName");
+                            CocoPreferences.removeValueForKey("LastName");
+
+
                             txtUserName.setVisibility(View.GONE);
                             txtUserEmail.setVisibility(View.GONE);
                             txtLoginSignup.setVisibility(View.VISIBLE);

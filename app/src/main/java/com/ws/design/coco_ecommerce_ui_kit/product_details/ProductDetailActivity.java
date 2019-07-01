@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit;
+package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,11 +6,11 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +20,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.ReviewActivity;
+import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 
 import java.util.ArrayList;
 
 import Adapter.RecycleAdapteTopTenHome;
-import Adapter.ViewpagerAdapter;
 import Adapter.ViewpagerProductDetailsAdapter;
 import Model.TopTenModelClass;
 import fragment.CustomItemClickListener;
 import fragment.ToolbarBaseFragment;
-import me.relex.circleindicator.CircleIndicator;
 
-public class ProductDetailActivity extends ToolbarBaseFragment implements View.OnClickListener {
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
+
+public class ProductDetailActivity extends ToolbarBaseFragment implements ProductDetailsView, View.OnClickListener {
 
     TextView offer;
     RelativeLayout rightNav;
@@ -41,6 +45,8 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements View.O
 
     LinearLayout right1,right2,right3;
     ImageView right1_imag,right2_imag,right3_imag;
+
+
 
 
     private ViewPager viewPager;
@@ -56,6 +62,11 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements View.O
 
     RelativeLayout relative1,relative2,relative3,relative4;
     private View mView;
+
+    private ProductDetailsPresenter productDetailsPresenter;
+    private TextView txtAddToWishlist;
+    private TextView txtAddToCart;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -67,6 +78,14 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements View.O
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        productDetailsPresenter = new ProductDetailsPresenter(this);
+
+        txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
+        txtAddToCart = mView.findViewById(R.id.txtAddToCart);
+        txtAddToWishlist.setOnClickListener(this);
+        txtAddToCart.setOnClickListener(this);
+
 
         right1 = mView.findViewById(R.id.right1);
         right2 = mView.findViewById(R.id.right2);
@@ -268,6 +287,51 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements View.O
                 viewPager.setCurrentItem(3);
                 break;
 
+            case R.id.txtAddToWishlist:
+                productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), "20");
+                break;
+            case R.id.txtAddToCart:
+                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), "20");
+                break;
+                default:
+                    break;
+
+        }
+    }
+
+    @Override
+    public void showWait() {
+        showProDialog(getActivity());
+    }
+
+    @Override
+    public void removeWait() {
+        dismissProDialog();
+    }
+
+    @Override
+    public void onFailure(String appErrorMessage) {
+
+        showCenteredToast(getActivity(), appErrorMessage);
+    }
+
+    @Override
+    public void addToWishList(AddToWishListResponse addToWishListResponse) {
+        if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
+            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+
+        }else {
+            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+        }
+    }
+
+    @Override
+    public void addToCart(AddToCartResponse addToWishListResponse) {
+        if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
+            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+
+        }else {
+            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
         }
     }
 }

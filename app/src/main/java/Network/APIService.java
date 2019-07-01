@@ -4,7 +4,15 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.EmptyCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.RemoveCartByCrossResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.RemoveCartOneByOneResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 
@@ -38,11 +46,11 @@ public interface APIService {
     @POST("saveuserdata")
     @FormUrlEncoded
     Call<SignUpResponse> doSignUp(@Field("email") String email,
-                                        @Field("fname") String fName,
-                                        @Field("lname") String lName,
-                                        @Field("mobileno") String phone,
-                                        @Field("password") String password,
-                                        @Field("cn_password") String confirmPassword);
+                                  @Field("fname") String fName,
+                                  @Field("lname") String lName,
+                                  @Field("mobileno") String phone,
+                                  @Field("password") String password,
+                                  @Field("cn_password") String confirmPassword);
 
 
     @POST("passwordreset")
@@ -83,7 +91,46 @@ public interface APIService {
     @FormUrlEncoded
     Call<UpdateProfileResponse> doUpdateProfile(@Field("id") String userId,
                                                 @Field("name") String fName,
-                                                      @Field("lastname") String lName,
-                                                      @Field("mobileno") String phone,
-                                                      @Field("password") String password);
+                                                @Field("lastname") String lName,
+                                                @Field("mobileno") String phone,
+                                                @Field("password") String password);
+
+    @POST("wishlist")
+    @FormUrlEncoded
+    Call<MyWishListResponse> getMyWishList(@Field("user_id") String userID);
+
+
+    @POST("add-to-wishlist")
+    @FormUrlEncoded
+    Call<AddToWishListResponse> addToWishList(@Field("user_id") String userID,
+                                              @Field("product_id") String productId);
+
+    @POST("remove-wishlist")
+    @FormUrlEncoded
+    Call<RemoveWishListResponse> removeWishList(@Field("wishlist_id") String wishlistId);
+
+
+    @POST("add-to-cart")
+    @FormUrlEncoded
+    Call<AddToCartResponse> addToCart(@Field("user_id") String userID,
+                                          @Field("product_id") String productId);
+
+    @POST("cartlist")
+    @FormUrlEncoded
+    Call<CartListResponse> getCartList(@Field("user_id") String userID);
+
+    @POST("empty-cart")
+    @FormUrlEncoded
+    Call<EmptyCartResponse> emptyCart(@Field("user_id") String userID);
+
+    @POST("remove-from-cart-one-by-one")
+    @FormUrlEncoded
+    Call<RemoveCartOneByOneResponse> removeCartOneByOne(@Field("user_id") String userID,
+                                               @Field("product_id") String productId);
+
+
+    @POST("remove-cart-cross-button")
+    @FormUrlEncoded
+    Call<RemoveCartByCrossResponse> removeCartByCross();
 }
+

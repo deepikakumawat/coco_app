@@ -98,14 +98,14 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
             if (loginResponse != null) {
 
-                if (!TextUtils.isEmpty(loginResponse.getmStatus()) && ("1".equalsIgnoreCase(loginResponse.getmStatus()))) {
+                if (!TextUtils.isEmpty(loginResponse.getMStatus()) && ("1".equalsIgnoreCase(loginResponse.getMStatus()))) {
 
 
-                    CocoPreferences.setUserId(loginResponse.getmLoginData().getmId());
-                    CocoPreferences.setUserEmail(loginResponse.getmLoginData().getmEmail());
-                    CocoPreferences.setUserPhone(loginResponse.getmLoginData().getmMobileNo());
-                    CocoPreferences.setFirstName(loginResponse.getmLoginData().getmName());
-                    CocoPreferences.setLastName(loginResponse.getmLoginData().getmLastName());
+                    CocoPreferences.setUserId(loginResponse.getLoginData().getMId());
+                    CocoPreferences.setUserEmail(loginResponse.getLoginData().getMEmail());
+                    CocoPreferences.setUserPhone(loginResponse.getLoginData().getMMobileNo());
+                    CocoPreferences.setFirstName(loginResponse.getLoginData().getMName());
+                    CocoPreferences.setLastName(loginResponse.getLoginData().getMLastName());
                     CocoPreferences.savePreferencese();
 
 

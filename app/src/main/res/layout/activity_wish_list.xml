@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6f7"
+    android:orientation="vertical"
+    tools:context="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity">
+
+    <include
+        android:id="@+id/includeLayout"
+        layout="@layout/toolbar_cart"></include>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/txtStartShopping"
+        android:layout_below="@+id/includeLayout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:id="@+id/lyEmpty">
+
+            <ImageView
+                android:id="@+id/imgEmptyWishlist"
+                android:layout_width="165dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="150dp"
+                android:background="#f5f6f7"
+                android:src="@drawable/empty" />
+
+            <customfonts.MyTextView_Roboto_Medium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center_horizontal"
+                android:text="You have no items in your wishlist"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMyWishList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </RelativeLayout>
+
+
+    <customfonts.Button_Roboto_Medium
+        android:id="@+id/txtStartShopping"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/shopping_rect"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+
+        android:paddingRight="30dp"
+        android:text="Start Shoping"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
