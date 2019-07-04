@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -54,8 +55,9 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
     private RecyclerView rvCart;
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private TextView txtEmptyCart;
-    private int removeOnByOnePostion=-1;
-    private int removeCorssPostion =-1;
+    private int removeOnByOnePostion = -1;
+    private int removeCorssPostion = -1;
+    private ImageView imgBack;
 
 
     @Override
@@ -65,11 +67,14 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
 
         cartPresenter = new CartPresenter(this);
         rvCart = findViewById(R.id.rvCart);
+        imgBack = findViewById(R.id.imgBack);
         txtEmptyCart = findViewById(R.id.txtEmptyCart);
         txtEmptyCart.setOnClickListener(this);
         cartPresenter.getCartList("87");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvCart.setLayoutManager(layoutManager);
+
+        imgBack.setOnClickListener(this);
 
 
     /*    navigationModelClasses = new ArrayList<>();
@@ -164,7 +169,7 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     cartPresenter.emptyCart(CocoPreferences.getUserId());
                     break;
                 case R.id.txtOneByOne:
-                   productData = ((CartListResponse.ProductData) view.getTag());
+                    productData = ((CartListResponse.ProductData) view.getTag());
                     removeOnByOnePostion = (int) view.getTag(R.id.txtOneByOne);
                     if (productData != null) {
 
@@ -173,13 +178,16 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     }
                     break;
                 case R.id.txtCross:
-                  productData = ((CartListResponse.ProductData) view.getTag());
+                    productData = ((CartListResponse.ProductData) view.getTag());
                     removeCorssPostion = (int) view.getTag(R.id.txtCross);
                     if (productData != null) {
 
                         cartPresenter.removeCartByCross();
 
                     }
+                    break;
+                case R.id.imgBack:
+                    finish();
                     break;
                 default:
                     break;

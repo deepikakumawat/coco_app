@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.ReviewActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 
 import java.util.ArrayList;
@@ -67,6 +71,10 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
     private TextView txtAddToWishlist;
     private TextView txtAddToCart;
 
+    private ArrayList<ProductDetailsSimilier> productDetailsArrayList = new ArrayList<>();
+    private ProductDetailsViewPager productDetailsViewPager;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -80,6 +88,7 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         productDetailsPresenter = new ProductDetailsPresenter(this);
+        productDetailsPresenter.getProductDetails("apple-ipad-pro--1383");
 
         txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
         txtAddToCart = mView.findViewById(R.id.txtAddToCart);
@@ -138,8 +147,8 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
 
         rightNav = (RelativeLayout) mView.findViewById(R.id.rightNav);
         viewPager = (ViewPager) mView.findViewById(R.id.viewpager_product_detail);
-        viewpagerAdapter = new ViewpagerProductDetailsAdapter(getActivity().getSupportFragmentManager());
-        viewPager.setAdapter(viewpagerAdapter);
+      /*  viewpagerAdapter = new ViewpagerProductDetailsAdapter(getActivity().getSupportFragmentManager());
+        viewPager.setAdapter(viewpagerAdapter);*/
 
         // Images right navigatin
         rightNav.setOnClickListener(new View.OnClickListener() {
@@ -288,10 +297,11 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
                 break;
 
             case R.id.txtAddToWishlist:
-                productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), "20");
+//                productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), "1547");
+                productDetailsPresenter.addToWishList("87", "1547");
                 break;
             case R.id.txtAddToCart:
-                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), "20");
+                productDetailsPresenter.addToCart("87", "1544","1");
                 break;
                 default:
                     break;
@@ -322,6 +332,20 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
 
         }else {
             showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+        }
+    }
+
+    @Override
+    public void getProductDetails(ProductDetailsResponse productDetailsResponse) {
+
+        if (productDetailsResponse != null) {
+            if (!productDetailsResponse.getmData().getmProduct().isEmpty()) {
+                productDetailsArrayList.clear();
+                productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
+
+                productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsArrayList);
+                viewPager.setAdapter(productDetailsViewPager);
+            }
         }
     }
 

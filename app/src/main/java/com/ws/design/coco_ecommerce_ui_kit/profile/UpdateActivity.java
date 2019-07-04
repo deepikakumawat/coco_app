@@ -3,7 +3,9 @@ package com.ws.design.coco_ecommerce_ui_kit.profile;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -12,7 +14,7 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class UpdateActivity extends AppCompatActivity implements UpdateView {
+public class UpdateActivity extends AppCompatActivity implements UpdateView , View.OnClickListener{
 
 
     private UpdateProfilePresenter updateProfilePresenter;
@@ -23,6 +25,9 @@ public class UpdateActivity extends AppCompatActivity implements UpdateView {
     private EditText etConfirmPassword;
     private EditText etPassword;
     private EditText etPhone;
+
+    TextView title,edit,test,edit_txt;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,18 @@ public class UpdateActivity extends AppCompatActivity implements UpdateView {
 
 
     private void init() {
+
+        title = (TextView)findViewById(R.id.title);
+        edit_txt = (TextView)findViewById(R.id.edit_txt);
+        edit_txt.setVisibility(View.GONE);
+        edit = (TextView)findViewById(R.id.edit);
+        imgBack = (ImageView)findViewById(R.id.imgBack);
+        edit.setVisibility(View.GONE);
+        title.setVisibility(View.VISIBLE);
+        title.setText("Profile");
+        imgBack.setOnClickListener(this);
+
+
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
@@ -122,4 +139,20 @@ public class UpdateActivity extends AppCompatActivity implements UpdateView {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        try{
+            int vId = view.getId();
+            switch (vId){
+                case R.id.imgBack:
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }

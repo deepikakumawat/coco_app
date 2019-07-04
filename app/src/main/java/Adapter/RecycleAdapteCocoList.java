@@ -12,14 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ws.design.coco_ecommerce_ui_kit.AddNewAddressActivity;
+import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CategoryActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoEcommerceHomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoFilter1_Activity;
-import com.ws.design.coco_ecommerce_ui_kit.HomeActivity;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoLogin1Activity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductDetails2;
@@ -176,7 +176,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, NavigationActivity2.class);
                     context.startActivity(i);
                 }else if (position == 17) {
-                    Intent i = new Intent(context, AddNewAddressActivity.class);
+                    Intent i = new Intent(context, AddAddressActivity.class);
                     context.startActivity(i);
                 }else if (position == 18) {
                     Intent i = new Intent(context, CocoAddNewAddress1Activity.class);

@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit.utility;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,12 +9,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 public class Util {
+    private  ProgressBar mProgressBar = null;
+
     public static boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -23,9 +29,10 @@ public class Util {
     }
 
     private static ProgressDialog progressDialog;
+    private static CustomProgressBar customProgressBar;
 
     public static Dialog showProDialog(Context context) {
-        try {
+       /* try {
             if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
@@ -36,19 +43,30 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return progressDialog;
+        return progressDialog;*/
+
+        customProgressBar = new CustomProgressBar(context); // In onCreate
+        customProgressBar.show(); // To show the progress bar
+        return  null;
     }
 
     public static Dialog dismissProDialog() {
-        try {
+       /* try {
             if (progressDialog != null) {
                 progressDialog.dismiss();
             }
             progressDialog = null;
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+
+        if (customProgressBar != null) {
+            customProgressBar.hide(); // To show the progress bar
+
         }
-        return progressDialog;
+
+
+        return null;
     }
 
     public static boolean isDeviceOnline(Context context) {
@@ -85,6 +103,34 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void ProgressBarHandler(Context context) {
+
+        ViewGroup layout = (ViewGroup) ((Activity) context).findViewById(android.R.id.content).getRootView();
+
+        mProgressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleLarge);
+        mProgressBar.setIndeterminate(true);
+
+        RelativeLayout.LayoutParams params = new
+                RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        RelativeLayout rl = new RelativeLayout(context);
+
+        rl.setGravity(Gravity.CENTER);
+        rl.addView(mProgressBar);
+
+        layout.addView(rl, params);
+
+        hide();
+    }
+
+    public void show() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hide() {
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
 
 }

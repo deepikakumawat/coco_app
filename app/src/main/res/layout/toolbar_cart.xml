@@ -10,6 +10,7 @@
         <ImageView
             android:layout_width="17.7dp"
             android:layout_height="17.7dp"
+            android:id="@+id/imgBack"
             android:layout_marginTop="3dp"
             android:src="@drawable/ic_back_arrow" />
         <customfonts.MyTextView_Roboto_Medium

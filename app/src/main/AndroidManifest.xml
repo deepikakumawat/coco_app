@@ -36,7 +36,7 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MyAccountActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.NavigationActivity2" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Navigation1" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.AddNewAddressActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity" />

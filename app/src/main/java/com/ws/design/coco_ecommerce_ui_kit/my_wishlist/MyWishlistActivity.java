@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +27,8 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
     private ArrayList<MyWishListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private MyWishListPresenter myWishListPresenter;
     private LinearLayout lyEmpty;
-    private int removePosstion=-1;
+    private int removePosstion = -1;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +37,14 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
 
         myWishListPresenter = new MyWishListPresenter(this);
 
-        txt1=(TextView)findViewById(R.id.txt1);
-        lyEmpty=(LinearLayout)findViewById(R.id.lyEmpty);
-        rvMyWishList=(RecyclerView)findViewById(R.id.rvMyWishList);
+        txt1 = (TextView) findViewById(R.id.txt1);
+        lyEmpty = (LinearLayout) findViewById(R.id.lyEmpty);
+        imgBack = findViewById(R.id.imgBack);
+        rvMyWishList = (RecyclerView) findViewById(R.id.rvMyWishList);
         txt1.setText("Whishlist");
 
         myWishListPresenter.getMyWishList("87");
+        imgBack.setOnClickListener(this);
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -70,7 +74,7 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
         if (productDataArrayList.isEmpty()) {
             lyEmpty.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
             lyEmpty.setVisibility(View.GONE);
 
         }
@@ -91,29 +95,28 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
     }
 
 
-
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(this,removeWishListResponse.getmData());
+            showCenteredToast(this, removeWishListResponse.getmData());
             if (myWishListAdapter != null) {
                 productDataArrayList.remove(removePosstion);
                 myWishListAdapter.notifyDataSetChanged();
             }
-        }else {
-            showCenteredToast(this,removeWishListResponse.getmData());
+        } else {
+            showCenteredToast(this, removeWishListResponse.getmData());
         }
     }
 
 
     @Override
     public void onClick(View view) {
-        try{
+        try {
             int vId = view.getId();
-            switch (vId){
+            switch (vId) {
                 case R.id.txtProductName:
-                    MyWishListResponse.ProductData  productData = ((MyWishListResponse.ProductData) view.getTag());
-                    removePosstion=(int)view.getTag(R.id.txtProductName);
+                    MyWishListResponse.ProductData productData = ((MyWishListResponse.ProductData) view.getTag());
+                    removePosstion = (int) view.getTag(R.id.txtProductName);
 
                     if (productData != null) {
 
@@ -121,10 +124,13 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
 
                     }
                     break;
-                    default:
-                        break;
+                case R.id.imgBack:
+                    finish();
+                    break;
+                default:
+                    break;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -13,4 +13,7 @@ public interface AddressListView {
 
     void deleteAddress(DeleteAddressResponse deleteAddressResponse);
 
+    void addUpdateAddress(AddUpdateAddressResponse addUpdateAddressResponse);
+
+
 }

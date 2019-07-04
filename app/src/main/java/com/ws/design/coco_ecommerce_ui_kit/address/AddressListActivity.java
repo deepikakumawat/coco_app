@@ -79,6 +79,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
     }
 
+
     @Override
     public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
         if (!TextUtils.isEmpty(deleteAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(deleteAddressResponse.getmStatus()))) {
@@ -90,6 +91,11 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         }else {
             showCenteredToast(this,deleteAddressResponse.getMessage());
         }
+    }
+
+    @Override
+    public void addUpdateAddress(AddUpdateAddressResponse addUpdateAddressResponse) {
+        // do nothing
     }
 
 

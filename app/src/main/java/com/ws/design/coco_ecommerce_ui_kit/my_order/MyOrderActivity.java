@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 
 import java.util.ArrayList;
 
@@ -16,13 +18,14 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class MyOrderActivity extends AppCompatActivity implements MyOrderView {
+public class MyOrderActivity extends AppCompatActivity implements MyOrderView, View.OnClickListener {
 
     TextView title;
     LinearLayout linearLayout;
     MyOrderAdapter myOrderAdapter;
     private RecyclerView rvMyOrder;
     private ArrayList<MyOrderResponse.MyOrderData> myOrderDataArrayList = new ArrayList<>();
+    private ImageView imgBack;
 
 
     @Override
@@ -35,6 +38,8 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView {
         title = (TextView) findViewById(R.id.title);
         linearLayout = (LinearLayout) findViewById(R.id.linear);
         rvMyOrder = (RecyclerView) findViewById(R.id.rvMyOrder);
+        imgBack =  findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(this);
 
         title.setText("My Orders");
         linearLayout.setVisibility(View.GONE);
@@ -79,4 +84,22 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView {
 
 
     }
+
+
+    @Override
+    public void onClick(View view) {
+        try{
+            int vId = view.getId();
+            switch (vId){
+                case R.id.imgBack:
+                 finish();
+                    break;
+                default:
+                    break;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

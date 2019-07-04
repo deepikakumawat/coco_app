@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit;
+package com.ws.design.coco_ecommerce_ui_kit.home;
 
 
 import android.os.Bundle;
@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.ExploreActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailActivity;
 
 import java.util.ArrayList;
 
 import Adapter.RecycleAdapteHomeBanner;
-import Adapter.RecycleAdapteHomeCategory;
 import Adapter.RecycleAdapteTopTenHome;
 import Model.HomeBannerModelClass;
 import Model.HomeCategoryModelClass;
@@ -26,40 +26,35 @@ import fragment.CustomItemClickListener;
 import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
-public class HomeActivity extends ToolbarBaseFragment {
+public class HomeActivity extends ToolbarBaseFragment implements View.OnClickListener {
 
 
     private ArrayList<HomeBannerModelClass> homeBannerModelClasses;
     private RecyclerView recyclerView;
     private RecycleAdapteHomeBanner mAdapter;
-    private Integer image[] ={R.drawable.image95,R.drawable.image95,R.drawable.image95,R.drawable.image95};
-
-
+    private Integer image[] = {R.drawable.image95, R.drawable.image95, R.drawable.image95, R.drawable.image95};
 
 
     private ArrayList<HomeCategoryModelClass> homeCategoryModelClasses;
     private RecyclerView category_recyclerView;
-    private RecycleAdapteHomeCategory mAdapter1;
-    private String title[] ={"All Categories","Mens","Womens","Electronics","Home and Furniture","Sports"};
-
+    private HomeCategoryAdapter homeCategoryAdapter;
+    private String title[] = {"All Categories", "Mens", "Womens", "Electronics", "Home and Furniture", "Sports"};
 
 
     private ArrayList<TopTenModelClass> topTenModelClasses;
     private RecyclerView top_ten_crecyclerview;
     private RecycleAdapteTopTenHome mAdapter2;
-    private Integer image1[]={R.drawable.ac,R.drawable.headphones,R.drawable.ac,R.drawable.headphones};
-    private String title1[] ={"Vigo Atom Personal Air Condi....","Bosh Head Phone Blue Color","Vigo Atom Personal Air Condi....","Bosh Head Phone Blue Color",};
-    private String type[] = {"Kitenid","HeadPhones","Kitenid","HeadPhones"};
-
-
+    private Integer image1[] = {R.drawable.ac, R.drawable.headphones, R.drawable.ac, R.drawable.headphones};
+    private String title1[] = {"Vigo Atom Personal Air Condi....", "Bosh Head Phone Blue Color", "Vigo Atom Personal Air Condi....", "Bosh Head Phone Blue Color",};
+    private String type[] = {"Kitenid", "HeadPhones", "Kitenid", "HeadPhones"};
 
 
     private ArrayList<TopTenModelClass> topTenModelClasses1;
     private RecyclerView like_recyclerview;
     private RecycleAdapteTopTenHome mAdapter3;
-    private Integer image2[]={R.drawable.mobile1,R.drawable.mobile2,R.drawable.mobile1,R.drawable.mobile2};
-    private String title2[] ={"Samsung On Mask 2GB Ram","Samsung Galaxy 8 6GB Ram","Samsung On Mask 2GB Ram","Samsung Galaxy 8 6GB Ram"};
-    private String type2[] = {"Phones","Phones","Phones","Phones"};
+    private Integer image2[] = {R.drawable.mobile1, R.drawable.mobile2, R.drawable.mobile1, R.drawable.mobile2};
+    private String title2[] = {"Samsung On Mask 2GB Ram", "Samsung Galaxy 8 6GB Ram", "Samsung On Mask 2GB Ram", "Samsung Galaxy 8 6GB Ram"};
+    private String type2[] = {"Phones", "Phones", "Phones", "Phones"};
     private View mView;
 
     @Nullable
@@ -71,14 +66,14 @@ public class HomeActivity extends ToolbarBaseFragment {
 
         return mView;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 //        Homepage Banner Recyclerview Code is here
 
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerview);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerview);
 
         homeBannerModelClasses = new ArrayList<>();
-
 
 
         for (int i = 0; i < image.length; i++) {
@@ -98,14 +93,11 @@ public class HomeActivity extends ToolbarBaseFragment {
         recyclerView.setAdapter(mAdapter);
 
 
-
-
         //        Category Recyclerview Code is here
 
-        category_recyclerView = (RecyclerView)mView.findViewById(R.id.category_recyclerview);
+        category_recyclerView = (RecyclerView) mView.findViewById(R.id.category_recyclerview);
 
         homeCategoryModelClasses = new ArrayList<>();
-
 
 
         for (int i = 0; i < title.length; i++) {
@@ -115,32 +107,25 @@ public class HomeActivity extends ToolbarBaseFragment {
         }
 
 
-        mAdapter1 = new RecycleAdapteHomeCategory(getActivity(), homeCategoryModelClasses, new CustomItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreActivity(), null, false, false);
-            }
-        });
+
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         category_recyclerView.setLayoutManager(mLayoutManager1);
 
 
         category_recyclerView.setLayoutManager(mLayoutManager1);
         category_recyclerView.setItemAnimator(new DefaultItemAnimator());
-        category_recyclerView.setAdapter(mAdapter1);
-
+        category_recyclerView.setAdapter(homeCategoryAdapter);
 
 
         //        Top Ten  Recyclerview Code is here
 
-        top_ten_crecyclerview = (RecyclerView)mView.findViewById(R.id.top_ten_recyclerview);
+        top_ten_crecyclerview = (RecyclerView) mView.findViewById(R.id.top_ten_recyclerview);
 
         topTenModelClasses = new ArrayList<>();
 
 
-
         for (int i = 0; i < image1.length; i++) {
-            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i],title1[i],type[i]);
+            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i], title1[i], type[i]);
 
             topTenModelClasses.add(beanClassForRecyclerView_contacts);
         }
@@ -161,18 +146,15 @@ public class HomeActivity extends ToolbarBaseFragment {
         top_ten_crecyclerview.setAdapter(mAdapter2);
 
 
-
-
         //      Like  Recyclerview Code is here
 
-        like_recyclerview = (RecyclerView)mView.findViewById(R.id.like_recyclerview);
+        like_recyclerview = (RecyclerView) mView.findViewById(R.id.like_recyclerview);
 
         topTenModelClasses1 = new ArrayList<>();
 
 
-
         for (int i = 0; i < image2.length; i++) {
-            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image2[i],title2[i],type2[i]);
+            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image2[i], title2[i], type2[i]);
 
             topTenModelClasses1.add(beanClassForRecyclerView_contacts);
         }
@@ -195,14 +177,13 @@ public class HomeActivity extends ToolbarBaseFragment {
 
         //        Recent  Recyclerview Code is here
 
-        top_ten_crecyclerview = (RecyclerView)mView.findViewById(R.id.recent_recyclerview);
+        top_ten_crecyclerview = (RecyclerView) mView.findViewById(R.id.recent_recyclerview);
 
         topTenModelClasses = new ArrayList<>();
 
 
-
         for (int i = 0; i < image1.length; i++) {
-            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i],title1[i],type[i]);
+            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i], title1[i], type[i]);
 
             topTenModelClasses.add(beanClassForRecyclerView_contacts);
         }
@@ -223,5 +204,22 @@ public class HomeActivity extends ToolbarBaseFragment {
         top_ten_crecyclerview.setAdapter(mAdapter2);
 
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        try {
+            int vId = view.getId();
+            switch (vId) {
+                case R.id.txtCategories:
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreActivity(), null, false, false);
+
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -134,6 +134,9 @@
     <string name="do_you_want_to_logout">Do you want to Log Out ?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="please_login">Please Login!</string>
+    <string name="somethingWentWrong"></string>
+
 
 
 </resources>

@@ -1,7 +1,9 @@
 package Network;
 
+import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
+import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
@@ -13,12 +15,15 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface APIService {
@@ -113,7 +118,8 @@ public interface APIService {
     @POST("add-to-cart")
     @FormUrlEncoded
     Call<AddToCartResponse> addToCart(@Field("user_id") String userID,
-                                          @Field("product_id") String productId);
+                                      @Field("product_id") String productId,
+                                      @Field("quantity") String quantity);
 
     @POST("cartlist")
     @FormUrlEncoded
@@ -126,11 +132,34 @@ public interface APIService {
     @POST("remove-from-cart-one-by-one")
     @FormUrlEncoded
     Call<RemoveCartOneByOneResponse> removeCartOneByOne(@Field("user_id") String userID,
-                                               @Field("product_id") String productId);
+                                                        @Field("product_id") String productId);
 
 
     @POST("remove-cart-cross-button")
     @FormUrlEncoded
     Call<RemoveCartByCrossResponse> removeCartByCross();
+
+    @POST("update-address")
+    @FormUrlEncoded
+    Call<AddUpdateAddressResponse> doAddUpdateAddress(@Field("id") String id,
+                                                   @Field("name") String name,
+                                                   @Field("userid") String userId,
+                                                   @Field("address1") String address1,
+                                                   @Field("address2") String address2,
+                                                   @Field("city") String city,
+                                                   @Field("state") String state,
+                                                   @Field("country") String country,
+                                                   @Field("phone") String phone);
+
+
+    @POST("product-detail")
+    @FormUrlEncoded
+    Call<ProductDetailsResponse> getProductDetails(@Field("slug") String slug);
+
+
+//    @Headers("user-key: 9900a9720d31dfd5fdb4352700c")
+    @GET("homepage")
+    Call<HomeResponse> getHomeData();
+
 }
 

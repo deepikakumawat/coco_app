@@ -26,12 +26,14 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
@@ -56,10 +58,15 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
+            "Offers", "Profile", "Help", "Contact Us"};
+
+    private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
             "Offers", "Profile", "Help", "Contact Us", "Logout"};
+
     private TextView txtUserEmail;
     private TextView txtUserName;
     private TextView txtLoginSignup;
+    private NavigationModelClass beanClassForRecyclerView_contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +87,21 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         navigationModelClasses = new ArrayList<>();
 
 
-        for (int i = 0; i < title.length; i++) {
-            NavigationModelClass beanClassForRecyclerView_contacts = new NavigationModelClass(title[i]);
+        if(TextUtils.isEmpty(CocoPreferences.getUserId())){
+            for (int i = 0; i < title.length; i++) {
+                beanClassForRecyclerView_contacts = new NavigationModelClass(title[i]);
 
-            navigationModelClasses.add(beanClassForRecyclerView_contacts);
+                navigationModelClasses.add(beanClassForRecyclerView_contacts);
+            }
+        }else{
+            for (int i = 0; i < titleWithLogout.length; i++) {
+                beanClassForRecyclerView_contacts = new NavigationModelClass(titleWithLogout[i]);
+
+                navigationModelClasses.add(beanClassForRecyclerView_contacts);
+            }
         }
+
+
 
         mAdapter = new RecycleAdapteNavigation(getApplicationContext(), navigationModelClasses, new CustomItemClickListener() {
             @Override
@@ -92,7 +109,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 if (position == 0) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
                 } else if (position == 1) {
-                    startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                    if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                    }else{
+                        Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                    }
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
@@ -231,8 +252,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         toolbar.findViewById(R.id.btn_cart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DrawerActivity.this, CartActivity.class));
-            }
+                if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                }else{
+                    Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                }            }
         });
 
     }
@@ -312,6 +336,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
         }
+
+
     }
 
     private void logout() {
@@ -338,6 +364,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                             txtUserName.setVisibility(View.GONE);
                             txtUserEmail.setVisibility(View.GONE);
                             txtLoginSignup.setVisibility(View.VISIBLE);
+
+                          navigationModelClasses.remove(11);
+                            mAdapter.notifyDataSetChanged();
 
 
                          /*   android.app.Fragment f = getFragmentManager().findFragmentById(R.id.frame_container);

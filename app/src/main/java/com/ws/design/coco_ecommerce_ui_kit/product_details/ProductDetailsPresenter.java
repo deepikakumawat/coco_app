@@ -3,7 +3,9 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 import android.util.Log;
 
+import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListView;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 
 import org.json.JSONObject;
 
@@ -31,40 +33,42 @@ public class ProductDetailsPresenter {
 
 
 
-
-    public void addToWishList(String userid, String productId) {
+    public void getProductDetails(String slug) {
         view.showWait();
         try {
 
-            Call call = service.addToWishList(userid,productId);
-            call.enqueue(new Callback<AddToWishListResponse>() {
+            Call call = service.getProductDetails(slug);
+            call.enqueue(new Callback<ProductDetailsResponse>() {
                 @Override
-                public void onResponse(Call<AddToWishListResponse> call, Response<AddToWishListResponse> response) {
+                public void onResponse(Call<ProductDetailsResponse> call, Response<ProductDetailsResponse> response) {
                     Log.d(TAG, call.request().url().toString());
                     view.removeWait();
-                    try{
+                    try {
                         if (response.isSuccessful()) {
 
-                            view.addToWishList(response.body());
-                        }else{
+                            view.getProductDetails(response.body());
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                     }
                 }
 
                 @Override
-                public void onFailure(Call<AddToWishListResponse> call, Throwable e) {
+                public void onFailure(Call<ProductDetailsResponse> call, Throwable e) {
                     view.removeWait();
                     try {
                         JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
                         view.onFailure(jsonObject.getString("message"));
                     } catch (Exception ee) {
-
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
                     }
 
                 }
@@ -76,28 +80,75 @@ public class ProductDetailsPresenter {
     }
 
 
-    public void addToCart(String userid, String productId) {
+    public void addToWishList(String userid, String productId) {
         view.showWait();
         try {
 
-            Call call = service.addToCart(userid,productId);
-            call.enqueue(new Callback<AddToCartResponse>() {
+            Call call = service.addToWishList(userid, productId);
+            call.enqueue(new Callback<AddToWishListResponse>() {
                 @Override
-                public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                public void onResponse(Call<AddToWishListResponse> call, Response<AddToWishListResponse> response) {
                     Log.d(TAG, call.request().url().toString());
                     view.removeWait();
-                    try{
+                    try {
                         if (response.isSuccessful()) {
 
-                            view.addToCart(response.body());
-                        }else{
+                            view.addToWishList(response.body());
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AddToWishListResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void addToCart(String userid, String productId, String quantity) {
+        view.showWait();
+        try {
+
+            Call call = service.addToCart(userid, productId, quantity);
+            call.enqueue(new Callback<AddToCartResponse>() {
+                @Override
+                public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try {
+                        if (response.isSuccessful()) {
+                            view.addToCart(response.body());
+                        } else {
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                     }
                 }
 
@@ -108,6 +159,8 @@ public class ProductDetailsPresenter {
                         JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
                         view.onFailure(jsonObject.getString("message"));
                     } catch (Exception ee) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
 
                     }
 
