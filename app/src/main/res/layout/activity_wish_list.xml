@@ -25,7 +25,8 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:id="@+id/lyEmpty">
+            android:id="@+id/lyEmpty"
+            >
 
             <ImageView
                 android:id="@+id/imgEmptyWishlist"

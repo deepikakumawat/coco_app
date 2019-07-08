@@ -63,6 +63,10 @@ public class MyWishListResponse {
 
     public class ProductData {
 
+        @SerializedName("wishlist")
+        @Expose
+        private String mWishList;
+
         @SerializedName("productid")
         @Expose
         private String mProductId;
@@ -446,6 +450,14 @@ public class MyWishListResponse {
 
         public void setmProductDateModify(String mProductDateModify) {
             this.mProductDateModify = mProductDateModify;
+        }
+
+        public String getmWishList() {
+            return mWishList;
+        }
+
+        public void setmWishList(String mWishList) {
+            this.mWishList = mWishList;
         }
     }
 }

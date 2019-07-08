@@ -8,10 +8,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class MyWishlistActivity extends AppCompatActivity implements MyWishListView, View.OnClickListener {
-    TextView txt1;
+    TextView txtTitle;
 
     private MyWishListAdapter myWishListAdapter;
     private RecyclerView rvMyWishList;
@@ -37,13 +39,13 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
 
         myWishListPresenter = new MyWishListPresenter(this);
 
-        txt1 = (TextView) findViewById(R.id.txt1);
+        txtTitle = (TextView) findViewById(R.id.txtTitle);
         lyEmpty = (LinearLayout) findViewById(R.id.lyEmpty);
         imgBack = findViewById(R.id.imgBack);
         rvMyWishList = (RecyclerView) findViewById(R.id.rvMyWishList);
-        txt1.setText("Whishlist");
+        txtTitle.setText("Whishlist");
 
-        myWishListPresenter.getMyWishList("87");
+        myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
         imgBack.setOnClickListener(this);
 
 
@@ -84,13 +86,28 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
     @Override
     public void getMyWishList(MyWishListResponse myWishListResponse) {
         if (myWishListResponse != null) {
-            if (!myWishListResponse.getmMyWishlistData().getmProductData().isEmpty()) {
-                productDataArrayList.clear();
-                productDataArrayList.addAll(myWishListResponse.getmMyWishlistData().getmProductData());
 
-                myWishListAdapter = new MyWishListAdapter(this, productDataArrayList, MyWishlistActivity.this);
-                rvMyWishList.setAdapter(myWishListAdapter);
+            if(myWishListResponse.getmMyWishlistData().getmProductData()!=null) {
+
+                if (!myWishListResponse.getmMyWishlistData().getmProductData().isEmpty()) {
+
+                    lyEmpty.setVisibility(View.GONE);
+                    rvMyWishList.setVisibility(View.VISIBLE);
+
+                    productDataArrayList.clear();
+                    productDataArrayList.addAll(myWishListResponse.getmMyWishlistData().getmProductData());
+
+                    myWishListAdapter = new MyWishListAdapter(this, productDataArrayList, MyWishlistActivity.this);
+                    rvMyWishList.setAdapter(myWishListAdapter);
+
+
+                } else {
+                    lyEmpty.setVisibility(View.VISIBLE);
+                    rvMyWishList.setVisibility(View.GONE);
+                }
             }
+
+
         }
     }
 
@@ -120,7 +137,7 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
 
                     if (productData != null) {
 
-                        myWishListPresenter.removeWishList(productData.getmProductId());
+                        myWishListPresenter.removeWishList(productData.getmWishList());
 
                     }
                     break;

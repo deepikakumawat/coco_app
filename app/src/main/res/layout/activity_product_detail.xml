@@ -193,6 +193,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/black"
+                          android:id="@+id/txtProductName"
                 android:text="Apple I phone 7 plus (Gold,32 GB)"/>
 
             <LinearLayout
@@ -213,12 +214,12 @@
                 <customfonts.MyTextView_Roboto_Medium
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 60,999"
+                    android:id="@+id/txtProductSalePrice"
                     android:textColor="@color/black"
                     android:textSize="16.7sp"/>
 
                 <customfonts.MyTextView_Roboto_Medium
-                    android:id="@+id/offer"
+                    android:id="@+id/txtProductPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 60,999"
@@ -238,24 +239,44 @@
                 android:textColor="@color/green"/>
 
 
-            <customfonts.MyTextView_Roboto_Bold
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="Add To Wishlist"
-                android:id="@+id/txtAddToWishlist"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/green"/>
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
 
-            <customfonts.MyTextView_Roboto_Bold
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:id="@+id/txtAddToCart"
+                <customfonts.Button_Roboto_Medium
+                    android:id="@+id/txtAddToWishlist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/red_round_rect"
+                    android:paddingTop="16.5dp"
+                    android:paddingBottom="16.5dp"
+                    android:text="Add To Wishlist"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="13.7sp" />
 
-                android:text="Add To Cart"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/green"/>
+                <customfonts.Button_Roboto_Medium
+                    android:id="@+id/txtAddToCart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/red_round_rect"
+                    android:paddingTop="16.5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="16.5dp"
+                    android:text="Add To Cart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="13.7sp" />
+            </LinearLayout>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -644,7 +665,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="20dp"
             android:nestedScrollingEnabled="false"
-            android:id="@+id/top_ten_recyclerview"/>
+            android:id="@+id/rvTopRatedProducts"/>
 
     </LinearLayout>
 

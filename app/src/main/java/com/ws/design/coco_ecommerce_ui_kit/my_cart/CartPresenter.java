@@ -117,11 +117,11 @@ public class CartPresenter {
 
     }
 
-    public void removeCartOneByOne(String userid, String productId) {
+    public void removeCartOneByOne(String userid, String productId, String quantity) {
         view.showWait();
         try {
 
-            Call call = service.removeCartOneByOne(userid,productId);
+            Call call = service.removeCartOneByOne(userid,productId,"1");
             call.enqueue(new Callback<RemoveCartOneByOneResponse>() {
                 @Override
                 public void onResponse(Call<RemoveCartOneByOneResponse> call, Response<RemoveCartOneByOneResponse> response) {
@@ -163,11 +163,11 @@ public class CartPresenter {
 
 
 
-    public void removeCartByCross() {
+    public void removeCartByCross(String cartId) {
         view.showWait();
         try {
 
-            Call call = service.removeCartByCross();
+            Call call = service.removeCartByCross(cartId);
             call.enqueue(new Callback<RemoveCartByCrossResponse>() {
                 @Override
                 public void onResponse(Call<RemoveCartByCrossResponse> call, Response<RemoveCartByCrossResponse> response) {

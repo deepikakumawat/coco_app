@@ -64,7 +64,9 @@ public class CartListResponse {
     public class ProductData {
 
 
-
+        @SerializedName("cart_id")
+        @Expose
+        private String mCartId;
 
 
         @SerializedName("productid")
@@ -162,6 +164,14 @@ public class CartListResponse {
 
         public void setmProductBrought(String mProductBrought) {
             this.mProductBrought = mProductBrought;
+        }
+
+        public String getmCartId() {
+            return mCartId;
+        }
+
+        public void setmCartId(String mCartId) {
+            this.mCartId = mCartId;
         }
     }
 }

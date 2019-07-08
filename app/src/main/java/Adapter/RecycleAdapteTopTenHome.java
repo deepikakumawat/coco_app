@@ -32,18 +32,18 @@ public class RecycleAdapteTopTenHome extends RecyclerView.Adapter<RecycleAdapteT
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        ImageView image;
+     /*   ImageView image;
         TextView title, type;
-        LinearLayout linear;
+        LinearLayout linear;*/
 
 
         public MyViewHolder(View view) {
             super(view);
 
-            image = (ImageView) view.findViewById(R.id.image);
+           /* image = (ImageView) view.findViewById(R.id.image);
             title = (TextView) view.findViewById(R.id.title);
             type = (TextView) view.findViewById(R.id.type);
-
+*/
 //            linear = (LinearLayout) view.findViewById(R.id.linear);
 
         }
@@ -60,7 +60,7 @@ public class RecycleAdapteTopTenHome extends RecyclerView.Adapter<RecycleAdapteT
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_top_ten_list, parent, false);
+                .inflate(R.layout.list_item_home_top_rated_products, parent, false);
 
 
         final MyViewHolder myViewHolder= new MyViewHolder(itemView);
@@ -75,9 +75,9 @@ public class RecycleAdapteTopTenHome extends RecyclerView.Adapter<RecycleAdapteT
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         TopTenModelClass movie = moviesList.get(position);
-        holder.image.setImageResource(movie.getImage());
+      /*  holder.image.setImageResource(movie.getImage());
         holder.title.setText(movie.getTitle());
-        holder.type.setText(movie.getType());
+        holder.type.setText(movie.getType());*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

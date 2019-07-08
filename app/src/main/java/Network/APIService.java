@@ -132,12 +132,13 @@ public interface APIService {
     @POST("remove-from-cart-one-by-one")
     @FormUrlEncoded
     Call<RemoveCartOneByOneResponse> removeCartOneByOne(@Field("user_id") String userID,
-                                                        @Field("product_id") String productId);
+                                                        @Field("product_id") String productId,
+                                                        @Field("quantity") String quantity);
 
 
     @POST("remove-cart-cross-button")
     @FormUrlEncoded
-    Call<RemoveCartByCrossResponse> removeCartByCross();
+    Call<RemoveCartByCrossResponse> removeCartByCross(@Field("cart_id") String cartId);
 
     @POST("update-address")
     @FormUrlEncoded
@@ -158,7 +159,7 @@ public interface APIService {
 
 
 //    @Headers("user-key: 9900a9720d31dfd5fdb4352700c")
-    @GET("homepage")
+    @POST("homepage")
     Call<HomeResponse> getHomeData();
 
 }

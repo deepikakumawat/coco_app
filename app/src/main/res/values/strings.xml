@@ -136,6 +136,12 @@
     <string name="no">NO</string>
     <string name="please_login">Please Login!</string>
     <string name="somethingWentWrong"></string>
+    <string name="primary_address">Primary Address can\'t be blank!</string>
+    <string name="area">Area can\'t be blank!</string>
+    <string name="city">City can\'t be blank!</string>
+    <string name="state">State can\'t be blank!</string>
+    <string name="country">Country can\'t be blank!</string>
+    <string name="phone">Phone can\'t be blank!</string>
 
 
 

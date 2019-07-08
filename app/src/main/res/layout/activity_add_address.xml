@@ -16,31 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <customfonts.MyTextView_Roboto_Medium
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_marginTop="24dp"
-        android:text="House Number"
-        android:layout_marginLeft="19.5dp"
-        android:textColor="@color/black"
-        />
-    <customfonts.EditText_Roboto_Regular
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:hint="eg. 45"
-        android:textSize="12sp"
-        android:layout_marginLeft="19.5dp"
-        android:textColorHint="#7137474f"
-        android:layout_marginTop="10dp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#3c000000"
-        android:layout_marginTop="7.2dp"
-        android:layout_marginLeft="19.5dp"
-        android:layout_marginRight="19.5dp"/>
+
+
     <customfonts.MyTextView_Roboto_Medium
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +32,9 @@
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:textSize="12sp"
-        android:hint="Enter your full address"
+        android:id="@+id/txtPrimaryAddress"
+
+        android:hint="Enter your primary address"
         android:layout_marginLeft="19.5dp"
         android:textColorHint="#7137474f"
         android:layout_marginTop="10dp"/>
@@ -80,8 +59,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00000000"
+        android:id="@+id/txtArea"
+
         android:textSize="12sp"
-        android:hint="Enter your full address"
+        android:hint="Enter your area"
         android:layout_marginLeft="19.5dp"
         android:textColorHint="#7137474f"
         android:layout_marginTop="10dp"/>
@@ -108,6 +89,7 @@
         android:textSize="12sp"
         android:background="#00000000"
         android:hint="Enter City"
+        android:id="@+id/txtCity"
         android:layout_marginLeft="19.5dp"
         android:textColorHint="#7137474f"
         android:layout_marginTop="10dp"/>
@@ -134,6 +116,7 @@
         android:background="#00000000"
         android:textSize="12sp"
         android:hint="Enter State"
+        android:id="@+id/txtState"
         android:layout_marginLeft="19.5dp"
         android:textColorHint="#7137474f"
         android:layout_marginTop="10dp"/>
@@ -149,7 +132,7 @@
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:layout_marginTop="24dp"
-        android:text="Country"
+        android:text="Phone"
         android:layout_marginLeft="19.5dp"
         android:textColor="@color/black"
         />
@@ -158,10 +141,39 @@
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:textSize="12sp"
-        android:hint="Enter Country"
+        android:hint="Enter Phone"
+        android:id="@+id/txtPhone"
         android:layout_marginLeft="19.5dp"
         android:textColorHint="#7137474f"
         android:layout_marginTop="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#3c000000"
+            android:layout_marginTop="7.2dp"
+            android:layout_marginLeft="19.5dp"
+            android:layout_marginRight="19.5dp"/>
+        <customfonts.MyTextView_Roboto_Medium
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:text="Country"
+            android:layout_marginLeft="19.5dp"
+            android:textColor="@color/black"
+            />
+        <customfonts.EditText_Roboto_Regular
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:textSize="12sp"
+            android:hint="Enter Country"
+            android:id="@+id/txtCountry"
+            android:layout_marginLeft="19.5dp"
+            android:textColorHint="#7137474f"
+            android:layout_marginTop="10dp"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

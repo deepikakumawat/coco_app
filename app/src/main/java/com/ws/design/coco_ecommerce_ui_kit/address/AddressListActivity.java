@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         linearLayout.setVisibility(View.GONE);
 
 
-      addressPresenter.addressList("87");
+      addressPresenter.addressList(CocoPreferences.getUserId());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvMyAddress.setLayoutManager(layoutManager);

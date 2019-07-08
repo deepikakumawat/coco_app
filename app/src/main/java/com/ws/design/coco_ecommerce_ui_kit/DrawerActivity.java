@@ -22,17 +22,21 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CocoCart1Activity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -65,19 +69,31 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
     private TextView txtUserEmail;
     private TextView txtUserName;
-    private TextView txtLoginSignup;
+    private TextView txtSignup;
+    private TextView txtLogin;
+    private LinearLayout lyLoginSignup;
     private NavigationModelClass beanClassForRecyclerView_contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        init();
+
+
+    }
+
+    private void init() {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         txtUserName = (TextView) findViewById(R.id.txtUserName);
         txtUserEmail = (TextView) findViewById(R.id.txtUserEmail);
-        txtLoginSignup = (TextView) findViewById(R.id.txtLoginSignup);
-        txtLoginSignup.setOnClickListener(this);
+        txtLogin = (TextView) findViewById(R.id.txtLogin);
+        txtSignup = (TextView) findViewById(R.id.txtSignup);
+        lyLoginSignup = (LinearLayout) findViewById(R.id.lyLoginSignup);
+        txtLogin.setOnClickListener(this);
+        txtSignup.setOnClickListener(this);
         setToolbar();
 
         setEmailName();
@@ -110,7 +126,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
                 } else if (position == 1) {
                     if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                        startActivity(new Intent(DrawerActivity.this, CocoCart1Activity.class));
                     }else{
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
@@ -119,7 +135,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 3) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
                 } else if (position == 4) {
-                   startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
+                    startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
                 } else if (position == 5) {
                     startActivity(new Intent(DrawerActivity.this, MyAccountActivity.class));
                 } else if (position == 6) {
@@ -134,6 +150,14 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 9) {
 
                 } else if (position == 10) {
+
+                    if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        startActivity(new Intent(DrawerActivity.this, AddAddressActivity.class));
+                    }else{
+                        Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                    }
+
+
 
                 } else if (position == 11) {
                     logout();
@@ -175,6 +199,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         invalidateOptionsMenu();
 
         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
+
 
 
     }
@@ -253,7 +278,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                    startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                    startActivity(new Intent(DrawerActivity.this, CocoCart1Activity.class));
                 }else{
                     Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                 }            }
@@ -273,17 +298,28 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtLoginSignup:
+                case R.id.txtLogin:
 
                     drawer.closeDrawer(GravityCompat.START);
 
-                    Intent intent = new Intent(DrawerActivity.this, LoginActivity.class);
+                     intent = new Intent(DrawerActivity.this, LoginActivity.class);
                     startActivity(intent);
 
                     break;
+
+                case R.id.txtSignup:
+
+                    drawer.closeDrawer(GravityCompat.START);
+
+                     intent = new Intent(DrawerActivity.this, SignupActivity.class);
+                    startActivity(intent);
+
+                    break;
+
 
                 default:
                     break;
@@ -328,11 +364,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         if (TextUtils.isEmpty(CocoPreferences.getUserId())) {
             txtUserName.setVisibility(View.GONE);
             txtUserEmail.setVisibility(View.GONE);
-            txtLoginSignup.setVisibility(View.VISIBLE);
+            lyLoginSignup.setVisibility(View.VISIBLE);
         } else {
             txtUserName.setVisibility(View.VISIBLE);
             txtUserEmail.setVisibility(View.VISIBLE);
-            txtLoginSignup.setVisibility(View.GONE);
+            lyLoginSignup.setVisibility(View.GONE);
 
 
         }
@@ -354,6 +390,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_LAST_NAME);*/
 
 
+
                             CocoPreferences.removeValueForKey("UserID");
                             CocoPreferences.removeValueForKey("UserEmail");
                             CocoPreferences.removeValueForKey("UserPhone");
@@ -363,10 +400,14 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
                             txtUserName.setVisibility(View.GONE);
                             txtUserEmail.setVisibility(View.GONE);
-                            txtLoginSignup.setVisibility(View.VISIBLE);
+                            lyLoginSignup.setVisibility(View.VISIBLE);
 
                           navigationModelClasses.remove(11);
                             mAdapter.notifyDataSetChanged();
+
+                            Util.showCenteredToast(DrawerActivity.this, "Logout Successfully!");
+
+                            init();
 
 
                          /*   android.app.Fragment f = getFragmentManager().findFragmentById(R.id.frame_container);

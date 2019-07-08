@@ -84,7 +84,10 @@ public class LoginPresenter {
                           view.onFailure(jsonObject.getString("message"));
                       }
                   }catch (Exception e){
+                      view.onFailure("Something Went Wrong. Please try again later");
+
                       e.printStackTrace();
+
                   }
 
 
@@ -130,6 +133,8 @@ public class LoginPresenter {
                             view.onFailure(jsonObject.getString("message"));
                         }
                     }catch (Exception e){
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                         e.printStackTrace();
                     }
 

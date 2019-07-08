@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
         imgBack = findViewById(R.id.imgBack);
         txtEmptyCart = findViewById(R.id.txtEmptyCart);
         txtEmptyCart.setOnClickListener(this);
-        cartPresenter.getCartList("87");
+        cartPresenter.getCartList(CocoPreferences.getUserId());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvCart.setLayoutManager(layoutManager);
 
@@ -173,7 +173,7 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     removeOnByOnePostion = (int) view.getTag(R.id.txtOneByOne);
                     if (productData != null) {
 
-                        cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(), productData.getmProductId());
+                        cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(), productData.getmProductId(), productData.getmQuantity());
 
                     }
                     break;
@@ -182,7 +182,7 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     removeCorssPostion = (int) view.getTag(R.id.txtCross);
                     if (productData != null) {
 
-                        cartPresenter.removeCartByCross();
+                        cartPresenter.removeCartByCross(productData.getmCartId());
 
                     }
                     break;

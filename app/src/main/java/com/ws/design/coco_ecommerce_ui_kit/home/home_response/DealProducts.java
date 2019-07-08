@@ -154,9 +154,299 @@ public class DealProducts {
     private String mProductDateModify;
 
 
+    public String getmDealProId() {
+        return mDealProId;
+    }
 
+    public void setmDealProId(String mDealProId) {
+        this.mDealProId = mDealProId;
+    }
 
+    public String getmProductId() {
+        return mProductId;
+    }
 
+    public void setmProductId(String mProductId) {
+        this.mProductId = mProductId;
+    }
 
+    public String getmDealEnd() {
+        return mDealEnd;
+    }
 
+    public void setmDealEnd(String mDealEnd) {
+        this.mDealEnd = mDealEnd;
+    }
+
+    public String getmCreateUser() {
+        return mCreateUser;
+    }
+
+    public void setmCreateUser(String mCreateUser) {
+        this.mCreateUser = mCreateUser;
+    }
+
+    public String getmCreateDate() {
+        return mCreateDate;
+    }
+
+    public void setmCreateDate(String mCreateDate) {
+        this.mCreateDate = mCreateDate;
+    }
+
+    public String getmRefId() {
+        return mRefId;
+    }
+
+    public void setmRefId(String mRefId) {
+        this.mRefId = mRefId;
+    }
+
+    public String getmProductName() {
+        return mProductName;
+    }
+
+    public void setmProductName(String mProductName) {
+        this.mProductName = mProductName;
+    }
+
+    public String getmProductSlug() {
+        return mProductSlug;
+    }
+
+    public void setmProductSlug(String mProductSlug) {
+        this.mProductSlug = mProductSlug;
+    }
+
+    public String getmProductDetails() {
+        return mProductDetails;
+    }
+
+    public void setmProductDetails(String mProductDetails) {
+        this.mProductDetails = mProductDetails;
+    }
+
+    public String getmProductShortDetails() {
+        return mProductShortDetails;
+    }
+
+    public void setmProductShortDetails(String mProductShortDetails) {
+        this.mProductShortDetails = mProductShortDetails;
+    }
+
+    public String getmProductShipPolicy() {
+        return mProductShipPolicy;
+    }
+
+    public void setmProductShipPolicy(String mProductShipPolicy) {
+        this.mProductShipPolicy = mProductShipPolicy;
+    }
+
+    public String getmRefundPolicy() {
+        return mRefundPolicy;
+    }
+
+    public void setmRefundPolicy(String mRefundPolicy) {
+        this.mRefundPolicy = mRefundPolicy;
+    }
+
+    public String getmProductCancelPolicy() {
+        return mProductCancelPolicy;
+    }
+
+    public void setmProductCancelPolicy(String mProductCancelPolicy) {
+        this.mProductCancelPolicy = mProductCancelPolicy;
+    }
+
+    public String getmCrossSell() {
+        return mCrossSell;
+    }
+
+    public void setmCrossSell(String mCrossSell) {
+        this.mCrossSell = mCrossSell;
+    }
+
+    public String getmProductBrought() {
+        return mProductBrought;
+    }
+
+    public void setmProductBrought(String mProductBrought) {
+        this.mProductBrought = mProductBrought;
+    }
+
+    public String getmProductNote() {
+        return mProductNote;
+    }
+
+    public void setmProductNote(String mProductNote) {
+        this.mProductNote = mProductNote;
+    }
+
+    public String getmAttrType() {
+        return mAttrType;
+    }
+
+    public void setmAttrType(String mAttrType) {
+        this.mAttrType = mAttrType;
+    }
+
+    public String getmAttrName() {
+        return mAttrName;
+    }
+
+    public void setmAttrName(String mAttrName) {
+        this.mAttrName = mAttrName;
+    }
+
+    public String getmUpSell() {
+        return mUpSell;
+    }
+
+    public void setmUpSell(String mUpSell) {
+        this.mUpSell = mUpSell;
+    }
+
+    public String getmStockStatus() {
+        return mStockStatus;
+    }
+
+    public void setmStockStatus(String mStockStatus) {
+        this.mStockStatus = mStockStatus;
+    }
+
+    public String getmPrice() {
+        return mPrice;
+    }
+
+    public void setmPrice(String mPrice) {
+        this.mPrice = mPrice;
+    }
+
+    public String getmSalePrice() {
+        return mSalePrice;
+    }
+
+    public void setmSalePrice(String mSalePrice) {
+        this.mSalePrice = mSalePrice;
+    }
+
+    public String getmTaxData() {
+        return mTaxData;
+    }
+
+    public void setmTaxData(String mTaxData) {
+        this.mTaxData = mTaxData;
+    }
+
+    public String getmProductQty() {
+        return mProductQty;
+    }
+
+    public void setmProductQty(String mProductQty) {
+        this.mProductQty = mProductQty;
+    }
+
+    public String getmProductSku() {
+        return mProductSku;
+    }
+
+    public void setmProductSku(String mProductSku) {
+        this.mProductSku = mProductSku;
+    }
+
+    public String getmProductStatus() {
+        return mProductStatus;
+    }
+
+    public void setmProductStatus(String mProductStatus) {
+        this.mProductStatus = mProductStatus;
+    }
+
+    public String getmProductCategories() {
+        return mProductCategories;
+    }
+
+    public void setmProductCategories(String mProductCategories) {
+        this.mProductCategories = mProductCategories;
+    }
+
+    public String getmProductImg() {
+        return mProductImg;
+    }
+
+    public void setmProductImg(String mProductImg) {
+        this.mProductImg = mProductImg;
+    }
+
+    public String getmProductGallery() {
+        return mProductGallery;
+    }
+
+    public void setmProductGallery(String mProductGallery) {
+        this.mProductGallery = mProductGallery;
+    }
+
+    public String getmDimension() {
+        return mDimension;
+    }
+
+    public void setmDimension(String mDimension) {
+        this.mDimension = mDimension;
+    }
+
+    public String getmProductVideo() {
+        return mProductVideo;
+    }
+
+    public void setmProductVideo(String mProductVideo) {
+        this.mProductVideo = mProductVideo;
+    }
+
+    public String getmProductWeight() {
+        return mProductWeight;
+    }
+
+    public void setmProductWeight(String mProductWeight) {
+        this.mProductWeight = mProductWeight;
+    }
+
+    public String getmPageTags() {
+        return mPageTags;
+    }
+
+    public void setmPageTags(String mPageTags) {
+        this.mPageTags = mPageTags;
+    }
+
+    public String getmProductUser() {
+        return mProductUser;
+    }
+
+    public void setmProductUser(String mProductUser) {
+        this.mProductUser = mProductUser;
+    }
+
+    public String getmProductDate() {
+        return mProductDate;
+    }
+
+    public void setmProductDate(String mProductDate) {
+        this.mProductDate = mProductDate;
+    }
+
+    public String getmProductUserModify() {
+        return mProductUserModify;
+    }
+
+    public void setmProductUserModify(String mProductUserModify) {
+        this.mProductUserModify = mProductUserModify;
+    }
+
+    public String getmProductDateModify() {
+        return mProductDateModify;
+    }
+
+    public void setmProductDateModify(String mProductDateModify) {
+        this.mProductDateModify = mProductDateModify;
+    }
 }

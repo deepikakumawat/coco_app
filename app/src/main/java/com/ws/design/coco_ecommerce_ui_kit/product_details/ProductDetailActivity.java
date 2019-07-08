@@ -21,6 +21,9 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.ReviewActivity;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeTopRatedProductsAdapter;
+import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
@@ -41,7 +44,6 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class ProductDetailActivity extends ToolbarBaseFragment implements ProductDetailsView, View.OnClickListener {
 
-    TextView offer;
     RelativeLayout rightNav;
 
     LinearLayout linear1, linear2, linear3, linear4;
@@ -58,11 +60,15 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
 
 
     private ArrayList<TopTenModelClass> topTenModelClasses;
-    private RecyclerView top_ten_crecyclerview;
-    private RecycleAdapteTopTenHome mAdapter2;
-    private Integer image1[]={R.drawable.ac,R.drawable.headphones,R.drawable.ac,R.drawable.headphones};
-    private String title1[] ={"Vigo Atom Personal Air Condi....","Bosh Head Phone Blue Color","Vigo Atom Personal Air Condi....","Bosh Head Phone Blue Color",};
-    private String type[] = {"Kitenid","HeadPhones","Kitenid","HeadPhones"};
+//    private RecyclerView top_ten_crecyclerview;
+//    private RecycleAdapteTopTenHome mAdapter2;
+//    private Integer image1[]={R.drawable.ac,R.drawable.headphones,R.drawable.ac,R.drawable.headphones};
+//    private String title1[] ={"Vigo Atom Personal Air Condi....","Bosh Head Phone Blue Color","Vigo Atom Personal Air Condi....","Bosh Head Phone Blue Color",};
+//    private String type[] = {"Kitenid","HeadPhones","Kitenid","HeadPhones"};
+
+    private RecyclerView rvTopRatedProducts;
+    private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList = new ArrayList<>();
+    private ProductDetailsTopRatedProductsAdapter productDetailsTopRatedProductsAdapter;
 
     RelativeLayout relative1,relative2,relative3,relative4;
     private View mView;
@@ -73,6 +79,12 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
 
     private ArrayList<ProductDetailsSimilier> productDetailsArrayList = new ArrayList<>();
     private ProductDetailsViewPager productDetailsViewPager;
+    private TextView txtProductName;
+    private TextView txtProductPrice;
+    private TextView txtProductSalePrice;
+    private  String productSlug = null;
+    private  String productId = null;
+    private  String productQty = null;
 
 
     @Nullable
@@ -82,16 +94,26 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
         super.onCreate(savedInstanceState);
         mView = inflater.inflate(R.layout.activity_product_detail, container, false);
 
+
+        Bundle bundle = getArguments();
+        productSlug= (String) bundle.getString("productSlug");
+        productId= (String) bundle.getString("productId");
+        productQty= (String) bundle.getString("productQty");
+
         return mView;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         productDetailsPresenter = new ProductDetailsPresenter(this);
-        productDetailsPresenter.getProductDetails("apple-ipad-pro--1383");
+        productDetailsPresenter.getProductDetails(productSlug);
 
         txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
         txtAddToCart = mView.findViewById(R.id.txtAddToCart);
+        txtProductName = mView.findViewById(R.id.txtProductName);
+        txtProductPrice = mView.findViewById(R.id.txtProductPrice);
+        txtProductSalePrice = mView.findViewById(R.id.txtProductSalePrice);
+        rvTopRatedProducts = mView.findViewById(R.id.rvTopRatedProducts);
         txtAddToWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
 
@@ -125,9 +147,6 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
         right2_imag = mView.findViewById(R.id.right2_img);
         right3_imag = mView.findViewById(R.id.right3_img);
 
-        offer = (TextView) mView.findViewById(R.id.offer);
-        offer.setText("\u20B9 63,999");
-        offer.setPaintFlags(offer.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         linear1 = (LinearLayout) mView.findViewById(R.id.linear1);
         linear2 = (LinearLayout) mView.findViewById(R.id.linear2);
@@ -166,32 +185,34 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
 
         //        Top Ten  Recyclerview Code is here
 
-        top_ten_crecyclerview = (RecyclerView) mView.findViewById(R.id.top_ten_recyclerview);
+//        top_ten_crecyclerview = (RecyclerView) mView.findViewById(R.id.top_ten_recyclerview);
 
         topTenModelClasses = new ArrayList<>();
 
 
 
-        for (int i = 0; i < image1.length; i++) {
+       /* for (int i = 0; i < image1.length; i++) {
             TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i],title1[i],type[i]);
 
             topTenModelClasses.add(beanClassForRecyclerView_contacts);
         }
 
-
-        mAdapter2 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses, new CustomItemClickListener() {
+*/
+       /* mAdapter2 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
 
             }
-        });
+        });*/
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        top_ten_crecyclerview.setLayoutManager(mLayoutManager2);
+        rvTopRatedProducts.setLayoutManager(mLayoutManager2);
 
 
-        top_ten_crecyclerview.setLayoutManager(mLayoutManager2);
-        top_ten_crecyclerview.setItemAnimator(new DefaultItemAnimator());
+        rvTopRatedProducts.setLayoutManager(mLayoutManager2);
+        rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
+/*
         top_ten_crecyclerview.setAdapter(mAdapter2);
+*/
 
     }
 
@@ -297,11 +318,11 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
                 break;
 
             case R.id.txtAddToWishlist:
-//                productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), "1547");
-                productDetailsPresenter.addToWishList("87", "1547");
+               productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
+ //               productDetailsPresenter.addToWishList("87", "1547");
                 break;
             case R.id.txtAddToCart:
-                productDetailsPresenter.addToCart("87", "1544","1");
+                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId,productQty);
                 break;
                 default:
                     break;
@@ -339,12 +360,31 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
     public void getProductDetails(ProductDetailsResponse productDetailsResponse) {
 
         if (productDetailsResponse != null) {
-            if (!productDetailsResponse.getmData().getmProduct().isEmpty()) {
-                productDetailsArrayList.clear();
-                productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
 
-                productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsArrayList);
-                viewPager.setAdapter(productDetailsViewPager);
+            if (productDetailsResponse.getmData() !=null) {
+                if (!productDetailsResponse.getmData().getmProduct().isEmpty()) {
+                    productDetailsArrayList.clear();
+                    productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
+
+                    productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsArrayList);
+                    viewPager.setAdapter(productDetailsViewPager);
+
+                    txtProductName.setText(productDetailsResponse.getmData().getmProduct().get(0).getmProductName());
+                    txtProductSalePrice.setText(productDetailsResponse.getmData().getmProduct().get(0).getmSalePrice());
+                    txtProductPrice.setText(productDetailsResponse.getmData().getmProduct().get(0).getmPrice());
+                    txtProductPrice.setPaintFlags(txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+
+                    if (productDetailsResponse.getmData().getmProductDetailsSimilier() != null) {
+                        productDetailsSimilierArrayList.clear();
+                        productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
+                        productDetailsTopRatedProductsAdapter = new ProductDetailsTopRatedProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailActivity.this);
+                        rvTopRatedProducts.setAdapter(productDetailsTopRatedProductsAdapter);
+                    }
+
+
+                }
+
             }
         }
     }

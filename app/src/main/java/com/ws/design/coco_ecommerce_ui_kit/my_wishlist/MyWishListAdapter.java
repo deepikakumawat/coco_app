@@ -40,7 +40,7 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
         MyWishListResponse.ProductData productData = myWishProductDataArrayList.get(position);
         if (productData != null) {
             holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" :productData.getmProductName());
-            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmPrice()) ? "-" : productData.getmPrice());
+            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : productData.getmSalePrice());
 
 
             String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();

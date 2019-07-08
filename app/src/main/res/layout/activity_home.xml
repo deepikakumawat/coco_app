@@ -37,7 +37,7 @@
         android:paddingRight="15dp"
         android:elevation="5dp"
         android:nestedScrollingEnabled="false"
-        android:id="@+id/recyclerview"/>
+        android:id="@+id/rvBanner"/>
 
 
         </LinearLayout>
@@ -52,7 +52,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:nestedScrollingEnabled="false"
-        android:id="@+id/category_recyclerview"/>
+        android:id="@+id/rvCategory"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,7 +88,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="15dp"
         android:nestedScrollingEnabled="false"
-        android:id="@+id/top_ten_recyclerview"/>
+        android:id="@+id/rvTopRatedProducts"/>
 
 
 
@@ -125,7 +125,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="15dp"
             android:nestedScrollingEnabled="false"
-            android:id="@+id/like_recyclerview"/>
+            android:id="@+id/rvLike"/>
         
         
         <ImageView

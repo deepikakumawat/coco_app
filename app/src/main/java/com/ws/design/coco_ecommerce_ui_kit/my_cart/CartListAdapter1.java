@@ -6,36 +6,33 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 
 
-public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> implements View.OnClickListener {
+public class CartListAdapter1 extends RecyclerView.Adapter<CartListAdapter1.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<CartListResponse.ProductData> productDataArrayList;
-    private CartActivity cartActivity;
+    private CocoCart1Activity cocoCart1Activity;
 
 
-    public CartListAdapter(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CartActivity cartActivity) {
+    public CartListAdapter1(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CocoCart1Activity cocoCart1Activity) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.cartActivity = cartActivity;
+        this.cocoCart1Activity = cocoCart1Activity;
 
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart1, parent, false));
     }
 
     @Override
@@ -52,11 +49,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
             holder.txtCross.setTag(productData);
             holder.txtCross.setTag(R.id.txtCross,position);
-            holder.txtCross.setOnClickListener( cartActivity);
-
-            holder.txtOneByOne.setTag(productData);
-            holder.txtOneByOne.setTag(R.id.txtOneByOne,position);
-            holder.txtOneByOne.setOnClickListener( cartActivity);
+            holder.txtCross.setOnClickListener( cocoCart1Activity);
 
 
 
@@ -107,7 +100,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         private LinearLayout lyIncrement;
         private TextView txtProductPrice;
         private TextView txtCross;
-        private TextView txtOneByOne;
         private TextView txtIncDec;
         private ImageView imgProduct;
 
@@ -124,7 +116,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             lyDecrement = view.findViewById(R.id.lyDecrement);
             lyIncrement = view.findViewById(R.id.lyIncrement);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
-            txtOneByOne = view.findViewById(R.id.txtOneByOne);
+
             txtCross = view.findViewById(R.id.txtCross);
 
 

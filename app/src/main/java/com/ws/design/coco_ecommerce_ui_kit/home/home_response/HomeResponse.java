@@ -29,6 +29,22 @@ public class HomeResponse {
     @Expose
     private HomeData mData;
 
+    public String getmStatus() {
+        return mStatus;
+    }
+
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
+    }
+
+    public HomeData getmData() {
+        return mData;
+    }
+
+    public void setmData(HomeData mData) {
+        this.mData = mData;
+    }
+
     public class HomeData {
 
         @SerializedName("categories")
@@ -39,7 +55,7 @@ public class HomeResponse {
         @Expose
         private ArrayList<Banner> mBanner1;
 
-        @SerializedName("banner2")
+       @SerializedName("banner2")
         @Expose
         private ArrayList<Banner> mBanner2;
 
@@ -123,7 +139,7 @@ public class HomeResponse {
             this.mBanner1 = mBanner1;
         }
 
-        public ArrayList<Banner> getmBanner2() {
+       public ArrayList<Banner> getmBanner2() {
             return mBanner2;
         }
 

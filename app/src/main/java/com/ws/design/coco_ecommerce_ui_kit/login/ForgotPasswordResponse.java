@@ -8,28 +8,38 @@ public class ForgotPasswordResponse {
 
     @SerializedName("data")
     @Expose
-    private ForgotPasswordData mForgotPasswordData;
+    private String mForgotPasswordData;
 
-    public ForgotPasswordData getmForgotPasswordData() {
+    @SerializedName("message")
+    @Expose
+    private String message;
+
+    @SerializedName("status")
+    @Expose
+    private String mStatus;
+
+
+    public String getmForgotPasswordData() {
         return mForgotPasswordData;
     }
 
-    public void setmForgotPasswordData(ForgotPasswordData mForgotPasswordData) {
+    public void setmForgotPasswordData(String mForgotPasswordData) {
         this.mForgotPasswordData = mForgotPasswordData;
     }
 
-    public class ForgotPasswordData {
+    public String getMessage() {
+        return message;
+    }
 
-        @SerializedName("message")
-        @Expose
-        private String message;
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-        public String getMessage() {
-            return message;
-        }
+    public String getmStatus() {
+        return mStatus;
+    }
 
-        public void setMessage(String message) {
-            this.message = message;
-        }
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
     }
 }

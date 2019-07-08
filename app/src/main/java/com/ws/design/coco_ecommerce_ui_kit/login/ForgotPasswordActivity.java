@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
@@ -14,16 +17,24 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class ForgotPasswordActivity extends AppCompatActivity implements LoginView {
+public class ForgotPasswordActivity extends AppCompatActivity implements LoginView, View.OnClickListener {
 
     private EditText etEmail;
     private Button btnSend;
+    private TextView txtTitle;
+    private ImageView imgBack;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
+        txtTitle = findViewById(R.id.txtTitle);
+        imgBack = findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(this);
+        txtTitle.setText("Forgot Password");
+
         LoginPresenter presenter = new LoginPresenter(this);
         findViewById(R.id.btnSend).setOnClickListener(view -> {
 
@@ -129,7 +140,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
             if (forgotPasswordResponse!=null) {
 
-                showCenteredToast(this,forgotPasswordResponse.getmForgotPasswordData().getMessage());
+                showCenteredToast(this,forgotPasswordResponse.getMessage());
             }
 
         }catch (Exception e){
@@ -138,4 +149,21 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
     }
 
 
+    @Override
+    public void onClick(View view) {
+        try{
+            int vId = view.getId();
+            switch (vId){
+                case R.id.imgBack:
+                    finish();
+                    break;
+                    default:
+                        break;
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }
