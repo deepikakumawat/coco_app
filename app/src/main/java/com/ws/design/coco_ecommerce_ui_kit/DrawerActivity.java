@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,10 +32,9 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CocoCart1Activity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
-import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateActivity;
+import com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -62,10 +62,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Offers", "Profile", "Help", "Contact Us"};
+            "Offers",  "Address", "Help", "Contact Us"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Offers", "Profile", "Help", "Contact Us", "Logout"};
+            "Offers", "Address", "Help", "Contact Us", "Logout"};
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -73,6 +73,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private TextView txtLogin;
     private LinearLayout lyLoginSignup;
     private NavigationModelClass beanClassForRecyclerView_contacts;
+    private static final int MYACCOUNT_ACTION = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +127,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
                 } else if (position == 1) {
                     if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        startActivity(new Intent(DrawerActivity.this, CocoCart1Activity.class));
+                        startActivity(new Intent(DrawerActivity.this, CartActivity.class));
                     }else{
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
@@ -137,29 +138,32 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 4) {
                     startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
                 } else if (position == 5) {
-                    startActivity(new Intent(DrawerActivity.this, MyAccountActivity.class));
+
+                   Intent intent = new Intent(DrawerActivity.this, MyAccountActivity.class);
+                    startActivityForResult(intent, MYACCOUNT_ACTION);
+
                 } else if (position == 6) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListActivity(), null, false, false);
 
                 } else if (position == 7) {
-                    startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
+
 
                 } else if (position == 8) {
-                    startActivity(new Intent(DrawerActivity.this, UpdateActivity.class));
-
-                } else if (position == 9) {
-
-                } else if (position == 10) {
 
                     if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        startActivity(new Intent(DrawerActivity.this, AddAddressActivity.class));
+                        startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
                     }else{
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
 
 
+                } else if (position == 9) {
+
+
+                } else if (position == 10) {
 
                 } else if (position == 11) {
+
                     logout();
                 }
 
@@ -278,7 +282,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                    startActivity(new Intent(DrawerActivity.this, CocoCart1Activity.class));
+                    startActivity(new Intent(DrawerActivity.this, CartActivity.class));
                 }else{
                     Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                 }            }
@@ -429,4 +433,15 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MYACCOUNT_ACTION) {
+            if (resultCode == Activity.RESULT_OK) {
+                setEmailName();
+                navigationModelClasses.remove(11);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 }

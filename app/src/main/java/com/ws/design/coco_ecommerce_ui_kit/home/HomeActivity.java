@@ -21,6 +21,7 @@ import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailActivity;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
@@ -92,7 +93,16 @@ private HomeBannerAdapter homeBannerAdapter;
 //        Homepage Banner Recyclerview Code is here
 
         homePresenter = new HomePresenter(this);
-        homePresenter.getHomeData();
+
+        if (Util.isDeviceOnline(getActivity())) {
+            homePresenter.getHomeData();
+
+        }else{
+            showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+        }
+
+
         rvBanner = (RecyclerView) mView.findViewById(R.id.rvBanner);
 
         homeBannerModelClasses = new ArrayList<>();

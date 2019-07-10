@@ -1,16 +1,21 @@
 package com.ws.design.coco_ecommerce_ui_kit.address;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
@@ -27,6 +32,10 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private ArrayList<AddressListResponse.AddressData> addressDataArrayList = new ArrayList<>();
     private AddressPresenter addressPresenter;
     private int deletedPosition = -1;
+    private ImageView imgBack;
+    private LinearLayout linear;
+    private static final int ADD_ADDRESS_ACTION = 101;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +45,35 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
          addressPresenter = new AddressPresenter(this);
 
         title = (TextView) findViewById(R.id.title);
-        linearLayout = (LinearLayout) findViewById(R.id.linear);
         rvMyAddress = (RecyclerView) findViewById(R.id.rvMyOrder);
+        imgBack =  findViewById(R.id.imgBack);
+        linear =  findViewById(R.id.linear);
+        imgBack.setOnClickListener(this);
+        linear.setOnClickListener(this);
 
         title.setText("Address List");
-        linearLayout.setVisibility(View.GONE);
 
 
-      addressPresenter.addressList(CocoPreferences.getUserId());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvMyAddress.setLayoutManager(layoutManager);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (addressDataArrayList.isEmpty()) {
+            if(Util.isDeviceOnline(this)){
+                addressPresenter.addressList(CocoPreferences.getUserId());
+
+            }else{
+                showCenteredToast(this, getString(R.string.network_connection));
+
+            }
+
+        }
     }
 
     @Override
@@ -112,15 +137,43 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
                     if (addressData != null) {
 
-                        addressPresenter.deteleAddress(addressData.getmId());
+                        if (Util.isDeviceOnline(this)) {
+                            addressPresenter.deteleAddress(addressData.getmId());
+
+                        }else{
+                            showCenteredToast(this, getString(R.string.network_connection));
+
+                        }
 
                     }
+                    break;
+                case R.id.imgBack:
+                    finish();
+                    break;
+                case R.id.linear:
+                    if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        Intent intent = new Intent(AddressListActivity.this, AddAddressActivity.class);
+                        startActivityForResult(intent, ADD_ADDRESS_ACTION);
+                    }else{
+                        Util.showCenteredToast(AddressListActivity.this, getString(R.string.please_login));
+                    }
+
                     break;
                     default:
                         break;
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_ADDRESS_ACTION) {
+            if (resultCode == Activity.RESULT_OK) {
+                addressPresenter.addressList(CocoPreferences.getUserId());
+            }
         }
     }
 }

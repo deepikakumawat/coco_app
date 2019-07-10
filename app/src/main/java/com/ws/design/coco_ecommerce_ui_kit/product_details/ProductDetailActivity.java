@@ -29,6 +29,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
@@ -106,7 +107,14 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         productDetailsPresenter = new ProductDetailsPresenter(this);
-        productDetailsPresenter.getProductDetails(productSlug);
+
+        if (Util.isDeviceOnline(getActivity())) {
+            productDetailsPresenter.getProductDetails(productSlug);
+
+        }else{
+            showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+        }
 
         txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
         txtAddToCart = mView.findViewById(R.id.txtAddToCart);
@@ -318,11 +326,23 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
                 break;
 
             case R.id.txtAddToWishlist:
-               productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
- //               productDetailsPresenter.addToWishList("87", "1547");
+                if(Util.isDeviceOnline(getActivity())){
+                    productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
+
+                }else{
+                    showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                }
                 break;
             case R.id.txtAddToCart:
-                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId,productQty);
+                if(Util.isDeviceOnline(getActivity())){
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId,productQty);
+
+                }else{
+                    showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                }
+
                 break;
                 default:
                     break;

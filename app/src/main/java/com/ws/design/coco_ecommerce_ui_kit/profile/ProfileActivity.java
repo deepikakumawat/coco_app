@@ -14,7 +14,7 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class UpdateActivity extends AppCompatActivity implements UpdateView , View.OnClickListener{
+public class ProfileActivity extends AppCompatActivity implements UpdateView , View.OnClickListener{
 
 
     private UpdateProfilePresenter updateProfilePresenter;

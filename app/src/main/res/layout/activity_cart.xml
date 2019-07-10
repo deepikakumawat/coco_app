@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity">
+    tools:context="com.ws.design.coco_ecommerce_ui_kit.my_cart.CheckoutActivity">
 
     <include layout="@layout/toolbar_cart" />
 

@@ -1,5 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.address;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -80,6 +82,10 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
     public void addUpdateAddress(AddUpdateAddressResponse addUpdateAddressResponse) {
         if (!TextUtils.isEmpty(addUpdateAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(addUpdateAddressResponse.getmStatus()))) {
             showCenteredToast(this,addUpdateAddressResponse.getMessage());
+
+            Intent data = new Intent();
+            setResult(Activity.RESULT_OK, data);
+            finish();
 
         }else {
             showCenteredToast(this,addUpdateAddressResponse.getMessage());

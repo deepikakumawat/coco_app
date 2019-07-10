@@ -143,6 +143,7 @@
         android:textSize="12sp"
         android:hint="Enter Phone"
         android:id="@+id/txtPhone"
+        android:maxLength="10"
         android:layout_marginLeft="19.5dp"
         android:textColorHint="#7137474f"
         android:layout_marginTop="10dp"/>

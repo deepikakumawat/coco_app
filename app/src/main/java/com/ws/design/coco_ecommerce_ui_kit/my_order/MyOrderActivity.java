@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,14 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
         linearLayout.setVisibility(View.GONE);
 
 
-        myOrderPresenter.myOrder(CocoPreferences.getUserId());
+        if (Util.isDeviceOnline(this)) {
+
+            myOrderPresenter.myOrder(CocoPreferences.getUserId());
+
+        }else{
+            showCenteredToast(this, getString(R.string.network_connection));
+
+        }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvMyOrder.setLayoutManager(layoutManager);

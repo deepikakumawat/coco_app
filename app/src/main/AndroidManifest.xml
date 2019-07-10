@@ -22,7 +22,7 @@
 
         </activity>
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.profile.UpdateActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoListActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity" />
@@ -38,8 +38,8 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Navigation1" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CheckoutActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CocoCart1Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />

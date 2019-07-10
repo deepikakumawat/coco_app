@@ -17,22 +17,22 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import java.util.ArrayList;
 
 
-public class CartListAdapter1 extends RecyclerView.Adapter<CartListAdapter1.ViewHolder> implements View.OnClickListener {
+public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<CartListResponse.ProductData> productDataArrayList;
-    private CocoCart1Activity cocoCart1Activity;
+    private CheckoutActivity checkoutActivity;
 
 
-    public CartListAdapter1(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CocoCart1Activity cocoCart1Activity) {
+    public CheckoutListAdapter(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CheckoutActivity checkoutActivity) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.cocoCart1Activity = cocoCart1Activity;
+        this.checkoutActivity = checkoutActivity;
 
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart1, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart, parent, false));
     }
 
     @Override
@@ -49,7 +49,11 @@ public class CartListAdapter1 extends RecyclerView.Adapter<CartListAdapter1.View
 
             holder.txtCross.setTag(productData);
             holder.txtCross.setTag(R.id.txtCross,position);
-            holder.txtCross.setOnClickListener( cocoCart1Activity);
+            holder.txtCross.setOnClickListener(checkoutActivity);
+
+            holder.txtOneByOne.setTag(productData);
+            holder.txtOneByOne.setTag(R.id.txtOneByOne,position);
+            holder.txtOneByOne.setOnClickListener(checkoutActivity);
 
 
 
@@ -100,6 +104,7 @@ public class CartListAdapter1 extends RecyclerView.Adapter<CartListAdapter1.View
         private LinearLayout lyIncrement;
         private TextView txtProductPrice;
         private TextView txtCross;
+        private TextView txtOneByOne;
         private TextView txtIncDec;
         private ImageView imgProduct;
 
@@ -116,7 +121,7 @@ public class CartListAdapter1 extends RecyclerView.Adapter<CartListAdapter1.View
             lyDecrement = view.findViewById(R.id.lyDecrement);
             lyIncrement = view.findViewById(R.id.lyIncrement);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
-
+            txtOneByOne = view.findViewById(R.id.txtOneByOne);
             txtCross = view.findViewById(R.id.txtCross);
 
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,14 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
         rvMyWishList = (RecyclerView) findViewById(R.id.rvMyWishList);
         txtTitle.setText("Whishlist");
 
-        myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
+        if (Util.isDeviceOnline(this)) {
+            myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
+
+        }else{
+            showCenteredToast(this, getString(R.string.network_connection));
+
+        }
+
         imgBack.setOnClickListener(this);
 
 
@@ -137,7 +145,13 @@ public class MyWishlistActivity extends AppCompatActivity implements MyWishListV
 
                     if (productData != null) {
 
-                        myWishListPresenter.removeWishList(productData.getmWishList());
+                        if (Util.isDeviceOnline(this)) {
+                            myWishListPresenter.removeWishList(productData.getmWishList());
+
+                        }else{
+                            showCenteredToast(this, getString(R.string.network_connection));
+
+                        }
 
                     }
                     break;
