@@ -16,6 +16,8 @@ import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 
@@ -143,24 +145,38 @@ public interface APIService {
     @POST("update-address")
     @FormUrlEncoded
     Call<AddUpdateAddressResponse> doAddUpdateAddress(@Field("id") String id,
-                                                   @Field("name") String name,
-                                                   @Field("userid") String userId,
-                                                   @Field("address1") String address1,
-                                                   @Field("address2") String address2,
-                                                   @Field("city") String city,
-                                                   @Field("state") String state,
-                                                   @Field("country") String country,
-                                                   @Field("phone") String phone);
+                                                      @Field("name") String name,
+                                                      @Field("userid") String userId,
+                                                      @Field("address1") String address1,
+                                                      @Field("address2") String address2,
+                                                      @Field("city") String city,
+                                                      @Field("state") String state,
+                                                      @Field("country") String country,
+                                                      @Field("phone") String phone);
 
 
     @POST("product-detail")
     @FormUrlEncoded
     Call<ProductDetailsResponse> getProductDetails(@Field("slug") String slug);
 
+    @POST("product-ratings")
+    @FormUrlEncoded
+    Call<ProductRatingResponse> getProductRating(@Field("productid") String productId);
 
-//    @Headers("user-key: 9900a9720d31dfd5fdb4352700c")
+
+    //    @Headers("user-key: 9900a9720d31dfd5fdb4352700c")
     @POST("homepage")
     Call<HomeResponse> getHomeData();
+
+
+    @POST("add-product-rating")
+    @FormUrlEncoded
+    Call<AddRatingResponse> addReview(@Field("userid") String userId,
+                                      @Field("usercommnet") String userComment,
+                                      @Field("productid") String productId,
+                                      @Field("prod_rate") String productRate
+    );
+
 
 }
 

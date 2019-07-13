@@ -6,12 +6,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
 
 import java.util.ArrayList;
@@ -20,13 +17,13 @@ import java.util.ArrayList;
 public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Categories> categoriesArrayList;
-    private HomeActivity homeActivity;
+    private HomeFragment homeFragment;
 
 
-    public HomeCategoryAdapter(Context context, ArrayList<Categories> categoriesArrayList, HomeActivity homeActivity) {
+    public HomeCategoryAdapter(Context context, ArrayList<Categories> categoriesArrayList, HomeFragment homeFragment) {
         this.context = context;
         this.categoriesArrayList = categoriesArrayList;
-        this.homeActivity = homeActivity;
+        this.homeFragment = homeFragment;
 
     }
 
@@ -45,7 +42,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
             holder.txtCategories.setTag(categories);
             holder.txtCategories.setTag(R.id.txtCategories,position);
-            holder.txtCategories.setOnClickListener( homeActivity);
+            holder.txtCategories.setOnClickListener(homeFragment);
         }
 
     }

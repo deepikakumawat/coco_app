@@ -19,13 +19,13 @@ import java.util.ArrayList;
 public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<ProductDetailsTopRatedProductsAdapter.ViewHolder> {
     private Context context;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList;
-    private ProductDetailActivity productDetailActivity;
+    private ProductDetailFragment productDetailFragment;
 
 
-    public ProductDetailsTopRatedProductsAdapter(Context context, ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList, ProductDetailActivity productDetailActivity) {
+    public ProductDetailsTopRatedProductsAdapter(Context context, ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList, ProductDetailFragment productDetailFragment) {
         this.context = context;
         this.productDetailsSimilierArrayList = productDetailsSimilierArrayList;
-        this.productDetailActivity = productDetailActivity;
+        this.productDetailFragment = productDetailFragment;
 
     }
 

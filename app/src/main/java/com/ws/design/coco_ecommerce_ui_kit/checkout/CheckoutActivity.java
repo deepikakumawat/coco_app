@@ -1,5 +1,6 @@
-package com.ws.design.coco_ecommerce_ui_kit.my_cart;
+package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartPresenter;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartView;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.EmptyCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.RemoveCartByCrossResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.RemoveCartOneByOneResponse;
+import com.ws.design.coco_ecommerce_ui_kit.payment_gateway.RazorPaymentActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -56,6 +64,8 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
     private RecyclerView rvCart;
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private TextView txtEmptyCart;
+    private TextView txtConfirmPlaceOrder;
+    private TextView txtTitle;
     private int removeOnByOnePostion = -1;
     private int removeCorssPostion = -1;
     private ImageView imgBack;
@@ -64,13 +74,17 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_checkout);
 
         cartPresenter = new CartPresenter(this);
         rvCart = findViewById(R.id.rvCart);
         imgBack = findViewById(R.id.imgBack);
+        txtConfirmPlaceOrder = findViewById(R.id.txtConfirmPlaceOrder);
         txtEmptyCart = findViewById(R.id.txtEmptyCart);
+        txtTitle = findViewById(R.id.txtTitle);
         txtEmptyCart.setOnClickListener(this);
+        txtConfirmPlaceOrder.setOnClickListener(this);
+        txtTitle.setText("Checkout");
 
         if (Util.isDeviceOnline(this)) {
             cartPresenter.getCartList(CocoPreferences.getUserId());
@@ -216,6 +230,10 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
                     break;
                 case R.id.imgBack:
                     finish();
+                    break;
+                case R.id.txtConfirmPlaceOrder:
+                    Intent intent = new Intent(CheckoutActivity.this, RazorPaymentActivity.class);
+                    startActivity(intent);
                     break;
                 default:
                     break;

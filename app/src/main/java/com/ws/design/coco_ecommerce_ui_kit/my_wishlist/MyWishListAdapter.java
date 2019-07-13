@@ -44,7 +44,7 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
 
 
             String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.ac).dontAnimate().into(holder.imgProduct);
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.ac).into(holder.imgProduct);
 
 
 

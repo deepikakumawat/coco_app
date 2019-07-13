@@ -38,13 +38,14 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Navigation1" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CheckoutActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.payment_gateway.RazorPaymentActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Signup2Activity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.ReviewActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoFilter1_Activity" />
 
         <!-- vaibhav start -->
@@ -78,6 +79,12 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Expantable">
 
         </activity>
+
+        <!-- Add your API key here -->
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_4dmCERmMcHDpyG" />
+
     </application>
 
 </manifest>

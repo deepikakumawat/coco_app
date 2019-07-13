@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.DealProducts;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
@@ -21,13 +20,13 @@ import java.util.ArrayList;
 public class HomeLikeProductsAdapter extends RecyclerView.Adapter<HomeLikeProductsAdapter.ViewHolder> {
     private Context context;
     private ArrayList<DealProducts> dealProductsArrayList;
-    private HomeActivity homeActivity;
+    private HomeFragment homeFragment;
 
 
-    public HomeLikeProductsAdapter(Context context, ArrayList<DealProducts> dealProductsArrayList, HomeActivity homeActivity) {
+    public HomeLikeProductsAdapter(Context context, ArrayList<DealProducts> dealProductsArrayList, HomeFragment homeFragment) {
         this.context = context;
         this.dealProductsArrayList = dealProductsArrayList;
-        this.homeActivity = homeActivity;
+        this.homeFragment = homeFragment;
 
     }
 
@@ -54,7 +53,7 @@ public class HomeLikeProductsAdapter extends RecyclerView.Adapter<HomeLikeProduc
 
             holder.lyLikeProduct.setTag(productData);
             holder.lyLikeProduct.setTag(R.id.lyLikeProduct,position);
-            holder.lyLikeProduct.setOnClickListener( homeActivity);
+            holder.lyLikeProduct.setOnClickListener(homeFragment);
 
 
 

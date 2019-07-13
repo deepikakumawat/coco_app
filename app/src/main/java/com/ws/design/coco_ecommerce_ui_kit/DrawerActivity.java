@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -27,14 +28,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
-import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
-import com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -59,10 +59,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
     private RecyclerView recyclerView;
     private RecycleAdapteNavigation mAdapter;
+    long back_pressed = 0;
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Offers",  "Address", "Help", "Contact Us"};
+            "Offers", "Address", "Help", "Contact Us"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
             "Offers", "Address", "Help", "Contact Us", "Logout"};
@@ -104,13 +105,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         navigationModelClasses = new ArrayList<>();
 
 
-        if(TextUtils.isEmpty(CocoPreferences.getUserId())){
+        if (TextUtils.isEmpty(CocoPreferences.getUserId())) {
             for (int i = 0; i < title.length; i++) {
                 beanClassForRecyclerView_contacts = new NavigationModelClass(title[i]);
 
                 navigationModelClasses.add(beanClassForRecyclerView_contacts);
             }
-        }else{
+        } else {
             for (int i = 0; i < titleWithLogout.length; i++) {
                 beanClassForRecyclerView_contacts = new NavigationModelClass(titleWithLogout[i]);
 
@@ -119,16 +120,15 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         }
 
 
-
         mAdapter = new RecycleAdapteNavigation(getApplicationContext(), navigationModelClasses, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 if (position == 0) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
                 } else if (position == 1) {
-                    if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, CartActivity.class));
-                    }else{
+                    } else {
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
                 } else if (position == 2) {
@@ -136,10 +136,17 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 3) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
                 } else if (position == 4) {
-                    startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
+
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
+                    } else {
+                        Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                    }
+
+
                 } else if (position == 5) {
 
-                   Intent intent = new Intent(DrawerActivity.this, MyAccountActivity.class);
+                    Intent intent = new Intent(DrawerActivity.this, MyAccountActivity.class);
                     startActivityForResult(intent, MYACCOUNT_ACTION);
 
                 } else if (position == 6) {
@@ -150,9 +157,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
                 } else if (position == 8) {
 
-                    if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
-                    }else{
+                    } else {
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
 
@@ -202,8 +209,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         invalidateOptionsMenu();
 
-        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeActivity(), null, false, false);
-
+        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
 
     }
@@ -236,13 +242,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-
-            drawer.closeDrawer(Gravity.LEFT); //OPEN Nav Drawer!
-        }
-    }
 
     private Fragment getCurrentFragmentInRootLayout() {
         return getSupportFragmentManager().findFragmentById(R.id.rootLayout);
@@ -281,11 +280,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         toolbar.findViewById(R.id.btn_cart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                     startActivity(new Intent(DrawerActivity.this, CartActivity.class));
-                }else{
+                } else {
                     Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
-                }            }
+                }
+            }
         });
 
     }
@@ -310,7 +310,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
                     drawer.closeDrawer(GravityCompat.START);
 
-                     intent = new Intent(DrawerActivity.this, LoginActivity.class);
+                    intent = new Intent(DrawerActivity.this, LoginActivity.class);
                     startActivity(intent);
 
                     break;
@@ -319,7 +319,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
                     drawer.closeDrawer(GravityCompat.START);
 
-                     intent = new Intent(DrawerActivity.this, SignupActivity.class);
+                    intent = new Intent(DrawerActivity.this, SignupActivity.class);
                     startActivity(intent);
 
                     break;
@@ -394,7 +394,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_LAST_NAME);*/
 
 
-
                             CocoPreferences.removeValueForKey("UserID");
                             CocoPreferences.removeValueForKey("UserEmail");
                             CocoPreferences.removeValueForKey("UserPhone");
@@ -406,7 +405,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                             txtUserEmail.setVisibility(View.GONE);
                             lyLoginSignup.setVisibility(View.VISIBLE);
 
-                          navigationModelClasses.remove(11);
+                            navigationModelClasses.remove(11);
                             mAdapter.notifyDataSetChanged();
 
                             Util.showCenteredToast(DrawerActivity.this, "Logout Successfully!");
@@ -444,4 +443,23 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             }
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+
+            drawer.closeDrawer(Gravity.LEFT); //OPEN Nav Drawer!
+
+        } else {
+
+
+            Log.d("fragment", "fragment");
+        }
+
+    }
+
+
+
 }

@@ -20,13 +20,13 @@ import java.util.ArrayList;
 public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRatedProductsAdapter.ViewHolder> {
     private Context context;
     private ArrayList<ProductData> productDataArrayList;
-    private HomeActivity homeActivity;
+    private HomeFragment homeFragment;
 
 
-    public HomeTopRatedProductsAdapter(Context context, ArrayList<ProductData> productDataArrayList, HomeActivity homeActivity) {
+    public HomeTopRatedProductsAdapter(Context context, ArrayList<ProductData> productDataArrayList, HomeFragment homeFragment) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.homeActivity = homeActivity;
+        this.homeFragment = homeFragment;
 
     }
 
@@ -53,7 +53,7 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
 
             holder.lyProduct.setTag(productData);
             holder.lyProduct.setTag(R.id.lyProduct,position);
-            holder.lyProduct.setOnClickListener( homeActivity);
+            holder.lyProduct.setOnClickListener(homeFragment);
 
 
 

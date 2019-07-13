@@ -6,7 +6,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.ws.design.coco_ecommerce_ui_kit"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -29,7 +29,7 @@ android {
         }
     }
 
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
 
@@ -90,7 +90,11 @@ dependencies {
 /*    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'*/
 
+  /*  implementation 'com.google.firebase:firebase-auth:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+*/
 
+    implementation 'com.razorpay:checkout:1.5.2'
 
 
 }

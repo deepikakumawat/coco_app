@@ -53,6 +53,7 @@
                 android:gravity="center_vertical"
                 android:isIndicator="false"
                 android:max="5"
+                android:id="@+id/rating"
                 android:numStars="5"
                 android:progressTint="@color/yellow"
                 android:rating="2.5"
@@ -63,6 +64,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:layout_marginTop="14.7dp"
                 android:layout_width="wrap_content"
+                android:id="@+id/txtUserNameDate"
                 android:layout_height="wrap_content"
                 android:text="@string/by_ruchi_on_24_march_2017"
                 android:textColor="#95989a"
@@ -75,6 +77,7 @@
                 android:text="@string/surprice_gift_to_my_sister_she_just_jumped_in_air_loved_it"
                 android:textColor="#666666"
                 android:textSize="11.3sp"
+                android:id="@+id/txtUserComment"
                 android:fontFamily="@font/roboto_regular" />
 
 

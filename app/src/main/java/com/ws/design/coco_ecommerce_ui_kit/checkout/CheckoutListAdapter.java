@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.my_cart;
+package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;

@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="24.3dp"
-                        android:text="Cross"
+                        android:text="Remove"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -129,6 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="24.3dp"
                         android:text="One By One"
+                        android:visibility="gone"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 

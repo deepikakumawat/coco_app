@@ -20,12 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.ReviewActivity;
-import com.ws.design.coco_ecommerce_ui_kit.home.HomeActivity;
-import com.ws.design.coco_ecommerce_ui_kit.home.HomeTopRatedProductsAdapter;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
+import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
@@ -33,17 +28,15 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
-import Adapter.RecycleAdapteTopTenHome;
 import Adapter.ViewpagerProductDetailsAdapter;
 import Model.TopTenModelClass;
-import fragment.CustomItemClickListener;
 import fragment.ToolbarBaseFragment;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class ProductDetailActivity extends ToolbarBaseFragment implements ProductDetailsView, View.OnClickListener {
+public class ProductDetailFragment extends ToolbarBaseFragment implements ProductDetailsView, View.OnClickListener {
 
     RelativeLayout rightNav;
 
@@ -82,6 +75,7 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
     private ProductDetailsViewPager productDetailsViewPager;
     private TextView txtProductName;
     private TextView txtProductPrice;
+    private TextView txtRating;
     private TextView txtProductSalePrice;
     private  String productSlug = null;
     private  String productId = null;
@@ -122,6 +116,7 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
         txtProductPrice = mView.findViewById(R.id.txtProductPrice);
         txtProductSalePrice = mView.findViewById(R.id.txtProductSalePrice);
         rvTopRatedProducts = mView.findViewById(R.id.rvTopRatedProducts);
+        txtRating = mView.findViewById(R.id.txtRating);
         txtAddToWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
 
@@ -133,7 +128,9 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
         mView.findViewById(R.id.btn_review).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ReviewActivity.class));
+                Intent intent = (new Intent(getActivity(), ReviewActivity.class));
+                intent.putExtra("productId",productId);
+                startActivity(intent);
             }
         });
 
@@ -382,23 +379,31 @@ public class ProductDetailActivity extends ToolbarBaseFragment implements Produc
         if (productDetailsResponse != null) {
 
             if (productDetailsResponse.getmData() !=null) {
-                if (!productDetailsResponse.getmData().getmProduct().isEmpty()) {
+                if (productDetailsResponse.getmData().getmProduct() != null) {
                     productDetailsArrayList.clear();
-                    productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
+                 /*   productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
 
                     productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsArrayList);
-                    viewPager.setAdapter(productDetailsViewPager);
+                    viewPager.setAdapter(productDetailsViewPager);*/
 
-                    txtProductName.setText(productDetailsResponse.getmData().getmProduct().get(0).getmProductName());
-                    txtProductSalePrice.setText(productDetailsResponse.getmData().getmProduct().get(0).getmSalePrice());
-                    txtProductPrice.setText(productDetailsResponse.getmData().getmProduct().get(0).getmPrice());
-                    txtProductPrice.setPaintFlags(txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
+                    txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice(): "-");
+
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
+                        txtProductPrice.setText(productDetailsResponse.getmData().getmProduct().getmPrice());
+                        txtProductPrice.setPaintFlags(txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    }else{
+                        txtProductPrice.setText("-");
+                    }
+
+
+                    txtRating.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmAvgRating()) ? productDetailsResponse.getmData().getmAvgRating() : "0");
 
 
                     if (productDetailsResponse.getmData().getmProductDetailsSimilier() != null) {
                         productDetailsSimilierArrayList.clear();
                         productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
-                        productDetailsTopRatedProductsAdapter = new ProductDetailsTopRatedProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailActivity.this);
+                        productDetailsTopRatedProductsAdapter = new ProductDetailsTopRatedProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailFragment.this);
                         rvTopRatedProducts.setAdapter(productDetailsTopRatedProductsAdapter);
                     }
 

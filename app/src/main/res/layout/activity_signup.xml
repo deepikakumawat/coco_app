@@ -231,6 +231,7 @@
             android:textColor="@color/white"
             android:text="Gmail"
             android:gravity="center"
+            android:id="@+id/btnGoogle"
             android:layout_weight="1"
             android:textSize="15sp"
             android:paddingTop="13.5dp"
@@ -250,6 +251,15 @@
             android:paddingBottom="13.5dp"
             android:backgroundTint="#2c55ac"
             android:background="@drawable/button_rect22"/>
+
+
+    <!--    <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />-->
+
+
     </LinearLayout>
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -1,14 +1,24 @@
 package com.ws.design.coco_ecommerce_ui_kit.signup;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+/*import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;*/
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -16,7 +26,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.isEmailValid;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.isValidMobile;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class SignupActivity extends AppCompatActivity implements SignUpView {
+public class SignupActivity extends AppCompatActivity implements SignUpView, View.OnClickListener {
 
 
     private SignUpPresenter signUpPresenter;
@@ -27,12 +37,22 @@ public class SignupActivity extends AppCompatActivity implements SignUpView {
     private EditText etConfirmPassword;
     private EditText etPassword;
     private EditText etPhone;
+    private TextView btnGoogle;
+//    private GoogleSignInClient googleSignInClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         signUpPresenter = new SignUpPresenter(this);
         setContentView(R.layout.activity_signup);
+
+     /*   GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, gso);*/
+
 
         init();
 
@@ -106,6 +126,10 @@ public class SignupActivity extends AppCompatActivity implements SignUpView {
         etLname = (EditText) findViewById(R.id.etLname);
         etPhone = (EditText) findViewById(R.id.etPhone);
         btnSignup = (TextView) findViewById(R.id.btnSignup);
+        btnGoogle = (TextView) findViewById(R.id.btnGoogle);
+        btnGoogle.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -144,4 +168,52 @@ public class SignupActivity extends AppCompatActivity implements SignUpView {
             showCenteredToast(this,signUpResponse.getMessage());
         }
     }
+
+    @Override
+    public void onClick(View view) {
+        try{
+            int vId = view.getId();
+            switch (vId){
+                case R.id.btnGoogle:
+                  /*  Intent signInIntent = googleSignInClient.getSignInIntent();
+                    startActivityForResult(signInIntent, 101);*/
+                    break;
+                    default:
+                        break;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+       try{
+//           if (resultCode == Activity.RESULT_OK)
+             /*  switch (requestCode) {
+                   case 101:
+                       try {
+                           // The Task returned from this call is always completed, no need to attach
+                           // a listener.
+                           Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                           GoogleSignInAccount account = task.getResult(ApiException.class);
+                           onLoggedIn(account);
+                       } catch (ApiException e) {
+                           // The ApiException status code indicates the detailed failure reason.
+                           Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
+                       }
+                       break;
+               }
+*/
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+    }
+
+  /*  private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
+      Log.d("name", googleSignInAccount.getDisplayName());
+      Log.d("email", googleSignInAccount.getEmail());
+
+    }*/
 }

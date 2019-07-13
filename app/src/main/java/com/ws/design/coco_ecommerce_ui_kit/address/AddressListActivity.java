@@ -66,7 +66,14 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         super.onResume();
         if (addressDataArrayList.isEmpty()) {
             if(Util.isDeviceOnline(this)){
-                addressPresenter.addressList(CocoPreferences.getUserId());
+
+                if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    addressPresenter.addressList(CocoPreferences.getUserId());
+
+                }else{
+                    Util.showCenteredToast(this,getString(R.string.please_login));
+                }
+
 
             }else{
                 showCenteredToast(this, getString(R.string.network_connection));
@@ -172,7 +179,21 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_ADDRESS_ACTION) {
             if (resultCode == Activity.RESULT_OK) {
-                addressPresenter.addressList(CocoPreferences.getUserId());
+
+                if(Util.isDeviceOnline(this)){
+
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        addressPresenter.addressList(CocoPreferences.getUserId());
+
+                    }else{
+                        Util.showCenteredToast(this,getString(R.string.please_login));
+                    }
+
+
+                }else{
+                    showCenteredToast(this, getString(R.string.network_connection));
+
+                }
             }
         }
     }

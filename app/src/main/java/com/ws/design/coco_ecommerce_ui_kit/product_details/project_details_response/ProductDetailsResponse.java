@@ -37,6 +37,10 @@ public class ProductDetailsResponse {
         @Expose
         private String mTitle;
 
+        @SerializedName("avg_rating")
+        @Expose
+        private String mAvgRating;
+
         @SerializedName("productsdatasimiler")
         @Expose
         private ArrayList<ProductDetailsSimilier> mProductDetailsSimilier;
@@ -47,7 +51,7 @@ public class ProductDetailsResponse {
 
         @SerializedName("product")
         @Expose
-        private ArrayList<ProductDetailsSimilier> mProduct;
+        private ProductDetailsSimilier mProduct;
 
         @SerializedName("cate_id")
         @Expose
@@ -82,14 +86,13 @@ public class ProductDetailsResponse {
             this.mBrudrumdata = mBrudrumdata;
         }
 
-        public ArrayList<ProductDetailsSimilier> getmProduct() {
+        public ProductDetailsSimilier getmProduct() {
             return mProduct;
         }
 
-        public void setmProduct(ArrayList<ProductDetailsSimilier> mProduct) {
+        public void setmProduct(ProductDetailsSimilier mProduct) {
             this.mProduct = mProduct;
         }
-
 
 
         public ArrayList<ProductBroughtData> getmProductBroughtData() {
@@ -107,6 +110,15 @@ public class ProductDetailsResponse {
 
         public void setmCatId(ArrayList<String> mCatId) {
             this.mCatId = mCatId;
+        }
+
+
+        public String getmAvgRating() {
+            return mAvgRating;
+        }
+
+        public void setmAvgRating(String mAvgRating) {
+            this.mAvgRating = mAvgRating;
         }
     }
 }

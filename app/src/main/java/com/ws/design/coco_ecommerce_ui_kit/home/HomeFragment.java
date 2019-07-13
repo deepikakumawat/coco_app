@@ -4,7 +4,6 @@ package com.ws.design.coco_ecommerce_ui_kit.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,18 +18,14 @@ import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.DealProducts;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailActivity;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
-import Adapter.RecycleAdapteHomeBanner;
-import Adapter.RecycleAdapteTopTenHome;
 import Model.HomeBannerModelClass;
 import Model.HomeCategoryModelClass;
 import Model.TopTenModelClass;
-import fragment.CustomItemClickListener;
 import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
@@ -38,7 +33,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class HomeActivity extends ToolbarBaseFragment implements View.OnClickListener , HomeView{
+public class HomeFragment extends ToolbarBaseFragment implements View.OnClickListener , HomeView{
 
 
     private ArrayList<HomeBannerModelClass> homeBannerModelClasses;
@@ -166,7 +161,7 @@ private HomeBannerAdapter homeBannerAdapter;
        /* mAdapter2 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductDetailActivity(), null, false, false);
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductDetailFragment(), null, false, false);
             }
         });*/
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -201,7 +196,7 @@ private HomeBannerAdapter homeBannerAdapter;
                 bundle.putString("productId", productData.getmProductId());
                 bundle.putString("productQty", productData.getmProductQty());
 
-                ProductDetailActivity productDetailActivity = new ProductDetailActivity();
+                ProductDetailFragment productDetailActivity = new ProductDetailFragment();
                 productDetailActivity.setArguments(bundle);
 
                 FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailActivity, null, false, false);
@@ -235,7 +230,7 @@ private HomeBannerAdapter homeBannerAdapter;
         mAdapter2 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductDetailActivity(), null, false, false);
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductDetailFragment(), null, false, false);
             }
         });*/
         RecyclerView.LayoutManager mLayoutManager4 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -269,10 +264,10 @@ private HomeBannerAdapter homeBannerAdapter;
                         bundle.putString("productId", productData.getmProductId());
                         bundle.putString("productQty", productData.getmProductQty());
 
-                        ProductDetailActivity productDetailActivity = new ProductDetailActivity();
-                        productDetailActivity.setArguments(bundle);
+                        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+                        productDetailFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailActivity, null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, null, false, false);
 
                     }
 
@@ -289,10 +284,10 @@ private HomeBannerAdapter homeBannerAdapter;
                         bundle.putString("productId", dealProduct.getmProductId());
                         bundle.putString("productQty", dealProduct.getmProductQty());
 
-                        ProductDetailActivity productDetailActivity = new ProductDetailActivity();
-                        productDetailActivity.setArguments(bundle);
+                        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+                        productDetailFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailActivity, null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, null, false, false);
 
                     }
 
@@ -328,7 +323,7 @@ private HomeBannerAdapter homeBannerAdapter;
                 if (homeResponse.getmData().getmCategories() != null) {
                     categoriesArrayList.clear();
                     categoriesArrayList.addAll(homeResponse.getmData().getmCategories());
-                    homeCategoryAdapter = new HomeCategoryAdapter(getActivity(), categoriesArrayList,HomeActivity.this);
+                    homeCategoryAdapter = new HomeCategoryAdapter(getActivity(), categoriesArrayList, HomeFragment.this);
                     rvCategory.setAdapter(homeCategoryAdapter);
                 }
 
@@ -336,21 +331,21 @@ private HomeBannerAdapter homeBannerAdapter;
                 if (homeResponse.getmData().getmBanner1() != null) {
                     bannerArrayList.clear();
                     bannerArrayList.addAll(homeResponse.getmData().getmBanner1());
-                    homeBannerAdapter = new HomeBannerAdapter(getActivity(), bannerArrayList,HomeActivity.this);
+                    homeBannerAdapter = new HomeBannerAdapter(getActivity(), bannerArrayList, HomeFragment.this);
                     rvBanner.setAdapter(homeBannerAdapter);
                 }
 
                 if (homeResponse.getmData().getmProductData() != null) {
                     productDataArrayList.clear();
                     productDataArrayList.addAll(homeResponse.getmData().getmProductData());
-                    homeTopRatedProductsAdapter = new HomeTopRatedProductsAdapter(getActivity(), productDataArrayList,HomeActivity.this);
+                    homeTopRatedProductsAdapter = new HomeTopRatedProductsAdapter(getActivity(), productDataArrayList, HomeFragment.this);
                     rvTopRatedProducts.setAdapter(homeTopRatedProductsAdapter);
                 }
 
                 if (homeResponse.getmData().getmDealProducts() != null) {
                     dealProductsArrayList.clear();
                     dealProductsArrayList.addAll(homeResponse.getmData().getmDealProducts());
-                    homeLikeProductsAdapter = new HomeLikeProductsAdapter(getActivity(), dealProductsArrayList,HomeActivity.this);
+                    homeLikeProductsAdapter = new HomeLikeProductsAdapter(getActivity(), dealProductsArrayList, HomeFragment.this);
                     rvLike.setAdapter(homeLikeProductsAdapter);
                 }
 
