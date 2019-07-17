@@ -129,10 +129,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onItemClick(View v, int position) {
                 if (position == 0) {
-//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+                   FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
-                    fragment = new HomeFragment();
-                    replaceFragment(fragment);
+                   /* fragment = new HomeFragment();
+                    replaceFragment(fragment);*/
 
                 } else if (position == 1) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
@@ -143,18 +143,18 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
-//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
 
-               fragment = new CategoryActivity();
-               replaceFragment(fragment);
+             /*  fragment = new CategoryActivity();
+               replaceFragment(fragment);*/
 
                 } else if (position == 4) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-//                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), null, false, false);
 
-                        fragment = new MyWishlistFragment();
-                        replaceFragment(fragment);
+                      /*  fragment = new MyWishlistFragment();
+                        replaceFragment(fragment);*/
                     } else {
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
@@ -166,10 +166,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     startActivityForResult(intent, MYACCOUNT_ACTION);
 
                 } else if (position == 6) {
-//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListActivity(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListActivity(), null, false, false);
 
-                    fragment = new ProductDetailFragment();
-                    replaceFragment(fragment);
+                 /*   fragment = new ProductDetailFragment();
+                    replaceFragment(fragment);*/
                 } else if (position == 7) {
 
 
@@ -227,10 +227,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         invalidateOptionsMenu();
 
-//        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+       FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
-        fragment = new HomeFragment();
-        replaceFragment(fragment);
+      /*  fragment = new HomeFragment();
+        replaceFragment(fragment);*/
 
     }
 
