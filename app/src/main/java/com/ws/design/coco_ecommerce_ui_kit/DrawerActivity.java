@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -24,16 +25,19 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
@@ -75,6 +79,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private LinearLayout lyLoginSignup;
     private NavigationModelClass beanClassForRecyclerView_contacts;
     private static final int MYACCOUNT_ACTION = 101;
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +129,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onItemClick(View v, int position) {
                 if (position == 0) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+
+                    fragment = new HomeFragment();
+                    replaceFragment(fragment);
+
                 } else if (position == 1) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, CartActivity.class));
@@ -134,11 +143,18 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
+//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
+
+               fragment = new CategoryActivity();
+               replaceFragment(fragment);
+
                 } else if (position == 4) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        startActivity(new Intent(DrawerActivity.this, MyWishlistActivity.class));
+//                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), null, false, false);
+
+                        fragment = new MyWishlistFragment();
+                        replaceFragment(fragment);
                     } else {
                         Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
                     }
@@ -150,8 +166,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     startActivityForResult(intent, MYACCOUNT_ACTION);
 
                 } else if (position == 6) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListActivity(), null, false, false);
+//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListActivity(), null, false, false);
 
+                    fragment = new ProductDetailFragment();
+                    replaceFragment(fragment);
                 } else if (position == 7) {
 
 
@@ -209,8 +227,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         invalidateOptionsMenu();
 
-        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+//        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
+        fragment = new HomeFragment();
+        replaceFragment(fragment);
 
     }
 
@@ -455,11 +475,60 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         } else {
 
 
-            Log.d("fragment", "fragment");
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
 
     }
 
 
+
+
+    public void replaceFragment(Fragment fragment) {
+
+
+        if (getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+
+
+        String backStateName = fragment.getClass().getName();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        boolean fragmentPopped = fragmentManager.popBackStackImmediate(backStateName, 0);
+
+        if (!fragmentPopped && fragmentManager.findFragmentByTag(backStateName) == null) {
+
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.rootLayout, fragment, backStateName);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+            fragmentTransaction.addToBackStack(backStateName);
+            fragmentTransaction.commit();
+
+        }
+    }
+
+    public void addFragment(Fragment fragment) {
+
+
+        if (getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+
+
+//        String backStateName = fragment.getClass().getName();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+//        boolean fragmentPopped = fragmentManager.popBackStackImmediate(backStateName, 0);
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.rootLayout, fragment, null);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+        fragmentTransaction.disallowAddToBackStack();
+        fragmentTransaction.commit();
+    }
 
 }

@@ -13,19 +13,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.CocoApp;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListPresenter;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.Ratings;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
-
-import customfonts.EditText_Roboto_Meidum;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;

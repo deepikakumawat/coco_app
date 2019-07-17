@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListView;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 
 import org.json.JSONObject;
@@ -161,6 +162,49 @@ public class ProductDetailsPresenter {
                     } catch (Exception ee) {
                         e.printStackTrace();
                         view.onFailure("Something Went Wrong. Please try again later");
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeWishList(String wishlistId) {
+        view.showWait();
+        try {
+
+            Call call = service.removeWishList(wishlistId);
+            call.enqueue(new Callback<RemoveWishListResponse>() {
+                @Override
+                public void onResponse(Call<RemoveWishListResponse> call, Response<RemoveWishListResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try{
+                        if (response.isSuccessful()) {
+
+                            view.removeWishList(response.body());
+                        }else{
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RemoveWishListResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
 
                     }
 

@@ -145,6 +145,7 @@
     <string name="country">Country can\'t be blank!</string>
     <string name="phone">Phone can\'t be blank!</string>
     <string name="client_id">668030816880-vnh16c51f4l760lth09lsdkrb5lfs9tg.apps.googleusercontent.com</string>
+    <string name="msg_token_fmt">FCM Message Token</string>
 
 
 </resources>

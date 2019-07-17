@@ -71,7 +71,7 @@ public class RecycleAdapteHomeBanner extends RecyclerView.Adapter<RecycleAdapteH
 
     public void onBindViewHolder(final MyViewHolder holder,final int position) {
         HomeBannerModelClass movie = moviesList.get(position);
-        holder.image.setImageResource(movie.getImage());
+//        holder.image.setImageResource(movie.getImage());
 
 
 

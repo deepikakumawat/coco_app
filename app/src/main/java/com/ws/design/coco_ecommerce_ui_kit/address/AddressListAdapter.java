@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -52,6 +53,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             holder.btnDelete.setTag(addressData);
             holder.btnDelete.setTag(R.id.btnDelete,position);
             holder.btnDelete.setOnClickListener( addressListActivity);
+
+            holder.lyAddress.setTag(addressData);
+            holder.lyAddress.setOnClickListener( addressListActivity);
         }
 
     }
@@ -75,6 +79,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         private TextView txtZipcode;
         private TextView txtPhone;
         private Button btnDelete;
+        private LinearLayout lyAddress;
 
 
 
@@ -92,6 +97,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             txtZipcode = view.findViewById(R.id.txtZipcode);
             txtPhone = view.findViewById(R.id.txtPhone);
             btnDelete = view.findViewById(R.id.btnDelete);
+            lyAddress = view.findViewById(R.id.lyAddress);
 
 
         }

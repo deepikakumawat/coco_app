@@ -5,12 +5,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
@@ -43,10 +47,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     LinearLayout linear1, linear2, linear3, linear4;
     TextView txt1, txt2, txt3, txt4;
 
-    LinearLayout right1,right2,right3;
-    ImageView right1_imag,right2_imag,right3_imag;
-
-
+    LinearLayout right1, right2, right3;
+    ImageView right1_imag, right2_imag, right3_imag;
 
 
     private ViewPager viewPager;
@@ -64,7 +66,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList = new ArrayList<>();
     private ProductDetailsTopRatedProductsAdapter productDetailsTopRatedProductsAdapter;
 
-    RelativeLayout relative1,relative2,relative3,relative4;
+    RelativeLayout relative1, relative2, relative3, relative4;
     private View mView;
 
     private ProductDetailsPresenter productDetailsPresenter;
@@ -77,9 +79,12 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private TextView txtProductPrice;
     private TextView txtRating;
     private TextView txtProductSalePrice;
-    private  String productSlug = null;
-    private  String productId = null;
-    private  String productQty = null;
+    private String productSlug = null;
+    private String productId = null;
+    private String productQty = null;
+    private TextView txtRemoveWishlist;
+    private String screen;
+    private String wishListId;
 
 
     @Nullable
@@ -91,12 +96,24 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
 
         Bundle bundle = getArguments();
-        productSlug= (String) bundle.getString("productSlug");
-        productId= (String) bundle.getString("productId");
-        productQty= (String) bundle.getString("productQty");
+        productSlug = bundle.getString("productSlug");
+        productId = bundle.getString("productId");
+        productQty = bundle.getString("productQty");
+
+        if (bundle.containsKey("screen")) {
+            screen = bundle.getString("screen");
+
+        }
+
+        if (bundle.containsKey("wishlistId")) {
+            wishListId = bundle.getString("wishlistId");
+
+        }
+
 
         return mView;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -105,12 +122,13 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         if (Util.isDeviceOnline(getActivity())) {
             productDetailsPresenter.getProductDetails(productSlug);
 
-        }else{
+        } else {
             showCenteredToast(getActivity(), getString(R.string.network_connection));
 
         }
 
         txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
+        txtRemoveWishlist = mView.findViewById(R.id.txtRemoveWishlist);
         txtAddToCart = mView.findViewById(R.id.txtAddToCart);
         txtProductName = mView.findViewById(R.id.txtProductName);
         txtProductPrice = mView.findViewById(R.id.txtProductPrice);
@@ -118,6 +136,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         rvTopRatedProducts = mView.findViewById(R.id.rvTopRatedProducts);
         txtRating = mView.findViewById(R.id.txtRating);
         txtAddToWishlist.setOnClickListener(this);
+        txtRemoveWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
 
 
@@ -129,7 +148,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             @Override
             public void onClick(View view) {
                 Intent intent = (new Intent(getActivity(), ReviewActivity.class));
-                intent.putExtra("productId",productId);
+                intent.putExtra("productId", productId);
                 startActivity(intent);
             }
         });
@@ -185,9 +204,6 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         });
 
 
-
-
-
         //        Top Ten  Recyclerview Code is here
 
 //        top_ten_crecyclerview = (RecyclerView) mView.findViewById(R.id.top_ten_recyclerview);
@@ -215,6 +231,15 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         rvTopRatedProducts.setLayoutManager(mLayoutManager2);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
+
+
+        if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("MyWishList")) {
+            txtRemoveWishlist.setVisibility(View.VISIBLE);
+            txtAddToWishlist.setVisibility(View.GONE);
+        } else {
+            txtRemoveWishlist.setVisibility(View.GONE);
+            txtAddToWishlist.setVisibility(View.VISIBLE);
+        }
 /*
         top_ten_crecyclerview.setAdapter(mAdapter2);
 */
@@ -236,7 +261,6 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 txt2.setTextColor(Color.parseColor("#d0d0d0"));
                 txt3.setTextColor(Color.parseColor("#d0d0d0"));
                 txt4.setTextColor(Color.parseColor("#d0d0d0"));
-
 
 
                 break;
@@ -268,7 +292,6 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 break;
 
             case R.id.linear4:
-
 
 
                 linear1.setBackgroundResource(R.drawable.storage_gray_rect);
@@ -323,26 +346,40 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 break;
 
             case R.id.txtAddToWishlist:
-                if(Util.isDeviceOnline(getActivity())){
+                if (Util.isDeviceOnline(getActivity())) {
                     productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
 
-                }else{
+                } else {
                     showCenteredToast(getActivity(), getString(R.string.network_connection));
 
                 }
                 break;
             case R.id.txtAddToCart:
-                if(Util.isDeviceOnline(getActivity())){
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId,productQty);
+                if (Util.isDeviceOnline(getActivity())) {
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
 
-                }else{
+                } else {
                     showCenteredToast(getActivity(), getString(R.string.network_connection));
 
                 }
 
                 break;
-                default:
-                    break;
+            case R.id.txtRemoveWishlist:
+
+                if (!TextUtils.isEmpty(wishListId)) {
+
+                    if (Util.isDeviceOnline(getActivity())) {
+                        productDetailsPresenter.removeWishList(wishListId);
+
+                    } else {
+                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                    }
+
+                }
+                break;
+            default:
+                break;
 
         }
     }
@@ -366,10 +403,10 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     @Override
     public void addToWishList(AddToWishListResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
 
-        }else {
-            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+        } else {
+            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
         }
     }
 
@@ -378,7 +415,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         if (productDetailsResponse != null) {
 
-            if (productDetailsResponse.getmData() !=null) {
+            if (productDetailsResponse.getmData() != null) {
                 if (productDetailsResponse.getmData().getmProduct() != null) {
                     productDetailsArrayList.clear();
                  /*   productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
@@ -387,12 +424,12 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     viewPager.setAdapter(productDetailsViewPager);*/
 
                     txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
-                    txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice(): "-");
+                    txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
                         txtProductPrice.setText(productDetailsResponse.getmData().getmProduct().getmPrice());
                         txtProductPrice.setPaintFlags(txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    }else{
+                    } else {
                         txtProductPrice.setText("-");
                     }
 
@@ -417,10 +454,23 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     @Override
     public void addToCart(AddToCartResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
 
-        }else {
-            showCenteredToast(getActivity(),addToWishListResponse.getmMessage());
+        } else {
+            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
         }
     }
+
+    @Override
+    public void removeWishList(RemoveWishListResponse removeWishListResponse) {
+        if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
+            showCenteredToast(getActivity(), removeWishListResponse.getmData());
+            txtAddToWishlist.setVisibility(View.VISIBLE);
+            txtRemoveWishlist.setVisibility(View.GONE);
+        } else {
+            showCenteredToast(getActivity(), removeWishListResponse.getmData());
+        }
+    }
+
+
 }

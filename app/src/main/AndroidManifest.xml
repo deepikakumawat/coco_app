@@ -41,7 +41,6 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.payment_gateway.RazorPaymentActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Signup2Activity" />
@@ -83,7 +82,31 @@
         <!-- Add your API key here -->
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_4dmCERmMcHDpyG" />
+            android:value="rzp_test_WNGp90GFNS3CgJ" />
+
+
+        <!--FCM -->
+       <!-- <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+-->
+
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+      <!--  <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" />-->
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+      <!--  <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+-->
+
 
     </application>
 

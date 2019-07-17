@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,13 +20,13 @@ import java.util.ArrayList;
 public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.ViewHolder> {
     private Context context;
     private ArrayList<MyWishListResponse.ProductData> myWishProductDataArrayList;
-    private MyWishlistActivity myWishlistActivity;
+    private MyWishlistFragment myWishlistFragment;
 
 
-    public MyWishListAdapter(Context context, ArrayList<MyWishListResponse.ProductData> myWishProductDataArrayList, MyWishlistActivity myWishlistActivity) {
+    public MyWishListAdapter(Context context, ArrayList<MyWishListResponse.ProductData> myWishProductDataArrayList, MyWishlistFragment myWishlistFragment) {
         this.context = context;
         this.myWishProductDataArrayList = myWishProductDataArrayList;
-        this.myWishlistActivity = myWishlistActivity;
+        this.myWishlistFragment = myWishlistFragment;
 
     }
 
@@ -47,12 +48,14 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
             Glide.with(context).load(thumbnail).placeholder(R.drawable.ac).into(holder.imgProduct);
 
 
-
-
             holder.txtProductName.setTag(productData);
             holder.txtProductName.setTag(R.id.txtProductName,position);
+            holder.txtProductName.setOnClickListener(myWishlistFragment);
 
-            holder.txtProductName.setOnClickListener( myWishlistActivity);
+
+            holder.lyProduct.setTag(productData);
+            holder.lyProduct.setTag(R.id.lyProduct,position);
+            holder.lyProduct.setOnClickListener(myWishlistFragment);
         }
 
     }
@@ -68,6 +71,7 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
         private TextView txtProductPrice;
         private TextView txtProductName;
         private ImageView imgProduct;
+        private LinearLayout lyProduct;
 
 
 
@@ -78,6 +82,7 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
             txtProductName = view.findViewById(R.id.txtProductName);
             imgProduct = view.findViewById(R.id.imgProduct);
+            lyProduct = view.findViewById(R.id.lyProduct);
 
 
         }

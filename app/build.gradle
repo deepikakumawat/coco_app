@@ -95,6 +95,7 @@ dependencies {
 */
 
     implementation 'com.razorpay:checkout:1.5.2'
+//    implementation 'com.google.firebase:firebase-messaging:19.0.1'
 
 
 }

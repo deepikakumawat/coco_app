@@ -33,7 +33,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_checkout, parent, false));
     }
 
     @Override
@@ -48,38 +48,8 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
 
 
-            holder.txtCross.setTag(productData);
-            holder.txtCross.setTag(R.id.txtCross,position);
-            holder.txtCross.setOnClickListener(checkoutActivity);
+            holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" :"Quantity: "+ productData.getmQuantity());
 
-            holder.txtOneByOne.setTag(productData);
-            holder.txtOneByOne.setTag(R.id.txtOneByOne,position);
-            holder.txtOneByOne.setOnClickListener(checkoutActivity);
-
-
-
-
-            holder.lyIncrement.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int count= Integer.parseInt(String.valueOf(holder.txtIncDec.getText()));
-                    count++;
-                    holder.txtIncDec.setText(String.valueOf(count));
-                }
-
-            });
-
-            holder.lyDecrement.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int count= Integer.parseInt(String.valueOf(holder.txtIncDec.getText()));
-                    if (count > 1)
-                        count--;
-                    holder.txtIncDec.setText(String.valueOf(count));
-
-
-                }
-            });
 
 
 
@@ -101,11 +71,8 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtProductName;
-        private LinearLayout lyDecrement;
-        private LinearLayout lyIncrement;
+
         private TextView txtProductPrice;
-        private TextView txtCross;
-        private TextView txtOneByOne;
         private TextView txtIncDec;
         private ImageView imgProduct;
 
@@ -119,11 +86,8 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             txtIncDec = view.findViewById(R.id.txtIncDec);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductName = view.findViewById(R.id.txtProductName);
-            lyDecrement = view.findViewById(R.id.lyDecrement);
-            lyIncrement = view.findViewById(R.id.lyIncrement);
+
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
-            txtOneByOne = view.findViewById(R.id.txtOneByOne);
-            txtCross = view.findViewById(R.id.txtCross);
 
 
         }

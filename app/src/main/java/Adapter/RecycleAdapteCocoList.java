@@ -17,7 +17,7 @@ import com.ws.design.coco_ecommerce_ui_kit.CategoryActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoEcommerceHomeActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.CocoFilter1_Activity;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.CocoLogin1Activity;
@@ -188,7 +188,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
 //                    Intent i = new Intent(context, CartActivity.class);
 //                    context.startActivity(i);
                 } else if (position == 21) {
-                    Intent i = new Intent(context, MyWishlistActivity.class);
+                    Intent i = new Intent(context, MyWishlistFragment.class);
                     context.startActivity(i);
                 }else if (position == 22) {
                     Intent i = new Intent(context, CocoLogin1Activity.class);

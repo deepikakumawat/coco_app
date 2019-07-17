@@ -3,6 +3,7 @@ package Network;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
+import com.ws.design.coco_ecommerce_ui_kit.checkout_payment.CheckoutPaymentResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginResponse;
@@ -176,6 +177,35 @@ public interface APIService {
                                       @Field("productid") String productId,
                                       @Field("prod_rate") String productRate
     );
+
+    @POST("checkout-payment")
+    @FormUrlEncoded
+    Call<CheckoutPaymentResponse> getCheckoutPayment(@Field("user_id") String userId,
+                                                     @Field("razorpay_payment_id") String razorPaymentId,
+                                                     @Field("shipcharge") String shipCharge,
+                                                     @Field("amount") String amount,
+                                                     @Field("sameinfo") String sameInfo,
+                                                     @Field("rfname") String rFname,
+                                                     @Field("rlname") String rLname,
+                                                     @Field("remail") String rEmail,
+                                                     @Field("rlandmark") String rLandmark,
+                                                     @Field("rnumber") String rNumber,
+                                                     @Field("radress") String rAddress,
+                                                     @Field("rzip") String rZip,
+                                                     @Field("rstate") String rState,
+                                                     @Field("rcity") String rCity,
+                                                     @Field("sfname") String sFname,
+                                                     @Field("slname") String sLname,
+                                                     @Field("semail") String sEmail,
+                                                     @Field("slandmark") String sLandmark,
+                                                     @Field("snumber") String sNumber,
+                                                     @Field("sadress") String sAddress,
+                                                     @Field("szip") String sZip,
+                                                     @Field("sstate") String sState,
+                                                     @Field("scity") String sCity
+    );
+
+
 
 
 }

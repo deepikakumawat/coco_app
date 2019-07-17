@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="#f5f6f7"
     android:orientation="vertical"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistActivity">
+    tools:context="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment">
 
     <include
         android:id="@+id/includeLayout"
+        android:visibility="gone"
         layout="@layout/toolbar_cart"></include>
 
 

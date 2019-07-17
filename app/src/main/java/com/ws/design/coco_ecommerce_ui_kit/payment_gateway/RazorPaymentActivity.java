@@ -1,7 +1,9 @@
 package com.ws.design.coco_ecommerce_ui_kit.payment_gateway;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,13 +12,24 @@ import android.widget.Toast;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
+import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.checkout_payment.CheckoutPaymentPresenter;
+import com.ws.design.coco_ecommerce_ui_kit.checkout_payment.CheckoutPaymentResponse;
+import com.ws.design.coco_ecommerce_ui_kit.checkout_payment.CheckoutPaymentView;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import org.json.JSONObject;
 
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
-public class RazorPaymentActivity extends Activity implements PaymentResultListener {
+public class RazorPaymentActivity extends Activity implements PaymentResultListener, CheckoutPaymentView {
+
+    private CheckoutPaymentPresenter checkoutPaymentPresenter;
+    private AddressListResponse.AddressData addressData;
 
 
     @Override
@@ -24,6 +37,12 @@ public class RazorPaymentActivity extends Activity implements PaymentResultListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_razor_payment);
+
+        checkoutPaymentPresenter = new CheckoutPaymentPresenter(this);
+
+
+        Intent intent = getIntent();
+        addressData = (AddressListResponse.AddressData) intent.getSerializableExtra("addressData");
 
 
 
@@ -64,7 +83,7 @@ public class RazorPaymentActivity extends Activity implements PaymentResultListe
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
-            options.put("amount", "10000");
+            options.put("amount", "1000000");
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", CocoPreferences.getUserEmail());
@@ -100,6 +119,44 @@ public class RazorPaymentActivity extends Activity implements PaymentResultListe
             Toast.makeText(getApplicationContext(), "Successfully payment", Toast.LENGTH_LONG).show();
 
 
+
+            if (Util.isDeviceOnline(this)) {
+                if (addressData != null) {
+                    checkoutPaymentPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
+                            razorpayPaymentID,
+                            "0",
+                            "201600",
+                            "1",
+                            CocoPreferences.getFirstName(),
+                            CocoPreferences.getLastName(),
+                            CocoPreferences.getUserEmail(),
+                            "gurudwara",
+                            CocoPreferences.getUserPhone(),
+                            "Jaipur",
+                            "30252012",
+                            "raj",
+                            "jai",
+                            CocoPreferences.getFirstName(),
+                            CocoPreferences.getLastName(),
+                            CocoPreferences.getUserEmail(),
+                            "gurudwara",
+                            CocoPreferences.getUserPhone(),
+                            "Jaipur",
+                            "30252012",
+                            "raj",
+                            "jai"
+                    );
+                }
+
+
+            }else{
+                showCenteredToast(this, getString(R.string.network_connection));
+
+            }
+
+
+
+
 //            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
            e.printStackTrace();
@@ -124,5 +181,28 @@ public class RazorPaymentActivity extends Activity implements PaymentResultListe
     }
 
 
+    @Override
+    public void showWait() {
+        showProDialog(this);
+    }
 
+    @Override
+    public void removeWait() {
+        dismissProDialog();
+    }
+
+    @Override
+    public void onFailure(String appErrorMessage) {
+        showCenteredToast(this, appErrorMessage);
+    }
+
+    @Override
+    public void getCheckoutPayment(CheckoutPaymentResponse checkoutPaymentResponse) {
+        if (!TextUtils.isEmpty(checkoutPaymentResponse.getmStatus()) && ("1".equalsIgnoreCase(checkoutPaymentResponse.getmStatus()))) {
+            showCenteredToast(this,checkoutPaymentResponse.getMessage());
+
+        }else {
+            showCenteredToast(this,checkoutPaymentResponse.getMessage());
+        }
+    }
 }

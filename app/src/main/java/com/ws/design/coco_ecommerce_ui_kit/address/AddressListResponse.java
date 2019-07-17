@@ -3,9 +3,10 @@ package com.ws.design.coco_ecommerce_ui_kit.address;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AddressListResponse {
+public class AddressListResponse implements Serializable {
 
     @SerializedName("status")
     @Expose
@@ -33,7 +34,7 @@ public class AddressListResponse {
     }
 
 
-    public class AddressData {
+    public class AddressData implements Serializable{
 
         @SerializedName("id")
         @Expose

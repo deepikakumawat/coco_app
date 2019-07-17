@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.address.AddressListAdapter;
+import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartPresenter;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartView;
@@ -29,7 +33,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class CheckoutActivity extends AppCompatActivity implements CartView, View.OnClickListener {
+public class CheckoutActivity extends AppCompatActivity implements CheckoutView, View.OnClickListener {
 
     //    private RecyclerView recyclerView;
 
@@ -60,7 +64,6 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
     String paymentType[] = {"Credit / Debit Card", "Cash On Delivery", "PAYTM", "Google Wallet"};
     Integer logoImage[] = {R.drawable.credit, R.drawable.cash, R.drawable.paytm, R.drawable.googlewallet};
 
-    private CartPresenter cartPresenter;
     private RecyclerView rvCart;
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private TextView txtEmptyCart;
@@ -69,6 +72,19 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
     private int removeOnByOnePostion = -1;
     private int removeCorssPostion = -1;
     private ImageView imgBack;
+    private TextView txtAddress1;
+    private TextView txtAddress2;
+    private TextView txtLandmark;
+    private TextView txtCity;
+    private TextView txtState;
+    private TextView txtCountry;
+    private TextView txtZipcode;
+    private TextView txtChange;
+    private static final int ADDRESSLIST_ACTION = 101;
+
+
+    private CheckoutPresenter checkoutPresenter;
+    AddressListResponse.AddressData addressData = null;
 
 
     @Override
@@ -76,23 +92,36 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        cartPresenter = new CartPresenter(this);
+        checkoutPresenter = new CheckoutPresenter(this);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            productDataArrayList = (ArrayList<CartListResponse.ProductData>) intent.getSerializableExtra("cartList");
+
+
+        }
+
+        checkoutPresenter.addressList(CocoPreferences.getUserId());
+
+
         rvCart = findViewById(R.id.rvCart);
         imgBack = findViewById(R.id.imgBack);
         txtConfirmPlaceOrder = findViewById(R.id.txtConfirmPlaceOrder);
         txtEmptyCart = findViewById(R.id.txtEmptyCart);
         txtTitle = findViewById(R.id.txtTitle);
+        txtChange = findViewById(R.id.txtChange);
         txtEmptyCart.setOnClickListener(this);
         txtConfirmPlaceOrder.setOnClickListener(this);
+        txtChange.setOnClickListener(this);
         txtTitle.setText("Checkout");
 
-        if (Util.isDeviceOnline(this)) {
-            cartPresenter.getCartList(CocoPreferences.getUserId());
-
-        }else{
-            showCenteredToast(this, getString(R.string.network_connection));
-
-        }
+        txtAddress1 = findViewById(R.id.txtAddress1);
+        txtAddress2 = findViewById(R.id.txtAddress2);
+        txtLandmark = findViewById(R.id.txtLandmark);
+        txtCity = findViewById(R.id.txtCity);
+        txtState = findViewById(R.id.txtState);
+        txtCountry = findViewById(R.id.txtCountry);
+        txtZipcode = findViewById(R.id.txtZipcode);
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -181,59 +210,30 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
 
 */
 
+        if (!productDataArrayList.isEmpty()) {
+
+            checkoutListAdapter = new CheckoutListAdapter(this, productDataArrayList, CheckoutActivity.this);
+            rvCart.setAdapter(checkoutListAdapter);
+        }
+
     }
 
     @Override
     public void onClick(View view) {
-        CartListResponse.ProductData productData;
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtEmptyCart:
-                    if (Util.isDeviceOnline(this)) {
-                        cartPresenter.emptyCart(CocoPreferences.getUserId());
-
-                    }else{
-                        showCenteredToast(this, getString(R.string.network_connection));
-
-                    }                    break;
-                case R.id.txtOneByOne:
-                    productData = ((CartListResponse.ProductData) view.getTag());
-                    removeOnByOnePostion = (int) view.getTag(R.id.txtOneByOne);
-                    if (productData != null) {
-
-                        if (Util.isDeviceOnline(this)) {
-                            cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(), productData.getmProductId(), productData.getmQuantity());
-
-                        }else{
-                            showCenteredToast(this, getString(R.string.network_connection));
-
-                        }
-
-
-                    }
-                    break;
-                case R.id.txtCross:
-                    productData = ((CartListResponse.ProductData) view.getTag());
-                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
-                    if (productData != null) {
-
-                        if (Util.isDeviceOnline(this)) {
-
-                            cartPresenter.removeCartByCross(productData.getmCartId());
-
-                        }else{
-                            showCenteredToast(this, getString(R.string.network_connection));
-
-                        }
-                    }
-                    break;
                 case R.id.imgBack:
                     finish();
                     break;
                 case R.id.txtConfirmPlaceOrder:
                     Intent intent = new Intent(CheckoutActivity.this, RazorPaymentActivity.class);
+                    intent.putExtra("addressData",addressData);
                     startActivity(intent);
+                    break;
+                case R.id.txtChange:
+                    intent = new Intent(CheckoutActivity.this, AddressListActivity.class);
+                    startActivityForResult(intent, ADDRESSLIST_ACTION);
                     break;
                 default:
                     break;
@@ -261,46 +261,40 @@ public class CheckoutActivity extends AppCompatActivity implements CartView, Vie
     }
 
     @Override
-    public void getCartList(CartListResponse cartListResponse) {
-        if (cartListResponse != null) {
-            if (!cartListResponse.getmCartlistData().getmProductData().isEmpty()) {
-                productDataArrayList.clear();
-                productDataArrayList.addAll(cartListResponse.getmCartlistData().getmProductData());
-
-                checkoutListAdapter = new CheckoutListAdapter(this, productDataArrayList, CheckoutActivity.this);
-                rvCart.setAdapter(checkoutListAdapter);
+    public void getAddressList(AddressListResponse addressListResponse) {
+        if (addressListResponse != null) {
+            if (!addressListResponse.getmAddressData().isEmpty()) {
+                addressData = addressListResponse.getmAddressData().get(0);
+                setAddress(addressData);
             }
         }
 
     }
 
     @Override
-    public void emptyCart(EmptyCartResponse emptyCartResponse) {
-        if (!TextUtils.isEmpty(emptyCartResponse.getmStatus()) && ("1".equalsIgnoreCase(emptyCartResponse.getmStatus()))) {
-            showCenteredToast(this, emptyCartResponse.getmMessage());
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADDRESSLIST_ACTION) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    addressData = (AddressListResponse.AddressData) data.getSerializableExtra("addressData");
+                    setAddress(addressData);
+                }
 
-        } else {
-            showCenteredToast(this, emptyCartResponse.getmMessage());
+            }
         }
     }
 
-    @Override
-    public void removeCartOneByOne(RemoveCartOneByOneResponse removeCartOneByOneResponse) {
-        if (!TextUtils.isEmpty(removeCartOneByOneResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartOneByOneResponse.getmStatus()))) {
-            showCenteredToast(this, removeCartOneByOneResponse.getmMessage());
+    private void setAddress(AddressListResponse.AddressData addressData) {
+        if (addressData != null) {
+            txtAddress1.setText(TextUtils.isEmpty(addressData.getmAddress1()) ? "-" : addressData.getmAddress1());
+            txtAddress2.setText(TextUtils.isEmpty(addressData.getmAddress2()) ? "-" : addressData.getmAddress2());
+            txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : addressData.getmLandmark());
+            txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : addressData.getmCity());
+            txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" : addressData.getmState());
+            txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" : addressData.getmCountry());
+            txtZipcode.setText(TextUtils.isEmpty(addressData.getmZipcode()) ? "-" : addressData.getmZipcode());
 
-        } else {
-            showCenteredToast(this, removeCartOneByOneResponse.getmMessage());
-        }
-    }
-
-    @Override
-    public void removeCartByCross(RemoveCartByCrossResponse removeCartByCrossResponse) {
-        if (!TextUtils.isEmpty(removeCartByCrossResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartByCrossResponse.getmStatus()))) {
-            showCenteredToast(this, removeCartByCrossResponse.getmMessage());
-
-        } else {
-            showCenteredToast(this, removeCartByCrossResponse.getmMessage());
         }
     }
 

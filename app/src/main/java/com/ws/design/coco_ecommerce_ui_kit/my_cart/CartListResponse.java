@@ -3,9 +3,10 @@ package com.ws.design.coco_ecommerce_ui_kit.my_cart;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CartListResponse {
+public class CartListResponse implements Serializable {
 
     @SerializedName("status")
     @Expose
@@ -33,7 +34,7 @@ public class CartListResponse {
     }
 
 
-    public class CartListData {
+    public class CartListData implements Serializable {
 
         @SerializedName("brudrumdata")
         @Expose
@@ -61,7 +62,7 @@ public class CartListResponse {
         }
     }
 
-    public class ProductData {
+    public class ProductData implements Serializable{
 
 
         @SerializedName("cart_id")

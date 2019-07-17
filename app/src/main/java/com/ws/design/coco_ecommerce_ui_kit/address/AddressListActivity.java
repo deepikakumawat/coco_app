@@ -166,6 +166,18 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                     }
 
                     break;
+                case R.id.lyAddress:
+                     addressData = ((AddressListResponse.AddressData) view.getTag());
+
+                    if (addressData != null) {
+
+                        Intent data = new Intent();
+                        data.putExtra("addressData",addressData);
+                        setResult(Activity.RESULT_OK, data);
+                        finish();
+
+                    }
+                    break;
                     default:
                         break;
             }

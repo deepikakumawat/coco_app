@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
                     android:layout_marginTop="17dp"
+                    android:id="@+id/lyAddress"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -218,7 +219,8 @@
                         android:paddingBottom="8dp"
                         android:text="Update"
                         android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:visibility="gone"/>
 
                     <customfonts.Button_Roboto_Medium
                         android:layout_width="0dp"
