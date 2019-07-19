@@ -39,7 +39,6 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.payment_gateway.RazorPaymentActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />
@@ -52,7 +51,7 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoEcommerceHomeActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoProductListGrid2Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoecommerceHome2Activity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoProductListGrid10Activity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.ProductByCategoryActivity1" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoProductListGridwithTabActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Cocoreviews2Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Cocoproductlist3Activity" />
@@ -86,27 +85,30 @@
 
 
         <!--FCM -->
-       <!-- <service
-            android:name=".MyFirebaseMessagingService"
+        <service
+            android:name="com.ws.design.coco_ecommerce_ui_kit.fcm.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
--->
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more. -->
-      <!--  <meta-data
+     <!--  <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_ic_notification" />-->
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more. -->
-      <!--  <meta-data
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
--->
 
+        <service android:name="com.ws.design.coco_ecommerce_ui_kit.fcm.MyFirebaseId">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

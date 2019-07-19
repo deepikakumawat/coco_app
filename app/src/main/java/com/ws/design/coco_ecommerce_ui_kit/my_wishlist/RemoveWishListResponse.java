@@ -11,6 +11,10 @@ public class RemoveWishListResponse {
     @Expose
     private String mStatus;
 
+    @SerializedName("message")
+    @Expose
+    private String mMessage;
+
     @SerializedName("data")
     @Expose
     private String mData;
@@ -29,5 +33,13 @@ public class RemoveWishListResponse {
 
     public void setmData(String mData) {
         this.mData = mData;
+    }
+
+    public String getmMessage() {
+        return mMessage;
+    }
+
+    public void setmMessage(String mMessage) {
+        this.mMessage = mMessage;
     }
 }

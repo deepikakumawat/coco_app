@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ws.design.coco_ecommerce_ui_kit.ProductByCategoryActivity1;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CategoryActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity;
@@ -25,7 +26,6 @@ import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductDetails2;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductDetails3;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductDetails4;
-import com.ws.design.coco_ecommerce_ui_kit.CocoProductListGrid10Activity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductListGrid2Activity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductListGridwithTabActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoSearch1;
@@ -53,7 +53,7 @@ import com.ws.design.coco_ecommerce_ui_kit.NavigationActivity2;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.ProductGridActivity;
-import com.ws.design.coco_ecommerce_ui_kit.ProductListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
 import com.ws.design.coco_ecommerce_ui_kit.Reviews;
@@ -146,7 +146,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, ProductGridActivity.class);
                     context.startActivity(i);
                 }else if (position == 7) {
-                    Intent i = new Intent(context, ProductListActivity.class);
+                    Intent i = new Intent(context, ProductListByCategoryFragment.class);
                     context.startActivity(i);
                 }else if (position == 8) {
                     Intent i = new Intent(context, FilterActivity.class);
@@ -224,7 +224,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, CocoecommerceHome2Activity.class);
                     context.startActivity(i);
                 } else if (position == 32) {
-                    Intent i = new Intent(context, CocoProductListGrid10Activity.class);
+                    Intent i = new Intent(context, ProductByCategoryActivity1.class);
                     context.startActivity(i);
                 } else if (position == 33) {
                     Intent i = new Intent(context, CocoProductListGridwithTabActivity.class);

@@ -46,15 +46,24 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
 
+            holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" : productData.getmQuantity());
+
 
             holder.txtCross.setTag(productData);
             holder.txtCross.setTag(R.id.txtCross,position);
             holder.txtCross.setOnClickListener(cartActivity);
 
 
+            holder.lyIncrement.setTag(productData);
+            holder.lyIncrement.setTag(R.id.lyIncrement,holder.txtIncDec);
+            holder.lyIncrement.setOnClickListener(cartActivity);
 
 
-            holder.lyIncrement.setOnClickListener(new View.OnClickListener() {
+            holder.lyDecrement.setTag(productData);
+            holder.lyDecrement.setTag(R.id.lyDecrement,holder.txtIncDec);
+            holder.lyDecrement.setOnClickListener(cartActivity);
+
+        /*    holder.lyIncrement.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int count= Integer.parseInt(String.valueOf(holder.txtIncDec.getText()));
@@ -62,9 +71,9 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
                     holder.txtIncDec.setText(String.valueOf(count));
                 }
 
-            });
+            });*/
 
-            holder.lyDecrement.setOnClickListener(new View.OnClickListener() {
+         /*   holder.lyDecrement.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int count= Integer.parseInt(String.valueOf(holder.txtIncDec.getText()));
@@ -75,7 +84,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
                 }
             });
-
+*/
 
 
         }

@@ -16,24 +16,24 @@ import Adapter.CocoProductListGrideAdapter;
 import Model.CocoProductListGridmodel;
 
 
-public class CocoProductListGrid10Activity extends AppCompatActivity implements View.OnClickListener
-{
+public class ProductByCategoryActivity1 extends AppCompatActivity implements View.OnClickListener {
 
 
-    private TextView tv1,tv2,tv3,tv4,title;
+    private TextView tv1, tv2, tv3, tv4, title;
 
-    Integer mobi[] = {R.drawable.img1, R.drawable.img1,R.drawable.img1,R.drawable.img1,R.drawable.img1, R.drawable.img1,R.drawable.img1,R.drawable.img1};
+    Integer mobi[] = {R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1};
 
-    private RecyclerView recyclerView;
+    private RecyclerView rvProducts;
     private CocoProductListGrideAdapter coco_product_list_gride_adapter;
     private ArrayList<CocoProductListGridmodel> coco_product_list_gride_models;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coco_product_list_grid10);
 
-        title=findViewById(R.id.title);
+        setContentView(R.layout.activity_product_by_category1);
+
+        title = findViewById(R.id.title);
         title.setText("Search : Care");
 
         tv1 = findViewById(R.id.tv1);
@@ -46,12 +46,12 @@ public class CocoProductListGrid10Activity extends AppCompatActivity implements 
         tv2.setOnClickListener(this);
         tv3.setOnClickListener(this);
         tv4.setOnClickListener(this);
-        recyclerView = findViewById(R.id.recy_list3);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(CocoProductListGrid10Activity.this,2);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setFocusableInTouchMode(false);
+        rvProducts = findViewById(R.id.rvProducts);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ProductByCategoryActivity1.this, 2);
+        rvProducts.setLayoutManager(layoutManager);
+        rvProducts.setItemAnimator(new DefaultItemAnimator());
+        rvProducts.setNestedScrollingEnabled(false);
+        rvProducts.setFocusableInTouchMode(false);
 
         coco_product_list_gride_models = new ArrayList<>();
 
@@ -59,8 +59,8 @@ public class CocoProductListGrid10Activity extends AppCompatActivity implements 
             CocoProductListGridmodel ab = new CocoProductListGridmodel(mobi[i]);
             coco_product_list_gride_models.add(ab);
         }
-        coco_product_list_gride_adapter = new CocoProductListGrideAdapter(CocoProductListGrid10Activity.this, coco_product_list_gride_models);
-        recyclerView.setAdapter(coco_product_list_gride_adapter);
+        coco_product_list_gride_adapter = new CocoProductListGrideAdapter(ProductByCategoryActivity1.this, coco_product_list_gride_models);
+        rvProducts.setAdapter(coco_product_list_gride_adapter);
 
     }
 
@@ -68,6 +68,7 @@ public class CocoProductListGrid10Activity extends AppCompatActivity implements 
     public void onClick(View v) {
 
 
-
     }
+
+
 }

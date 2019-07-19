@@ -13,6 +13,7 @@ public interface CartView {
 
     void getCartList(CartListResponse cartListResponse);
 
+    void addToCart(AddToCartResponse addToWishListResponse);
 
     void emptyCart(EmptyCartResponse emptyCartResponse);
 

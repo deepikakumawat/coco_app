@@ -120,7 +120,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recy_list3"
+                    android:id="@+id/rvProducts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="2.5dp"

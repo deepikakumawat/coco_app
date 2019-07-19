@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.checkout_payment;
+package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

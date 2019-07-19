@@ -1,10 +1,9 @@
-package com.ws.design.coco_ecommerce_ui_kit;
+package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.FilterActivity;
 
 import Adapter.CategoryPagerAdapterProductList;
 import Adapter.WrapContentHeightViewPager;
@@ -19,7 +19,7 @@ import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
 
-public class ProductListActivity extends ToolbarBaseFragment {
+public class ProductListByCategoryFragment extends ToolbarBaseFragment {
 
     private TabLayout tabLayout;
     private Typeface mTypeface;
@@ -32,7 +32,7 @@ public class ProductListActivity extends ToolbarBaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = inflater.inflate(R.layout.activity_product_list, container, false);
+        mView = inflater.inflate(R.layout.fragment_product_by_category, container, false);
 
         return mView;
     }

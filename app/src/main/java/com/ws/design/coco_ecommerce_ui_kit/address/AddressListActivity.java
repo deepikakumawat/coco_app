@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -71,7 +72,8 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                     addressPresenter.addressList(CocoPreferences.getUserId());
 
                 }else{
-                    Util.showCenteredToast(this,getString(R.string.please_login));
+                   Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
+                   startActivity(intent);
                 }
 
 
@@ -162,7 +164,8 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         Intent intent = new Intent(AddressListActivity.this, AddAddressActivity.class);
                         startActivityForResult(intent, ADD_ADDRESS_ACTION);
                     }else{
-                        Util.showCenteredToast(AddressListActivity.this, getString(R.string.please_login));
+                        Intent intent = new Intent(AddressListActivity.this,LoginActivity.class);
+                        startActivity(intent);
                     }
 
                     break;
@@ -198,7 +201,9 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         addressPresenter.addressList(CocoPreferences.getUserId());
 
                     }else{
-                        Util.showCenteredToast(this,getString(R.string.please_login));
+
+                        Intent intent = new Intent(AddressListActivity.this,LoginActivity.class);
+                        startActivity(intent);
                     }
 
 

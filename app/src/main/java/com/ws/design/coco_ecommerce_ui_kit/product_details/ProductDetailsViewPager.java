@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,13 @@ public class ProductDetailsViewPager extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
 
-    private ArrayList<ProductDetailsSimilier> productDetailsArrayList;
+    private ArrayList<String> productDetailsImagesArrayList;
     
     
-    public ProductDetailsViewPager(Context context,ArrayList<ProductDetailsSimilier> productDetailsArrayList) {
+    public ProductDetailsViewPager(Context context,ArrayList<String> productDetailsImagesArrayList) {
 
         this.context = context;
-        this.productDetailsArrayList = productDetailsArrayList;
+        this.productDetailsImagesArrayList = productDetailsImagesArrayList;
     }
 
     @Override
@@ -35,12 +36,9 @@ public class ProductDetailsViewPager extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.viewpager_product_details, container, false);
         ImageView imgProduct = view.findViewById(R.id.imgProduct);
 
-        ProductDetailsSimilier productDetailsSimilier = productDetailsArrayList.get(position);
+        String images = productDetailsImagesArrayList.get(position);
 
-        if (productDetailsSimilier != null) {
-            String thumbnail =  productDetailsSimilier.getmProductImg();
-            Glide.with(context).load(thumbnail).dontAnimate().into(imgProduct);
-        }
+        Glide.with(context).load(images).placeholder(R.drawable.ac).into(imgProduct);
 
         container.addView(view);
 
@@ -49,7 +47,7 @@ public class ProductDetailsViewPager extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return productDetailsArrayList.size();
+        return productDetailsImagesArrayList.size();
     }
 
     @Override

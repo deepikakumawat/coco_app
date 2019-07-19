@@ -18,6 +18,7 @@ import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.DealProducts;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -250,7 +251,8 @@ private HomeBannerAdapter homeBannerAdapter;
             int vId = view.getId();
             switch (vId) {
                 case R.id.txtCategories:
-                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreActivity(), null, false, false);
+//                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreActivity(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductListByCategoryFragment(), null, false, false);
 
                     break;
                 case R.id.lyProduct:

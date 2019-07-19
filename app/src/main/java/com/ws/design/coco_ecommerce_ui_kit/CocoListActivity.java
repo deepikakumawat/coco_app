@@ -31,7 +31,7 @@ public class CocoListActivity extends AppCompatActivity {
     "25 Mobile Verification","26 Coco SignUp1","27 Coco SignUp2","28 Review","29 Coco Filter1",
 
             "30 CocoEcommerceHomeActivity","31 CocoProductListGrid2Activity","32 CocoecommerceHome2Activity"
-            ,"33 CocoProductListGrid10Activity","34 CocoProductListGridwithTabActivity","35 Cocoreviews2Activity"
+            ,"33 ProductByCategoryActivity1","34 CocoProductListGridwithTabActivity","35 Cocoreviews2Activity"
             ,"36Cocoproductlist3Activity",
 
             "37 Coco_product_list_grid_8","38 CocoProductDetails3","39 CocoProductDetails2","40 CocoProductDetails4",

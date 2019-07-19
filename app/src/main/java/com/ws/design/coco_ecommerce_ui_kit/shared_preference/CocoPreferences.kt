@@ -11,6 +11,7 @@ object CocoPreferences {
     private var preferences: SharedPreferences? = null
     private var editor: SharedPreferences.Editor? = null
     private val PREFERENCES_NAME: String = "test_login_preference"
+    private val FCM_REFRESH_TOKEN: String = "fcm_referesh_token"
 
 
     @SuppressLint("CommitPrefEdits")
@@ -70,6 +71,16 @@ object CocoPreferences {
     @JvmStatic
     fun setLastName(lname: String) {
         editor!!.putString(LoginResponse().KEY_LAST_NAME, lname)
+    }
+
+    @JvmStatic
+    fun getFCMRefreshToken(): String? {
+        return preferences!!.getString(FCM_REFRESH_TOKEN, "")
+    }
+
+    @JvmStatic
+    fun setFCMRefreshToken(fcmRefreshToken: String) {
+        editor!!.putString(FCM_REFRESH_TOKEN, fcmRefreshToken)
     }
 
 

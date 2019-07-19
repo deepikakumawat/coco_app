@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
@@ -38,7 +37,7 @@ import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -67,10 +66,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Offers", "Address", "Help", "Contact Us"};
+             "Address", "Help", "Contact Us"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Offers", "Address", "Help", "Contact Us", "Logout"};
+             "Address", "Help", "Contact Us", "Logout"};
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -138,7 +137,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, CartActivity.class));
                     } else {
-                        Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
@@ -156,7 +155,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                       /*  fragment = new MyWishlistFragment();
                         replaceFragment(fragment);*/
                     } else {
-                        Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
 
 
@@ -166,20 +165,20 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     startActivityForResult(intent, MYACCOUNT_ACTION);
 
                 } else if (position == 6) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListActivity(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), null, false, false);
 
                  /*   fragment = new ProductDetailFragment();
                     replaceFragment(fragment);*/
                 } else if (position == 7) {
-
-
-                } else if (position == 8) {
-
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
                     } else {
-                        Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
+
+                } else if (position == 8) {
+
+
 
 
                 } else if (position == 9) {
@@ -187,9 +186,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
                 } else if (position == 10) {
 
-                } else if (position == 11) {
-
                     logout();
+
                 }
 
                 drawer.closeDrawer(GravityCompat.START);
@@ -303,7 +301,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                     startActivity(new Intent(DrawerActivity.this, CartActivity.class));
                 } else {
-                    Util.showCenteredToast(DrawerActivity.this, getString(R.string.please_login));
+                    startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                 }
             }
         });
@@ -425,7 +423,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                             txtUserEmail.setVisibility(View.GONE);
                             lyLoginSignup.setVisibility(View.VISIBLE);
 
-                            navigationModelClasses.remove(11);
+                            navigationModelClasses.remove(10);
                             mAdapter.notifyDataSetChanged();
 
                             Util.showCenteredToast(DrawerActivity.this, "Logout Successfully!");
@@ -458,7 +456,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         if (requestCode == MYACCOUNT_ACTION) {
             if (resultCode == Activity.RESULT_OK) {
                 setEmailName();
-                navigationModelClasses.remove(11);
+                navigationModelClasses.remove(10);
                 mAdapter.notifyDataSetChanged();
             }
         }

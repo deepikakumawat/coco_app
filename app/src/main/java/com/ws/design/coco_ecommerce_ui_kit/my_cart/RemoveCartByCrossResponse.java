@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.my_cart;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 
 public class RemoveCartByCrossResponse {
 
@@ -11,7 +12,7 @@ public class RemoveCartByCrossResponse {
 
     @SerializedName("data")
     @Expose
-    private String mData;
+    private AddToCartResponse.CartData mData;
 
     @SerializedName("message")
     @Expose
@@ -25,11 +26,11 @@ public class RemoveCartByCrossResponse {
         this.mStatus = mStatus;
     }
 
-    public String getmData() {
+    public AddToCartResponse.CartData getmData() {
         return mData;
     }
 
-    public void setmData(String mData) {
+    public void setmData(AddToCartResponse.CartData mData) {
         this.mData = mData;
     }
 

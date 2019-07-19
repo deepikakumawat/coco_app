@@ -40,6 +40,10 @@ public class CartListResponse implements Serializable {
         @Expose
         private String mBrudrumdata;
 
+        @SerializedName("total_price")
+        @Expose
+        private String mTotalPrice;
+
 
         @SerializedName("products")
         @Expose
@@ -60,9 +64,17 @@ public class CartListResponse implements Serializable {
         public void setmProductData(ArrayList<ProductData> mProductData) {
             this.mProductData = mProductData;
         }
+
+        public String getmTotalPrice() {
+            return mTotalPrice;
+        }
+
+        public void setmTotalPrice(String mTotalPrice) {
+            this.mTotalPrice = mTotalPrice;
+        }
     }
 
-    public class ProductData implements Serializable{
+    public class ProductData implements Serializable {
 
 
         @SerializedName("cart_id")

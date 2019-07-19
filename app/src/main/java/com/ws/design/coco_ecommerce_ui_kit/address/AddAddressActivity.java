@@ -87,6 +87,11 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
             setResult(Activity.RESULT_OK, data);
             finish();
 
+           /* Intent data = new Intent();
+            data.putExtra("addressData",addUpdateAddressResponse.getAddressData());
+            setResult(Activity.RESULT_OK, data);
+            finish();*/
+
         }else {
             showCenteredToast(this,addUpdateAddressResponse.getMessage());
         }

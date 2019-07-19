@@ -90,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$698"
+                    android:id="@+id/txtTotalPrice"
                     android:textSize="18.3sp"
                     android:letterSpacing="0"
                     android:textColor="@color/black"

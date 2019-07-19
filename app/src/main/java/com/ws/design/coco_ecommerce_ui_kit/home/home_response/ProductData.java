@@ -7,6 +7,9 @@ import java.io.Serializable;
 
 public class ProductData implements Serializable {
 
+
+
+
     @SerializedName("productid")
     @Expose
     private String mProductId;
@@ -27,11 +30,11 @@ public class ProductData implements Serializable {
     @Expose
     private String mProductDetails;
 
-@SerializedName("productshortdetails")
+    @SerializedName("productshortdetails")
     @Expose
     private String mProductShortDetails;
 
-@SerializedName("productshippolicy")
+    @SerializedName("productshippolicy")
     @Expose
     private String mProductShippolicy;
 

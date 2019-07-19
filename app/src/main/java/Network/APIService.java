@@ -3,10 +3,11 @@ package Network;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
-import com.ws.design.coco_ecommerce_ui_kit.checkout_payment.CheckoutPaymentResponse;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutPaymentResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.EmptyCartResponse;
@@ -25,8 +26,6 @@ import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface APIService {
@@ -206,7 +205,9 @@ public interface APIService {
     );
 
 
-
+    @POST("get-products-by-category")
+    @FormUrlEncoded
+    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId);
 
 }
 

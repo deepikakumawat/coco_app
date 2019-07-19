@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
@@ -66,14 +68,13 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList = new ArrayList<>();
     private ProductDetailsTopRatedProductsAdapter productDetailsTopRatedProductsAdapter;
 
-    RelativeLayout relative1, relative2, relative3, relative4;
     private View mView;
 
     private ProductDetailsPresenter productDetailsPresenter;
     private TextView txtAddToWishlist;
     private TextView txtAddToCart;
 
-    private ArrayList<ProductDetailsSimilier> productDetailsArrayList = new ArrayList<>();
+    private ArrayList<String> productDetailsImagesArrayList = new ArrayList<>();
     private ProductDetailsViewPager productDetailsViewPager;
     private TextView txtProductName;
     private TextView txtProductPrice;
@@ -85,6 +86,9 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private TextView txtRemoveWishlist;
     private String screen;
     private String wishListId;
+    private TextView txtReview;
+    private TextView txtBuyNow;
+    private boolean isClickOnBuyNow = false;
 
 
     @Nullable
@@ -127,6 +131,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         }
 
+        txtBuyNow = mView.findViewById(R.id.txtBuyNow);
         txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
         txtRemoveWishlist = mView.findViewById(R.id.txtRemoveWishlist);
         txtAddToCart = mView.findViewById(R.id.txtAddToCart);
@@ -135,9 +140,11 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         txtProductSalePrice = mView.findViewById(R.id.txtProductSalePrice);
         rvTopRatedProducts = mView.findViewById(R.id.rvTopRatedProducts);
         txtRating = mView.findViewById(R.id.txtRating);
+        txtReview = mView.findViewById(R.id.txtReview);
         txtAddToWishlist.setOnClickListener(this);
         txtRemoveWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
+        txtBuyNow.setOnClickListener(this);
 
 
         right1 = mView.findViewById(R.id.right1);
@@ -153,15 +160,15 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             }
         });
 
-        relative1 = mView.findViewById(R.id.relative1);
-        relative2 = mView.findViewById(R.id.relative2);
-        relative3 = mView.findViewById(R.id.relative3);
-        relative4 = mView.findViewById(R.id.relative4);
+       /* relative1 = mView.findViewById(R.id.relative1);
+        relative2 = mView.findViewById(R.id.relative2);*/
+//        relative3 = mView.findViewById(R.id.relative3);
+//        relative4 = mView.findViewById(R.id.relative4);
 
-        relative1.setOnClickListener(this);
-        relative2.setOnClickListener(this);
-        relative3.setOnClickListener(this);
-        relative4.setOnClickListener(this);
+      /*  relative1.setOnClickListener(this);
+        relative2.setOnClickListener(this);*/
+//        relative3.setOnClickListener(this);
+//        relative4.setOnClickListener(this);
 
         right1.setOnClickListener(this);
         right2.setOnClickListener(this);
@@ -324,14 +331,14 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 right1_imag.setVisibility(View.GONE);
                 break;
 
-            case R.id.relative1:
+          /*  case R.id.relative1:
                 viewPager.setCurrentItem(0);
                 break;
 
             case R.id.relative2:
 
                 viewPager.setCurrentItem(1);
-                break;
+                break;*/
 
 
             case R.id.relative3:
@@ -340,10 +347,10 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 break;
 
 
-            case R.id.relative4:
+          /*  case R.id.relative4:
 
                 viewPager.setCurrentItem(3);
-                break;
+                break;*/
 
             case R.id.txtAddToWishlist:
                 if (Util.isDeviceOnline(getActivity())) {
@@ -353,6 +360,17 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     showCenteredToast(getActivity(), getString(R.string.network_connection));
 
                 }
+                break;
+            case R.id.txtBuyNow:
+                if (Util.isDeviceOnline(getActivity())) {
+                    isClickOnBuyNow = true;
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
+
+                } else {
+                    showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                }
+
                 break;
             case R.id.txtAddToCart:
                 if (Util.isDeviceOnline(getActivity())) {
@@ -405,6 +423,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
             showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
 
+
+
         } else {
             showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
         }
@@ -417,11 +437,11 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
             if (productDetailsResponse.getmData() != null) {
                 if (productDetailsResponse.getmData().getmProduct() != null) {
-                    productDetailsArrayList.clear();
-                 /*   productDetailsArrayList.addAll(productDetailsResponse.getmData().getmProduct());
+                    productDetailsImagesArrayList.clear();
+                    productDetailsImagesArrayList.add(productDetailsResponse.getmData().getmProduct().getmProductImg());
 
-                    productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsArrayList);
-                    viewPager.setAdapter(productDetailsViewPager);*/
+                    productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList);
+                    viewPager.setAdapter(productDetailsViewPager);
 
                     txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
                     txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
@@ -435,6 +455,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
 
                     txtRating.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmAvgRating()) ? productDetailsResponse.getmData().getmAvgRating() : "0");
+                    txtReview.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmAvgRating()) ? productDetailsResponse.getmData().getmAvgRating() : "0");
 
 
                     if (productDetailsResponse.getmData().getmProductDetailsSimilier() != null) {
@@ -452,19 +473,27 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     }
 
     @Override
-    public void addToCart(AddToCartResponse addToWishListResponse) {
-        if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
+    public void addToCart(AddToCartResponse addToCartResponse) {
+        if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
+            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+
+            if (isClickOnBuyNow) {
+
+                Intent intent = new Intent(getActivity(), CheckoutActivity.class);
+                intent.putExtra("cartList", addToCartResponse.getmData().getmProductData());
+                intent.putExtra("totalPrice", addToCartResponse.getmData().getmTotalPrice());
+                startActivity(intent);
+            }
 
         } else {
-            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
+            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
         }
     }
 
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), removeWishListResponse.getmData());
+            showCenteredToast(getActivity(), removeWishListResponse.getmMessage());
             txtAddToWishlist.setVisibility(View.VISIBLE);
             txtRemoveWishlist.setVisibility(View.GONE);
         } else {

@@ -138,7 +138,7 @@ public class MyWishlistFragment extends ToolbarBaseFragment implements MyWishLis
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), removeWishListResponse.getmData());
+            showCenteredToast(getActivity(), removeWishListResponse.getmMessage());
             if (myWishListAdapter != null) {
                 productDataArrayList.remove(removePosstion);
                 myWishListAdapter.notifyDataSetChanged();

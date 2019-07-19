@@ -1,6 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.checkout_payment;
-
-
+package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 
 import android.util.Log;
@@ -19,13 +17,13 @@ import rx.subscriptions.CompositeSubscription;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class CheckoutPaymentPresenter {
+public class ProductByCategoryPresenter {
 
     private final APIService service;
-    private final CheckoutPaymentView view;
+    private final ProductByCategoryView view;
     private CompositeSubscription subscriptions;
 
-    public CheckoutPaymentPresenter(CheckoutPaymentView view) {
+    public ProductByCategoryPresenter(ProductByCategoryView view) {
         this.view = view;
         service = ApiUtils.getAPIService();
         this.subscriptions = new CompositeSubscription();
@@ -33,43 +31,42 @@ public class CheckoutPaymentPresenter {
 
 
 
-    public void getCheckoutPayment(String userId,String razorPaymentId, String shipCharge,String amount, String sameInfo, String rFname, String rLname, String rEmail, String rLandmark, String rNumber, String rAddress, String rZip, String rState, String rCity, String sFname, String sLname, String sEmail, String sLandmark,String sNumber,String sAddress,String sZip,String sState,String sCity ) {
+    public void getProductDetails(String catId) {
         view.showWait();
         try {
 
-            Call call = service.getCheckoutPayment(userId,razorPaymentId, shipCharge,amount,sameInfo,rFname,rLname,rEmail,rLandmark,rNumber,rAddress,rZip,rState,rCity,sFname,sLname,sEmail,sLandmark,sNumber,sAddress,sZip,sState,sCity);
-            call.enqueue(new Callback<CheckoutPaymentResponse>() {
+            Call call = service.getProductByCategory(catId);
+            call.enqueue(new Callback<ProductByCategoryResponse>() {
                 @Override
-                public void onResponse(Call<CheckoutPaymentResponse> call, Response<CheckoutPaymentResponse> response) {
+                public void onResponse(Call<ProductByCategoryResponse> call, Response<ProductByCategoryResponse> response) {
                     Log.d(TAG, call.request().url().toString());
                     view.removeWait();
-                    try{
+                    try {
                         if (response.isSuccessful()) {
 
-                            view.getCheckoutPayment(response.body());
-                        }else{
+                            view.getProductByCategory(response.body());
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
+                        e.printStackTrace();
                         view.onFailure("Something Went Wrong. Please try again later");
 
-                        e.printStackTrace();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<CheckoutPaymentResponse> call, Throwable e) {
+                public void onFailure(Call<ProductByCategoryResponse> call, Throwable e) {
                     view.removeWait();
                     try {
                         JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
                         view.onFailure(jsonObject.getString("message"));
                     } catch (Exception ee) {
+                        e.printStackTrace();
                         view.onFailure("Something Went Wrong. Please try again later");
-
-                        ee.printStackTrace();
                     }
 
                 }
@@ -79,5 +76,9 @@ public class CheckoutPaymentPresenter {
         }
 
     }
+
+
+   
+
 
 }
