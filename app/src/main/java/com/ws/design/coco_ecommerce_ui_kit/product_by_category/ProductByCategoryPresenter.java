@@ -31,7 +31,7 @@ public class ProductByCategoryPresenter {
 
 
 
-    public void getProductDetails(String catId) {
+    public void getProductByCat(String catId) {
         view.showWait();
         try {
 
