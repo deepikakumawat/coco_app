@@ -252,7 +252,17 @@ private HomeBannerAdapter homeBannerAdapter;
             switch (vId) {
                 case R.id.txtCategories:
 //                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreActivity(), null, false, false);
-                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductListByCategoryFragment(), null, false, false);
+
+                    Categories categories = (Categories) view.getTag();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("catId", categories.getmCatId());
+
+
+                    ProductListByCategoryFragment productListByCategoryFragment = new ProductListByCategoryFragment();
+                    productListByCategoryFragment.setArguments(bundle);
+
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productListByCategoryFragment, "ProductListByCategoryFragment", true, false);
 
                     break;
                 case R.id.lyProduct:
@@ -261,7 +271,7 @@ private HomeBannerAdapter homeBannerAdapter;
 //                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
                     if (productData != null) {
 
-                        Bundle bundle = new Bundle();
+                        bundle = new Bundle();
                         bundle.putString("productSlug", productData.getmProductSlug());
                         bundle.putString("productId", productData.getmProductId());
                         bundle.putString("productQty", productData.getmProductQty());
@@ -269,7 +279,7 @@ private HomeBannerAdapter homeBannerAdapter;
                         ProductDetailFragment productDetailFragment = new ProductDetailFragment();
                         productDetailFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
 
                     }
 
@@ -281,7 +291,7 @@ private HomeBannerAdapter homeBannerAdapter;
 //                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
                     if (dealProduct != null) {
 
-                        Bundle bundle = new Bundle();
+                        bundle = new Bundle();
                         bundle.putString("productSlug", dealProduct.getmProductSlug());
                         bundle.putString("productId", dealProduct.getmProductId());
                         bundle.putString("productQty", dealProduct.getmProductQty());
@@ -289,7 +299,7 @@ private HomeBannerAdapter homeBannerAdapter;
                         ProductDetailFragment productDetailFragment = new ProductDetailFragment();
                         productDetailFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
 
                     }
 

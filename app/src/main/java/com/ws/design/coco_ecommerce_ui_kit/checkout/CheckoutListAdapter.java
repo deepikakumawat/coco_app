@@ -45,7 +45,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" :productData.getmSalePrice());
 
             String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
-            Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
             holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" :"Quantity: "+ productData.getmQuantity());

@@ -5,14 +5,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +18,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductGalleryData;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.TopReview;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -66,7 +68,9 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
     private RecyclerView rvTopRatedProducts;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList = new ArrayList<>();
+    private ArrayList<ProductBroughtData> productBroughtDataArrayList = new ArrayList<>();
     private ProductDetailsTopRatedProductsAdapter productDetailsTopRatedProductsAdapter;
+    private ProductDetailsBroughtDataAdapter productDetailsBroughtDataAdapter;
 
     private View mView;
 
@@ -89,6 +93,17 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private TextView txtReview;
     private TextView txtBuyNow;
     private boolean isClickOnBuyNow = false;
+    private LinearLayout lyImageView;
+    private RecyclerView rvBroughtProducts;
+    private TextView txtUserComment;
+    private TextView txtUserNameDate;
+    private TextView txtViewAllReview;
+    private TextView txtReviewCount;
+    private TextView txtRatingCount;
+    private TextView txtDiscout;
+    private LinearLayout lyTopReview;
+    private LinearLayout lyBroughtProduct;
+    private LinearLayout lySimilarProduct;
 
 
     @Nullable
@@ -131,6 +146,10 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         }
 
+        lySimilarProduct = mView.findViewById(R.id.lySimilarProduct);
+        lyBroughtProduct = mView.findViewById(R.id.lyBroughtProduct);
+        lyTopReview = mView.findViewById(R.id.lyTopReview);
+        lyImageView = mView.findViewById(R.id.lyImageView);
         txtBuyNow = mView.findViewById(R.id.txtBuyNow);
         txtAddToWishlist = mView.findViewById(R.id.txtAddToWishlist);
         txtRemoveWishlist = mView.findViewById(R.id.txtRemoveWishlist);
@@ -139,26 +158,29 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         txtProductPrice = mView.findViewById(R.id.txtProductPrice);
         txtProductSalePrice = mView.findViewById(R.id.txtProductSalePrice);
         rvTopRatedProducts = mView.findViewById(R.id.rvTopRatedProducts);
+        rvBroughtProducts = mView.findViewById(R.id.rvBroughtProducts);
         txtRating = mView.findViewById(R.id.txtRating);
         txtReview = mView.findViewById(R.id.txtReview);
+        txtUserComment = view.findViewById(R.id.txtUserComment);
+        txtUserNameDate = view.findViewById(R.id.txtUserNameDate);
+        txtViewAllReview = view.findViewById(R.id.txtViewAllReview);
+        txtReviewCount = view.findViewById(R.id.txtReviewCount);
+        txtDiscout = view.findViewById(R.id.txtDiscout);
+        txtRatingCount = view.findViewById(R.id.txtRatingCount);
         txtAddToWishlist.setOnClickListener(this);
         txtRemoveWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
         txtBuyNow.setOnClickListener(this);
+        txtViewAllReview.setOnClickListener(this);
+        txtReviewCount.setOnClickListener(this);
+        txtRatingCount.setOnClickListener(this);
 
 
         right1 = mView.findViewById(R.id.right1);
         right2 = mView.findViewById(R.id.right2);
         right3 = mView.findViewById(R.id.right3);
 
-        mView.findViewById(R.id.btn_review).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = (new Intent(getActivity(), ReviewActivity.class));
-                intent.putExtra("productId", productId);
-                startActivity(intent);
-            }
-        });
+
 
        /* relative1 = mView.findViewById(R.id.relative1);
         relative2 = mView.findViewById(R.id.relative2);*/
@@ -238,6 +260,14 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         rvTopRatedProducts.setLayoutManager(mLayoutManager2);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
+
+
+        RecyclerView.LayoutManager mLayoutManagerBroughtData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvBroughtProducts.setLayoutManager(mLayoutManagerBroughtData);
+
+
+        rvBroughtProducts.setLayoutManager(mLayoutManagerBroughtData);
+        rvBroughtProducts.setItemAnimator(new DefaultItemAnimator());
 
 
         if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("MyWishList")) {
@@ -331,27 +361,6 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 right1_imag.setVisibility(View.GONE);
                 break;
 
-          /*  case R.id.relative1:
-                viewPager.setCurrentItem(0);
-                break;
-
-            case R.id.relative2:
-
-                viewPager.setCurrentItem(1);
-                break;*/
-
-
-            case R.id.relative3:
-
-                viewPager.setCurrentItem(2);
-                break;
-
-
-          /*  case R.id.relative4:
-
-                viewPager.setCurrentItem(3);
-                break;*/
-
             case R.id.txtAddToWishlist:
                 if (Util.isDeviceOnline(getActivity())) {
                     productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
@@ -396,6 +405,15 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
                 }
                 break;
+            case R.id.txtViewAllReview:
+            case R.id.txtRatingCount:
+            case R.id.txtReviewCount:
+                Intent intent = (new Intent(getActivity(), ReviewActivity.class));
+                intent.putExtra("productId", productId);
+                startActivity(intent);
+
+                break;
+
             default:
                 break;
 
@@ -424,7 +442,6 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
 
 
-
         } else {
             showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
         }
@@ -440,8 +457,18 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     productDetailsImagesArrayList.clear();
                     productDetailsImagesArrayList.add(productDetailsResponse.getmData().getmProduct().getmProductImg());
 
+                    if (!productDetailsResponse.getmData().getmProductGallery().isEmpty()) {
+                        for (ProductGalleryData productGalleryData : productDetailsResponse.getmData().getmProductGallery()) {
+
+                            productDetailsImagesArrayList.add(Constant.MEDIA_THUMBNAIL_BASE_URL + productGalleryData.getmProImgUrl());
+                        }
+                    }
+
                     productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList);
                     viewPager.setAdapter(productDetailsViewPager);
+
+                    setLyImages(productDetailsImagesArrayList);
+                    topRating(productDetailsResponse.getmData().getmTopReview());
 
                     txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
                     txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
@@ -453,16 +480,43 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                         txtProductPrice.setText("-");
                     }
 
+                    setTxtDiscout(productDetailsResponse);
+
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmRatingCount())) {
+                        txtReviewCount.setText(productDetailsResponse.getmData().getmRatingCount() + " Reviews");
+                        txtRatingCount.setText(productDetailsResponse.getmData().getmRatingCount() + " Reviews");
+
+                    } else {
+                        txtReviewCount.setText(0 + " Reviews");
+                        txtRatingCount.setText(0 + " Reviews");
+
+                    }
 
                     txtRating.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmAvgRating()) ? productDetailsResponse.getmData().getmAvgRating() : "0");
                     txtReview.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmAvgRating()) ? productDetailsResponse.getmData().getmAvgRating() : "0");
 
 
-                    if (productDetailsResponse.getmData().getmProductDetailsSimilier() != null) {
+                    if (!productDetailsResponse.getmData().getmProductDetailsSimilier().isEmpty()) {
+                        lySimilarProduct.setVisibility(View.VISIBLE);
+
                         productDetailsSimilierArrayList.clear();
                         productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
                         productDetailsTopRatedProductsAdapter = new ProductDetailsTopRatedProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailFragment.this);
                         rvTopRatedProducts.setAdapter(productDetailsTopRatedProductsAdapter);
+                    }else{
+                        lySimilarProduct.setVisibility(View.GONE);
+                    }
+
+                    if (!productDetailsResponse.getmData().getmProductBroughtData().isEmpty()) {
+
+                        lyBroughtProduct.setVisibility(View.VISIBLE);
+
+                        productBroughtDataArrayList.clear();
+                        productBroughtDataArrayList.addAll(productDetailsResponse.getmData().getmProductBroughtData());
+                        productDetailsBroughtDataAdapter = new ProductDetailsBroughtDataAdapter(getActivity(), productBroughtDataArrayList, ProductDetailFragment.this);
+                        rvBroughtProducts.setAdapter(productDetailsBroughtDataAdapter);
+                    }else{
+                        lyBroughtProduct.setVisibility(View.GONE);
                     }
 
 
@@ -470,6 +524,87 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
             }
         }
+    }
+
+
+    private void setLyImages(ArrayList<String> productDetailsImagesArrayList) {
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view;
+        for (int i = 0; i < productDetailsImagesArrayList.size(); i++) {
+            view = layoutInflater.inflate(R.layout.image_layout, lyImageView, false);
+            ImageView imgProduct = view.findViewById(R.id.imgProduct);
+            Glide.with(this).load(productDetailsImagesArrayList.get(i)).placeholder(R.drawable.richkart).into(imgProduct);
+
+            imgProduct.setTag(i);
+            imgProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viewPager.setCurrentItem(((int) view.getTag()));
+
+                }
+            });
+            lyImageView.addView(imgProduct);
+
+        }
+    }
+
+    private void topRating(TopReview topReview) {
+        if (topReview != null) {
+            lyTopReview.setVisibility(View.VISIBLE);
+            txtUserComment.setText(TextUtils.isEmpty(topReview.getmUserComment()) ? "-" : topReview.getmUserComment());
+
+            if (!TextUtils.isEmpty(topReview.getmUserName()) && !TextUtils.isEmpty(topReview.getmRatingTime())) {
+                txtUserNameDate.setText("By " + topReview.getmUserName() + " on " + topReview.getmRatingTime());
+
+            } else if (!TextUtils.isEmpty(topReview.getmUserName()) && TextUtils.isEmpty(topReview.getmRatingTime())) {
+                txtUserNameDate.setText("By " + topReview.getmUserName());
+
+            } else if (TextUtils.isEmpty(topReview.getmUserName()) && !TextUtils.isEmpty(topReview.getmRatingTime())) {
+                txtUserNameDate.setText("on " + topReview.getmRatingTime());
+
+            } else {
+                txtUserNameDate.setText("-");
+
+            }
+
+        }else{
+            lyTopReview.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void setTxtDiscout(ProductDetailsResponse productDetailsResponse) {
+
+        try {
+
+            if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice()) &&
+                    !TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice())) {
+
+                double price = 0;
+                double salesPrice = 0;
+
+                price = Double.parseDouble(productDetailsResponse.getmData().getmProduct().getmPrice());
+                salesPrice = Double.parseDouble(productDetailsResponse.getmData().getmProduct().getmSalePrice());
+
+                double increases = price - salesPrice;
+                double divide = increases / price;
+                double dicount = divide * 100;
+
+                String dis = String.format("%.2f", dicount) + " %";
+
+                txtDiscout.setText(dis + " off");
+
+            } else {
+                txtDiscout.setText("0%");
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

@@ -27,12 +27,17 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
 
     WrapContentHeightViewPager wrapContentHeightViewPager;
     private View mView;
+    private String catId;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mView = inflater.inflate(R.layout.fragment_product_by_category, container, false);
+
+        Bundle bundle = getArguments();
+        catId = bundle.getString("catId");
 
         return mView;
     }
@@ -85,7 +90,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
 
 
         wrapContentHeightViewPager = (WrapContentHeightViewPager) mView.findViewById(R.id.pager);
-        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4);
+        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4, catId);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(1);
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

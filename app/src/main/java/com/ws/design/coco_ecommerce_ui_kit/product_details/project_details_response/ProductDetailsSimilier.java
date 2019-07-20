@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProductDetailsSimilier {
 
+    @SerializedName("avg_rating")
+    @Expose
+    private String mAvgRating;
+
     @SerializedName("productid")
     @Expose
     private String mProductId;
@@ -391,5 +395,13 @@ public class ProductDetailsSimilier {
 
     public void setmProductDateModify(String mProductDateModify) {
         this.mProductDateModify = mProductDateModify;
+    }
+
+    public String getmAvgRating() {
+        return mAvgRating;
+    }
+
+    public void setmAvgRating(String mAvgRating) {
+        this.mAvgRating = mAvgRating;
     }
 }

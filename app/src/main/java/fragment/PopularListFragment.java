@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import Adapter.RecycleAdapteProductList;
 import Model.ProductGridModellClass;
 
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
 public class PopularListFragment extends Fragment implements View.OnClickListener ,ProductByCategoryView {
@@ -32,6 +34,16 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private RecyclerView recyclerview;
     private RecycleAdapteProductList mAdapter2;
     ProductByCategoryPresenter productByCategoryPresenter;
+    private String catId;
+
+    public static PopularListFragment newInstance(String catId) {
+        PopularListFragment fragment = new PopularListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("catId", catId);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
 
     @Nullable
     @Override
@@ -40,17 +52,18 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_popular_list, container, false);
         productByCategoryPresenter = new ProductByCategoryPresenter(this);
 
-        //      New Arrival Kitchen  Recyclerview Code is here
+        if (getArguments() != null) {
+            catId = getArguments().getString("catId");
 
-        recyclerview = (RecyclerView)view.findViewById(R.id.recyclerview);
+
+        }
+
+        recyclerview = view.findViewById(R.id.recyclerview);
 
         productGridModellClasses = new ArrayList<>();
 
-
-
-
         if (Util.isDeviceOnline(getActivity())) {
-            productByCategoryPresenter.getProductByCat("19");
+            productByCategoryPresenter.getProductByCat(catId);
 
         }else{
             showCenteredToast(getActivity(), getString(R.string.network_connection));
@@ -64,18 +77,19 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void showWait() {
-
+//        showProDialog(getActivity());
     }
 
     @Override
     public void removeWait() {
-
+//        dismissProDialog();
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
-
+//        showCenteredToast(getActivity(), appErrorMessage);
     }
+
 
     @Override
     public void getProductByCategory(ProductByCategoryResponse productByCategoryResponse) {
@@ -114,7 +128,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                         ProductDetailFragment productDetailFragment = new ProductDetailFragment();
                         productDetailFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
 
                     }
 

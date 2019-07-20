@@ -37,6 +37,10 @@ public class ProductDetailsResponse {
         @Expose
         private String mTitle;
 
+        @SerializedName("ratings_count")
+        @Expose
+        private String mRatingCount;
+
         @SerializedName("avg_rating")
         @Expose
         private String mAvgRating;
@@ -53,6 +57,11 @@ public class ProductDetailsResponse {
         @Expose
         private ProductDetailsSimilier mProduct;
 
+
+        @SerializedName("top_review")
+        @Expose
+        private TopReview mTopReview;
+
         @SerializedName("cate_id")
         @Expose
         private ArrayList<String> mCatId;
@@ -60,6 +69,10 @@ public class ProductDetailsResponse {
         @SerializedName("productsbroughtdata")
         @Expose
         private ArrayList<ProductBroughtData> mProductBroughtData;
+
+        @SerializedName("productgallery")
+        @Expose
+        private ArrayList<ProductGalleryData> mProductGallery;
 
 
         public String getmTitle() {
@@ -119,6 +132,30 @@ public class ProductDetailsResponse {
 
         public void setmAvgRating(String mAvgRating) {
             this.mAvgRating = mAvgRating;
+        }
+
+        public ArrayList<ProductGalleryData> getmProductGallery() {
+            return mProductGallery;
+        }
+
+        public void setmProductGallery(ArrayList<ProductGalleryData> mProductGallery) {
+            this.mProductGallery = mProductGallery;
+        }
+
+        public TopReview getmTopReview() {
+            return mTopReview;
+        }
+
+        public void setmTopReview(TopReview mTopReview) {
+            this.mTopReview = mTopReview;
+        }
+
+        public String getmRatingCount() {
+            return mRatingCount;
+        }
+
+        public void setmRatingCount(String mRatingCount) {
+            this.mRatingCount = mRatingCount;
         }
     }
 }

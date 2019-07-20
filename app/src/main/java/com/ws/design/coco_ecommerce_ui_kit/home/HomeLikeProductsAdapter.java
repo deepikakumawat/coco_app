@@ -43,12 +43,12 @@ public class HomeLikeProductsAdapter extends RecyclerView.Adapter<HomeLikeProduc
 
             holder.txtProductName.setText(productData.getmProductName());
 
-            holder. txtProductPrice .setText(productData.getmPrice());
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
 
 
 
             String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.ac).dontAnimate().into(holder.imgProduct);
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
             holder.lyLikeProduct.setTag(productData);

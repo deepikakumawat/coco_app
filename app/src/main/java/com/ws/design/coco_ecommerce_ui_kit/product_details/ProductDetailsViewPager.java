@@ -38,7 +38,7 @@ public class ProductDetailsViewPager extends PagerAdapter {
 
         String images = productDetailsImagesArrayList.get(position);
 
-        Glide.with(context).load(images).placeholder(R.drawable.ac).into(imgProduct);
+        Glide.with(context).load(images).placeholder(R.drawable.richkart).into(imgProduct);
 
         container.addView(view);
 

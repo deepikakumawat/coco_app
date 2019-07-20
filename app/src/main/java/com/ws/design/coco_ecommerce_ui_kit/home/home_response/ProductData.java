@@ -9,7 +9,6 @@ public class ProductData implements Serializable {
 
 
 
-
     @SerializedName("productid")
     @Expose
     private String mProductId;

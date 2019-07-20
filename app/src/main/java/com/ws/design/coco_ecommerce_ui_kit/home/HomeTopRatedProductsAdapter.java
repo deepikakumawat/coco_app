@@ -42,21 +42,14 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
         if (productData != null) {
 
             holder.txtProductName.setText(productData.getmProductName());
-
-            holder. txtProductPrice .setText(productData.getmPrice());
-
-
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
 
             String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProImgUrl();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.ac).dontAnimate().into(holder.imgProduct);
-
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
 
             holder.lyProduct.setTag(productData);
             holder.lyProduct.setTag(R.id.lyProduct,position);
             holder.lyProduct.setOnClickListener(homeFragment);
-
-
-
 
         }
 
@@ -75,9 +68,6 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
         private TextView txtProductType;
         private TextView txtProductPrice;
         private LinearLayout lyProduct;
-
-
-
 
 
         public ViewHolder(View view) {

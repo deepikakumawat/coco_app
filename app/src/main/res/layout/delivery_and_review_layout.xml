@@ -202,6 +202,7 @@
                     android:textSize="12.3sp"
                     android:text="@string/review"
                     android:layout_gravity="center"
+                    android:id="@+id/txtRatingCount"
                     android:layout_marginLeft="15dp"
                     android:textColor="@color/cut_price"/>
 
@@ -232,6 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="25dp"
+                android:id="@+id/lyTopReview"
                 android:layout_marginRight="25dp"
                 android:orientation="vertical">
 
@@ -258,14 +260,15 @@
                         android:layout_height="wrap_content"
                         android:text="Great Diwali Gift"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         android:textSize="12.7sp"/>
-
+<!--
                     <customfonts.MyTextView_Roboto_Medium
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="11.3sp"
                         android:textColor="@color/green"
-                        android:text="Verifeid User"/>
+                        android:text="Verifeid User"/>-->
                 </LinearLayout>
 
 
@@ -276,6 +279,7 @@
                     android:textSize="10.3sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
+                    android:id="@+id/txtUserNameDate"
                     android:text="By Guest on 24 March 2017"/>
 
 
@@ -284,6 +288,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="11.3sp"
                     android:textColor="#545d64"
+                    android:id="@+id/txtUserComment"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
                     android:text="Surprise Gift to my sister, she just jumped in air,loved it...."/>
@@ -295,6 +300,7 @@
                     android:text="View All Reviews"
                     android:textColor="@color/red"
                     android:textSize="12.7sp"
+                    android:id="@+id/txtViewAllReview"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="15dp"/>
 

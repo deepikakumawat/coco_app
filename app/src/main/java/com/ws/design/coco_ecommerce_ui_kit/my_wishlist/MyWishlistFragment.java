@@ -186,7 +186,7 @@ public class MyWishlistFragment extends ToolbarBaseFragment implements MyWishLis
                         ProductDetailFragment productDetailFragment = new ProductDetailFragment();
                         productDetailFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
 
                     }
                     break;

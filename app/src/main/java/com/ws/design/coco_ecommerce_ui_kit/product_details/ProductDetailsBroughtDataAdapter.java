@@ -11,21 +11,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
-import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
+
 
 import java.util.ArrayList;
 
 
-public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<ProductDetailsTopRatedProductsAdapter.ViewHolder> {
+public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<ProductDetailsBroughtDataAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList;
+    private ArrayList<ProductBroughtData> productBroughtDataArrayList;
     private ProductDetailFragment productDetailFragment;
 
 
-    public ProductDetailsTopRatedProductsAdapter(Context context, ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList, ProductDetailFragment productDetailFragment) {
+    public ProductDetailsBroughtDataAdapter(Context context, ArrayList<ProductBroughtData> productBroughtDataArrayList, ProductDetailFragment productDetailFragment) {
         this.context = context;
-        this.productDetailsSimilierArrayList = productDetailsSimilierArrayList;
+        this.productBroughtDataArrayList = productBroughtDataArrayList;
         this.productDetailFragment = productDetailFragment;
 
     }
@@ -38,18 +38,22 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        ProductDetailsSimilier productData = productDetailsSimilierArrayList.get(position);
-        if (productData != null) {
+        ProductBroughtData productBroughtData = productBroughtDataArrayList.get(position);
+        if (productBroughtData != null) {
 
-            holder.txtProductName.setText(productData.getmProductName());
+            holder.txtProductName.setText(productBroughtData.getmProductName());
 
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
-            holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "5");
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmPrice());
+            holder. txtRating .setText(!TextUtils.isEmpty(productBroughtData.getmAvgRating()) ? productBroughtData.getmAvgRating() : "5");
 
 
 
-            String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
+            String thumbnail =  productBroughtData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
+
+
+
+
 
 
 
@@ -60,7 +64,7 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return productDetailsSimilierArrayList.size();
+        return productBroughtDataArrayList.size();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
