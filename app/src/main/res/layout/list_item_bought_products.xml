@@ -18,10 +18,18 @@
         app:cardBackgroundColor="@color/white">
 
         <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="260dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/lyProduct"
             android:orientation="vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/imgAddToCart"
+                android:src="@drawable/dark_cart"/>
 
             <ImageView
                 android:id="@+id/imgProduct"
@@ -90,13 +98,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/imgAddToCart"
-                    android:src="@drawable/dark_cart"/>
+
 
 
                 <customfonts.MyTextView_Roboto_Medium

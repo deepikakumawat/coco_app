@@ -72,7 +72,7 @@
                     <customfonts.MyTextView_Roboto_Medium
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$698"
+                        android:text=""
                         android:textSize="18.3sp"
                         android:id="@+id/txtTotalPrice"
                         android:letterSpacing="0"

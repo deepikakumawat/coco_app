@@ -149,13 +149,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         productDetailsPresenter = new ProductDetailsPresenter(this);
 
-        if (Util.isDeviceOnline(getActivity())) {
-            productDetailsPresenter.getProductDetails(productSlug);
 
-        } else {
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
-
-        }
 
         txtProductDesc = mView.findViewById(R.id.txtProductDesc);
         txtSpecification = mView.findViewById(R.id.txtSpecification);
@@ -294,9 +288,15 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             txtRemoveWishlist.setVisibility(View.GONE);
             txtAddToWishlist.setVisibility(View.VISIBLE);
         }
-/*
-        top_ten_crecyclerview.setAdapter(mAdapter2);
-*/
+
+
+        if (Util.isDeviceOnline(getActivity())) {
+            productDetailsPresenter.getProductDetails(productSlug);
+
+        } else {
+            showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+        }
 
     }
 
