@@ -111,7 +111,7 @@
                 android:textColor="@color/black"
                 android:textSize="13.3sp"
                 android:letterSpacing="0.03"
-                android:text="Pay with Paypal"
+                android:text="Cash on Delivery"
                 android:gravity="center"/>
             <customfonts.MyTextView_Roboto_Medium
                 android:layout_width="158dp"

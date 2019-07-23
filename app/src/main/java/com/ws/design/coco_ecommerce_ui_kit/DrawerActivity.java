@@ -1,12 +1,17 @@
 package com.ws.design.coco_ecommerce_ui_kit;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -80,15 +85,36 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private static final int MYACCOUNT_ACTION = 101;
     private Fragment fragment;
 
+    String[] PERMISSIONS = {Manifest.permission.CALL_PHONE};
+    private final int PERMISSION_ALL = 11;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
         init();
 
 
     }
+
+    private boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     private void init() {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

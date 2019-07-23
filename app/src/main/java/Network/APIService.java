@@ -7,6 +7,7 @@ import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutPaymentResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_order.CancelOrderResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
@@ -209,5 +210,9 @@ public interface APIService {
     @FormUrlEncoded
     Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId);
 
+    @POST("cancel_order")
+    @FormUrlEncoded
+    Call<CancelOrderResponse> cancelOrder(@Field("order_id") String orderId,
+                                          @Field("reason") String reason);
 }
 

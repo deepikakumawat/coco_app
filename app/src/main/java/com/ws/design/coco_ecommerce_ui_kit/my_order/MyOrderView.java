@@ -10,4 +10,6 @@ public interface MyOrderView {
     void onFailure(String appErrorMessage);
 
     void onMyOrderList(MyOrderResponse myOrderResponse);
+
+    void cancelOrder(CancelOrderResponse cancelOrderResponse);
 }

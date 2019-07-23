@@ -102,5 +102,51 @@ public class MyOrderPresenter {
 
     }
 
+    public void cancelOrder(String orderId, String reason) {
+        view.showWait();
+        try {
+
+            Call call = service.cancelOrder(orderId,reason);
+            call.enqueue(new Callback<CancelOrderResponse>() {
+                @Override
+                public void onResponse(Call<CancelOrderResponse> call, Response<CancelOrderResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try{
+                        if (response.isSuccessful()) {
+                            Log.d(TAG, call.request().url().toString());
+
+                            view.cancelOrder(response.body());
+                        }else{
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CancelOrderResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 
 }

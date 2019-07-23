@@ -20,7 +20,6 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import java.util.ArrayList;
 
 
-
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
@@ -31,12 +30,12 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
     private RecyclerView rvCart;
 //    private RecycleAdapterCocoCart mAdapter;
 
-    String rupees[]={"$329","$450","$90"};
-    String phoneName[]={"Iphone X | 128 GB, Black | 6 GB ram |\n" +
-            "12000 mAh battry","Mi Mix 2 (Black, 128 GB) 6GB Ram \n" +
-            "with 5000 mAh…","Food container, set of 3 container,\n" +
+    String rupees[] = {"$329", "$450", "$90"};
+    String phoneName[] = {"Iphone X | 128 GB, Black | 6 GB ram |\n" +
+            "12000 mAh battry", "Mi Mix 2 (Black, 128 GB) 6GB Ram \n" +
+            "with 5000 mAh…", "Food container, set of 3 container,\n" +
             "yellow color"};
-    Integer phoneImage[]={R.drawable.mobile1, R.drawable.mobile2, R.drawable.mobile1};
+    Integer phoneImage[] = {R.drawable.mobile1, R.drawable.mobile2, R.drawable.mobile1};
     private CartPresenter cartPresenter;
     private CartListAdapter cartListAdapter;
     private int removeCorssPostion = -1;
@@ -133,6 +132,21 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
         if (!TextUtils.isEmpty(removeCartOneByOneResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartOneByOneResponse.getmStatus()))) {
             showCenteredToast(this, removeCartOneByOneResponse.getmMessage());
 
+            if (!removeCartOneByOneResponse.getmData().getmProductData().isEmpty()) {
+                productDataArrayList.clear();
+                productDataArrayList.addAll(removeCartOneByOneResponse.getmData().getmProductData());
+
+                if (cartListAdapter != null) {
+                    cartListAdapter.notifyDataSetChanged();
+                } else {
+                    cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
+                    rvCart.setAdapter(cartListAdapter);
+                }
+            }
+            totalPrice = removeCartOneByOneResponse.getmData().getmTotalPrice();
+            txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+
+
         } else {
             showCenteredToast(this, removeCartOneByOneResponse.getmMessage());
         }
@@ -142,8 +156,25 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
     public void removeCartByCross(RemoveCartByCrossResponse removeCartByCrossResponse) {
         if (!TextUtils.isEmpty(removeCartByCrossResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartByCrossResponse.getmStatus()))) {
             showCenteredToast(this, removeCartByCrossResponse.getmMessage());
-            productDataArrayList.remove(removeCorssPostion);
-            cartListAdapter.notifyDataSetChanged();
+
+            if (removeCorssPostion == -1) {
+                if (!removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
+                    productDataArrayList.clear();
+                    productDataArrayList.addAll(removeCartByCrossResponse.getmData().getmProductData());
+
+                    if (cartListAdapter != null) {
+                        cartListAdapter.notifyDataSetChanged();
+                    } else {
+                        cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
+                        rvCart.setAdapter(cartListAdapter);
+                    }
+                }
+                totalPrice = removeCartByCrossResponse.getmData().getmTotalPrice();
+                txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+            }else {
+                productDataArrayList.remove(removeCorssPostion);
+                cartListAdapter.notifyDataSetChanged();
+            }
 
         } else {
             showCenteredToast(this, removeCartByCrossResponse.getmMessage());
@@ -191,12 +222,17 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     productData = ((CartListResponse.ProductData) view.getTag());
                     TextView txtIncDec = (TextView) view.getTag(R.id.lyIncrement);
                     if (productData != null) {
-                        int count= Integer.parseInt(String.valueOf(txtIncDec.getText()));
+                        int count = Integer.parseInt(String.valueOf(txtIncDec.getText()));
                         count++;
-                        txtIncDec.setText(String.valueOf(count));
+//                        txtIncDec.setText(String.valueOf(count));
 
+                        if (Util.isDeviceOnline(this)) {
+                            cartPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1");
 
-                        cartPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), txtIncDec.getText().toString());
+                        } else {
+                            showCenteredToast(this, getString(R.string.network_connection));
+
+                        }
 
 
                     }
@@ -205,10 +241,14 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     productData = ((CartListResponse.ProductData) view.getTag());
                     txtIncDec = (TextView) view.getTag(R.id.lyDecrement);
                     if (productData != null) {
-                        int count= Integer.parseInt(String.valueOf(txtIncDec.getText()));
-                        if (count > 1)
+                        int count = Integer.parseInt(String.valueOf(txtIncDec.getText()));
+                        if (count > 1) {
                             count--;
-                        txtIncDec.setText(String.valueOf(count));
+                            cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(),productData.getmProductId(),"1");
+                        }else{
+                            cartPresenter.removeCartByCross(productData.getmCartId());
+                        }
+//                        txtIncDec.setText(String.valueOf(count));
 
                     }
                     break;
@@ -222,7 +262,27 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
     }
 
     @Override
-    public void addToCart(AddToCartResponse addToWishListResponse) {
+    public void addToCart(AddToCartResponse addToCartResponse) {
+        if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
+            showCenteredToast(this, addToCartResponse.getmMessage());
 
+            if (!addToCartResponse.getmData().getmProductData().isEmpty()) {
+                productDataArrayList.clear();
+                productDataArrayList.addAll(addToCartResponse.getmData().getmProductData());
+
+                if (cartListAdapter != null) {
+                    cartListAdapter.notifyDataSetChanged();
+                } else {
+                    cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
+                    rvCart.setAdapter(cartListAdapter);
+                }
+            }
+            totalPrice = addToCartResponse.getmData().getmTotalPrice();
+            txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+
+
+        } else {
+            showCenteredToast(this, addToCartResponse.getmMessage());
+        }
     }
 }

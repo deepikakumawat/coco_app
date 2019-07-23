@@ -1,17 +1,24 @@
 package com.ws.design.coco_ecommerce_ui_kit.home;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.ExploreActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
@@ -34,15 +41,15 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class HomeFragment extends ToolbarBaseFragment implements View.OnClickListener , HomeView{
+public class HomeFragment extends ToolbarBaseFragment implements View.OnClickListener, HomeView {
 
 
     private ArrayList<HomeBannerModelClass> homeBannerModelClasses;
     private RecyclerView rvBanner;
-//    private RecycleAdapteHomeBanner mAdapter;
+    //    private RecycleAdapteHomeBanner mAdapter;
 //    private Integer image[] = {R.drawable.image95, R.drawable.image95, R.drawable.image95, R.drawable.image95};
-private ArrayList<Banner> bannerArrayList = new ArrayList<>();
-private HomeBannerAdapter homeBannerAdapter;
+    private ArrayList<Banner> bannerArrayList = new ArrayList<>();
+    private HomeBannerAdapter homeBannerAdapter;
 
     private ArrayList<HomeCategoryModelClass> homeCategoryModelClasses;
     private RecyclerView rvCategory;
@@ -52,7 +59,7 @@ private HomeBannerAdapter homeBannerAdapter;
 
     private ArrayList<TopTenModelClass> topTenModelClasses;
     private RecyclerView rvTopRatedProducts;
-//    private RecycleAdapteTopTenHome mAdapter2;
+    //    private RecycleAdapteTopTenHome mAdapter2;
 //    private Integer image1[] = {R.drawable.ac, R.drawable.headphones, R.drawable.ac, R.drawable.headphones};
 //    private String title1[] = {"Vigo Atom Personal Air Condi....", "Bosh Head Phone Blue Color", "Vigo Atom Personal Air Condi....", "Bosh Head Phone Blue Color",};
 //    private String type[] = {"Kitenid", "HeadPhones", "Kitenid", "HeadPhones"};
@@ -63,7 +70,7 @@ private HomeBannerAdapter homeBannerAdapter;
     private ArrayList<DealProducts> dealProductsArrayList = new ArrayList<>();
     private HomeLikeProductsAdapter homeLikeProductsAdapter;
     private RecyclerView rvLike;
-//    private RecycleAdapteTopTenHome mAdapter3;
+    //    private RecycleAdapteTopTenHome mAdapter3;
 //    private Integer image2[] = {R.drawable.mobile1, R.drawable.mobile2, R.drawable.mobile1, R.drawable.mobile2};
 //    private String title2[] = {"Samsung On Mask 2GB Ram", "Samsung Galaxy 8 6GB Ram", "Samsung On Mask 2GB Ram", "Samsung Galaxy 8 6GB Ram"};
 //    private String type2[] = {"Phones", "Phones", "Phones", "Phones"};
@@ -72,6 +79,7 @@ private HomeBannerAdapter homeBannerAdapter;
     private ArrayList<Categories> categoriesArrayList = new ArrayList<>();
     private ProductData productData;
     private DealProducts dealProduct;
+    private ShimmerFrameLayout shimmerContainer;
 
 
     @Nullable
@@ -90,10 +98,26 @@ private HomeBannerAdapter homeBannerAdapter;
 
         homePresenter = new HomePresenter(this);
 
+    /*    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getActivity(), R.drawable.black_circle);
+        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+        DrawableCompat.setTint(wrappedDrawable, Color.RED);
+
+        LinearLayout right1 = view.findViewById(R.id.right1);
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            right1.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.black_circle) );
+        } else {
+            right1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.black_circle));
+        }
+
+*/
+
+
+
         if (Util.isDeviceOnline(getActivity())) {
             homePresenter.getHomeData();
 
-        }else{
+        } else {
             showCenteredToast(getActivity(), getString(R.string.network_connection));
 
         }
@@ -133,7 +157,6 @@ private HomeBannerAdapter homeBannerAdapter;
 
             homeCategoryModelClasses.add(beanClassForRecyclerView_contacts);
         }*/
-
 
 
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -285,7 +308,7 @@ private HomeBannerAdapter homeBannerAdapter;
 
                     break;
 
-                    case R.id.lyLikeProduct:
+                case R.id.lyLikeProduct:
 
                     dealProduct = (DealProducts) view.getTag();
 //                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
@@ -314,12 +337,17 @@ private HomeBannerAdapter homeBannerAdapter;
 
     @Override
     public void showWait() {
-        showProDialog(getActivity());
+//        showProDialog(getActivity());
+        shimmerContainer.startShimmerAnimation();
+
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
+//        dismissProDialog();
+        shimmerContainer.stopShimmerAnimation();
+
+
     }
 
     @Override
@@ -331,7 +359,7 @@ private HomeBannerAdapter homeBannerAdapter;
     @Override
     public void getHomeData(HomeResponse homeResponse) {
         if (homeResponse != null) {
-            if(homeResponse.getmData() !=null) {
+            if (homeResponse.getmData() != null) {
                 if (homeResponse.getmData().getmCategories() != null) {
                     categoriesArrayList.clear();
                     categoriesArrayList.addAll(homeResponse.getmData().getmCategories());
@@ -360,8 +388,6 @@ private HomeBannerAdapter homeBannerAdapter;
                     homeLikeProductsAdapter = new HomeLikeProductsAdapter(getActivity(), dealProductsArrayList, HomeFragment.this);
                     rvLike.setAdapter(homeLikeProductsAdapter);
                 }
-
-
 
 
             }

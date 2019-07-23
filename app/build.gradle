@@ -111,6 +111,10 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-iid:17.0.3'*/
 
+//    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+
 
 }
 repositories {

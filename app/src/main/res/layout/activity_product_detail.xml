@@ -568,6 +568,7 @@
                     android:layout_height="0.5dp"
                     android:background="#d7d4d4" />
 
+                <include layout="@layout/include_product_details_specification" />
                 <include layout="@layout/delivery_and_review_layout" />
 
 

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductGalleryData;
@@ -35,9 +36,12 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import Adapter.ViewpagerProductDetailsAdapter;
 import Model.TopTenModelClass;
+import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
@@ -104,6 +108,13 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private LinearLayout lyTopReview;
     private LinearLayout lyBroughtProduct;
     private LinearLayout lySimilarProduct;
+    private TextView txtProductDesSpecValue;
+    private TextView txtProductDesc;
+    private TextView txtSpecification;
+    private String productDetails;
+    private String productSpecification;
+    private TextView txtSpecValue;
+    private String productSpecificationName;
 
 
     @Nullable
@@ -146,6 +157,10 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         }
 
+        txtProductDesc = mView.findViewById(R.id.txtProductDesc);
+        txtSpecification = mView.findViewById(R.id.txtSpecification);
+        txtProductDesSpecValue = mView.findViewById(R.id.txtProductDesSpecValue);
+        txtSpecValue = mView.findViewById(R.id.txtSpecValue);
         lySimilarProduct = mView.findViewById(R.id.lySimilarProduct);
         lyBroughtProduct = mView.findViewById(R.id.lyBroughtProduct);
         lyTopReview = mView.findViewById(R.id.lyTopReview);
@@ -174,6 +189,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         txtViewAllReview.setOnClickListener(this);
         txtReviewCount.setOnClickListener(this);
         txtRatingCount.setOnClickListener(this);
+        txtProductDesc.setOnClickListener(this);
+        txtSpecification.setOnClickListener(this);
 
 
         right1 = mView.findViewById(R.id.right1);
@@ -373,7 +390,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             case R.id.txtBuyNow:
                 if (Util.isDeviceOnline(getActivity())) {
                     isClickOnBuyNow = true;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
+//                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1");
 
                 } else {
                     showCenteredToast(getActivity(), getString(R.string.network_connection));
@@ -383,7 +401,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 break;
             case R.id.txtAddToCart:
                 if (Util.isDeviceOnline(getActivity())) {
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
+//                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1");
 
                 } else {
                     showCenteredToast(getActivity(), getString(R.string.network_connection));
@@ -414,10 +433,49 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
                 break;
 
+            case R.id.imgAddToCart:
+                ProductBroughtData productBroughtData = ((ProductBroughtData) v.getTag());
+
+                if (productBroughtData != null) {
+
+                    if (Util.isDeviceOnline(getActivity())) {
+                        productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1");
+
+                    } else {
+                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                    }
+
+                }
+                break;
+            case R.id.txtProductDesc:
+                unSelectAllTabs();
+                selectClickedTab(((TextView) v));
+                setProductDes(productDetails);
+                break;
+
+            case R.id.txtSpecification:
+                unSelectAllTabs();
+                selectClickedTab(((TextView) v));
+                setProductSpecfication(productSpecification, productSpecificationName);
+                break;
+
             default:
                 break;
 
         }
+    }
+
+    private void selectClickedTab(TextView view) {
+        view.setEnabled(false);
+        view.setSelected(true);
+    }
+
+    private void unSelectAllTabs() {
+        txtProductDesc.setSelected(false);
+        txtSpecification.setSelected(false);
+        txtProductDesc.setEnabled(true);
+        txtSpecification.setEnabled(true);
     }
 
     @Override
@@ -480,6 +538,20 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                         txtProductPrice.setText("-");
                     }
 
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductDetails())) {
+                        productDetails = productDetailsResponse.getmData().getmProduct().getmProductDetails();
+                    }
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmAttrType())) {
+                        productSpecification = productDetailsResponse.getmData().getmProduct().getmAttrType();
+                    }
+
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmAttrName())) {
+                        productSpecificationName = productDetailsResponse.getmData().getmProduct().getmAttrName();
+                    }
+
+
+                    setProductDes(productDetails);
+
                     setTxtDiscout(productDetailsResponse);
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmRatingCount())) {
@@ -503,7 +575,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                         productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
                         productDetailsTopRatedProductsAdapter = new ProductDetailsTopRatedProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailFragment.this);
                         rvTopRatedProducts.setAdapter(productDetailsTopRatedProductsAdapter);
-                    }else{
+                    } else {
                         lySimilarProduct.setVisibility(View.GONE);
                     }
 
@@ -515,7 +587,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                         productBroughtDataArrayList.addAll(productDetailsResponse.getmData().getmProductBroughtData());
                         productDetailsBroughtDataAdapter = new ProductDetailsBroughtDataAdapter(getActivity(), productBroughtDataArrayList, ProductDetailFragment.this);
                         rvBroughtProducts.setAdapter(productDetailsBroughtDataAdapter);
-                    }else{
+                    } else {
                         lyBroughtProduct.setVisibility(View.GONE);
                     }
 
@@ -524,6 +596,70 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
             }
         }
+    }
+
+    private void setProductDes(String productDese) {
+        try {
+            txtSpecValue.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(productDese)) {
+                txtProductDesSpecValue.setText(productDese);
+            }else{
+                txtProductDesSpecValue.setText("-");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setProductSpecfication(String productSpecfication, String productSpecificationName) {
+        try {
+            txtSpecValue.setVisibility(View.VISIBLE);
+
+            if (!TextUtils.isEmpty(productSpecfication)) {
+
+                List<String> items = Arrays.asList(productSpecfication.split("\\s*,\\s*"));
+
+                StringBuilder builder = new StringBuilder();
+                for (String details : items) {
+                    builder.append(details + "\n");
+                }
+
+                txtProductDesSpecValue.setText(builder.toString());
+
+//                txtProductDesSpecValue.setText(productSpecfication);
+            }else{
+                txtProductDesSpecValue.setText("-");
+
+            }
+
+
+            if (!TextUtils.isEmpty(productSpecificationName)) {
+
+                List<String> items = Arrays.asList(productSpecificationName.split("\\s*,\\s*"));
+
+                StringBuilder builder = new StringBuilder();
+                for (String details : items) {
+                    builder.append(details + "\n");
+                }
+
+                txtSpecValue.setText(builder.toString());
+
+//                txtProductDesSpecValue.setText(productSpecfication);
+            }else{
+                txtSpecValue.setText("-");
+
+            }
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -568,7 +704,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
             }
 
-        }else{
+        } else {
             lyTopReview.setVisibility(View.GONE);
         }
 

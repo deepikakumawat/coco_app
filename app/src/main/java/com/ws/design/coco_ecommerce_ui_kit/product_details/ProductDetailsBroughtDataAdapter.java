@@ -32,7 +32,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_home_top_rated_products, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_bought_products, parent, false));
     }
 
     @Override
@@ -53,7 +53,9 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
 
 
-
+            holder.imgAddToCart.setTag(productBroughtData);
+            holder.imgAddToCart.setTag(R.id.imgAddToCart,position);
+            holder.imgAddToCart.setOnClickListener(productDetailFragment);
 
 
 
@@ -74,6 +76,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
         private TextView txtProductType;
         private TextView txtProductPrice;
         private TextView txtRating;
+        private ImageView imgAddToCart;
 
 
 
@@ -87,6 +90,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
             txtProductName = view.findViewById(R.id.txtProductName);
             txtProductType = view.findViewById(R.id.txtProductType);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
+            imgAddToCart = view.findViewById(R.id.imgAddToCart);
 
 
 
