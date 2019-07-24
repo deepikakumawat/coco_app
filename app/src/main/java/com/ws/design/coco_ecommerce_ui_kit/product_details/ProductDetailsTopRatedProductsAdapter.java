@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -52,6 +53,9 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
 
 
+            holder.lyProduct.setTag(productData);
+            holder.lyProduct.setTag(R.id.lyProduct,position);
+            holder.lyProduct.setOnClickListener(productDetailFragment);
 
         }
 
@@ -70,6 +74,7 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
         private TextView txtProductType;
         private TextView txtProductPrice;
         private TextView txtRating;
+        private LinearLayout lyProduct;
 
 
 
@@ -83,6 +88,8 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
             txtProductName = view.findViewById(R.id.txtProductName);
             txtProductType = view.findViewById(R.id.txtProductType);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
+            lyProduct = view.findViewById(R.id.lyProduct);
+
 
 
 

@@ -74,6 +74,10 @@ public class ProductDetailsResponse {
         @Expose
         private ArrayList<ProductGalleryData> mProductGallery;
 
+        @SerializedName("attributes")
+        @Expose
+        private ArrayList<ProductAttributeData> mProductAttributes;
+
 
         public String getmTitle() {
             return mTitle;
@@ -156,6 +160,14 @@ public class ProductDetailsResponse {
 
         public void setmRatingCount(String mRatingCount) {
             this.mRatingCount = mRatingCount;
+        }
+
+        public ArrayList<ProductAttributeData> getmProductAttributes() {
+            return mProductAttributes;
+        }
+
+        public void setmProductAttributes(ArrayList<ProductAttributeData> mProductAttributes) {
+            this.mProductAttributes = mProductAttributes;
         }
     }
 }

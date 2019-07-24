@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -23,6 +24,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
     private Button btnSend;
     private TextView txtTitle;
     private ImageView imgBack;
+    private LinearLayout lyConfirmationMail;
 
 
     @Override
@@ -91,6 +93,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
     @Override
     public void onFailure(String appErrorMessage) {
         Util.showCenteredToast(this, appErrorMessage);
+        lyConfirmationMail.setVisibility(View.GONE);
     }
 
 
@@ -98,6 +101,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
         etEmail = (EditText) findViewById(R.id.etEmail);
 
         btnSend = (Button) findViewById(R.id.btnSend);
+        lyConfirmationMail = (LinearLayout) findViewById(R.id.lyConfirmationMail);
 
 
     }
@@ -140,7 +144,10 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
             if (forgotPasswordResponse!=null) {
 
-                showCenteredToast(this,forgotPasswordResponse.getMessage());
+//                showCenteredToast(this,forgotPasswordResponse.getMessage());
+                lyConfirmationMail.setVisibility(View.VISIBLE);
+            }else{
+                lyConfirmationMail.setVisibility(View.GONE);
             }
 
         }catch (Exception e){

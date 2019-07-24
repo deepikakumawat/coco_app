@@ -44,7 +44,7 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
             holder.txtProductName.setText(productData.getmProductName());
             holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
 
-            String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProImgUrl();
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProImgUrl();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
 
             holder.lyProduct.setTag(productData);

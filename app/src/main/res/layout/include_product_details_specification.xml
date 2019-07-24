@@ -21,6 +21,18 @@
             android:orientation="horizontal">
 
             <customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/txtProductShortDesc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="17dp"
+                android:layout_weight="1"
+                android:background="@drawable/tab_selector_product_details"
+                android:text="Short Description"
+                android:textColor="@color/black"
+                android:textSize="12.7sp" />
+
+            <customfonts.MyTextView_Roboto_Bold
                 android:id="@+id/txtProductDesc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -61,6 +73,18 @@
 
 
             <customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/txtProductShortDesValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="13sp"
+                android:layout_weight="1"
+                android:text="Enter pincode for exact delivery dates/charges"
+                android:textColor="@color/cut_price"
+                android:textSize="11sp" />
+
+
+
+            <customfonts.MyTextView_Roboto_Regular
                 android:id="@+id/txtProductDesSpecValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -71,15 +95,17 @@
                 android:textSize="11sp" />
 
 
-            <customfonts.MyTextView_Roboto_Regular
-                android:id="@+id/txtSpecValue"
-                android:layout_width="0dp"
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvProductAttr"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginBottom="13sp"
-                android:text="Enter pincode for exact delivery dates/charges"
-                android:textColor="@color/cut_price"
-                android:textSize="11sp" />
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp" />
 
         </LinearLayout>
 

@@ -140,6 +140,29 @@ public class ProductDetailsSimilier {
     @Expose
     private String mProductDateModify;
 
+    @SerializedName("seller_id")
+    @Expose
+    private String mSellerId;
+
+    @SerializedName("seller_name")
+    @Expose
+    private String mSellerName;
+
+    public String getmSellerId() {
+        return mSellerId;
+    }
+
+    public void setmSellerId(String mSellerId) {
+        this.mSellerId = mSellerId;
+    }
+
+    public String getmSellerName() {
+        return mSellerName;
+    }
+
+    public void setmSellerName(String mSellerName) {
+        this.mSellerName = mSellerName;
+    }
 
     public String getmProductId() {
         return mProductId;

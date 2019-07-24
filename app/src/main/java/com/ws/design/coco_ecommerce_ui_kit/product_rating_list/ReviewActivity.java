@@ -36,6 +36,9 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     private ImageView imgBack;
     private ReviewListAdapter reviewListAdapter;
     private String productId;
+    private RatingBar rbProductRating;
+    private TextView txtReview;
+    private TextView txtRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,9 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         productRatingPresenter = new ProductRatingPresenter(this);
         productRatingPresenter.getProductDetails(productId);
 
+        txtRating = findViewById(R.id.txtRating);
+        txtReview = findViewById(R.id.txtReview);
+        rbProductRating = findViewById(R.id.rbProductRating);
         imgBack = findViewById(R.id.imgBack);
         etxtReview = findViewById(R.id.etxtReview);
         productRating = findViewById(R.id.productRating);
@@ -125,6 +131,35 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
                     reviewListAdapter = new ReviewListAdapter(this, ratingsArrayList, ReviewActivity.this);
                     rvRating.setAdapter(reviewListAdapter);
 
+                    if (!productRatingResponse.getmData().getmOverAll().isEmpty()) {
+
+                        if (!TextUtils.isEmpty(productRatingResponse.getmData().getmOverAll().get(0).getmAvgRating())) {
+
+                            String rating = productRatingResponse.getmData().getmOverAll().get(0).getmAvgRating();
+
+                            rbProductRating.setRating(Float.parseFloat(rating));
+                            txtRating.setText(rating);
+
+                        }else{
+                            rbProductRating.setRating(0);
+                            txtRating.setText(""+0);
+
+                        }
+
+
+                    }else{
+                        rbProductRating.setRating(0);
+                        txtRating.setText(""+0);
+
+                    }
+
+
+                    if (!TextUtils.isEmpty(productRatingResponse.getmData().getmTotalReviews())) {
+                        txtReview.setText(productRatingResponse.getmData().getmTotalReviews() + " Reviews");
+                    } else {
+                        txtReview.setText(0 + " Reviews");
+
+                    }
 
                 } else {
                    /* lyEmpty.setVisibility(View.VISIBLE);

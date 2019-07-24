@@ -40,28 +40,32 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
         CartListResponse.ProductData productData = productDataArrayList.get(position);
         if (productData != null) {
-            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" :productData.getmProductName());
-            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" :productData.getmSalePrice());
+            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
+            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : productData.getmSalePrice());
 
-            String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
 
             holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" : productData.getmQuantity());
 
 
             holder.txtCross.setTag(productData);
-            holder.txtCross.setTag(R.id.txtCross,position);
+            holder.txtCross.setTag(R.id.txtCross, position);
             holder.txtCross.setOnClickListener(cartActivity);
 
 
             holder.lyIncrement.setTag(productData);
-            holder.lyIncrement.setTag(R.id.lyIncrement,holder.txtIncDec);
+            holder.lyIncrement.setTag(R.id.lyIncrement, holder.txtIncDec);
             holder.lyIncrement.setOnClickListener(cartActivity);
 
 
             holder.lyDecrement.setTag(productData);
-            holder.lyDecrement.setTag(R.id.lyDecrement,holder.txtIncDec);
+            holder.lyDecrement.setTag(R.id.lyDecrement, holder.txtIncDec);
             holder.lyDecrement.setOnClickListener(cartActivity);
+
+            holder.lyCartProduct.setTag(productData);
+            holder.lyCartProduct.setTag(R.id.lyCartProduct, position);
+            holder.lyCartProduct.setOnClickListener(cartActivity);
 
         /*    holder.lyIncrement.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,9 +115,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         private TextView txtCross;
         private TextView txtIncDec;
         private ImageView imgProduct;
-
-
-
+        private LinearLayout lyCartProduct;
 
 
         public ViewHolder(View view) {
@@ -127,6 +129,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
 
             txtCross = view.findViewById(R.id.txtCross);
+            lyCartProduct = view.findViewById(R.id.lyCartProduct);
 
 
         }

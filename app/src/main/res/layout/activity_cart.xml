@@ -4,49 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.CocoCart1Activity">
+    tools:context="com.ws.design.coco_ecommerce_ui_kit.Cart1Activity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <include layout="@layout/toolbar_cart"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rect_recycler"
-        android:elevation="3dp"
-        android:layout_marginLeft="8.3dp"
-        android:layout_marginRight="8.9dp"
-        android:layout_marginTop="13.3dp">
-        <android.support.v7.widget.RecyclerView
+        <include layout="@layout/toolbar_cart" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingBottom="20dp"
-            android:id="@+id/rvCart">
+            android:layout_marginLeft="8.3dp"
+            android:layout_marginTop="13.3dp"
+            android:layout_marginRight="8.9dp"
+            android:background="@drawable/rect_recycler"
+            android:elevation="3dp"
+            android:orientation="vertical">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="20dp">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    </LinearLayout>
+
+    <customfonts.MyTextView_Roboto_Regular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/txtNoDataFound"
+        android:visibility="gone"
+        android:text="@string/your_cart_empty"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
+        android:id="@+id/lyBottomView"
+        android:orientation="vertical"
         android:paddingBottom="10dp">
 
         <customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/txtEmptyCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11dp"
             android:layout_marginTop="25dp"
             android:text="Empty Cart"
-            android:id="@+id/txtEmptyCart"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -56,74 +77,83 @@
             android:background="@drawable/shadow">
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginLeft="15.7dp"
                     android:layout_marginTop="12dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="15.7dp">
+                    android:orientation="vertical">
+
                     <customfonts.TextViewSFProDisplayRegular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Order Total"
                         android:letterSpacing="0.03"
-                        android:textSize="17sp"
-                        android:textColor="@color/black"/>
+                        android:text="Order Total"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
                     <customfonts.TextViewSFProDisplayMedium
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#99000000"
-                        android:textSize="12sp"
                         android:letterSpacing="0.02"
-                        android:text="Total is including tax and delivery charges"/>
+                        android:text="Total is including tax and delivery charges"
+                        android:textColor="#99000000"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
                 <customfonts.MyTextView_Roboto_Medium
+                    android:id="@+id/txtTotalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/txtTotalPrice"
-                    android:textSize="18.3sp"
-                    android:letterSpacing="0"
-                    android:textColor="@color/black"
                     android:layout_marginTop="21dp"
-                    android:layout_marginRight="21dp"/>
+                    android:layout_marginRight="21dp"
+                    android:letterSpacing="0"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="18.3sp" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="13.3dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
             <customfonts.MyTextView_Roboto_Medium
                 android:layout_width="158dp"
                 android:layout_height="40dp"
                 android:background="@drawable/button_rect2"
-                android:textColor="@color/black"
-                android:textSize="13.3sp"
+                android:gravity="center"
                 android:letterSpacing="0.03"
                 android:text="Cash on Delivery"
-                android:gravity="center"/>
+                android:textColor="@color/black"
+                android:textSize="13.3sp" />
+
             <customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtCheckout"
                 android:layout_width="158dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/button_rect"
-                android:textColor="@color/white"
-                android:textSize="13.3sp"
+                android:gravity="center"
                 android:letterSpacing="0.03"
-                android:id="@+id/txtCheckout"
                 android:text="Checkout"
-                android:gravity="center"/>
+                android:textColor="@color/white"
+                android:textSize="13.3sp" />
         </LinearLayout>
     </LinearLayout>
 

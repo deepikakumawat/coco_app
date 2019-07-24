@@ -8,12 +8,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/lyCartProduct"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imgProduct"
-            android:layout_width="28.2dp"
-            android:layout_height="56.7dp"
+            android:layout_width="40dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="29dp"
             android:layout_marginTop="17.5dp"
             android:src="@drawable/mobile2" />

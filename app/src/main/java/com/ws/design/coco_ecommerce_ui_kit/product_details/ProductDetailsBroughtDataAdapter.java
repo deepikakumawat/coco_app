@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -57,6 +58,10 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
             holder.imgAddToCart.setTag(R.id.imgAddToCart,position);
             holder.imgAddToCart.setOnClickListener(productDetailFragment);
 
+            holder.lyBroughtProduct.setTag(productBroughtData);
+            holder.lyBroughtProduct.setTag(R.id.lyBroughtProduct,position);
+            holder.lyBroughtProduct.setOnClickListener(productDetailFragment);
+
 
 
         }
@@ -77,6 +82,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
         private TextView txtProductPrice;
         private TextView txtRating;
         private ImageView imgAddToCart;
+        private LinearLayout lyBroughtProduct;
 
 
 
@@ -91,6 +97,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
             txtProductType = view.findViewById(R.id.txtProductType);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
             imgAddToCart = view.findViewById(R.id.imgAddToCart);
+            lyBroughtProduct = view.findViewById(R.id.lyBroughtProduct);
 
 
 

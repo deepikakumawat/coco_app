@@ -4,149 +4,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#f5f6f7"
+    android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity">
+
     <include layout="@layout/review"></include>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
-    <customfonts.MyTextView_Roboto_Medium
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="13.3sp"
-        android:layout_marginLeft="19.3dp"
-        android:letterSpacing="0.03"
-        android:text="Customer Ratings &amp; Reviews"
-        android:layout_marginTop="23.3dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="23.2dp"
-        android:layout_marginLeft="19.5dp">
-    <customfonts.MyTextView_Roboto_Regular
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="21.7dp"
-        android:text="4.0"/>
-    <customfonts.MyTextView_Roboto_Regular
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" /5"
-        android:textColor="#9a000000"/>
-        <LinearLayout
+
+        <customfonts.MyTextView_Roboto_Medium
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="27.3dp">
-            <RatingBar
-                android:id="@+id/rtbProductRating"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:numStars="5"
-                android:rating="4"
-                android:isIndicator="false"
-                android:theme="@style/RatingBar"
-                style="?android:attr/ratingBarStyleSmall" />
+            android:layout_marginLeft="19.3dp"
+            android:layout_marginTop="23.3dp"
+            android:letterSpacing="0.03"
+            android:text="Customer Ratings &amp; Reviews"
+            android:textColor="@color/black"
+            android:textSize="13.3sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19.5dp"
+            android:layout_marginTop="23.2dp"
+            android:orientation="horizontal">
+
             <customfonts.MyTextView_Roboto_Regular
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="4.0"
+                android:id="@+id/txtRating"
                 android:textColor="@color/black"
-                android:textSize="11.7sp"
-                android:text="745 reviews and 8593 Ratings  >"/>
+                android:textSize="21.7dp" />
+
+            <customfonts.MyTextView_Roboto_Regular
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" /5"
+                android:textColor="#9a000000" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27.3dp"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:id="@+id/rbProductRating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:rating="4"
+                    android:theme="@style/RatingBar" />
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:id="@+id/txtReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="745 reviews and 8593 Ratings  >"
+                    android:textColor="@color/black"
+                    android:textSize="11.7sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.7dp"
             android:layout_marginTop="16.5dp"
-            android:background="#34707070"/>
+            android:background="#34707070" />
     </LinearLayout>
 
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="16.5dp"
-        android:paddingBottom="16.5dp"
-        android:background="@color/white"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal">
-        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-            android:layout_width="73dp"
-            android:layout_height="73dp"
-            android:id="@+id/image"
-            android:scaleType="fitXY"
-            android:layout_marginRight="11.2dp"
-            android:layout_weight="1"
-            app:siShape="@drawable/rect1"
-            android:src="@drawable/watch1"
-            app:siSquare="true"/>
-        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-            android:layout_width="73dp"
-            android:layout_height="73dp"
-            android:layout_marginRight="11.2dp"
-            android:scaleType="fitXY"
-            android:layout_weight="1"
-            app:siShape="@drawable/rect1"
-            android:src="@drawable/watch1"
-            app:siSquare="true"/>
-        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-            android:layout_width="73dp"
-            android:layout_height="73dp"
-            android:scaleType="fitXY"
-            android:layout_marginRight="11.2dp"
-            android:layout_weight="1"
-            app:siShape="@drawable/rect1"
-            android:src="@drawable/watch1"
-            app:siSquare="true"/>
         <LinearLayout
-            android:layout_width="73dp"
-            android:layout_height="73dp"
-            android:background="@drawable/rect_recycler"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="1">
-            <customfonts.MyTextView_Roboto_Regular
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+13"
-                android:textColor="@color/black"
-                android:textSize="13.3sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="16.5dp"
+            android:paddingBottom="16.5dp"
+            android:visibility="gone">
+
+            <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                android:id="@+id/image"
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:layout_marginRight="11.2dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/watch1"
+                app:siShape="@drawable/rect1"
+                app:siSquare="true" />
+
+            <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:layout_marginRight="11.2dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/watch1"
+                app:siShape="@drawable/rect1"
+                app:siSquare="true" />
+
+            <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:layout_marginRight="11.2dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/watch1"
+                app:siShape="@drawable/rect1"
+                app:siSquare="true" />
+
+            <LinearLayout
+                android:layout_width="73dp"
+                android:layout_height="73dp"
                 android:layout_gravity="center"
-                android:gravity="center" />
+                android:layout_weight="1"
+                android:background="@drawable/rect_recycler"
+                android:gravity="center">
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="+13"
+                    android:textColor="@color/black"
+                    android:textSize="13.3sp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
-
 
 
     </android.support.v7.widget.CardView>
     <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="2dp"-->
-        <!--android:background="@drawable/shadow"-->
-        <!--/>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2dp"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--/>-->
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:layout_marginTop="5dp"
-        android:background="#34707070"/>
+        android:background="#34707070" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -155,127 +172,117 @@
         app:cardBackgroundColor="@color/white">
 
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-
-                <customfonts.MyTextView_Roboto_Medium
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="13.3sp"
-                    android:layout_marginLeft="19.3dp"
-                    android:letterSpacing="0.03"
-                    android:text="Your Reviews"
-                   />
-
-
-                <customfonts.EditText_Roboto_Meidum
-                    android:id="@+id/etxtReview"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="19.3dp"
-                    android:layout_marginRight="19.3dp"
-                    android:layout_marginTop="9dp"
-                    android:inputType="text"
-                    android:paddingLeft="28dp"
-                    android:paddingTop="16.5dp"
-                    android:paddingBottom="16.5dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="13sp" />
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
 
+
+                    <customfonts.MyTextView_Roboto_Medium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.3dp"
+                        android:letterSpacing="0.03"
+                        android:text="Your Reviews"
+                        android:textColor="@color/black"
+                        android:textSize="13.3sp" />
+
+
+                    <customfonts.EditText_Roboto_Meidum
+                        android:id="@+id/etxtReview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.3dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginRight="19.3dp"
+                        android:inputType="text"
+                        android:paddingLeft="28dp"
+                        android:paddingTop="16.5dp"
+                        android:paddingBottom="16.5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="13sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <customfonts.MyTextView_Roboto_Medium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.3dp"
+                        android:letterSpacing="0.03"
+                        android:text="Chosse Your Star Rating"
+                        android:textColor="@color/black"
+                        android:textSize="13.3sp" />
+
+
+                    <RatingBar
+                        android:id="@+id/productRating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.3dp"
+                        android:layout_marginTop="9dp"
+                        android:isIndicator="false"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:theme="@style/RatingBar" />
+
+                    <customfonts.Button_Roboto_Medium
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.3dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginRight="43dp"
+                        android:background="@drawable/red_round_rect"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="16.5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="16.5dp"
+                        android:text="Submit"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="13.7sp" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
-            <LinearLayout
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvRating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
-
-                <customfonts.MyTextView_Roboto_Medium
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="13.3sp"
-                    android:layout_marginLeft="19.3dp"
-                    android:letterSpacing="0.03"
-                    android:text="Chosse Your Star Rating"
-                    />
-
-
-
-                <RatingBar
-                    android:id="@+id/productRating"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:numStars="5"
-                    android:rating="4"
-                    android:layout_marginLeft="19.3dp"
-                    android:layout_marginTop="9dp"
-                    android:isIndicator="false"
-                    android:theme="@style/RatingBar"
-                    style="?android:attr/ratingBarStyleSmall" />
-
-                <customfonts.Button_Roboto_Medium
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="19.3dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginRight="43dp"
-                    android:background="@drawable/red_round_rect"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="16.5dp"
-                    android:paddingBottom="16.5dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Submit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="13.7sp" />
-
-
-            </LinearLayout>
-
-
-
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
 
 
         </LinearLayout>
-
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:nestedScrollingEnabled="false"
-            android:id="@+id/rvRating"/>
-
-
-
-    </LinearLayout>
     </android.support.v7.widget.CardView>
 
 

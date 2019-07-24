@@ -148,6 +148,7 @@
     <string name="phone">Phone can\'t be blank!</string>
     <string name="client_id">668030816880-vnh16c51f4l760lth09lsdkrb5lfs9tg.apps.googleusercontent.com</string>
     <string name="msg_token_fmt">FCM Message Token</string>
+    <string name="your_cart_empty">Your cart is empty.</string>
 
 
 </resources>

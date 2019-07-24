@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +23,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
+import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
+import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductAttributeData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductGalleryData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.TopReview;
@@ -83,6 +89,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private TextView txtAddToCart;
 
     private ArrayList<String> productDetailsImagesArrayList = new ArrayList<>();
+    private ArrayList<ProductAttributeData> productAttributeDataArrayList = new ArrayList<>();
     private ProductDetailsViewPager productDetailsViewPager;
     private TextView txtProductName;
     private TextView txtProductPrice;
@@ -109,12 +116,17 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private LinearLayout lyBroughtProduct;
     private LinearLayout lySimilarProduct;
     private TextView txtProductDesSpecValue;
+    private TextView txtProductShortDesValue;
     private TextView txtProductDesc;
     private TextView txtSpecification;
     private String productDetails;
     private String productSpecification;
-    private TextView txtSpecValue;
     private String productSpecificationName;
+    private RecyclerView rvProductAttr;
+    private ProductDetailsAttributeAdapter productDetailsAttributeAdapter;
+    private TextView txtProductShortDesc;
+    private String productShortDesc;
+    private TextView txtSellerName;
 
 
     @Nullable
@@ -151,10 +163,12 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
 
 
+        rvProductAttr = mView.findViewById(R.id.rvProductAttr);
         txtProductDesc = mView.findViewById(R.id.txtProductDesc);
+        txtProductShortDesc = mView.findViewById(R.id.txtProductShortDesc);
         txtSpecification = mView.findViewById(R.id.txtSpecification);
         txtProductDesSpecValue = mView.findViewById(R.id.txtProductDesSpecValue);
-        txtSpecValue = mView.findViewById(R.id.txtSpecValue);
+        txtProductShortDesValue = mView.findViewById(R.id.txtProductShortDesValue);
         lySimilarProduct = mView.findViewById(R.id.lySimilarProduct);
         lyBroughtProduct = mView.findViewById(R.id.lyBroughtProduct);
         lyTopReview = mView.findViewById(R.id.lyTopReview);
@@ -164,6 +178,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         txtRemoveWishlist = mView.findViewById(R.id.txtRemoveWishlist);
         txtAddToCart = mView.findViewById(R.id.txtAddToCart);
         txtProductName = mView.findViewById(R.id.txtProductName);
+        txtSellerName = mView.findViewById(R.id.txtSellerName);
         txtProductPrice = mView.findViewById(R.id.txtProductPrice);
         txtProductSalePrice = mView.findViewById(R.id.txtProductSalePrice);
         rvTopRatedProducts = mView.findViewById(R.id.rvTopRatedProducts);
@@ -185,6 +200,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         txtRatingCount.setOnClickListener(this);
         txtProductDesc.setOnClickListener(this);
         txtSpecification.setOnClickListener(this);
+        txtProductShortDesc.setOnClickListener(this);
 
 
         right1 = mView.findViewById(R.id.right1);
@@ -279,6 +295,11 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
         rvBroughtProducts.setLayoutManager(mLayoutManagerBroughtData);
         rvBroughtProducts.setItemAnimator(new DefaultItemAnimator());
+
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        rvProductAttr.setLayoutManager(mLayoutManager);
+        rvProductAttr.setItemAnimator(new DefaultItemAnimator());
 
 
         if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("MyWishList")) {
@@ -388,15 +409,20 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 }
                 break;
             case R.id.txtBuyNow:
-                if (Util.isDeviceOnline(getActivity())) {
-                    isClickOnBuyNow = true;
-//                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1");
 
-                } else {
-                    showCenteredToast(getActivity(), getString(R.string.network_connection));
+                if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    if (Util.isDeviceOnline(getActivity())) {
+                        isClickOnBuyNow = true;
+                        productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1");
 
+                    } else {
+                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                    }                } else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
+
+
 
                 break;
             case R.id.txtAddToCart:
@@ -457,9 +483,39 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             case R.id.txtSpecification:
                 unSelectAllTabs();
                 selectClickedTab(((TextView) v));
-                setProductSpecfication(productSpecification, productSpecificationName);
+                setProductSpecfication(productAttributeDataArrayList);
                 break;
+            case R.id.txtProductShortDesc:
+                unSelectAllTabs();
+                selectClickedTab(((TextView) v));
+                setProductShortDes(productShortDesc);
+                break;
+            case R.id.lyProduct:
 
+                ProductDetailsSimilier  productDetailsSimilier = (ProductDetailsSimilier) v.getTag();
+//                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
+                if (productDetailsSimilier != null) {
+                    unSelectAllTabs();
+                    onClick(txtProductDesc);
+                    productId = productDetailsSimilier.getmProductId();
+
+                  productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductSlug());
+                }
+
+                break;
+            case R.id.lyBroughtProduct:
+
+                 productBroughtData = (ProductBroughtData) v.getTag();
+//                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
+                if (productBroughtData != null) {
+                    unSelectAllTabs();
+                    onClick(txtProductDesc);
+                    productId = productBroughtData.getmProductId();
+
+                    productDetailsPresenter.getProductDetails(productBroughtData.getmProductSlug());
+                }
+
+                break;
             default:
                 break;
 
@@ -474,8 +530,10 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private void unSelectAllTabs() {
         txtProductDesc.setSelected(false);
         txtSpecification.setSelected(false);
+        txtProductShortDesc.setSelected(false);
         txtProductDesc.setEnabled(true);
         txtSpecification.setEnabled(true);
+        txtProductShortDesc.setEnabled(true);
     }
 
     @Override
@@ -513,7 +571,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
             if (productDetailsResponse.getmData() != null) {
                 if (productDetailsResponse.getmData().getmProduct() != null) {
                     productDetailsImagesArrayList.clear();
-                    productDetailsImagesArrayList.add(productDetailsResponse.getmData().getmProduct().getmProductImg());
+                    productDetailsImagesArrayList.add(Constant.MEDIA_THUMBNAIL_BASE_URL +productDetailsResponse.getmData().getmProduct().getmProductImg());
 
                     if (!productDetailsResponse.getmData().getmProductGallery().isEmpty()) {
                         for (ProductGalleryData productGalleryData : productDetailsResponse.getmData().getmProductGallery()) {
@@ -522,6 +580,15 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                         }
                     }
 
+                    if (!productDetailsResponse.getmData().getmProductAttributes().isEmpty()) {
+                        productAttributeDataArrayList.clear();
+                        productAttributeDataArrayList.addAll(productDetailsResponse.getmData().getmProductAttributes());
+                        setProductSpecfication(productAttributeDataArrayList);
+
+                    }
+
+
+
                     productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList);
                     viewPager.setAdapter(productDetailsViewPager);
 
@@ -529,6 +596,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     topRating(productDetailsResponse.getmData().getmTopReview());
 
                     txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
+                    txtSellerName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSellerName()) ? "Sold by: "+productDetailsResponse.getmData().getmProduct().getmSellerName() : "-");
                     txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
@@ -548,9 +616,13 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmAttrName())) {
                         productSpecificationName = productDetailsResponse.getmData().getmProduct().getmAttrName();
                     }
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductShortDetails())) {
+                        productShortDesc = productDetailsResponse.getmData().getmProduct().getmProductShortDetails();
+                    }
 
 
                     setProductDes(productDetails);
+                    setProductShortDes(productShortDesc);
 
                     setTxtDiscout(productDetailsResponse);
 
@@ -598,15 +670,20 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         }
     }
 
-    private void setProductDes(String productDese) {
+    private void setProductShortDes(String productShortDese) {
         try {
-            txtSpecValue.setVisibility(View.GONE);
-            if (!TextUtils.isEmpty(productDese)) {
-                txtProductDesSpecValue.setText(productDese);
+            rvProductAttr.setVisibility(View.GONE);
+            txtProductDesSpecValue.setVisibility(View.GONE);
+            txtProductShortDesValue.setVisibility(View.VISIBLE);
+
+            if (!TextUtils.isEmpty(productShortDese)) {
+                txtProductShortDesValue.setText(Html.fromHtml(productShortDese));
             }else{
-                txtProductDesSpecValue.setText("-");
+                txtProductShortDesValue.setText("-");
 
             }
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -614,45 +691,37 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
     }
 
-    private void setProductSpecfication(String productSpecfication, String productSpecificationName) {
+    private void setProductDes(String productDese) {
         try {
-            txtSpecValue.setVisibility(View.VISIBLE);
+            txtProductShortDesValue.setVisibility(View.GONE);
+            rvProductAttr.setVisibility(View.GONE);
+            txtProductDesSpecValue.setVisibility(View.VISIBLE);
 
-            if (!TextUtils.isEmpty(productSpecfication)) {
-
-                List<String> items = Arrays.asList(productSpecfication.split("\\s*,\\s*"));
-
-                StringBuilder builder = new StringBuilder();
-                for (String details : items) {
-                    builder.append(details + "\n");
-                }
-
-                txtProductDesSpecValue.setText(builder.toString());
-
-//                txtProductDesSpecValue.setText(productSpecfication);
+            if (!TextUtils.isEmpty(productDese)) {
+                txtProductDesSpecValue.setText(Html.fromHtml(productDese));
             }else{
                 txtProductDesSpecValue.setText("-");
 
             }
 
 
-            if (!TextUtils.isEmpty(productSpecificationName)) {
 
-                List<String> items = Arrays.asList(productSpecificationName.split("\\s*,\\s*"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-                StringBuilder builder = new StringBuilder();
-                for (String details : items) {
-                    builder.append(details + "\n");
-                }
+    }
 
-                txtSpecValue.setText(builder.toString());
+    private void setProductSpecfication(ArrayList<ProductAttributeData> productAttributeDataArrayList) {
+        try {
+            rvProductAttr.setVisibility(View.VISIBLE);
+            txtProductDesSpecValue.setVisibility(View.GONE);
+            txtProductShortDesValue.setVisibility(View.GONE);
 
-//                txtProductDesSpecValue.setText(productSpecfication);
-            }else{
-                txtSpecValue.setText("-");
 
-            }
 
+            productDetailsAttributeAdapter = new ProductDetailsAttributeAdapter(getActivity(), productAttributeDataArrayList, ProductDetailFragment.this);
+            rvProductAttr.setAdapter(productDetailsAttributeAdapter);
 
 
 
@@ -664,6 +733,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
 
 
     private void setLyImages(ArrayList<String> productDetailsImagesArrayList) {
+
+        lyImageView.removeAllViews();
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View view;
@@ -727,7 +798,8 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                 double divide = increases / price;
                 double dicount = divide * 100;
 
-                String dis = String.format("%.2f", dicount) + " %";
+                int dis = (int)dicount;
+//                String dis = String.format("%.2f", dicount) + " %";
 
                 txtDiscout.setText(dis + " off");
 

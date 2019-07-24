@@ -45,6 +45,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
+import com.ws.design.coco_ecommerce_ui_kit.terms_condition.TermsConditionFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -71,10 +72,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-             "Address", "Help", "Contact Us"};
+             "Address", "Help", "Contact Us","Terms & Conditions"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-             "Address", "Help", "Contact Us", "Logout"};
+             "Address", "Help", "Contact Us", "Terms & Conditions","Logout"};
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -210,7 +211,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 9) {
 
 
-                } else if (position == 10) {
+                }  else if (position == 10) {
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new TermsConditionFragment(), null, false, false);
+
+
+                }else if (position == 11) {
 
                     logout();
 
@@ -251,7 +256,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         invalidateOptionsMenu();
 
-       FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+      FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
       /*  fragment = new HomeFragment();
         replaceFragment(fragment);*/
@@ -449,7 +454,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                             txtUserEmail.setVisibility(View.GONE);
                             lyLoginSignup.setVisibility(View.VISIBLE);
 
-                            navigationModelClasses.remove(10);
+                            navigationModelClasses.remove(11);
                             mAdapter.notifyDataSetChanged();
 
                             Util.showCenteredToast(DrawerActivity.this, "Logout Successfully!");
@@ -482,7 +487,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         if (requestCode == MYACCOUNT_ACTION) {
             if (resultCode == Activity.RESULT_OK) {
                 setEmailName();
-                navigationModelClasses.remove(10);
+                navigationModelClasses.remove(11);
                 mAdapter.notifyDataSetChanged();
             }
         }

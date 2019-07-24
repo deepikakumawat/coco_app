@@ -70,6 +70,14 @@
 
                         </FrameLayout>
 
+            <HorizontalScrollView
+                android:id="@+id/hsv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fillViewport="true"
+                android:measureAllChildren="false"
+                android:scrollbars="none" >
 
                         <LinearLayout
                             android:id="@+id/lyImageView"
@@ -78,6 +86,8 @@
                             android:layout_marginRight="20dp"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal" />
+
+            </HorizontalScrollView>
 
 
 
@@ -100,6 +110,16 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtSellerName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:textStyle="bold"
+                                android:textSize="16.7sp" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -299,6 +319,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
                         android:text="Storage"
+                        android:visibility="gone"
                         android:textColor="@color/storage"
                         android:textSize="12.3sp" />
 
@@ -308,6 +329,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="15dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
 
@@ -674,6 +696,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="15dp"
+        android:visibility="gone"
         android:layout_marginBottom="20dp"
         android:src="@drawable/filter_plus" />
 

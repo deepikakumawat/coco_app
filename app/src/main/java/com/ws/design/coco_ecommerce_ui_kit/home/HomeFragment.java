@@ -79,7 +79,7 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
     private ArrayList<Categories> categoriesArrayList = new ArrayList<>();
     private ProductData productData;
     private DealProducts dealProduct;
-    private ShimmerFrameLayout shimmerContainer;
+//    private ShimmerFrameLayout shimmerContainer;
 
 
     @Nullable
@@ -337,15 +337,15 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
 
     @Override
     public void showWait() {
-//        showProDialog(getActivity());
-        shimmerContainer.startShimmerAnimation();
+       showProDialog(getActivity());
+//        shimmerContainer.startShimmerAnimation();
 
     }
 
     @Override
     public void removeWait() {
-//        dismissProDialog();
-        shimmerContainer.stopShimmerAnimation();
+        dismissProDialog();
+//        shimmerContainer.stopShimmerAnimation();
 
 
     }
