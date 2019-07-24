@@ -17,10 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8.3dp"
+            android:id="@+id/lyCart"
             android:layout_marginTop="13.3dp"
             android:layout_marginRight="8.9dp"
             android:background="@drawable/rect_recycler"
             android:elevation="3dp"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
@@ -35,6 +37,7 @@
 
 
         </LinearLayout>
+
 
     </LinearLayout>
 
@@ -59,6 +62,7 @@
         android:background="@color/white"
         android:id="@+id/lyBottomView"
         android:orientation="vertical"
+        android:visibility="gone"
         android:paddingBottom="10dp">
 
         <customfonts.MyTextView_Roboto_Medium
@@ -156,5 +160,22 @@
                 android:textSize="13.3sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <customfonts.Button_Roboto_Medium
+        android:id="@+id/txtContinueShopping"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/shopping_rect"
+        android:gravity="center"
+        android:visibility="gone"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/continue_shopping"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

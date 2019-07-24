@@ -171,8 +171,11 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                     break;
                 case R.id.lyAddress:
                      addressData = ((AddressListResponse.AddressData) view.getTag());
+                    ImageView imgSelectAddress = (ImageView) view.getTag(R.id.lyAddress);
 
                     if (addressData != null) {
+
+//                        imgSelectAddress.setVisibility(View.VISIBLE);
 
                         Intent data = new Intent();
                         data.putExtra("addressData",addressData);

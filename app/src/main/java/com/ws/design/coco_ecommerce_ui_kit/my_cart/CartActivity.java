@@ -32,14 +32,6 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
 
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private RecyclerView rvCart;
-//    private RecycleAdapterCocoCart mAdapter;
-
-    String rupees[] = {"$329", "$450", "$90"};
-    String phoneName[] = {"Iphone X | 128 GB, Black | 6 GB ram |\n" +
-            "12000 mAh battry", "Mi Mix 2 (Black, 128 GB) 6GB Ram \n" +
-            "with 5000 mAh…", "Food container, set of 3 container,\n" +
-            "yellow color"};
-    Integer phoneImage[] = {R.drawable.mobile1, R.drawable.mobile2, R.drawable.mobile1};
     private CartPresenter cartPresenter;
     private CartListAdapter cartListAdapter;
     private int removeCorssPostion = -1;
@@ -50,6 +42,8 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
     private String totalPrice;
     private TextView txtNoDataFound;
     private LinearLayout lyBottomView;
+    private LinearLayout lyCart;
+    private TextView txtContinueShopping;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +54,18 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
 
         if (Util.isDeviceOnline(this)) {
             cartPresenter.getCartList(CocoPreferences.getUserId());
-
         } else {
             showCenteredToast(this, getString(R.string.network_connection));
 
         }
 
+        init();
 
+    }
+
+    private void init() {
+        txtContinueShopping = findViewById(R.id.txtContinueShopping);
+        lyCart = findViewById(R.id.lyCart);
         lyBottomView = findViewById(R.id.lyBottomView);
         txtNoDataFound = findViewById(R.id.txtNoDataFound);
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
@@ -76,20 +75,12 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
         imgBack.setOnClickListener(this);
         txtCheckout.setOnClickListener(this);
         txtEmptyCart.setOnClickListener(this);
-        rvCart = (RecyclerView) findViewById(R.id.rvCart);
-       /* navigationModelClasses = new ArrayList<>();
-        for (int i = 0; i < rupees.length; i++) {
-            CocoCartModel1 beanClassForRecyclerView_contacts = new CocoCartModel1(phoneName[i],rupees[i],phoneImage[i]);
+        txtContinueShopping.setOnClickListener(this);
+        rvCart = findViewById(R.id.rvCart);
 
-            navigationModelClasses.add(beanClassForRecyclerView_contacts);
-        }
-        mAdapter = new RecycleAdapterCocoCart(CartActivity.this,navigationModelClasses);
-*/
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(CartActivity.this);
         rvCart.setLayoutManager(mLayoutManager);
         rvCart.setItemAnimator(new DefaultItemAnimator());
-//        rvCart.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -105,34 +96,21 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
     @Override
     public void onFailure(String appErrorMessage) {
         showCenteredToast(this, appErrorMessage);
-
-        txtNoDataFound.setVisibility(View.VISIBLE);
-        rvCart.setVisibility(View.GONE);
-        lyBottomView.setVisibility(View.GONE);
+        noDataFound();
     }
 
     @Override
     public void getCartList(CartListResponse cartListResponse) {
         if (cartListResponse != null) {
             if (!cartListResponse.getmCartlistData().getmProductData().isEmpty()) {
-
-                txtNoDataFound.setVisibility(View.GONE);
-                rvCart.setVisibility(View.VISIBLE);
-                lyBottomView.setVisibility(View.VISIBLE);
-
-
                 productDataArrayList.clear();
                 productDataArrayList.addAll(cartListResponse.getmCartlistData().getmProductData());
-
-                cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
-                rvCart.setAdapter(cartListAdapter);
-
                 totalPrice = cartListResponse.getmCartlistData().getmTotalPrice();
-                txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+
+                setAdapter(productDataArrayList, totalPrice);
+
             } else {
-                txtNoDataFound.setVisibility(View.VISIBLE);
-                rvCart.setVisibility(View.GONE);
-                lyBottomView.setVisibility(View.GONE);
+                noDataFound();
             }
 
         }
@@ -146,9 +124,7 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
             productDataArrayList.clear();
             cartListAdapter.notifyDataSetChanged();
 
-            txtNoDataFound.setVisibility(View.VISIBLE);
-            rvCart.setVisibility(View.GONE);
-            lyBottomView.setVisibility(View.GONE);
+            noDataFound();
 
 
         } else {
@@ -163,32 +139,17 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
 
             if (!removeCartOneByOneResponse.getmData().getmProductData().isEmpty()) {
 
-                txtNoDataFound.setVisibility(View.GONE);
-                rvCart.setVisibility(View.VISIBLE);
-                lyBottomView.setVisibility(View.VISIBLE);
-
-
 
                 productDataArrayList.clear();
                 productDataArrayList.addAll(removeCartOneByOneResponse.getmData().getmProductData());
-
-                if (cartListAdapter != null) {
-                    cartListAdapter.notifyDataSetChanged();
-                } else {
-                    cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
-                    rvCart.setAdapter(cartListAdapter);
-                }
-
                 totalPrice = removeCartOneByOneResponse.getmData().getmTotalPrice();
-                txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+
+                setAdapter(productDataArrayList, totalPrice);
 
 
-            }else{
-                txtNoDataFound.setVisibility(View.VISIBLE);
-                rvCart.setVisibility(View.GONE);
-                lyBottomView.setVisibility(View.GONE);
+            } else {
+                noDataFound();
             }
-
 
 
         } else {
@@ -204,39 +165,24 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
             if (removeCorssPostion == -1) {
                 if (!removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
 
-                    txtNoDataFound.setVisibility(View.GONE);
-                    rvCart.setVisibility(View.VISIBLE);
-                    lyBottomView.setVisibility(View.VISIBLE);
-
-
                     productDataArrayList.clear();
                     productDataArrayList.addAll(removeCartByCrossResponse.getmData().getmProductData());
 
-                    if (cartListAdapter != null) {
-                        cartListAdapter.notifyDataSetChanged();
-                    } else {
-                        cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
-                        rvCart.setAdapter(cartListAdapter);
-                    }
-
                     totalPrice = removeCartByCrossResponse.getmData().getmTotalPrice();
-                    txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
 
-                }else{
+                    setAdapter(productDataArrayList, totalPrice);
 
-                        txtNoDataFound.setVisibility(View.VISIBLE);
-                        rvCart.setVisibility(View.GONE);
-                        lyBottomView.setVisibility(View.GONE);
-
+                } else {
+                    noDataFound();
                 }
 
             } else {
                 productDataArrayList.remove(removeCorssPostion);
                 cartListAdapter.notifyDataSetChanged();
+                if (removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
+                    noDataFound();
 
-
-
-
+                }
             }
 
         } else {
@@ -274,7 +220,6 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     break;
                 case R.id.lyCartProduct:
                     productData = ((CartListResponse.ProductData) view.getTag());
-//                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
                     if (productData != null) {
 
                         Bundle bundle = new Bundle();
@@ -289,6 +234,7 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
 
                     }
                     break;
+                case R.id.txtContinueShopping:
                 case R.id.imgBack:
                     finish();
                     break;
@@ -311,7 +257,6 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     if (productData != null) {
                         int count = Integer.parseInt(String.valueOf(txtIncDec.getText()));
                         count++;
-//                        txtIncDec.setText(String.valueOf(count));
 
                         if (Util.isDeviceOnline(this)) {
                             cartPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
@@ -335,8 +280,6 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                         } else {
                             cartPresenter.removeCartByCross(productData.getmCartId());
                         }
-//                        txtIncDec.setText(String.valueOf(count));
-
                     }
                     break;
                 default:
@@ -357,19 +300,38 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                 productDataArrayList.clear();
                 productDataArrayList.addAll(addToCartResponse.getmData().getmProductData());
 
-                if (cartListAdapter != null) {
-                    cartListAdapter.notifyDataSetChanged();
-                } else {
-                    cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
-                    rvCart.setAdapter(cartListAdapter);
-                }
             }
             totalPrice = addToCartResponse.getmData().getmTotalPrice();
-            txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+
+            setAdapter(productDataArrayList, totalPrice);
 
 
         } else {
             showCenteredToast(this, addToCartResponse.getmMessage());
         }
+    }
+
+    private void setAdapter(ArrayList<CartListResponse.ProductData> productDataArrayList, String totalPrice) {
+
+        txtNoDataFound.setVisibility(View.GONE);
+        txtContinueShopping.setVisibility(View.GONE);
+        lyCart.setVisibility(View.VISIBLE);
+        lyBottomView.setVisibility(View.VISIBLE);
+
+        if (cartListAdapter != null) {
+            cartListAdapter.notifyDataSetChanged();
+        } else {
+            cartListAdapter = new CartListAdapter(this, productDataArrayList, CartActivity.this);
+            rvCart.setAdapter(cartListAdapter);
+        }
+        txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? getString(R.string.Rs) + totalPrice : "-");
+
+    }
+
+    private void noDataFound() {
+        txtNoDataFound.setVisibility(View.VISIBLE);
+        txtContinueShopping.setVisibility(View.VISIBLE);
+        lyCart.setVisibility(View.GONE);
+        lyBottomView.setVisibility(View.GONE);
     }
 }

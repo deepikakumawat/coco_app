@@ -146,6 +146,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
 //                showCenteredToast(this,forgotPasswordResponse.getMessage());
                 lyConfirmationMail.setVisibility(View.VISIBLE);
+                etEmail.setText("");
             }else{
                 lyConfirmationMail.setVisibility(View.GONE);
             }

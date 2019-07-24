@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,11 +39,11 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
         AddressListResponse.AddressData addressData = addressDataArrayList.get(position);
         if (addressData != null) {
-            holder.txtName.setText(TextUtils.isEmpty(addressData.getmName()) ? "-" :addressData.getmName());
+            holder.txtName.setText(TextUtils.isEmpty(addressData.getmName()) ? "-" : addressData.getmName());
             holder.txtAddressType.setText(TextUtils.isEmpty(addressData.getmName()) ? "-" : addressData.getmAddressType());
             holder.txtAddress1.setText(TextUtils.isEmpty(addressData.getmAddress1()) ? "-" : addressData.getmAddress1());
             holder.txtAddress2.setText(TextUtils.isEmpty(addressData.getmAddress2()) ? "-" : addressData.getmAddress2());
-            holder.txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-"  : addressData.getmLandmark());
+            holder.txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : addressData.getmLandmark());
             holder.txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : addressData.getmCity());
             holder.txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" : addressData.getmState());
             holder.txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" : addressData.getmCountry());
@@ -51,11 +52,12 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
 
             holder.btnDelete.setTag(addressData);
-            holder.btnDelete.setTag(R.id.btnDelete,position);
-            holder.btnDelete.setOnClickListener( addressListActivity);
+            holder.btnDelete.setTag(R.id.btnDelete, position);
+            holder.btnDelete.setOnClickListener(addressListActivity);
 
             holder.lyAddress.setTag(addressData);
-            holder.lyAddress.setOnClickListener( addressListActivity);
+            holder.lyAddress.setTag(R.id.lyAddress, holder.imgSelectAddress);
+            holder.lyAddress.setOnClickListener(addressListActivity);
         }
 
     }
@@ -80,7 +82,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         private TextView txtPhone;
         private Button btnDelete;
         private LinearLayout lyAddress;
-
+        private ImageView imgSelectAddress;
 
 
         public ViewHolder(View view) {
@@ -98,6 +100,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             txtPhone = view.findViewById(R.id.txtPhone);
             btnDelete = view.findViewById(R.id.btnDelete);
             lyAddress = view.findViewById(R.id.lyAddress);
+            imgSelectAddress = view.findViewById(R.id.imgSelectAddress);
 
 
         }

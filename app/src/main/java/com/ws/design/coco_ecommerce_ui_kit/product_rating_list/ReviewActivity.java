@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     private RatingBar rbProductRating;
     private TextView txtReview;
     private TextView txtRating;
+    private LinearLayout lyCustomerRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,26 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         setContentView(R.layout.activity_review);
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            productId= extras.getString("productId");
+        if (extras != null) {
+            productId = extras.getString("productId");
         }
 
         productRatingPresenter = new ProductRatingPresenter(this);
-        productRatingPresenter.getProductDetails(productId);
 
+        if (Util.isDeviceOnline(this)) {
+            productRatingPresenter.getProductDetails(productId);
+
+        } else {
+            showCenteredToast(this, getString(R.string.network_connection));
+
+        }
+
+
+        init();
+    }
+
+    private void init() {
+        lyCustomerRating = findViewById(R.id.lyCustomerRating);
         txtRating = findViewById(R.id.txtRating);
         txtReview = findViewById(R.id.txtReview);
         rbProductRating = findViewById(R.id.rbProductRating);
@@ -61,7 +76,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         productRating = findViewById(R.id.productRating);
         btnSubmit = findViewById(R.id.btnSubmit);
         rvRating = findViewById(R.id.rvRating);
-        txt1 = (TextView) findViewById(R.id.txt1);
+        txt1 = findViewById(R.id.txt1);
         txt1.setText("Reviews");
         btnSubmit.setOnClickListener(this);
         imgBack.setOnClickListener(this);
@@ -80,8 +95,8 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
                     Float rating = productRating.getRating();
 
                     String ratingFinal = String.valueOf((Math.round(rating)));
-                    if (isValid(comment,rating)) {
-                        productRatingPresenter.addReview(CocoPreferences.getUserId(),comment,productId,ratingFinal);
+                    if (isValid(comment, rating)) {
+                        productRatingPresenter.addReview(CocoPreferences.getUserId(), comment, productId, ratingFinal);
                     }
 
                     break;
@@ -122,16 +137,19 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
                 if (!productRatingResponse.getmData().getmRatings().isEmpty()) {
 
-                   /* lyEmpty.setVisibility(View.GONE);
-                    rvMyWishList.setVisibility(View.VISIBLE);*/
-
+                    rvRating.setVisibility(View.VISIBLE);
                     ratingsArrayList.clear();
                     ratingsArrayList.addAll(productRatingResponse.getmData().getmRatings());
 
                     reviewListAdapter = new ReviewListAdapter(this, ratingsArrayList, ReviewActivity.this);
                     rvRating.setAdapter(reviewListAdapter);
 
+                    lyCustomerRating.setVisibility(View.VISIBLE);
+
+
                     if (!productRatingResponse.getmData().getmOverAll().isEmpty()) {
+
+
 
                         if (!TextUtils.isEmpty(productRatingResponse.getmData().getmOverAll().get(0).getmAvgRating())) {
 
@@ -140,16 +158,16 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
                             rbProductRating.setRating(Float.parseFloat(rating));
                             txtRating.setText(rating);
 
-                        }else{
+                        } else {
                             rbProductRating.setRating(0);
-                            txtRating.setText(""+0);
+                            txtRating.setText("" + 0);
 
                         }
 
 
-                    }else{
+                    } else {
                         rbProductRating.setRating(0);
-                        txtRating.setText(""+0);
+                        txtRating.setText("" + 0);
 
                     }
 
@@ -162,8 +180,8 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
                     }
 
                 } else {
-                   /* lyEmpty.setVisibility(View.VISIBLE);
-                    rvMyWishList.setVisibility(View.GONE);*/
+                    rvRating.setVisibility(View.GONE);
+                    lyCustomerRating.setVisibility(View.GONE);
                 }
             }
 
@@ -174,13 +192,13 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     @Override
     public void addRating(AddRatingResponse addRatingResponse) {
         if (!TextUtils.isEmpty(addRatingResponse.getmStatus()) && ("1".equalsIgnoreCase(addRatingResponse.getmStatus()))) {
-            showCenteredToast(this,"Review added successfully");
+            showCenteredToast(this, "Review added successfully");
             etxtReview.getText().clear();
             productRating.setRating(0);
             productRatingPresenter.getProductDetails(productId);
 
-        }else {
-            showCenteredToast(this,getString(R.string.somethingWentWrong));
+        } else {
+            showCenteredToast(this, getString(R.string.somethingWentWrong));
         }
     }
 
@@ -190,7 +208,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
             if (TextUtils.isEmpty(comment)) {
                 showCenteredToast(this, getString(R.string.comment_validation_message));
                 etxtReview.requestFocus();
-            } else if (rating==0.0) {
+            } else if (rating == 0.0) {
                 showCenteredToast(this, getString(R.string.rating_validation_message));
                 productRating.requestFocus();
             } else {
