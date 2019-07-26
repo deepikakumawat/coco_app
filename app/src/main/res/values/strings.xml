@@ -150,6 +150,11 @@
     <string name="msg_token_fmt">FCM Message Token</string>
     <string name="your_cart_empty">Your cart is empty.</string>
     <string name="continue_shopping">Continue Shopping</string>
+    <string name="no_data_found">No Data Found.</string>
+    <string name="home_success">Success</string>
+    <string name="retry">Retry?</string>
+    <string name="go_to_home">Go To Home</string>
+    <string name="shop_more">Shop More!</string>
 
 
 </resources>

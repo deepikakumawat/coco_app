@@ -454,6 +454,7 @@
                     android:background="#d7d4d4" />
 
                 <include layout="@layout/include_product_details_specification" />
+                <include layout="@layout/include_bought_products" />
                 <include layout="@layout/delivery_and_review_layout" />
 
 
@@ -503,7 +504,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/lyBroughtProduct">
+                    android:id="@+id/lyRecentViewsProduct">
 
 
                     <LinearLayout
@@ -516,7 +517,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Brought Products"
+                            android:text="Recent Views Products"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -530,10 +531,9 @@
                             android:textSize="13sp" />
                     </LinearLayout>
 
-                    <!--Broght Data-->
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvBroughtProducts"
+                        android:id="@+id/rvRecentViewsProducts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"

@@ -22,6 +22,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_respo
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
+import com.ws.design.coco_ecommerce_ui_kit.seller.SellerResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 
 import retrofit2.Call;
@@ -122,7 +123,8 @@ public interface APIService {
     @FormUrlEncoded
     Call<AddToCartResponse> addToCart(@Field("user_id") String userID,
                                       @Field("product_id") String productId,
-                                      @Field("quantity") String quantity);
+                                      @Field("quantity") String quantity,
+                                      @Field("attributes") String attributes);
 
     @POST("cartlist")
     @FormUrlEncoded
@@ -158,14 +160,13 @@ public interface APIService {
 
     @POST("product-detail")
     @FormUrlEncoded
-    Call<ProductDetailsResponse> getProductDetails(@Field("slug") String slug);
+    Call<ProductDetailsResponse> getProductDetails(@Field("slug") String slug,  @Field("user_id") String userId);
 
     @POST("product-ratings")
     @FormUrlEncoded
     Call<ProductRatingResponse> getProductRating(@Field("productid") String productId);
 
 
-    //    @Headers("user-key: 9900a9720d31dfd5fdb4352700c")
     @POST("homepage")
     Call<HomeResponse> getHomeData();
 
@@ -214,5 +215,9 @@ public interface APIService {
     @FormUrlEncoded
     Call<CancelOrderResponse> cancelOrder(@Field("order_id") String orderId,
                                           @Field("reason") String reason);
+
+    @POST("vendordata")
+    @FormUrlEncoded
+    Call<SellerResponse> getSellerProduct(@Field("vendor_id") String venderId);
 }
 

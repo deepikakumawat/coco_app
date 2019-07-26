@@ -37,31 +37,27 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
         mView = inflater.inflate(R.layout.fragment_product_by_category, container, false);
 
         Bundle bundle = getArguments();
-        catId = bundle.getString("catId");
+        if (bundle != null) {
+            catId = bundle.getString("catId");
+        }
 
         return mView;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
-
-//        View root = tabLayout.getChildAt(0);
-//        if (root instanceof LinearLayout) {
-//            ((LinearLayout) root).setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-//            GradientDrawable drawable = new GradientDrawable();
-//            drawable.setColor(getResources().getColor(R.color.line));
-//            drawable.setSize(2, 1);
-//            ((LinearLayout) root).setDividerPadding(10);
-//            ((LinearLayout) root).setDividerDrawable(drawable);
+        tabLayout =  mView.findViewById(R.id.tab_layout);
 
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.addTab(tabLayout.newTab().setText("Popular"));
         tabLayout.addTab(tabLayout.newTab().setText("Low Price"));
         tabLayout.addTab(tabLayout.newTab().setText("High Price"));
         tabLayout.addTab(tabLayout.newTab().setText("Sale"));
+
         Typeface mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+
         int tabsCount = vg.getChildCount();
         for (int j = 0; j < tabsCount; j++) {
             ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
@@ -74,7 +70,6 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
             }
         }
 
-        //  sliderAdd = (SliderLayout) view.findViewById(R.id.sliderAdd);
 
 
         setCustomFontAndStyle(tabLayout, 0);
@@ -89,7 +84,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
         });
 
 
-        wrapContentHeightViewPager = (WrapContentHeightViewPager) mView.findViewById(R.id.pager);
+        wrapContentHeightViewPager =  mView.findViewById(R.id.pager);
         CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4, catId);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(1);

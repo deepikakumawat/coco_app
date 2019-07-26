@@ -78,6 +78,18 @@ public class ProductDetailsResponse {
         @Expose
         private ArrayList<ProductAttributeData> mProductAttributes;
 
+        @SerializedName("user_recent_views")
+        @Expose
+        private ArrayList<ProductDetailsSimilier> mUserRecentViews;
+
+
+        public ArrayList<ProductDetailsSimilier> getmUserRecentViews() {
+            return mUserRecentViews;
+        }
+
+        public void setmUserRecentViews(ArrayList<ProductDetailsSimilier> mUserRecentViews) {
+            this.mUserRecentViews = mUserRecentViews;
+        }
 
         public String getmTitle() {
             return mTitle;

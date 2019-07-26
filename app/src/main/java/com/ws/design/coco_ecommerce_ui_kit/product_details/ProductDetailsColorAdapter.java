@@ -24,11 +24,11 @@ import java.util.List;
 
 public class ProductDetailsColorAdapter extends RecyclerView.Adapter<ProductDetailsColorAdapter.ViewHolder> {
     private Context context;
-    private List<String> productColorDataArrayList;
+    private List<ColorData> productColorDataArrayList;
     private ProductDetailFragment productDetailFragment;
 
 
-    public ProductDetailsColorAdapter(Context context, List<String> productColorDataArrayList, ProductDetailFragment productDetailFragment) {
+    public ProductDetailsColorAdapter(Context context, List<ColorData> productColorDataArrayList, ProductDetailFragment productDetailFragment) {
         this.context = context;
         this.productColorDataArrayList = productColorDataArrayList;
         this.productDetailFragment = productDetailFragment;
@@ -43,26 +43,38 @@ public class ProductDetailsColorAdapter extends RecyclerView.Adapter<ProductDeta
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        String productData = productColorDataArrayList.get(position);
-        if (productData != null) {
-
-          
-
-            Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.black_circle);
-            Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-            DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#"+productData));
-//            DrawableCompat.setTint(wrappedDrawable, Color.RED);
-
-            final int sdk = android.os.Build.VERSION.SDK_INT;
-            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                holder.lyColor.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.black_circle) );
-            } else {
-                holder.lyColor.setBackground(ContextCompat.getDrawable(context, R.drawable.black_circle));
-            }
+      try{
+          ColorData colorCode = productColorDataArrayList.get(position);
+          if (colorCode!=null) {
 
 
-        
-        }
+
+              Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.black_circle);
+              Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+              DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#"+colorCode.getmAttrbuteRelatedData()));
+
+              final int sdk = android.os.Build.VERSION.SDK_INT;
+              if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                  holder.lyColor.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.black_circle) );
+              } else {
+                  holder.lyColor.setBackground(ContextCompat.getDrawable(context, R.drawable.black_circle));
+              }
+
+              if (colorCode.isSelected()) {
+                  holder.imgSelectColor.setVisibility(View.VISIBLE);
+              }else {
+                  holder.imgSelectColor.setVisibility(View.GONE);
+
+              }
+
+              holder.lyColor.setTag(colorCode);
+              holder.lyColor.setOnClickListener(productDetailFragment);
+
+
+          }
+      }catch (Exception e){
+          e.printStackTrace();
+      }
 
     }
 

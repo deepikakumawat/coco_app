@@ -20,19 +20,16 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
-import Adapter.RecycleAdapteProductList;
-import Model.ProductGridModellClass;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryAdapter;
 
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
 public class PopularListFragment extends Fragment implements View.OnClickListener ,ProductByCategoryView {
 
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
-    private RecycleAdapteProductList mAdapter2;
+    private ProductByCategoryAdapter mAdapter2;
     ProductByCategoryPresenter productByCategoryPresenter;
     private String catId;
 
@@ -98,7 +95,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                 if (productByCategoryResponse.getmData().getmProduct() != null) {
                     productGridModellClasses.clear();
                     productGridModellClasses.addAll(productByCategoryResponse.getmData().getmProduct());
-                    mAdapter2 = new RecycleAdapteProductList(getActivity(),productGridModellClasses, PopularListFragment.this);
+                    mAdapter2 = new ProductByCategoryAdapter(getActivity(),productGridModellClasses, PopularListFragment.this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerview.setLayoutManager(mLayoutManager);
                     recyclerview.setItemAnimator(new DefaultItemAnimator());

@@ -36,6 +36,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private ImageView imgBack;
     private LinearLayout linear;
     private static final int ADD_ADDRESS_ACTION = 101;
+    int selectedValue = 0;
 
 
     @Override
@@ -44,6 +45,12 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         setContentView(R.layout.activity_address_list);
 
          addressPresenter = new AddressPresenter(this);
+
+         Intent intent = getIntent();
+        if (intent != null) {
+            selectedValue =  intent.getIntExtra("selectedValue",0);
+
+        }
 
         title = (TextView) findViewById(R.id.title);
         rvMyAddress = (RecyclerView) findViewById(R.id.rvMyOrder);
@@ -105,7 +112,25 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         if (addressListResponse != null) {
             if (!addressListResponse.getmAddressData().isEmpty()) {
                 addressDataArrayList.clear();
-                addressDataArrayList.addAll(addressListResponse.getmAddressData());
+
+//                addressDataArrayList.addAll(addressListResponse.getmAddressData());
+
+                ArrayList<AddressListResponse.AddressData> dataArrayList = new ArrayList<>();
+
+                for(int i=0; i<addressListResponse.getmAddressData().size(); i++){
+
+                    if (i==selectedValue) {
+                        addressListResponse.getmAddressData().get(i).setmSelecetdAddress(true);
+
+                    }else{
+                        addressListResponse.getmAddressData().get(i).setmSelecetdAddress(false);
+
+                    }
+
+                    dataArrayList.add(addressListResponse.getmAddressData().get(i));
+                }
+
+                addressDataArrayList.addAll(dataArrayList);
 
                 addressAdapter = new AddressListAdapter(this, addressDataArrayList, AddressListActivity.this);
                 rvMyAddress.setAdapter(addressAdapter);
@@ -171,14 +196,18 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                     break;
                 case R.id.lyAddress:
                      addressData = ((AddressListResponse.AddressData) view.getTag());
-                    ImageView imgSelectAddress = (ImageView) view.getTag(R.id.lyAddress);
+                     selectedValue = ((int) view.getTag(R.id.lyAddress));
 
                     if (addressData != null) {
 
-//                        imgSelectAddress.setVisibility(View.VISIBLE);
+                        addressData.setmSelecetdAddress(true);
+                        if (addressAdapter != null) {
+                            addressAdapter.notifyDataSetChanged();
+                        }
 
                         Intent data = new Intent();
                         data.putExtra("addressData",addressData);
+                        data.putExtra("selectedValue",selectedValue);
                         setResult(Activity.RESULT_OK, data);
                         finish();
 

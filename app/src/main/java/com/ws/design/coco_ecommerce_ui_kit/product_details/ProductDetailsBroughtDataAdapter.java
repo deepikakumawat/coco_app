@@ -33,7 +33,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_bought_products, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items_bought_prod, parent, false));
     }
 
     @Override

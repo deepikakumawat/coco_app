@@ -24,6 +24,7 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import org.json.JSONObject;
@@ -89,6 +90,8 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     private String totalPrice;
     private TextView txtTotalPrice;
     private String totalRazorPrice;
+    private String orderStatus="";
+    private int selectedValue;
 
 
     @Override
@@ -244,10 +247,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                 case R.id.txtConfirmPlaceOrder:
 
                     if (addressData != null) {
-                       /* intent = new Intent(CheckoutActivity.this, RazorPaymentActivity.class);
-                        intent.putExtra("addressData", addressData);
-                        intent.putExtra("totalPrice", totalPrice);
-                        startActivity(intent);*/
 
                        startPayment();
 
@@ -259,6 +258,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                     break;
                 case R.id.txtChange:
                     intent = new Intent(CheckoutActivity.this, AddressListActivity.class);
+                    intent.putExtra("selectedValue",selectedValue);
                     startActivityForResult(intent, ADDRESSLIST_ACTION);
                     break;
                 case R.id.txtAddAddress:
@@ -302,6 +302,16 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             txtAddress1.setVisibility(View.VISIBLE);
             txtAddress1.setText("You haven't added address.");
         }
+
+        if (TextUtils.isEmpty(orderStatus)) {
+            Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
+            intent.putExtra("totalPrice",totalPrice);
+            intent.putExtra("orderStatus", Constant.ORDER_FAIL);
+            intent.putExtra("addressData",addressData);
+
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -341,6 +351,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                 if (resultCode == Activity.RESULT_OK) {
                     if (data != null) {
                         addressData = (AddressListResponse.AddressData) data.getSerializableExtra("addressData");
+                        selectedValue =  data.getIntExtra("selectedValue",0);
 
                         if (addressData != null) {
                             setAddress(addressData);
@@ -445,15 +456,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     public void onPaymentSuccess(String razorpayPaymentID) {
         try {
 
-/*
-
-            Intent intent = new Intent(RazorPaymentActivity.this, DrawerBaseActivity.class);
-            intent.putExtra("test", getFirstName);
-            startActivity(intent);
-*/
-
-            Toast.makeText(getApplicationContext(), "Successfully payment", Toast.LENGTH_LONG).show();
-
 
 
             if (Util.isDeviceOnline(this)) {
@@ -491,9 +493,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             }
 
 
-
-
-//            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -510,7 +509,16 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         try {
 
 
-            showCenteredToast(this,"Payment failed: " + code + " " + response);
+//            showCenteredToast(this,"Payment failed: " + code + " " + response);
+
+
+            Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
+            intent.putExtra("totalPrice",totalPrice);
+            intent.putExtra("orderStatus", Constant.ORDER_FAIL);
+            intent.putExtra("addressData",addressData);
+
+            startActivity(intent);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -522,11 +530,21 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     @Override
     public void getCheckoutPayment(CheckoutPaymentResponse checkoutPaymentResponse) {
         if (!TextUtils.isEmpty(checkoutPaymentResponse.getmStatus()) && ("1".equalsIgnoreCase(checkoutPaymentResponse.getmStatus()))) {
-            showCenteredToast(this,checkoutPaymentResponse.getMessage());
+//            showCenteredToast(this,checkoutPaymentResponse.getMessage());
 
-            Intent intent = new Intent(CheckoutActivity.this, DrawerActivity.class);
+           /* Intent intent = new Intent(CheckoutActivity.this, DrawerActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);*/
+
+            orderStatus = Constant.ORDER_SUCCESS;
+
+            Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
+            intent.putExtra("totalPrice",totalPrice);
+            intent.putExtra("orderStatus", Constant.ORDER_SUCCESS);
+            intent.putExtra("addressData",addressData);
+
             startActivity(intent);
+
         }else {
             showCenteredToast(this,checkoutPaymentResponse.getMessage());
         }

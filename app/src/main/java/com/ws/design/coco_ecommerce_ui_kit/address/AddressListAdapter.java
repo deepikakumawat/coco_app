@@ -50,13 +50,18 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             holder.txtZipcode.setText(TextUtils.isEmpty(addressData.getmZipcode()) ? "-" : addressData.getmZipcode());
             holder.txtPhone.setText(TextUtils.isEmpty(addressData.getmPhone()) ? "-" : addressData.getmPhone());
 
+            if (addressData.ismSelecetdAddress()) {
+                holder.imgSelectAddress.setVisibility(View.VISIBLE);
+            }else{
+                holder.imgSelectAddress.setVisibility(View.GONE);
+            }
 
             holder.btnDelete.setTag(addressData);
             holder.btnDelete.setTag(R.id.btnDelete, position);
             holder.btnDelete.setOnClickListener(addressListActivity);
 
             holder.lyAddress.setTag(addressData);
-            holder.lyAddress.setTag(R.id.lyAddress, holder.imgSelectAddress);
+            holder.lyAddress.setTag(R.id.lyAddress, position);
             holder.lyAddress.setOnClickListener(addressListActivity);
         }
 

@@ -34,11 +34,11 @@ public class ProductDetailsPresenter {
 
 
 
-    public void getProductDetails(String slug) {
+    public void getProductDetails(String slug, String userId) {
         view.showWait();
         try {
 
-            Call call = service.getProductDetails(slug);
+            Call call = service.getProductDetails(slug,userId);
             call.enqueue(new Callback<ProductDetailsResponse>() {
                 @Override
                 public void onResponse(Call<ProductDetailsResponse> call, Response<ProductDetailsResponse> response) {
@@ -128,11 +128,11 @@ public class ProductDetailsPresenter {
     }
 
 
-    public void addToCart(String userid, String productId, String quantity) {
+    public void addToCart(String userid, String productId, String quantity, String attributes) {
         view.showWait();
         try {
 
-            Call call = service.addToCart(userid, productId, quantity);
+            Call call = service.addToCart(userid, productId, quantity, attributes);
             call.enqueue(new Callback<AddToCartResponse>() {
                 @Override
                 public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {

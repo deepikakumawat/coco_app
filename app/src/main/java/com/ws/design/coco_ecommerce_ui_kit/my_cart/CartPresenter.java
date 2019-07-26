@@ -212,7 +212,7 @@ public class CartPresenter {
         view.showWait();
         try {
 
-            Call call = service.addToCart(userid, productId, quantity);
+            Call call = service.addToCart(userid, productId, quantity,"");
             call.enqueue(new Callback<AddToCartResponse>() {
                 @Override
                 public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {

@@ -3,6 +3,7 @@
     android:layout_width="32dp"
     android:layout_height="32dp"
     android:orientation="vertical"
+    android:gravity="center"
     android:id="@+id/lyColor">
 
     <ImageView

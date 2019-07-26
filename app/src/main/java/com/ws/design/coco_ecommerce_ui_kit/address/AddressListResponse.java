@@ -36,6 +36,9 @@ public class AddressListResponse implements Serializable {
 
     public class AddressData implements Serializable{
 
+        private boolean mSelecetdAddress;
+
+
         @SerializedName("id")
         @Expose
         private String mId;
@@ -179,6 +182,14 @@ public class AddressListResponse implements Serializable {
 
         public void setmPhone(String mPhone) {
             this.mPhone = mPhone;
+        }
+
+        public boolean ismSelecetdAddress() {
+            return mSelecetdAddress;
+        }
+
+        public void setmSelecetdAddress(boolean mSelecetdAddress) {
+            this.mSelecetdAddress = mSelecetdAddress;
         }
     }
 }

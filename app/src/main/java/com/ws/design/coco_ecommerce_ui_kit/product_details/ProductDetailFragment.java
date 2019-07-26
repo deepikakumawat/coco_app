@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
+import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,11 +20,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
@@ -37,6 +36,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_respo
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
+import com.ws.design.coco_ecommerce_ui_kit.seller.SellerProductFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -46,7 +46,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import Adapter.ViewpagerProductDetailsAdapter;
-import Model.TopTenModelClass;
 import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
@@ -66,9 +65,9 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private RecyclerView rvTopRatedProducts;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList = new ArrayList<>();
     private ArrayList<ProductBroughtData> productBroughtDataArrayList = new ArrayList<>();
+    private ArrayList<ProductDetailsSimilier> productRecentViewsDataArrayList = new ArrayList<>();
     private ProductDetailsTopRatedProductsAdapter productDetailsTopRatedProductsAdapter;
     private ProductDetailsBroughtDataAdapter productDetailsBroughtDataAdapter;
-
 
 
     private ProductDetailsPresenter productDetailsPresenter;
@@ -115,14 +114,19 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
     private String productShortDesc;
     private TextView txtSellerName;
     private RecyclerView rvColor;
-private ProductDetailsColorAdapter productDetailsColorAdapter;
+    private ProductDetailsColorAdapter productDetailsColorAdapter;
+    private ProductDetailsRecentViewsProductsAdapter productDetailsRecentViewsProductsAdapter;
+    private RecyclerView rvRecentViewsProducts;
+    private LinearLayout lyRecentViewsProduct;
+    private String sellerId;
+    private ColorData selectedColorData;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       View mView = inflater.inflate(R.layout.activity_product_detail, container, false);
+        View mView = inflater.inflate(R.layout.activity_product_detail, container, false);
 
 
         Bundle bundle = getArguments();
@@ -150,9 +154,7 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
         productDetailsPresenter = new ProductDetailsPresenter(this);
 
 
-       init(view);
-
-
+        init(view);
 
 
     }
@@ -167,6 +169,7 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
         txtProductShortDesValue = view.findViewById(R.id.txtProductShortDesValue);
         lySimilarProduct = view.findViewById(R.id.lySimilarProduct);
         lyBroughtProduct = view.findViewById(R.id.lyBroughtProduct);
+        lyRecentViewsProduct = view.findViewById(R.id.lyRecentViewsProduct);
         lyTopReview = view.findViewById(R.id.lyTopReview);
         lyImageView = view.findViewById(R.id.lyImageView);
         txtBuyNow = view.findViewById(R.id.txtBuyNow);
@@ -179,6 +182,7 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
         txtProductSalePrice = view.findViewById(R.id.txtProductSalePrice);
         rvTopRatedProducts = view.findViewById(R.id.rvTopRatedProducts);
         rvBroughtProducts = view.findViewById(R.id.rvBroughtProducts);
+        rvRecentViewsProducts = view.findViewById(R.id.rvRecentViewsProducts);
         txtRating = view.findViewById(R.id.txtRating);
         txtReview = view.findViewById(R.id.txtReview);
         txtUserComment = view.findViewById(R.id.txtUserComment);
@@ -197,6 +201,7 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
         txtProductDesc.setOnClickListener(this);
         txtSpecification.setOnClickListener(this);
         txtProductShortDesc.setOnClickListener(this);
+        txtSellerName.setOnClickListener(this);
 
 
         rightNav = view.findViewById(R.id.rightNav);
@@ -218,10 +223,13 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
 
 
-        RecyclerView.LayoutManager mLayoutManagerBroughtData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager mLayoutManagerBroughtData = new LinearLayoutManager(getActivity());
         rvBroughtProducts.setLayoutManager(mLayoutManagerBroughtData);
-        rvBroughtProducts.setLayoutManager(mLayoutManagerBroughtData);
-        rvBroughtProducts.setItemAnimator(new DefaultItemAnimator());
+
+        RecyclerView.LayoutManager mLayoutManagerRecentData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvRecentViewsProducts.setLayoutManager(mLayoutManagerRecentData);
+        rvRecentViewsProducts.setLayoutManager(mLayoutManagerRecentData);
+        rvRecentViewsProducts.setItemAnimator(new DefaultItemAnimator());
 
 
         RecyclerView.LayoutManager mLayoutManagerColorData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -243,19 +251,21 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
             txtAddToWishlist.setVisibility(View.VISIBLE);
         }
 
+        if (Util.isDeviceOnline(getActivity())) {
+//            productDetailsPresenter.getProductDetails(productSlug, CocoPreferences.getUserId());
+            productDetailsPresenter.getProductDetails("bajaj-fx-11-food-factory-food-processor-1638", CocoPreferences.getUserId());
+
+        } else {
+            showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+        }
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (Util.isDeviceOnline(getActivity())) {
-            productDetailsPresenter.getProductDetails(productSlug);
 
-        } else {
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
-
-        }
     }
 
     @Override
@@ -274,15 +284,25 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
                 break;
             case R.id.txtBuyNow:
 
-                if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                    if (Util.isDeviceOnline(getActivity())) {
-                        isClickOnBuyNow = true;
-                        productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1");
 
-                    } else {
-                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+                if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+
+                    if (selectedColorData!=null) {
+                        if (Util.isDeviceOnline(getActivity())) {
+                            isClickOnBuyNow = true;
+                            productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
+
+                        } else {
+                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                        }
+                    }else {
+                        showCenteredToast(getActivity(), getString(R.string.select_color));
 
                     }
+
+
+
                 } else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
@@ -290,14 +310,21 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
 
                 break;
             case R.id.txtAddToCart:
-                if (Util.isDeviceOnline(getActivity())) {
-//                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, productQty);
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1");
 
-                } else {
-                    showCenteredToast(getActivity(), getString(R.string.network_connection));
+                if (selectedColorData!=null) {
+                    if (Util.isDeviceOnline(getActivity())) {
+                        productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
+
+                    } else {
+                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                    }
+
+                }else{
+                    showCenteredToast(getActivity(), getString(R.string.select_color));
 
                 }
+
 
                 break;
             case R.id.txtRemoveWishlist:
@@ -324,12 +351,15 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
                 break;
 
             case R.id.imgAddToCart:
+
+
+
                 ProductBroughtData productBroughtData = ((ProductBroughtData) v.getTag());
 
                 if (productBroughtData != null) {
 
                     if (Util.isDeviceOnline(getActivity())) {
-                        productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1");
+                        productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1", "");
 
                     } else {
                         showCenteredToast(getActivity(), getString(R.string.network_connection));
@@ -359,10 +389,10 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
                 ProductDetailsSimilier productDetailsSimilier = (ProductDetailsSimilier) v.getTag();
                 if (productDetailsSimilier != null) {
                     unSelectAllTabs();
-                    onClick(txtProductDesc);
+                    onClick(txtProductShortDesc);
                     productId = productDetailsSimilier.getmProductId();
 
-                    productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductSlug());
+                    productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductSlug(), CocoPreferences.getUserId());
                 }
 
                 break;
@@ -371,10 +401,27 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
                 productBroughtData = (ProductBroughtData) v.getTag();
                 if (productBroughtData != null) {
                     unSelectAllTabs();
-                    onClick(txtProductDesc);
+                    onClick(txtProductShortDesc);
                     productId = productBroughtData.getmProductId();
 
-                    productDetailsPresenter.getProductDetails(productBroughtData.getmProductSlug());
+                    productDetailsPresenter.getProductDetails(productBroughtData.getmProductSlug(), CocoPreferences.getUserId());
+                }
+
+                break;
+            case R.id.txtSellerName:
+                SellerProductFragment sellerProductFragment = new SellerProductFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("sellerId", sellerId);
+                sellerProductFragment.setArguments(bundle);
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), sellerProductFragment, "SellerProductFragment", true, false);
+
+                break;
+            case R.id.lyColor:
+
+                selectedColorData = ((ColorData) v.getTag());
+                if (productDetailsColorAdapter != null) {
+                    selectedColorData.setSelected(true);
+                    productDetailsColorAdapter.notifyDataSetChanged();
                 }
 
                 break;
@@ -458,6 +505,7 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
                     topRating(productDetailsResponse.getmData().getmTopReview());
 
                     txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
+                    sellerId = productDetailsResponse.getmData().getmProduct().getmSellerId();
                     txtSellerName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSellerName()) ? "Sold by: " + productDetailsResponse.getmData().getmProduct().getmSellerName() : "-");
                     txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
 
@@ -526,6 +574,19 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
                     }
 
 
+                    if (!productDetailsResponse.getmData().getmUserRecentViews().isEmpty()) {
+
+                        lyRecentViewsProduct.setVisibility(View.VISIBLE);
+
+                        productRecentViewsDataArrayList.clear();
+                        productRecentViewsDataArrayList.addAll(productDetailsResponse.getmData().getmUserRecentViews());
+                        productDetailsRecentViewsProductsAdapter = new ProductDetailsRecentViewsProductsAdapter(getActivity(), productRecentViewsDataArrayList, ProductDetailFragment.this);
+                        rvRecentViewsProducts.setAdapter(productDetailsRecentViewsProductsAdapter);
+                    } else {
+                        lyRecentViewsProduct.setVisibility(View.GONE);
+                    }
+
+
                 }
 
             }
@@ -574,18 +635,47 @@ private ProductDetailsColorAdapter productDetailsColorAdapter;
 
 
     private void setColorCode(ArrayList<ProductAttributeData> productAttributeDataArrayList) {
-        String colorCode = "";
+        String attributeRelatedData = "";
+        String attributeId = "";
+        String attributeType = "";
         try {
-           for (ProductAttributeData productAttributeData : productAttributeDataArrayList){
-               if(productAttributeData.getmAttributeType().equalsIgnoreCase("COLOR")){
-                   colorCode = productAttributeData.getmAttributeRelatedData();
-               }
-           }
+            for (ProductAttributeData productAttributeData : productAttributeDataArrayList) {
+                if (productAttributeData.getmAttrType().equalsIgnoreCase("COLOR")) {
+                    attributeRelatedData = productAttributeData.getmAttributeRelatedData();
+                    attributeId = productAttributeData.getmAttributeId();
+                    attributeType = productAttributeData.getmAttributeName();
+                }
+            }
 
-            if (!TextUtils.isEmpty(colorCode)) {
-                List<String> items = Arrays.asList(colorCode.split("\\s*,\\s*"));
+            if (!TextUtils.isEmpty(attributeRelatedData)) {
+                List<String> attributeRelatedDataList = Arrays.asList(attributeRelatedData.split("\\s*,\\s*"));
+                List<String> attrIdList = Arrays.asList(attributeId.split("\\s*,\\s*"));
+                List<String> attrTypeList = Arrays.asList(attributeType.split("\\s*,\\s*"));
 
-                productDetailsColorAdapter = new ProductDetailsColorAdapter(getActivity(), items, ProductDetailFragment.this);
+
+                List<ColorData> colorCodeList = new ArrayList<>();
+
+
+              for(int i=0; i< attributeRelatedDataList.size();i++){
+
+                  ColorData colorData = new ColorData();
+
+                  if(!TextUtils.isEmpty(attributeRelatedDataList.get(i))&& !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")){
+
+                      colorData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
+                      colorData.setmAttributeId(attrIdList.get(i));
+                      colorData.setmAttrbuteType(attrTypeList.get(i));
+                      colorData.setSelected(false);
+                  }
+
+                  colorCodeList.add(colorData);
+              }
+
+
+
+
+
+                productDetailsColorAdapter = new ProductDetailsColorAdapter(getActivity(), colorCodeList, ProductDetailFragment.this);
                 rvColor.setAdapter(productDetailsColorAdapter);
 
             }

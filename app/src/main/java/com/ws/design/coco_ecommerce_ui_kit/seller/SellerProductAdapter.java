@@ -1,0 +1,95 @@
+package com.ws.design.coco_ecommerce_ui_kit.seller;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
+
+import java.util.ArrayList;
+
+
+public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdapter.ViewHolder> implements View.OnClickListener {
+    private Context context;
+    private ArrayList<ProductDetailsSimilier> productDataArrayList;
+    private SellerProductFragment sellerProductFragment;
+
+
+    public SellerProductAdapter(Context context, ArrayList<ProductDetailsSimilier> productDataArrayList, SellerProductFragment sellerProductFragment) {
+        this.context = context;
+        this.productDataArrayList = productDataArrayList;
+        this.sellerProductFragment = sellerProductFragment;
+
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_seller_product, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+        ProductDetailsSimilier productData = productDataArrayList.get(position);
+        if (productData != null) {
+            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
+            holder.txtProductSalePrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
+
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
+            Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
+
+            holder.imgAddToCart.setTag(productData);
+            holder.imgAddToCart.setTag(R.id.imgAddToCart,position);
+            holder.imgAddToCart.setOnClickListener(sellerProductFragment);
+
+
+
+
+        }
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return productDataArrayList.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    protected class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView txtProductName;
+
+        private TextView txtProductSalePrice;
+        private ImageView imgProduct;
+        private ImageView imgAddToCart;
+
+
+        public ViewHolder(View view) {
+            super(view);
+
+            imgAddToCart = view.findViewById(R.id.imgAddToCart);
+            imgProduct = view.findViewById(R.id.imgProduct);
+            txtProductName = view.findViewById(R.id.txtProductName);
+
+            txtProductSalePrice = view.findViewById(R.id.txtProductSalePrice);
+
+
+
+
+        }
+    }
+}
