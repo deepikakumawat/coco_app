@@ -32,6 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/great_diwali_gift"
+                    android:visibility="invisible"
                     android:textColor="@color/primarytext"
                     android:textSize="12.7sp" />
 
@@ -51,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4.8dp"
                 android:gravity="center_vertical"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 android:max="5"
                 android:id="@+id/rating"
                 android:numStars="5"

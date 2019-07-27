@@ -140,7 +140,10 @@
     <string name="no">NO</string>
     <string name="please_login">Please Login!</string>
     <string name="somethingWentWrong"></string>
+    <string name="address_type">Address type can\'t be blank!</string>
     <string name="primary_address">Primary Address can\'t be blank!</string>
+    <string name="landmark">Landmark can\'t be blank!</string>
+    <string name="zipcode_blank">Zipcode can\'t be blank!</string>
     <string name="area">Area can\'t be blank!</string>
     <string name="city">City can\'t be blank!</string>
     <string name="state">State can\'t be blank!</string>
@@ -155,6 +158,12 @@
     <string name="retry">Retry?</string>
     <string name="go_to_home">Go To Home</string>
     <string name="shop_more">Shop More!</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="home">Home</string>
+    <string name="categories">Categories</string>
+    <string name="my_wishlist">My Wishlist</string>
+    <string name="trandings">Trandings</string>
 
 
 </resources>

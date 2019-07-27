@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit.terms_condition;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListPresenter;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
@@ -44,6 +47,7 @@ public class TermsConditionFragment extends ToolbarBaseFragment  {
     private final String url = "https://www.richkart.com/terms-conditions";
 
     private WebView webView;
+    private IFragmentListener mListener;
 
 
     @Nullable
@@ -106,6 +110,24 @@ public class TermsConditionFragment extends ToolbarBaseFragment  {
         }
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (DrawerActivity) context;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (this.mListener != null ) {
+            this.mListener.setScreenTitle(getString(R.string.terms_conditions));
+
+        }
+
+    }
 
 
 }

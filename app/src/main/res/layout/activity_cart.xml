@@ -14,10 +14,10 @@
         <include layout="@layout/toolbar_cart" />
 
         <LinearLayout
+            android:id="@+id/lyCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8.3dp"
-            android:id="@+id/lyCart"
             android:layout_marginTop="13.3dp"
             android:layout_marginRight="8.9dp"
             android:background="@drawable/rect_recycler"
@@ -43,37 +43,40 @@
 
 
     <customfonts.MyTextView_Roboto_Regular
+        android:id="@+id/txtNoDataFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="11dp"
         android:layout_marginTop="25dp"
-        android:id="@+id/txtNoDataFound"
-        android:visibility="gone"
         android:text="@string/your_cart_empty"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="gone" />
 
 
     <LinearLayout
+        android:id="@+id/lyBottomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:id="@+id/lyBottomView"
         android:orientation="vertical"
-        android:visibility="gone"
         android:paddingBottom="10dp">
 
         <customfonts.MyTextView_Roboto_Medium
             android:id="@+id/txtEmptyCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="158dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_rect"
+            android:gravity="center"
+            android:letterSpacing="0.03"
             android:text="Empty Cart"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textColor="@color/white"
+            android:textSize="13.3sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -171,11 +174,11 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/shopping_rect"
         android:gravity="center"
-        android:visibility="gone"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="@string/continue_shopping"
         android:textAllCaps="false"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:visibility="gone" />
 
 </RelativeLayout>

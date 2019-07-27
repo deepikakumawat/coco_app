@@ -70,15 +70,7 @@
                             android:stepSize="1"
                             android:theme="@style/RatingBar" />
 
-                        <customfonts.MyTextView_Roboto_Bold
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:text="12"
-                            android:textColor="@color/cut_price"
-                            android:textSize="11.3sp" />
+
 
                         <customfonts.MyTextView_Roboto_Black
                             android:id="@+id/txtProductSalePrice"

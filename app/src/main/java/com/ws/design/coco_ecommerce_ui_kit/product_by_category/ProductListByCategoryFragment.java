@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.FilterActivity;
+import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 
 import Adapter.CategoryPagerAdapterProductList;
 import Adapter.WrapContentHeightViewPager;
@@ -28,6 +31,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
     WrapContentHeightViewPager wrapContentHeightViewPager;
     private View mView;
     private String catId;
+    private IFragmentListener mListener;
 
     @Nullable
     @Override
@@ -71,10 +75,8 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
         }
 
 
-
         setCustomFontAndStyle(tabLayout, 0);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
 
         mView.findViewById(R.id.btn_filter).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +87,8 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
 
 
         wrapContentHeightViewPager =  mView.findViewById(R.id.pager);
-        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4, catId);
+//        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4, catId);
+        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(1);
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -128,4 +131,23 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
             }
         }
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (DrawerActivity) context;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (this.mListener != null ) {
+            this.mListener.setScreenTitle(getString(R.string.trandings));
+
+        }
+
+    }
+
 }

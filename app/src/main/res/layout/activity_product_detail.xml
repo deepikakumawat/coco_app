@@ -70,25 +70,24 @@
 
                         </FrameLayout>
 
-            <HorizontalScrollView
-                android:id="@+id/hsv"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:fillViewport="true"
-                android:measureAllChildren="false"
-                android:scrollbars="none" >
-
-                        <LinearLayout
-                            android:id="@+id/lyImageView"
-                            android:layout_width="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
+                        <HorizontalScrollView
+                            android:id="@+id/hsv"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal" />
+                            android:layout_alignParentTop="true"
+                            android:fillViewport="true"
+                            android:measureAllChildren="false"
+                            android:scrollbars="none">
 
-            </HorizontalScrollView>
+                            <LinearLayout
+                                android:id="@+id/lyImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:orientation="horizontal" />
 
+                        </HorizontalScrollView>
 
 
                         <View
@@ -116,10 +115,10 @@
                                 android:id="@+id/txtSellerName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/blue"
                                 android:layout_marginTop="5dp"
-                                android:textStyle="bold"
-                                android:textSize="16.7sp" />
+                                android:textColor="@color/blue"
+                                android:textSize="16.7sp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -133,7 +132,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:gravity="center"
-                                    android:text="@string/Rs"
                                     android:textColor="@color/black"
                                     android:textSize="16.7sp" />
 
@@ -156,11 +154,10 @@
                             </LinearLayout>
 
                             <customfonts.MyTextView_Roboto_Bold
+                                android:id="@+id/txtDiscout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="( 9% off )"
-                                android:id="@+id/txtDiscout"
                                 android:textColor="@color/green"
                                 android:textSize="12sp" />
 
@@ -199,8 +196,7 @@
                                     android:text="Remove From Wishlist"
                                     android:textAllCaps="false"
                                     android:textColor="@color/white"
-                                    android:textSize="13.7sp"
-                                  />
+                                    android:textSize="13.7sp" />
 
                                 <customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtBuyNow"
@@ -290,7 +286,6 @@
                                     android:layout_gravity="center"
                                     android:layout_marginLeft="15dp"
                                     android:gravity="center"
-                                    android:text="@string/review"
                                     android:textColor="@color/cut_price"
                                     android:textSize="12.3sp" />
 
@@ -312,51 +307,45 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
+                    android:id="@+id/lyColor"
+
                     android:paddingTop="17dp">
 
-                    <customfonts.MyTextView_Roboto_Bold
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:text="Storage"
-                        android:visibility="gone"
-                        android:textColor="@color/storage"
-                        android:textSize="12.3sp" />
 
 
 
-                    <customfonts.MyTextView_Roboto_Bold
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Color"
-                        android:textColor="@color/storage"
-                        android:textSize="12.3sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
-
-
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rvColor"
-                            android:layout_width="match_parent"
+                        <customfonts.MyTextView_Roboto_Bold
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="15dp"
-                            android:paddingBottom="20dp" />
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Color"
+                            android:textColor="@color/storage"
+                            android:textSize="12.3sp" />
 
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
 
-                    </LinearLayout>
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rvColor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clipToPadding="false"
+                                android:nestedScrollingEnabled="false"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="20dp" />
+
+
+                        </LinearLayout>
+
+
 
                     <View
                         android:layout_width="match_parent"
@@ -365,86 +354,7 @@
                         android:background="@color/viewline" />
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
 
-                        android:visibility="gone"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="30dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_calendar_with_clock" />
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="EMIs from "
-                            android:textColor="@color/storage"
-                            android:textSize="13sp" />
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Rs"
-                            android:textColor="@color/storage"
-                            android:textSize="13sp" />
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2,085/month"
-                            android:textColor="@color/storage"
-                            android:textSize="13sp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="6dp"
-                        android:visibility="gone"
-                        android:layout_marginBottom="22dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_recycle" />
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Get Upto "
-                            android:textColor="@color/storage"
-                            android:textSize="13sp" />
-
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Rs"
-                            android:textColor="@color/storage"
-                            android:textSize="13sp" />
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="15,600 off on exchange"
-                            android:textColor="@color/storage"
-                            android:textSize="13sp"
-                            />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -454,57 +364,61 @@
                     android:background="#d7d4d4" />
 
                 <include layout="@layout/include_product_details_specification" />
+
                 <include layout="@layout/include_bought_products" />
+
                 <include layout="@layout/delivery_and_review_layout" />
 
 
                 <LinearLayout
+                    android:id="@+id/lySimilarProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lySimilarProduct">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <customfonts.MyTextView_Roboto_Medium
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Similar Products"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:layout_marginLeft="35dp"
+                        android:orientation="horizontal">
 
-                    <customfonts.MyTextView_Roboto_Medium
-                        android:layout_width="wrap_content"
+                        <customfonts.MyTextView_Roboto_Medium
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Similar Products"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <customfonts.MyTextView_Roboto_Medium
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="View More"
+                            android:textColor="@color/red"
+                            android:textSize="13sp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <!--Top Rated Recyclerview-->
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvTopRatedProducts"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:visibility="gone"
-                        android:text="View More"
-                        android:textColor="@color/red"
-                        android:textSize="13sp" />
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="20dp" />
+
                 </LinearLayout>
 
-                <!--Top Rated Recyclerview-->
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvTopRatedProducts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="20dp" />
-
-            </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/lyRecentViewsProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lyRecentViewsProduct">
+                    android:orientation="vertical">
 
 
                     <LinearLayout
@@ -526,9 +440,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:text="View More"
-                            android:visibility="gone"
                             android:textColor="@color/red"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
 
@@ -545,7 +459,6 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
         </ScrollView>
@@ -559,9 +472,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="15dp"
-        android:visibility="gone"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/filter_plus" />
+        android:src="@drawable/filter_plus"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

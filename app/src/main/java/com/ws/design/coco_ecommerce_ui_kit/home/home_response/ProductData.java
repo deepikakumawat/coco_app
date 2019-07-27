@@ -9,6 +9,10 @@ public class ProductData implements Serializable {
 
 
 
+    @SerializedName("avg_rating")
+    @Expose
+    private String mAvgRating;
+
     @SerializedName("productid")
     @Expose
     private String mProductId;
@@ -416,5 +420,14 @@ public class ProductData implements Serializable {
 
     public void setmProImgUrl(String mProImgUrl) {
         this.mProImgUrl = mProImgUrl;
+    }
+
+
+    public String getmAvgRating() {
+        return mAvgRating;
+    }
+
+    public void setmAvgRating(String mAvgRating) {
+        this.mAvgRating = mAvgRating;
     }
 }

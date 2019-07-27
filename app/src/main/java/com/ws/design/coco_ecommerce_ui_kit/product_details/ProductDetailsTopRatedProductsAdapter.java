@@ -45,7 +45,7 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
             holder.txtProductName.setText(productData.getmProductName());
 
             holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
-            holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "5");
+            holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
 
 
 

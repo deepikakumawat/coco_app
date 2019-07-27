@@ -155,12 +155,15 @@ public interface APIService {
                                                       @Field("city") String city,
                                                       @Field("state") String state,
                                                       @Field("country") String country,
+                                                      @Field("zipcode") String zipcode,
+                                                      @Field("addresstype") String addressType,
+                                                      @Field("landmark") String landmark,
                                                       @Field("phone") String phone);
 
 
     @POST("product-detail")
     @FormUrlEncoded
-    Call<ProductDetailsResponse> getProductDetails(@Field("slug") String slug,  @Field("user_id") String userId);
+    Call<ProductDetailsResponse> getProductDetails(@Field("productid") String slug,  @Field("user_id") String userId);
 
     @POST("product-ratings")
     @FormUrlEncoded

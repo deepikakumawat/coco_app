@@ -32,7 +32,7 @@ public class ProductRatingPresenter {
 
 
 
-    public void getProductDetails(String productId) {
+    public void getProductRating(String productId) {
         view.showWait();
         try {
 

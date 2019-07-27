@@ -4,13 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import fragment.PopularFragment;
+
 import fragment.PopularListFragment;
 
 
-/**
- * Created by wolfsoft5 on 7/4/18.
- */
+
 
 public class CategoryPagerAdapterProductList extends FragmentPagerAdapter {
 

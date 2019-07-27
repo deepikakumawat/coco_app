@@ -1,5 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_rating_list;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +43,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     private TextView txtReview;
     private TextView txtRating;
     private LinearLayout lyCustomerRating;
+    private boolean isReviewAdded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         productRatingPresenter = new ProductRatingPresenter(this);
 
         if (Util.isDeviceOnline(this)) {
-            productRatingPresenter.getProductDetails(productId);
+            productRatingPresenter.getProductRating(productId);
 
         } else {
             showCenteredToast(this, getString(R.string.network_connection));
@@ -101,7 +104,20 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
                     break;
                 case R.id.imgBack:
-                    finish();
+
+                  /*  if (isReviewAdded) {
+                        Intent data = new Intent();
+                        data.putExtra("isReviewAdded",isReviewAdded);
+                        setResult(Activity.RESULT_OK, data);
+                        finish();
+                    }else{
+                        finish();
+
+                    }
+*/
+                    backScreen();
+
+
                     break;
                 default:
                     break;
@@ -110,6 +126,14 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void backScreen() {
+        Intent data = new Intent();
+        data.putExtra("isReviewAdded", isReviewAdded);
+        setResult(Activity.RESULT_OK, data);
+        finish();
     }
 
     @Override
@@ -148,7 +172,6 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
 
                     if (!productRatingResponse.getmData().getmOverAll().isEmpty()) {
-
 
 
                         if (!TextUtils.isEmpty(productRatingResponse.getmData().getmOverAll().get(0).getmAvgRating())) {
@@ -193,9 +216,12 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     public void addRating(AddRatingResponse addRatingResponse) {
         if (!TextUtils.isEmpty(addRatingResponse.getmStatus()) && ("1".equalsIgnoreCase(addRatingResponse.getmStatus()))) {
             showCenteredToast(this, "Review added successfully");
+
+            isReviewAdded = true;
+
             etxtReview.getText().clear();
             productRating.setRating(0);
-            productRatingPresenter.getProductDetails(productId);
+            productRatingPresenter.getProductRating(productId);
 
         } else {
             showCenteredToast(this, getString(R.string.somethingWentWrong));

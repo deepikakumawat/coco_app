@@ -35,37 +35,12 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class CheckoutActivity extends AppCompatActivity implements CheckoutView, View.OnClickListener , PaymentResultListener {
-
-    //    private RecyclerView recyclerView;
-
-//    private ArrayList<CocoCartModel2> navigationModelClasses1;
-//    private RecyclerView recyclerView1;
-//    private RecycleAdapterCocoCart1 bAdapter;
+public class CheckoutActivity extends AppCompatActivity implements CheckoutView, View.OnClickListener, PaymentResultListener {
 
     RadioButton button1, button2;
     LinearLayout radio1, radio2;
 
-
-    private RecyclerView recyclerView2;
-    //    private RecycleAdapterCocoCart2 cAdapter;
     private CheckoutListAdapter checkoutListAdapter;
-
-    String rupees[] = {"$329", "$450"};
-    String phoneName[] = {"Iphone X | 128 GB, Black | 6 GB ram |\n" +
-            "12000 mAh battry", "Mi Mix 2 (Black, 128 GB) 6GB Ram \n" +
-            "with 5000 mAh…"};
-    Integer phoneImage[] = {R.drawable.mobile1, R.drawable.mobile2};
-
-
-    String deliverType[] = {"Express Delivery", "Normal Delivery"};
-    String noOfDays[] = {"1 day Delivery", "Upto 5 Business Days"};
-    String amount[] = {"+$9.00", ""};
-
-
-    String paymentType[] = {"Credit / Debit Card", "Cash On Delivery", "PAYTM", "Google Wallet"};
-    Integer logoImage[] = {R.drawable.credit, R.drawable.cash, R.drawable.paytm, R.drawable.googlewallet};
-
     private RecyclerView rvCart;
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private TextView txtConfirmPlaceOrder;
@@ -90,7 +65,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     private String totalPrice;
     private TextView txtTotalPrice;
     private String totalRazorPrice;
-    private String orderStatus="";
+    private String orderStatus = "";
     private int selectedValue;
 
 
@@ -104,7 +79,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         Intent intent = getIntent();
         if (intent != null) {
             productDataArrayList = (ArrayList<CartListResponse.ProductData>) intent.getSerializableExtra("cartList");
-            totalPrice =  intent.getStringExtra("totalPrice");
+            totalPrice = intent.getStringExtra("totalPrice");
 
             try {
                 totalRazorPrice = totalPrice + "00";
@@ -114,9 +89,27 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
         }
 
-        checkoutPresenter.addressList(CocoPreferences.getUserId());
+        if (Util.isDeviceOnline(this)) {
+            checkoutPresenter.addressList(CocoPreferences.getUserId());
+        } else {
+            showCenteredToast(this, getString(R.string.network_connection));
+        }
+
+        init();
 
 
+        if (!productDataArrayList.isEmpty()) {
+
+            checkoutListAdapter = new CheckoutListAdapter(this, productDataArrayList, CheckoutActivity.this);
+            rvCart.setAdapter(checkoutListAdapter);
+        }
+
+        txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+
+
+    }
+
+    private void init() {
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
         rvCart = findViewById(R.id.rvCart);
         imgBack = findViewById(R.id.imgBack);
@@ -143,20 +136,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
         imgBack.setOnClickListener(this);
 
-
-    /*    navigationModelClasses = new ArrayList<>();
-        for (int i = 0; i < rupees.length; i++) {
-            CocoCartModel1 beanClassForRecyclerView_contacts = new CocoCartModel1(phoneName[i], rupees[i], phoneImage[i]);
-
-            navigationModelClasses.add(beanClassForRecyclerView_contacts);
-        }
-        mAdapter = new RecycleAdapterCocoCart0(CheckoutActivity.this, navigationModelClasses);*/
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(CheckoutActivity.this);
-      /*  recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-*/
 
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -185,55 +164,8 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             }
         });
 
-
-//
-//        recyclerView1 = (RecyclerView)findViewById(R.id.recycler2);
-//
-//        navigationModelClasses1 = new ArrayList<>();
-//
-//
-//
-//        for (int i = 0; i < deliverType.length; i++) {
-//            CocoCartModel2 beanClassForRecyclerView_contacts = new CocoCartModel2(deliverType[i],noOfDays[i],amount[i]);
-//
-//            navigationModelClasses1.add(beanClassForRecyclerView_contacts);
-//        }
-//
-//
-//        bAdapter = new RecycleAdapterCocoCart1(CheckoutActivity.this,navigationModelClasses1);
-//
-//        RecyclerView.LayoutManager bLayoutManager = new LinearLayoutManager(CheckoutActivity.this);
-//        recyclerView1.setLayoutManager(bLayoutManager);
-//        recyclerView1.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView1.setAdapter(bAdapter);
-
-
-     /*   recyclerView2 = (RecyclerView) findViewById(R.id.recycler3);
-        navigationModelClasses2 = new ArrayList<>();
-        for (int i = 0; i < paymentType.length; i++) {
-            CocoCartModel3 beanClassForRecyclerView_contacts = new CocoCartModel3(paymentType[i], logoImage[i]);
-
-            navigationModelClasses2.add(beanClassForRecyclerView_contacts);
-        }*/
-      /*  cAdapter = new RecycleAdapterCocoCart2(CheckoutActivity.this,navigationModelClasses2);
-
-        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(CheckoutActivity.this);
-        recyclerView2.setLayoutManager(cLayoutManager);
-        recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        recyclerView2.setAdapter(cAdapter);
-
-*/
-
-        if (!productDataArrayList.isEmpty()) {
-
-            checkoutListAdapter = new CheckoutListAdapter(this, productDataArrayList, CheckoutActivity.this);
-            rvCart.setAdapter(checkoutListAdapter);
-        }
-
-        txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
-
-
     }
+
 
     @Override
     public void onClick(View view) {
@@ -248,22 +180,23 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
                     if (addressData != null) {
 
-                       startPayment();
+                        startPayment();
 
-                    }else{
-                        showCenteredToast(this,"You haven't added address. Please add address first");
+                    } else {
+                        showCenteredToast(this, "You haven't added address. Please add address first");
                     }
 
 
                     break;
                 case R.id.txtChange:
                     intent = new Intent(CheckoutActivity.this, AddressListActivity.class);
-                    intent.putExtra("selectedValue",selectedValue);
+                    intent.putExtra("selectedValue", selectedValue);
+                    intent.putExtra("screen", "Checkout");
                     startActivityForResult(intent, ADDRESSLIST_ACTION);
                     break;
                 case R.id.txtAddAddress:
                     intent = new Intent(CheckoutActivity.this, AddAddressActivity.class);
-                    startActivityForResult(intent,ADD_ADDRESS_ACTION);
+                    startActivityForResult(intent, ADD_ADDRESS_ACTION);
                     break;
                 default:
                     break;
@@ -287,7 +220,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
     @Override
     public void onFailure(String appErrorMessage) {
-       showCenteredToast(this, appErrorMessage);
+        showCenteredToast(this, appErrorMessage);
         if (addressData == null) {
             txtAddAddress.setVisibility(View.VISIBLE);
 
@@ -303,11 +236,11 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             txtAddress1.setText("You haven't added address.");
         }
 
-        if (TextUtils.isEmpty(orderStatus)) {
+        if (addressData!=null && TextUtils.isEmpty(orderStatus)) {
             Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
-            intent.putExtra("totalPrice",totalPrice);
+            intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_FAIL);
-            intent.putExtra("addressData",addressData);
+            intent.putExtra("addressData", addressData);
 
             startActivity(intent);
         }
@@ -351,7 +284,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                 if (resultCode == Activity.RESULT_OK) {
                     if (data != null) {
                         addressData = (AddressListResponse.AddressData) data.getSerializableExtra("addressData");
-                        selectedValue =  data.getIntExtra("selectedValue",0);
+                        selectedValue = data.getIntExtra("selectedValue", 0);
 
                         if (addressData != null) {
                             setAddress(addressData);
@@ -361,32 +294,15 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                 }
             } else if (requestCode == ADD_ADDRESS_ACTION) {
                 if (resultCode == Activity.RESULT_OK) {
-                  /*  if (data != null) {
 
-                        addUpdateAddressData = (ArrayList<AddUpdateAddressResponse.AddUpdateAddressData>) data.getSerializableExtra("addressData");
-                        if (!addUpdateAddressData.isEmpty()) {
-
-                            addressData.setmAddress1(addUpdateAddressData.get(0).getmAddress1());
-                            addressData.setmAddress2(addUpdateAddressData.get(0).getmAddress2());
-                            addressData.setmLandmark(addUpdateAddressData.get(0).getmLandmark());
-                            addressData.setmCity(addUpdateAddressData.get(0).getmCity());
-                            addressData.setmState(addUpdateAddressData.get(0).getmState());
-                            addressData.setmCountry(addUpdateAddressData.get(0).getmCountry());
-                            addressData.setmZipcode(addUpdateAddressData.get(0).getmZipcode());
-
-                            if (addressData != null) {
-                                setAddress(addressData);
-                            }
-
-                        }
-
-                    }*/
-
-                  checkoutPresenter.addressList(CocoPreferences.getUserId());
-
+                    if (Util.isDeviceOnline(this)) {
+                        checkoutPresenter.addressList(CocoPreferences.getUserId());
+                    } else {
+                        showCenteredToast(this, getString(R.string.network_connection));
+                    }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -457,7 +373,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         try {
 
 
-
             if (Util.isDeviceOnline(this)) {
                 if (addressData != null) {
                     checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
@@ -484,10 +399,13 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                             "raj",
                             "jai"
                     );
+
+
+
                 }
 
 
-            }else{
+            } else {
                 showCenteredToast(this, getString(R.string.network_connection));
 
             }
@@ -508,14 +426,10 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     public void onPaymentError(int code, String response) {
         try {
 
-
-//            showCenteredToast(this,"Payment failed: " + code + " " + response);
-
-
             Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
-            intent.putExtra("totalPrice",totalPrice);
+            intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_FAIL);
-            intent.putExtra("addressData",addressData);
+            intent.putExtra("addressData", addressData);
 
             startActivity(intent);
 
@@ -525,28 +439,22 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     }
 
 
-
-
     @Override
     public void getCheckoutPayment(CheckoutPaymentResponse checkoutPaymentResponse) {
         if (!TextUtils.isEmpty(checkoutPaymentResponse.getmStatus()) && ("1".equalsIgnoreCase(checkoutPaymentResponse.getmStatus()))) {
-//            showCenteredToast(this,checkoutPaymentResponse.getMessage());
 
-           /* Intent intent = new Intent(CheckoutActivity.this, DrawerActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);*/
 
             orderStatus = Constant.ORDER_SUCCESS;
 
             Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
-            intent.putExtra("totalPrice",totalPrice);
+            intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_SUCCESS);
-            intent.putExtra("addressData",addressData);
+            intent.putExtra("addressData", addressData);
 
             startActivity(intent);
 
-        }else {
-            showCenteredToast(this,checkoutPaymentResponse.getMessage());
+        } else {
+            showCenteredToast(this, checkoutPaymentResponse.getMessage());
         }
     }
 }

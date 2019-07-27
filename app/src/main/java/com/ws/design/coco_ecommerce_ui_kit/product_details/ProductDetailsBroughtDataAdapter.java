@@ -45,7 +45,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
             holder.txtProductName.setText(productBroughtData.getmProductName());
 
             holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmPrice());
-            holder. txtRating .setText(!TextUtils.isEmpty(productBroughtData.getmAvgRating()) ? productBroughtData.getmAvgRating() : "5");
+            holder. txtRating .setText(!TextUtils.isEmpty(productBroughtData.getmAvgRating()) ? productBroughtData.getmAvgRating() : "0");
 
 
 

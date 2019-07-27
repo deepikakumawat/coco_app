@@ -18,6 +18,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,12 +34,13 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.MarshMallowPermissions;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class MyOrderActivity extends AppCompatActivity implements MyOrderView, View.OnClickListener {
+public class MyOrderActivity extends AppCompatActivity implements MyOrderView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     TextView title;
     LinearLayout linearLayout;
@@ -51,6 +53,9 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
     private Dialog addContactDialog;
     private EditText etxtReason;
     private MyOrderPresenter myOrderPresenter;
+    private Spinner spReason;
+    private String cancelReason = "Choose Reason";
+    private LinearLayout lyReason;
 
 
     @Override
@@ -175,15 +180,18 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                 case R.id.txtSubmit:
 
                     myOrderData = ((MyOrderResponse.MyOrderData) view.getTag());
-                    String reason = etxtReason.getText().toString().trim();
-                    if (!TextUtils.isEmpty(reason)) {
+                    if (lyReason.getVisibility() == View.VISIBLE) {
+                        cancelReason = etxtReason.getText().toString().trim();
+                    }
 
-                        myOrderPresenter.cancelOrder(myOrderData.getmOrderId(), reason);
-
+                    if (!TextUtils.isEmpty(cancelReason) && !cancelReason.equalsIgnoreCase("Choose Reason")) {
+                        myOrderPresenter.cancelOrder(myOrderData.getmOrderId(), cancelReason);
                         addContactDialog.dismiss();
                         Util.hideKeyBoardMethod(this, view);
+
                     } else {
                         showCenteredToast(this, getString(R.string.order_cancel_reason));
+
                     }
 
 
@@ -202,10 +210,15 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
             addContactDialog = new Dialog(this);
             addContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             addContactDialog.setContentView(R.layout.dialog_cancel_order);
-            etxtReason = (EditText) addContactDialog.findViewById(R.id.etxtReason);
-            TextView txtSubmit = (TextView) addContactDialog.findViewById(R.id.txtSubmit);
-            TextView txtCancel = (TextView) addContactDialog.findViewById(R.id.txtCancel);
+            spReason = addContactDialog.findViewById(R.id.spReason);
+            etxtReason = addContactDialog.findViewById(R.id.etxtReason);
+            lyReason = addContactDialog.findViewById(R.id.lyReason);
+            TextView txtSubmit = addContactDialog.findViewById(R.id.txtSubmit);
+            TextView txtCancel = addContactDialog.findViewById(R.id.txtCancel);
+            lyReason.setVisibility(View.GONE);
 
+            loadReasonData();
+            spReason.setOnItemSelectedListener(this);
 
             txtSubmit.setOnClickListener(this);
             txtSubmit.setTag(myOrderData);
@@ -226,5 +239,42 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
         }
     }
 
+
+    public void loadReasonData() {
+        List<String> reasonList = new ArrayList<>();
+        reasonList.add("Choose Reason");
+        reasonList.add("Change Address");
+        reasonList.add("Product is not required anymore.");
+        reasonList.add("Change Product");
+        reasonList.add("Others");
+
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, reasonList);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spReason.setAdapter(aa);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        try {
+            cancelReason = (String) parent.getItemAtPosition(position);
+
+            if (cancelReason.equalsIgnoreCase("others")) {
+                lyReason.setVisibility(View.VISIBLE);
+            } else {
+                lyReason.setVisibility(View.GONE);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 
 }

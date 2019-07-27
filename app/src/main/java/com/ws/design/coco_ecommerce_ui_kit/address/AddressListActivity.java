@@ -37,6 +37,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private LinearLayout linear;
     private static final int ADD_ADDRESS_ACTION = 101;
     int selectedValue = 0;
+    private String screen ="";
 
 
     @Override
@@ -44,28 +45,35 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_list);
 
-         addressPresenter = new AddressPresenter(this);
+        addressPresenter = new AddressPresenter(this);
 
-         Intent intent = getIntent();
+        Intent intent = getIntent();
         if (intent != null) {
-            selectedValue =  intent.getIntExtra("selectedValue",0);
+            selectedValue = intent.getIntExtra("selectedValue", 0);
+
+            if (intent.hasExtra("screen")) {
+                screen = intent.getStringExtra("screen");
+
+            }
+
 
         }
 
-        title = (TextView) findViewById(R.id.title);
-        rvMyAddress = (RecyclerView) findViewById(R.id.rvMyOrder);
-        imgBack =  findViewById(R.id.imgBack);
-        linear =  findViewById(R.id.linear);
+        init();
+
+    }
+
+    private void init() {
+        title = findViewById(R.id.title);
+        rvMyAddress = findViewById(R.id.rvMyOrder);
+        imgBack = findViewById(R.id.imgBack);
+        linear = findViewById(R.id.linear);
         imgBack.setOnClickListener(this);
         linear.setOnClickListener(this);
-
         title.setText("Address List");
-
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvMyAddress.setLayoutManager(layoutManager);
-
 
     }
 
@@ -73,18 +81,18 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     protected void onResume() {
         super.onResume();
         if (addressDataArrayList.isEmpty()) {
-            if(Util.isDeviceOnline(this)){
+            if (Util.isDeviceOnline(this)) {
 
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                     addressPresenter.addressList(CocoPreferences.getUserId());
 
-                }else{
-                   Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
-                   startActivity(intent);
+                } else {
+                    Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
 
 
-            }else{
+            } else {
                 showCenteredToast(this, getString(R.string.network_connection));
 
             }
@@ -113,18 +121,23 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
             if (!addressListResponse.getmAddressData().isEmpty()) {
                 addressDataArrayList.clear();
 
-//                addressDataArrayList.addAll(addressListResponse.getmAddressData());
-
                 ArrayList<AddressListResponse.AddressData> dataArrayList = new ArrayList<>();
 
-                for(int i=0; i<addressListResponse.getmAddressData().size(); i++){
+                for (int i = 0; i < addressListResponse.getmAddressData().size(); i++) {
 
-                    if (i==selectedValue) {
+                    if (i == selectedValue) {
                         addressListResponse.getmAddressData().get(i).setmSelecetdAddress(true);
 
-                    }else{
+                    } else {
                         addressListResponse.getmAddressData().get(i).setmSelecetdAddress(false);
 
+                    }
+
+                    if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("Checkout")) {
+                        addressListResponse.getmAddressData().get(i).setDeleteButtonVisible(false);
+
+                    }else{
+                        addressListResponse.getmAddressData().get(i).setDeleteButtonVisible(true);
                     }
 
                     dataArrayList.add(addressListResponse.getmAddressData().get(i));
@@ -132,7 +145,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
                 addressDataArrayList.addAll(dataArrayList);
 
-                addressAdapter = new AddressListAdapter(this, addressDataArrayList, AddressListActivity.this);
+                addressAdapter = new AddressListAdapter(this, addressDataArrayList,  AddressListActivity.this);
                 rvMyAddress.setAdapter(addressAdapter);
             }
         }
@@ -143,13 +156,13 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     @Override
     public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
         if (!TextUtils.isEmpty(deleteAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(deleteAddressResponse.getmStatus()))) {
-            showCenteredToast(this,deleteAddressResponse.getMessage());
+            showCenteredToast(this, deleteAddressResponse.getMessage());
             if (addressAdapter != null) {
                 addressDataArrayList.remove(deletedPosition);
                 addressAdapter.notifyDataSetChanged();
             }
-        }else {
-            showCenteredToast(this,deleteAddressResponse.getMessage());
+        } else {
+            showCenteredToast(this, deleteAddressResponse.getMessage());
         }
     }
 
@@ -162,41 +175,37 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     @Override
     public void onClick(View view) {
 
-        try{
+        try {
             int vId = view.getId();
-            switch (vId){
+            switch (vId) {
                 case R.id.btnDelete:
-                    AddressListResponse.AddressData  addressData = ((AddressListResponse.AddressData) view.getTag());
-                    deletedPosition=(int)view.getTag(R.id.btnDelete);
-
+                    AddressListResponse.AddressData addressData = ((AddressListResponse.AddressData) view.getTag());
+                    deletedPosition = (int) view.getTag(R.id.btnDelete);
                     if (addressData != null) {
-
                         if (Util.isDeviceOnline(this)) {
                             addressPresenter.deteleAddress(addressData.getmId());
-
-                        }else{
+                        } else {
                             showCenteredToast(this, getString(R.string.network_connection));
 
                         }
-
                     }
                     break;
                 case R.id.imgBack:
                     finish();
                     break;
                 case R.id.linear:
-                    if(!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         Intent intent = new Intent(AddressListActivity.this, AddAddressActivity.class);
                         startActivityForResult(intent, ADD_ADDRESS_ACTION);
-                    }else{
-                        Intent intent = new Intent(AddressListActivity.this,LoginActivity.class);
+                    } else {
+                        Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
 
                     break;
                 case R.id.lyAddress:
-                     addressData = ((AddressListResponse.AddressData) view.getTag());
-                     selectedValue = ((int) view.getTag(R.id.lyAddress));
+                    addressData = ((AddressListResponse.AddressData) view.getTag());
+                    selectedValue = ((int) view.getTag(R.id.lyAddress));
 
                     if (addressData != null) {
 
@@ -206,17 +215,17 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         }
 
                         Intent data = new Intent();
-                        data.putExtra("addressData",addressData);
-                        data.putExtra("selectedValue",selectedValue);
+                        data.putExtra("addressData", addressData);
+                        data.putExtra("selectedValue", selectedValue);
                         setResult(Activity.RESULT_OK, data);
                         finish();
 
                     }
                     break;
-                    default:
-                        break;
+                default:
+                    break;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -227,19 +236,19 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         if (requestCode == ADD_ADDRESS_ACTION) {
             if (resultCode == Activity.RESULT_OK) {
 
-                if(Util.isDeviceOnline(this)){
+                if (Util.isDeviceOnline(this)) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         addressPresenter.addressList(CocoPreferences.getUserId());
 
-                    }else{
+                    } else {
 
-                        Intent intent = new Intent(AddressListActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
 
 
-                }else{
+                } else {
                     showCenteredToast(this, getString(R.string.network_connection));
 
                 }

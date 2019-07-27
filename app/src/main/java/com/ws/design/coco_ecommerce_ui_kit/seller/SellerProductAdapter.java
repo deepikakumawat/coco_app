@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,6 +45,9 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
             holder.txtProductSalePrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
 
+
+            holder. rbProductRating .setRating(!TextUtils.isEmpty(productData.getmAvgRating()) ? Float.parseFloat(productData.getmAvgRating()) : 0);
+
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
 
@@ -76,6 +80,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
         private TextView txtProductSalePrice;
         private ImageView imgProduct;
         private ImageView imgAddToCart;
+        private RatingBar rbProductRating;
 
 
         public ViewHolder(View view) {
@@ -84,6 +89,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             imgAddToCart = view.findViewById(R.id.imgAddToCart);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductName = view.findViewById(R.id.txtProductName);
+            rbProductRating = view.findViewById(R.id.rbProductRating);
 
             txtProductSalePrice = view.findViewById(R.id.txtProductSalePrice);
 

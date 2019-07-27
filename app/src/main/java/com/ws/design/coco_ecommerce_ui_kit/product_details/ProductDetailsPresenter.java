@@ -34,11 +34,11 @@ public class ProductDetailsPresenter {
 
 
 
-    public void getProductDetails(String slug, String userId) {
+    public void getProductDetails(String productId, String userId) {
         view.showWait();
         try {
 
-            Call call = service.getProductDetails(slug,userId);
+            Call call = service.getProductDetails(productId,userId);
             call.enqueue(new Callback<ProductDetailsResponse>() {
                 @Override
                 public void onResponse(Call<ProductDetailsResponse> call, Response<ProductDetailsResponse> response) {

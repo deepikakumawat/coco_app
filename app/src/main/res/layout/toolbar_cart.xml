@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:textSize="16.7sp"
             android:id="@+id/txtTitle"
-            android:text="Cart"
+            android:text="My Cart"
             android:layout_weight="1"
             android:layout_marginLeft="22.5dp"
             android:textColor="@color/toolbarTextColor"/>

@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             android:text="+"
             android:textColor="@color/white"
-            android:textSize="40sp"/>
+            android:textSize="30sp"/>
     </LinearLayout>
 
 </android.support.v7.widget.Toolbar>

@@ -44,14 +44,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
-            Glide.with(context).load(thumbnail).dontAnimate().into(holder.imgProduct);
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
             holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" : productData.getmQuantity());
 
 
-            holder.txtCross.setTag(productData);
-            holder.txtCross.setTag(R.id.txtCross, position);
-            holder.txtCross.setOnClickListener(cartActivity);
+            holder.imgCross.setTag(productData);
+            holder.imgCross.setTag(R.id.imgCross, position);
+            holder.imgCross.setOnClickListener(cartActivity);
 
 
             holder.lyIncrement.setTag(productData);
@@ -67,28 +67,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             holder.lyCartProduct.setTag(R.id.lyCartProduct, position);
             holder.lyCartProduct.setOnClickListener(cartActivity);
 
-        /*    holder.lyIncrement.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int count= Integer.parseInt(String.valueOf(holder.txtIncDec.getText()));
-                    count++;
-                    holder.txtIncDec.setText(String.valueOf(count));
-                }
 
-            });*/
-
-         /*   holder.lyDecrement.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int count= Integer.parseInt(String.valueOf(holder.txtIncDec.getText()));
-                    if (count > 1)
-                        count--;
-                    holder.txtIncDec.setText(String.valueOf(count));
-
-
-                }
-            });
-*/
 
 
         }
@@ -112,7 +91,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         private LinearLayout lyDecrement;
         private LinearLayout lyIncrement;
         private TextView txtProductPrice;
-        private TextView txtCross;
+        private ImageView imgCross;
         private TextView txtIncDec;
         private ImageView imgProduct;
         private LinearLayout lyCartProduct;
@@ -128,7 +107,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             lyIncrement = view.findViewById(R.id.lyIncrement);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
 
-            txtCross = view.findViewById(R.id.txtCross);
+            imgCross = view.findViewById(R.id.imgCross);
             lyCartProduct = view.findViewById(R.id.lyCartProduct);
 
 

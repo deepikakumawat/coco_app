@@ -48,6 +48,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
     private String totalRazorPrice;
     private CheckoutPresenter checkoutPresenter;
     private AddressListResponse.AddressData addressData = null;
+    private TextView txtOrderStatus;
 
 
     @Override
@@ -73,6 +74,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
             }
         }
 
+        txtOrderStatus = findViewById(R.id.txtOrderStatus);
         txtRetry = findViewById(R.id.txtRetry);
         txtGoToHome = findViewById(R.id.txtGoToHome);
         imgOrderStatus = findViewById(R.id.imgOrderStatus);
@@ -104,14 +106,17 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
         txtRetry.setVisibility(View.GONE);
         txtGoToHome.setVisibility(View.VISIBLE);
         txtGoToHome.setText(getString(R.string.shop_more));
-        imgOrderStatus.setBackgroundResource(R.drawable.payment_sucess);
+        imgOrderStatus.setImageResource(R.drawable.payment_sucess);
+        txtOrderStatus.setText("Thank your order was successfully placed.");
     }
 
     private void paymentFailed(){
         txtRetry.setVisibility(View.VISIBLE);
         txtGoToHome.setVisibility(View.VISIBLE);
         txtGoToHome.setText(getString(R.string.go_to_home));
-        imgOrderStatus.setBackgroundResource(R.drawable.payment_fail);
+        imgOrderStatus.setImageResource(R.drawable.payment_fail);
+        txtOrderStatus.setText("Oops! your order was not placed.");
+
     }
 
 
@@ -126,7 +131,8 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
                     startActivity(intent);
                     break;
                 case R.id.txtRetry:
-
+//                    startPayment();
+                    finish();
                     break;
                 default:
                     break;

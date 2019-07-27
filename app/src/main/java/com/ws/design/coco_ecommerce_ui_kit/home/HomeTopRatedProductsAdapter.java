@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,9 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
             holder.txtProductName.setText(productData.getmProductName());
             holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
 
+            holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
+
+
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProImgUrl();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
 
@@ -67,6 +71,7 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
         private TextView txtProductName;
         private TextView txtProductType;
         private TextView txtProductPrice;
+        private TextView txtRating;
         private LinearLayout lyProduct;
 
 
@@ -77,6 +82,7 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
             txtProductName = view.findViewById(R.id.txtProductName);
             txtProductType = view.findViewById(R.id.txtProductType);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
+            txtRating = view.findViewById(R.id.txtRating);
             lyProduct = view.findViewById(R.id.lyProduct);
 
 

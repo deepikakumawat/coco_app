@@ -13,8 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -30,13 +28,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
@@ -55,14 +53,13 @@ import Model.NavigationModelClass;
 import fragment.CustomItemClickListener;
 import fragment.FragmentManagerUtils;
 
-public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class DrawerActivity extends AppCompatActivity implements IFragmentListener, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
 
     private DrawerLayout drawer;
     private Toolbar toolbar;
-
 
     private ArrayList<NavigationModelClass> navigationModelClasses;
 
@@ -72,10 +69,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-             "Address", "Help", "Contact Us","Terms & Conditions"};
+            "Address", "Help", "Contact Us", "Terms & Conditions"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-             "Address", "Help", "Contact Us", "Terms & Conditions","Logout"};
+            "Address", "Help", "Contact Us", "Terms & Conditions", "Logout"};
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -84,11 +81,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private LinearLayout lyLoginSignup;
     private NavigationModelClass beanClassForRecyclerView_contacts;
     private static final int MYACCOUNT_ACTION = 101;
-    private Fragment fragment;
-
     String[] PERMISSIONS = {Manifest.permission.CALL_PHONE};
     private final int PERMISSION_ALL = 11;
-
+    private TextView txtTitle;
 
 
     @Override
@@ -118,13 +113,14 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     private void init() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        txtUserName = (TextView) findViewById(R.id.txtUserName);
-        txtUserEmail = (TextView) findViewById(R.id.txtUserEmail);
-        txtLogin = (TextView) findViewById(R.id.txtLogin);
-        txtSignup = (TextView) findViewById(R.id.txtSignup);
-        lyLoginSignup = (LinearLayout) findViewById(R.id.lyLoginSignup);
+        txtTitle = findViewById(R.id.txtTitle);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        txtUserName = findViewById(R.id.txtUserName);
+        txtUserEmail = findViewById(R.id.txtUserEmail);
+        txtLogin = findViewById(R.id.txtLogin);
+        txtSignup = findViewById(R.id.txtSignup);
+        lyLoginSignup = findViewById(R.id.lyLoginSignup);
         txtLogin.setOnClickListener(this);
         txtSignup.setOnClickListener(this);
         setToolbar();
@@ -155,10 +151,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onItemClick(View v, int position) {
                 if (position == 0) {
-                   FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
-
-                   /* fragment = new HomeFragment();
-                    replaceFragment(fragment);*/
+                    setScreenTitle(getString(R.string.home));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
                 } else if (position == 1) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
@@ -169,18 +163,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
+                    setScreenTitle(getString(R.string.categories));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
-
-             /*  fragment = new CategoryActivity();
-               replaceFragment(fragment);*/
-
                 } else if (position == 4) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        setScreenTitle(getString(R.string.my_wishlist));
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), null, false, false);
-
-                      /*  fragment = new MyWishlistFragment();
-                        replaceFragment(fragment);*/
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
@@ -192,10 +181,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     startActivityForResult(intent, MYACCOUNT_ACTION);
 
                 } else if (position == 6) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), null, false, false);
+                    setScreenTitle(getString(R.string.trandings));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), "ProductByCategoryFragment", false, false);
 
-                 /*   fragment = new ProductDetailFragment();
-                    replaceFragment(fragment);*/
                 } else if (position == 7) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
@@ -206,16 +194,15 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 } else if (position == 8) {
 
 
-
-
                 } else if (position == 9) {
 
 
-                }  else if (position == 10) {
+                } else if (position == 10) {
+                    setScreenTitle(getString(R.string.terms_conditions));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new TermsConditionFragment(), null, false, false);
 
 
-                }else if (position == 11) {
+                } else if (position == 11) {
 
                     logout();
 
@@ -256,10 +243,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         invalidateOptionsMenu();
 
-      FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
-
-      /*  fragment = new HomeFragment();
-        replaceFragment(fragment);*/
+        setScreenTitle(getString(R.string.home));
+        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
 
     }
 
@@ -381,6 +366,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void setScreenTitle(String title) {
+        if (!TextUtils.isEmpty(title)) {
+            txtTitle.setText(title);
+        }
     }
 
     class MyOnClickListener implements View.OnClickListener {
@@ -515,49 +507,5 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
 
-
-    public void replaceFragment(Fragment fragment) {
-
-
-        if (getCurrentFocus() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-
-
-        String backStateName = fragment.getClass().getName();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        boolean fragmentPopped = fragmentManager.popBackStackImmediate(backStateName, 0);
-
-        if (!fragmentPopped && fragmentManager.findFragmentByTag(backStateName) == null) {
-
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.rootLayout, fragment, backStateName);
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-            fragmentTransaction.addToBackStack(backStateName);
-            fragmentTransaction.commit();
-
-        }
-    }
-
-    public void addFragment(Fragment fragment) {
-
-
-        if (getCurrentFocus() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-
-
-//        String backStateName = fragment.getClass().getName();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-//        boolean fragmentPopped = fragmentManager.popBackStackImmediate(backStateName, 0);
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.rootLayout, fragment, null);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-        fragmentTransaction.disallowAddToBackStack();
-        fragmentTransaction.commit();
-    }
 
 }

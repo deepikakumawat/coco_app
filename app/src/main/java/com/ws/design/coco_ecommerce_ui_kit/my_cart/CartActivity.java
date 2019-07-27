@@ -206,9 +206,9 @@ public class CartActivity extends AppCompatActivity implements CartView, View.On
                     }
                     break;
 
-                case R.id.txtCross:
+                case R.id.imgCross:
                     productData = ((CartListResponse.ProductData) view.getTag());
-                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
+                    removeCorssPostion = (int) view.getTag(R.id.imgCross);
                     if (productData != null) {
                         if (Util.isDeviceOnline(this)) {
                             cartPresenter.removeCartByCross(productData.getmCartId());

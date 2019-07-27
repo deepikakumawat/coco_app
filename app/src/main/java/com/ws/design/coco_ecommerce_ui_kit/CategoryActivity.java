@@ -1,5 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,7 @@ public class CategoryActivity extends ToolbarBaseFragment {
     private Item_Fashion_Adapter item_fashion_adapter;
     private RecyclerView recyclerview;
     private View mView;
+    private IFragmentListener mListener;
 
     @Nullable
     @Override
@@ -139,6 +142,24 @@ public class CategoryActivity extends ToolbarBaseFragment {
         recyclerView.setAdapter(mAdapter);
 
 
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (DrawerActivity) context;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (this.mListener != null ) {
+            this.mListener.setScreenTitle(getString(R.string.categories));
+
+        }
 
     }
 }

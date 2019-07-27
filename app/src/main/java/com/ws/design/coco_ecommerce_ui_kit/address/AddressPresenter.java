@@ -32,36 +32,6 @@ public class AddressPresenter {
     public void addressList(String userid) {
         view.showWait();
 
-      /*  service.getAddressList("87")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<AddressListResponse>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        view.removeWait();
-                        try {
-                            JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
-                            view.onFailure(jsonObject.getString("message"));
-                        } catch (Exception ee) {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onNext(AddressListResponse post) {
-                        view.removeWait();
-                        view.getAddressList(post);
-                    }
-                });*/
-
-
         try {
 
             Call call = service.getAddressList(userid);
@@ -81,6 +51,8 @@ public class AddressPresenter {
                             view.onFailure(jsonObject.getString("message"));
                         }
                     }catch (Exception e){
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                         e.printStackTrace();
                     }
                 }
@@ -126,6 +98,8 @@ public class AddressPresenter {
                             view.onFailure(jsonObject.getString("message"));
                         }
                     }catch (Exception e){
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                         e.printStackTrace();
                     }
                 }
@@ -150,11 +124,11 @@ public class AddressPresenter {
 
 
 
-    public void addAddress(String name, String userId, String address1, String address2, String city, String state, String country, String phone, String id ) {
+    public void addAddress(String name, String userId, String address1, String address2,String landmark, String city, String state, String country, String phone, String id, String zipcode, String addressType ) {
         view.showWait();
         try {
 
-            Call call = service.doAddUpdateAddress(id,name,userId,address1,address2,city,state,country,phone);
+            Call call = service.doAddUpdateAddress(id,name,userId,address1,address2,city,state,country,zipcode,addressType,landmark,phone);
             call.enqueue(new Callback<AddUpdateAddressResponse>() {
                 @Override
                 public void onResponse(Call<AddUpdateAddressResponse> call, Response<AddUpdateAddressResponse> response) {
@@ -171,7 +145,10 @@ public class AddressPresenter {
                             view.onFailure(jsonObject.getString("message"));
                         }
                     }catch (Exception e){
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                         e.printStackTrace();
+
                     }
                 }
 

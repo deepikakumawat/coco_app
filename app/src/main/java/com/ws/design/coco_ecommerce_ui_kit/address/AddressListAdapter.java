@@ -22,7 +22,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private AddressListActivity addressListActivity;
 
 
-    public AddressListAdapter(Context context, ArrayList<AddressListResponse.AddressData> addressDataArrayList, AddressListActivity addressListActivity) {
+    public AddressListAdapter(Context context, ArrayList<AddressListResponse.AddressData> addressDataArrayList,  AddressListActivity addressListActivity) {
         this.context = context;
         this.addressDataArrayList = addressDataArrayList;
         this.addressListActivity = addressListActivity;
@@ -55,6 +55,14 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             }else{
                 holder.imgSelectAddress.setVisibility(View.GONE);
             }
+
+            if (addressData.isDeleteButtonVisible()) {
+                holder.btnDelete.setVisibility(View.VISIBLE);
+            }else{
+                holder.btnDelete.setVisibility(View.GONE);
+            }
+
+
 
             holder.btnDelete.setTag(addressData);
             holder.btnDelete.setTag(R.id.btnDelete, position);

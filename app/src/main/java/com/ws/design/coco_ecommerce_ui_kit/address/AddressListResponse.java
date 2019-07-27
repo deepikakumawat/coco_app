@@ -38,6 +38,8 @@ public class AddressListResponse implements Serializable {
 
         private boolean mSelecetdAddress;
 
+        private boolean isDeleteButtonVisible;
+
 
         @SerializedName("id")
         @Expose
@@ -190,6 +192,14 @@ public class AddressListResponse implements Serializable {
 
         public void setmSelecetdAddress(boolean mSelecetdAddress) {
             this.mSelecetdAddress = mSelecetdAddress;
+        }
+
+        public boolean isDeleteButtonVisible() {
+            return isDeleteButtonVisible;
+        }
+
+        public void setDeleteButtonVisible(boolean deleteButtonVisible) {
+            isDeleteButtonVisible = deleteButtonVisible;
         }
     }
 }

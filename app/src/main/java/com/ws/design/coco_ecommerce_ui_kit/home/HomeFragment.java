@@ -1,6 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.home;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,7 +20,9 @@ import android.widget.LinearLayout;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.ExploreActivity;
+import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.DealProducts;
@@ -46,23 +49,17 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
 
     private ArrayList<HomeBannerModelClass> homeBannerModelClasses;
     private RecyclerView rvBanner;
-    //    private RecycleAdapteHomeBanner mAdapter;
-//    private Integer image[] = {R.drawable.image95, R.drawable.image95, R.drawable.image95, R.drawable.image95};
     private ArrayList<Banner> bannerArrayList = new ArrayList<>();
     private HomeBannerAdapter homeBannerAdapter;
 
     private ArrayList<HomeCategoryModelClass> homeCategoryModelClasses;
     private RecyclerView rvCategory;
     private HomeCategoryAdapter homeCategoryAdapter;
-//    private String title[] = {"All Categories", "Mens", "Womens", "Electronics", "Home and Furniture", "Sports"};
 
 
     private ArrayList<TopTenModelClass> topTenModelClasses;
     private RecyclerView rvTopRatedProducts;
-    //    private RecycleAdapteTopTenHome mAdapter2;
-//    private Integer image1[] = {R.drawable.ac, R.drawable.headphones, R.drawable.ac, R.drawable.headphones};
-//    private String title1[] = {"Vigo Atom Personal Air Condi....", "Bosh Head Phone Blue Color", "Vigo Atom Personal Air Condi....", "Bosh Head Phone Blue Color",};
-//    private String type[] = {"Kitenid", "HeadPhones", "Kitenid", "HeadPhones"};
+
     private ArrayList<ProductData> productDataArrayList = new ArrayList<>();
     private HomeTopRatedProductsAdapter homeTopRatedProductsAdapter;
 
@@ -70,15 +67,13 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
     private ArrayList<DealProducts> dealProductsArrayList = new ArrayList<>();
     private HomeLikeProductsAdapter homeLikeProductsAdapter;
     private RecyclerView rvLike;
-    //    private RecycleAdapteTopTenHome mAdapter3;
-//    private Integer image2[] = {R.drawable.mobile1, R.drawable.mobile2, R.drawable.mobile1, R.drawable.mobile2};
-//    private String title2[] = {"Samsung On Mask 2GB Ram", "Samsung Galaxy 8 6GB Ram", "Samsung On Mask 2GB Ram", "Samsung Galaxy 8 6GB Ram"};
-//    private String type2[] = {"Phones", "Phones", "Phones", "Phones"};
+
     private View mView;
     private HomePresenter homePresenter;
     private ArrayList<Categories> categoriesArrayList = new ArrayList<>();
     private ProductData productData;
     private DealProducts dealProduct;
+    private IFragmentListener mListener;
 //    private ShimmerFrameLayout shimmerContainer;
 
 
@@ -94,24 +89,8 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        Homepage Banner Recyclerview Code is here
 
         homePresenter = new HomePresenter(this);
-
-    /*    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getActivity(), R.drawable.black_circle);
-        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-        DrawableCompat.setTint(wrappedDrawable, Color.RED);
-
-        LinearLayout right1 = view.findViewById(R.id.right1);
-        final int sdk = android.os.Build.VERSION.SDK_INT;
-        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            right1.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.black_circle) );
-        } else {
-            right1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.black_circle));
-        }
-
-*/
-
 
 
         if (Util.isDeviceOnline(getActivity())) {
@@ -123,40 +102,25 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
         }
 
 
-        rvBanner = (RecyclerView) mView.findViewById(R.id.rvBanner);
+        rvBanner =  mView.findViewById(R.id.rvBanner);
 
         homeBannerModelClasses = new ArrayList<>();
 
 
-       /* for (int i = 0; i < image.length; i++) {
-            HomeBannerModelClass beanClassForRecyclerView_contacts = new HomeBannerModelClass(image[i]);
-
-            homeBannerModelClasses.add(beanClassForRecyclerView_contacts);
-        }*/
-
-
-//        mAdapter = new RecycleAdapteHomeBanner(getActivity(), homeBannerModelClasses);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvBanner.setLayoutManager(mLayoutManager);
 
 
         rvBanner.setLayoutManager(mLayoutManager);
         rvBanner.setItemAnimator(new DefaultItemAnimator());
-//        rvBanner.setAdapter(mAdapter);
 
 
-        //        Category Recyclerview Code is here
 
-        rvCategory = (RecyclerView) mView.findViewById(R.id.rvCategory);
+        rvCategory =  mView.findViewById(R.id.rvCategory);
 
         homeCategoryModelClasses = new ArrayList<>();
 
 
-       /* for (int i = 0; i < title.length; i++) {
-            HomeCategoryModelClass beanClassForRecyclerView_contacts = new HomeCategoryModelClass(title[i]);
-
-            homeCategoryModelClasses.add(beanClassForRecyclerView_contacts);
-        }*/
 
 
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -165,7 +129,6 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
 
         rvCategory.setLayoutManager(mLayoutManager1);
         rvCategory.setItemAnimator(new DefaultItemAnimator());
-//        rvCategory.setAdapter(homeCategoryAdapter);
 
 
         //        Top Ten  Recyclerview Code is here
@@ -175,66 +138,24 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
         topTenModelClasses = new ArrayList<>();
 
 
-      /*  for (int i = 0; i < image1.length; i++) {
-            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i], title1[i], type[i]);
 
-            topTenModelClasses.add(beanClassForRecyclerView_contacts);
-        }
-*/
-
-       /* mAdapter2 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses, new CustomItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductDetailFragment(), null, false, false);
-            }
-        });*/
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvTopRatedProducts.setLayoutManager(mLayoutManager2);
 
 
         rvTopRatedProducts.setLayoutManager(mLayoutManager2);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
-//        rvTopRatedProducts.setAdapter(mAdapter2);
-
 
         //      Like  Recyclerview Code is here
 
         rvLike = (RecyclerView) mView.findViewById(R.id.rvLike);
 
-//        topTenModelClasses1 = new ArrayList<>();
-
-
-       /* for (int i = 0; i < image2.length; i++) {
-            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image2[i], title2[i], type2[i]);
-
-            topTenModelClasses1.add(beanClassForRecyclerView_contacts);
-        }
-
-
-        mAdapter3 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses1, new CustomItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-
-                Bundle bundle = new Bundle();
-                bundle.putString("productSlug", productData.getmProductSlug());
-                bundle.putString("productId", productData.getmProductId());
-                bundle.putString("productQty", productData.getmProductQty());
-
-                ProductDetailFragment productDetailActivity = new ProductDetailFragment();
-                productDetailActivity.setArguments(bundle);
-
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailActivity, null, false, false);
-
-
-            }
-        });*/
         RecyclerView.LayoutManager mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvLike.setLayoutManager(mLayoutManager3);
 
 
         rvLike.setLayoutManager(mLayoutManager3);
         rvLike.setItemAnimator(new DefaultItemAnimator());
-//        like_recyclerview.setAdapter(mAdapter3);
 
 
         //        Recent  Recyclerview Code is here
@@ -244,26 +165,12 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
         topTenModelClasses = new ArrayList<>();
 
 
-      /*  for (int i = 0; i < image1.length; i++) {
-            TopTenModelClass beanClassForRecyclerView_contacts = new TopTenModelClass(image1[i], title1[i], type[i]);
-
-            topTenModelClasses.add(beanClassForRecyclerView_contacts);
-        }
-
-
-        mAdapter2 = new RecycleAdapteTopTenHome(getActivity(), topTenModelClasses, new CustomItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ProductDetailFragment(), null, false, false);
-            }
-        });*/
         RecyclerView.LayoutManager mLayoutManager4 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvTopRatedProducts.setLayoutManager(mLayoutManager4);
 
 
         rvTopRatedProducts.setLayoutManager(mLayoutManager4);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
-//        rvTopRatedProducts.setAdapter(mAdapter2);
 
 
     }
@@ -394,4 +301,23 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
         }
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (this.mListener != null ) {
+            this.mListener.setScreenTitle(getString(R.string.home));
+
+        }
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (DrawerActivity) context;
+
+    }
+
 }
