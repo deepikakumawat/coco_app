@@ -1,5 +1,6 @@
 package fragment;
 
+import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +13,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryPresenter;
@@ -32,13 +36,16 @@ import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategory
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
 
-public class PopularListFragment extends Fragment implements View.OnClickListener ,ProductByCategoryView {
+public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
 
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
     private ProductByCategoryAdapter mAdapter2;
     ProductByCategoryPresenter productByCategoryPresenter;
     private String catId;
+    private ShimmerFrameLayout mShimmerViewContainer;
+    private TextView txtNoDataFound;
+    private RelativeLayout ryParent;
 
     public static PopularListFragment newInstance(String catId) {
         PopularListFragment fragment = new PopularListFragment();
@@ -56,7 +63,6 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_popular_list, container, false);
 
 
-
         return view;
     }
 
@@ -72,15 +78,19 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         }
 
+        ryParent = view.findViewById(R.id.ryParent);
         recyclerview = view.findViewById(R.id.recyclerview);
+        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
+
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         productGridModellClasses = new ArrayList<>();
 
         if (Util.isDeviceOnline(getActivity())) {
             productByCategoryPresenter.getProductByCat(catId);
 
-        }else{
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
+        } else {
+            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
         }
 
@@ -90,27 +100,36 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     @Override
     public void showWait() {
 //        showProDialog(getActivity());
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
 //        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
 //        showCenteredToast(getActivity(), appErrorMessage);
+        nodataFound(appErrorMessage);
     }
 
 
     @Override
     public void getProductByCategory(ProductByCategoryResponse productByCategoryResponse) {
         if (productByCategoryResponse != null) {
-            if(productByCategoryResponse.getmData() !=null) {
-                if (productByCategoryResponse.getmData().getmProduct() != null) {
+            if (productByCategoryResponse.getmData() != null) {
+                if (!productByCategoryResponse.getmData().getmProduct().isEmpty()) {
                     productGridModellClasses.clear();
                     productGridModellClasses.addAll(productByCategoryResponse.getmData().getmProduct());
-                    mAdapter2 = new ProductByCategoryAdapter(getActivity(),productGridModellClasses, PopularListFragment.this);
+
+                    recyclerview.setVisibility(View.VISIBLE);
+                    txtNoDataFound.setVisibility(View.GONE);
+
+                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerview.setLayoutManager(mLayoutManager);
                     recyclerview.setItemAnimator(new DefaultItemAnimator());
@@ -119,6 +138,12 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
             }
         }
 
+    }
+
+    private void nodataFound(String appErrorMessage) {
+        txtNoDataFound.setVisibility(View.VISIBLE);
+        txtNoDataFound.setText(appErrorMessage);
+        recyclerview.setVisibility(View.GONE);
     }
 
     @Override
@@ -155,7 +180,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                             productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
 
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                         }
 
@@ -173,12 +198,11 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
-
+            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
 
 
         } else {
-            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
         }
     }
 }

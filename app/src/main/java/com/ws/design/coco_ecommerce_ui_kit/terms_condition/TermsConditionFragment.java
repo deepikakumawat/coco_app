@@ -17,6 +17,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -48,6 +49,7 @@ public class TermsConditionFragment extends ToolbarBaseFragment  {
 
     private WebView webView;
     private IFragmentListener mListener;
+    private RelativeLayout ryParent;
 
 
     @Nullable
@@ -63,6 +65,7 @@ public class TermsConditionFragment extends ToolbarBaseFragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        ryParent = view.findViewById(R.id.ryParent);
         webView = view.findViewById(R.id.webView);
         showWebPage();
 
@@ -83,7 +86,7 @@ public class TermsConditionFragment extends ToolbarBaseFragment  {
             webView.setWebViewClient(new NavFreshWebClient());
 
         } else {
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
         }
     }

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -28,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     TextView title,edit,test,edit_txt;
     private ImageView imgBack;
+    private LinearLayout lyParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +62,19 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(fName)) {
-                showCenteredToast(this, getString(R.string.first_name_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.first_name_validation_message));
                 etFname.requestFocus();
             } else if (TextUtils.isEmpty(lName)) {
-                showCenteredToast(this, getString(R.string.last_name_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.last_name_validation_message));
                 etLname.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(this, getString(R.string.invalid_mobile_number));
+                showCenteredToast(lyParent,this, getString(R.string.invalid_mobile_number));
                 etPhone.requestFocus();
             }  else {
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
         }
         return validation_detials_flag;
     }
@@ -80,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     private void init() {
 
+        lyParent = findViewById(R.id.lyParent);
         title = (TextView)findViewById(R.id.title);
         edit_txt = (TextView)findViewById(R.id.edit_txt);
         edit_txt.setVisibility(View.GONE);
@@ -117,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage);
     }
 
     @Override
@@ -131,9 +134,9 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
             CocoPreferences.setLastName(updateProfileResponse.getmLoginData().getmLastName());
             CocoPreferences.savePreferencese();
 
-            showCenteredToast(this,updateProfileResponse.getMessage());
+            showCenteredToast(lyParent,this,updateProfileResponse.getMessage());
         }else {
-            showCenteredToast(this,updateProfileResponse.getMessage());
+            showCenteredToast(lyParent,this,updateProfileResponse.getMessage());
         }
 
     }

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,11 +83,14 @@ public class Util {
         return isDeviceOnLine;
     }
 
-    public static void showCenteredToast(Context context, String msg) {
-        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+    public static void showCenteredToast(View view,Context context, String msg) {
+        Snackbar snackbar1 = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+
+        snackbar1.show();
+
     }
+
+
 
     public static void openKeyBoard(final Context context, View textView) {
         try {

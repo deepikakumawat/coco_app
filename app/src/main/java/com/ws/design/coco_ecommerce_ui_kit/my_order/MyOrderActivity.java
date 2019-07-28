@@ -23,12 +23,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.MarshMallowPermissions;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -36,9 +36,7 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class MyOrderActivity extends AppCompatActivity implements MyOrderView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -56,6 +54,9 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
     private Spinner spReason;
     private String cancelReason = "Choose Reason";
     private LinearLayout lyReason;
+    private ShimmerFrameLayout mShimmerViewContainer;
+    private TextView txtNoDataFound;
+    private RelativeLayout ryParent;
 
 
     @Override
@@ -65,9 +66,14 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
 
         myOrderPresenter = new MyOrderPresenter(this);
 
+        ryParent = findViewById(R.id.ryParent);
         title = (TextView) findViewById(R.id.title);
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+
         linearLayout = (LinearLayout) findViewById(R.id.linear);
         rvMyOrder = (RecyclerView) findViewById(R.id.rvMyOrder);
+        txtNoDataFound = findViewById(R.id.txtNoDataFound);
+
         imgBack = findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
 
@@ -80,7 +86,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
             myOrderPresenter.myOrder(CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(ryParent,this, getString(R.string.network_connection));
 
         }
 
@@ -92,17 +98,30 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
 
     @Override
     public void showWait() {
-        showProDialog(this);
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
+//        showProDialog(this);
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
+//        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(this, appErrorMessage);
+//        showCenteredToast(this, appErrorMessage);
+      nodataFound(appErrorMessage);
+
+
+    }
+
+    private void nodataFound(String appErrorMessage) {
+        txtNoDataFound.setVisibility(View.VISIBLE);
+        txtNoDataFound.setText(appErrorMessage);
+        rvMyOrder.setVisibility(View.GONE);
     }
 
     @Override
@@ -112,6 +131,9 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
             if (!myOrderResponse.getmAddressData().isEmpty()) {
                 myOrderDataArrayList.clear();
                 myOrderDataArrayList.addAll(myOrderResponse.getmAddressData());
+
+                rvMyOrder.setVisibility(View.VISIBLE);
+                txtNoDataFound.setVisibility(View.GONE);
 
                 myOrderAdapter = new MyOrderAdapter(this, myOrderDataArrayList, MyOrderActivity.this);
                 rvMyOrder.setAdapter(myOrderAdapter);
@@ -124,13 +146,17 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
     @Override
     public void cancelOrder(CancelOrderResponse cancelOrderResponse) {
         if (!TextUtils.isEmpty(cancelOrderResponse.getmStatus()) && ("1".equalsIgnoreCase(cancelOrderResponse.getmStatus()))) {
-            showCenteredToast(this, cancelOrderResponse.getmMessage());
+            showCenteredToast(ryParent,this, cancelOrderResponse.getmMessage());
             if (myOrderAdapter != null) {
                 myOrderDataArrayList.remove(cancelOrderPosition);
                 myOrderAdapter.notifyDataSetChanged();
+
+                if (myOrderDataArrayList.isEmpty()) {
+                    nodataFound(getString(R.string.no_data_found));
+                }
             }
         } else {
-            showCenteredToast(this, cancelOrderResponse.getmData());
+            showCenteredToast(ryParent,this, cancelOrderResponse.getmData());
         }
     }
 
@@ -163,7 +189,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                             }
                             startActivity(intent);
                         } else {
-                            marshMallowPermissions.requestPermissionForPhone();
+                            marshMallowPermissions.requestPermissionForPhone(ryParent);
                         }
 
 
@@ -190,7 +216,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                         Util.hideKeyBoardMethod(this, view);
 
                     } else {
-                        showCenteredToast(this, getString(R.string.order_cancel_reason));
+                        showCenteredToast(ryParent,this, getString(R.string.order_cancel_reason));
 
                     }
 

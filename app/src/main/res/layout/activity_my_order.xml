@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ryParent"
     android:orientation="vertical"
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.MyOrderActivity">
 
 
+    <include
+        android:id="@+id/inTop"
+        layout="@layout/toolbar_product_grid_detail" />
 
-        <include layout="@layout/toolbar_product_grid_detail" />
+    <ScrollView
+        android:id="@+id/svTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inTop"
+        android:scrollbars="none">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="11sp"
-                android:layout_marginRight="11sp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="11sp"
                 android:background="@drawable/black_rect"
                 android:orientation="vertical"
                 android:padding="13sp">
@@ -116,17 +121,65 @@
             </LinearLayout>
 
 
-            </LinearLayout>
+        </LinearLayout>
 
-        </ScrollView>
+    </ScrollView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMyOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/svTop"
         android:layout_gravity="center" />
 
+    <customfonts.MyTextView_Roboto_Regular
+        android:id="@+id/txtNoDataFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:text="@string/no_data_found"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:ignore="MissingConstraints" />
 
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/inTop"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical"
+        shimmer:duration="800">
 
-</LinearLayout>
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+</RelativeLayout>

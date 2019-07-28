@@ -169,6 +169,7 @@
     <string name="date_time"><![CDATA[Date & Time: ]]></string>
     <string name="cash_on_delivery">Cash On Delivery</string>
     <string name="frequently_bought_product">Frequently Brought Together</string>
+    <string name="orderid">Order Id :</string>
 
 
 </resources>

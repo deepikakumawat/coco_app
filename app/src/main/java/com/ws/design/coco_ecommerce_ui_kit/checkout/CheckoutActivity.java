@@ -68,6 +68,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     private int selectedValue;
     private RecyclerView rvPaymentType;
     private PaymentMethodAdapter paymentMethodAdapter;
+    private LinearLayout lyParent;
 
 
     @Override
@@ -93,7 +94,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         if (Util.isDeviceOnline(this)) {
             checkoutPresenter.addressList(CocoPreferences.getUserId());
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
         }
 
         init();
@@ -111,6 +112,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     }
 
     private void init() {
+        lyParent = findViewById(R.id.lyParent);
         rvPaymentType = findViewById(R.id.rvPaymentType);
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
         rvCart = findViewById(R.id.rvCart);
@@ -197,7 +199,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                         startPayment();
 
                     } else {
-                        showCenteredToast(this, "You haven't added address. Please add address first");
+                        showCenteredToast(lyParent,this, "You haven't added address. Please add address first");
                     }
 
 
@@ -250,7 +252,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage);
         if (addressData == null) {
             txtAddAddress.setVisibility(View.VISIBLE);
 
@@ -271,6 +273,8 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_FAIL);
             intent.putExtra("addressData", addressData);
+            intent.putExtra("orderId", "");
+
 
             startActivity(intent);
         }
@@ -328,7 +332,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                     if (Util.isDeviceOnline(this)) {
                         checkoutPresenter.addressList(CocoPreferences.getUserId());
                     } else {
-                        showCenteredToast(this, getString(R.string.network_connection));
+                        showCenteredToast(lyParent,this, getString(R.string.network_connection));
                     }
                 }
             }
@@ -445,7 +449,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
 
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
 
         }
     }
@@ -464,6 +468,8 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_FAIL);
             intent.putExtra("addressData", addressData);
+            intent.putExtra("orderId", "");
+
 
             startActivity(intent);
 
@@ -478,17 +484,20 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         if (!TextUtils.isEmpty(checkoutPaymentResponse.getmStatus()) && ("1".equalsIgnoreCase(checkoutPaymentResponse.getmStatus()))) {
 
 
+            String orderId = checkoutPaymentResponse.getmData().getmOrderId();
+
             orderStatus = Constant.ORDER_SUCCESS;
 
             Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
             intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_SUCCESS);
             intent.putExtra("addressData", addressData);
+            intent.putExtra("orderId", orderId);
 
             startActivity(intent);
 
         } else {
-            showCenteredToast(this, checkoutPaymentResponse.getMessage());
+            showCenteredToast(lyParent,this, checkoutPaymentResponse.getMessage());
         }
     }
 

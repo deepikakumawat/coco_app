@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -35,6 +36,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
     private TextView btnGoogle;
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
+    private LinearLayout lyParent;
 
     // [START declare_auth]
 //    private FirebaseAuth mAuth;
@@ -102,44 +104,45 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(this, getString(R.string.email_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.email_validation_message));
                 etEmail.requestFocus();
             } else if (TextUtils.isEmpty(fName)) {
-                showCenteredToast(this, getString(R.string.first_name_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.first_name_validation_message));
                 etFname.requestFocus();
             } else if (TextUtils.isEmpty(lName)) {
-                showCenteredToast(this, getString(R.string.last_name_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.last_name_validation_message));
                 etLname.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(this, getString(R.string.invalid_mobile_number));
+                showCenteredToast(lyParent,this, getString(R.string.invalid_mobile_number));
                 etPhone.requestFocus();
             } else if (TextUtils.isEmpty(password)) {
-                showCenteredToast(this, getString(R.string.invalid_password));
+                showCenteredToast(lyParent,this, getString(R.string.invalid_password));
                 etPassword.requestFocus();
             } else if (TextUtils.isEmpty(confirmPassword)) {
-                showCenteredToast(this, getString(R.string.invalid_password));
+                showCenteredToast(lyParent,this, getString(R.string.invalid_password));
                 etConfirmPassword.requestFocus();
             } else if (!isEmailValid(email)) {
-                showCenteredToast(this, getString(R.string.invalid_email));
+                showCenteredToast(lyParent,this, getString(R.string.invalid_email));
                 etEmail.requestFocus();
             } else if (!isValidMobile(phone)) {
-                showCenteredToast(this, getString(R.string.mobile_number));
+                showCenteredToast(lyParent,this, getString(R.string.mobile_number));
                 etPhone.requestFocus();
             } else if (!confirmPassword.equalsIgnoreCase(password)) {
-                showCenteredToast(this, getString(R.string.password_confirm_password));
+                showCenteredToast(lyParent,this, getString(R.string.password_confirm_password));
                 etConfirmPassword.requestFocus();
 
             } else {
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
         }
         return validation_detials_flag;
     }
 
 
     private void init() {
+        lyParent =  findViewById(R.id.lyParent);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
@@ -165,7 +168,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage);
     }
 
     @Override
@@ -186,7 +189,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
             finish();
 
         }else {
-            showCenteredToast(this,signUpResponse.getMessage());
+            showCenteredToast(lyParent,this,signUpResponse.getMessage());
         }
     }
 

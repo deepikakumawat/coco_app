@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/lyParent"
     android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity">
 

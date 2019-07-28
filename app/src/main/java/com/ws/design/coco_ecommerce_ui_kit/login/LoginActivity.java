@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     private EditText etEmail, etPassword;
     private Button btn_login;
     private TextView txtFwdPassword;
+    private RelativeLayout ryParent;
 
 
     @Override
@@ -66,14 +68,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(this, getString(R.string.email_validation_message));
+                showCenteredToast(ryParent,this, getString(R.string.email_validation_message));
                 etEmail.requestFocus();
             } else if (TextUtils.isEmpty(password)) {
-                showCenteredToast(this, getString(R.string.invalid_password));
+                showCenteredToast(ryParent,this, getString(R.string.invalid_password));
                 etPassword.requestFocus();
             } else {
                 if (!Util.isEmailValid(email)) {
-                    showCenteredToast(this, getString(R.string.invalid_email));
+                    showCenteredToast(ryParent,this, getString(R.string.invalid_email));
                     etEmail.requestFocus();
                 } else {
                     validation_detials_flag = true;
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
             }
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(ryParent,this, getString(R.string.network_connection));
         }
         return validation_detials_flag;
     }
@@ -103,11 +105,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
     @Override
     public void onFailure(String appErrorMessage) {
-        Util.showCenteredToast(this, appErrorMessage);
+        Util.showCenteredToast(ryParent,this, appErrorMessage);
     }
 
 
     private void init() {
+        ryParent =  findViewById(R.id.ryParent);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btn_login = (Button) findViewById(R.id.btn_login);
@@ -138,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                     startActivity(intent);
                     finish();
                 } else {
-                    showCenteredToast(this, loginResponse.getMessage());
+                    showCenteredToast(ryParent,this, loginResponse.getMessage());
                 }
 
             }

@@ -25,6 +25,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
     private TextView txtTitle;
     private ImageView imgBack;
     private LinearLayout lyConfirmationMail;
+    private LinearLayout lyParent;
 
 
     @Override
@@ -32,6 +33,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        lyParent = findViewById(R.id.lyParent);
         txtTitle = findViewById(R.id.txtTitle);
         imgBack = findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
@@ -60,11 +62,11 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(this, getString(R.string.email_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.email_validation_message));
                 etEmail.requestFocus();
             }  else {
                 if (!Util.isEmailValid(email)) {
-                    showCenteredToast(this, getString(R.string.invalid_email));
+                    showCenteredToast(lyParent,this, getString(R.string.invalid_email));
                     etEmail.requestFocus();
                 } else {
                     validation_detials_flag = true;
@@ -72,7 +74,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
             }
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
         }
         return validation_detials_flag;
     }
@@ -92,7 +94,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
     @Override
     public void onFailure(String appErrorMessage) {
-        Util.showCenteredToast(this, appErrorMessage);
+        Util.showCenteredToast(lyParent,this, appErrorMessage);
         lyConfirmationMail.setVisibility(View.GONE);
     }
 
@@ -128,7 +130,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
                     startActivity(intent);
                     finish();
                 } else {
-                    showCenteredToast(this, loginResponse.getMessage());
+                    showCenteredToast(lyParent,this, loginResponse.getMessage());
                 }
 
             }

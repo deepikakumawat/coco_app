@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ryParent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.Cart1Activity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8.3dp"
-            android:visibility="gone"
             android:layout_marginTop="13.3dp"
             android:layout_marginRight="8.9dp"
             android:background="@drawable/rect_recycler"
@@ -43,15 +45,48 @@
 
     <customfonts.MyTextView_Roboto_Regular
         android:id="@+id/txtNoDataFound"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="11dp"
-        android:visibility="gone"
         android:layout_marginTop="25dp"
         android:text="@string/no_data_found"
         android:textColor="@color/black"
         android:textSize="15sp" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        shimmer:duration="800"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 </RelativeLayout>

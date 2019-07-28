@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListPresenter;
@@ -50,6 +52,8 @@ public class SellerProductFragment extends ToolbarBaseFragment implements Seller
     private String sellerId;
     private TextView txtNoDataFound;
     private LinearLayout lySellerProduct;
+    private ShimmerFrameLayout mShimmerViewContainer;
+    private RelativeLayout ryParent;
 
 
     @Nullable
@@ -69,14 +73,17 @@ public class SellerProductFragment extends ToolbarBaseFragment implements Seller
         Bundle bundle = getArguments();
         sellerId = bundle.getString("sellerId");
 
+        ryParent = view.findViewById(R.id.ryParent);
         lySellerProduct = view.findViewById(R.id.lySellerProduct);
         txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
         rvSellerProduct = view.findViewById(R.id.rvSellerProduct);
+        mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
+
 
         if (Util.isDeviceOnline(getActivity())) {
             sellerPresenter.getSellerProduct(sellerId);
         } else {
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
         }
 
@@ -88,19 +95,23 @@ public class SellerProductFragment extends ToolbarBaseFragment implements Seller
 
     @Override
     public void showWait() {
-        showProDialog(getActivity());
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
+//        showProDialog(getActivity());
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
+//        dismissProDialog();
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
         txtNoDataFound.setVisibility(View.GONE);
         lySellerProduct.setVisibility(View.VISIBLE);
-        showCenteredToast(getActivity(), appErrorMessage);
+        showCenteredToast(ryParent,getActivity(), appErrorMessage);
     }
 
     @Override
@@ -134,13 +145,13 @@ public class SellerProductFragment extends ToolbarBaseFragment implements Seller
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
 
 
 
 
         } else {
-            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
         }
     }
 
@@ -159,7 +170,7 @@ public class SellerProductFragment extends ToolbarBaseFragment implements Seller
                             sellerPresenter.addToCart(CocoPreferences.getUserId(), sellerProductData.getmProductId(), "1");
 
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                         }
 

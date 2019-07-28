@@ -75,6 +75,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private ProductData productData;
     private DealProducts dealProduct;
     private IFragmentListener mListener;
+    private LinearLayout lyParent;
 //    private ShimmerFrameLayout shimmerContainer;
 
 
@@ -93,12 +94,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         homePresenter = new HomePresenter(this);
 
+        lyParent=   mView.findViewById(R.id.lyParent);
 
         if (Util.isDeviceOnline(getActivity())) {
             homePresenter.getHomeData();
 
         } else {
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
+            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection));
 
         }
 
@@ -261,7 +263,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(getActivity(), appErrorMessage);
+        showCenteredToast(lyParent,getActivity(), appErrorMessage);
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -26,12 +27,14 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private TextView txtUserName;
     private TextView txtUserEmail;
     private LinearLayout lyMyOrder;
+    private RelativeLayout ryParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+        ryParent = findViewById(R.id.ryParent);
         title = findViewById(R.id.title);
         edit_txt = findViewById(R.id.edit_txt);
         edit_txt.setVisibility(View.GONE);
@@ -105,7 +108,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                             txtUserName.setText("");
                             txtUserEmail.setText("");
 
-                            Util.showCenteredToast(MyAccountActivity.this, "Logout Successfully!");
+                            Util.showCenteredToast(ryParent,MyAccountActivity.this, "Logout Successfully!");
 
 
                             Intent data = new Intent();

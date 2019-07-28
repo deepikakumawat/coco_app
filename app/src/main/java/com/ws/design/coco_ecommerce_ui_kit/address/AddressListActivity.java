@@ -38,6 +38,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private static final int ADD_ADDRESS_ACTION = 101;
     int selectedValue = 0;
     private String screen ="";
+    private LinearLayout lyParent;
 
 
     @Override
@@ -64,6 +65,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     }
 
     private void init() {
+        lyParent = findViewById(R.id.lyParent);
         title = findViewById(R.id.title);
         rvMyAddress = findViewById(R.id.rvMyOrder);
         imgBack = findViewById(R.id.imgBack);
@@ -93,7 +95,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
             } else {
-                showCenteredToast(this, getString(R.string.network_connection));
+                showCenteredToast(lyParent,this, getString(R.string.network_connection));
 
             }
 
@@ -112,7 +114,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage);
     }
 
     @Override
@@ -156,13 +158,13 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     @Override
     public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
         if (!TextUtils.isEmpty(deleteAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(deleteAddressResponse.getmStatus()))) {
-            showCenteredToast(this, deleteAddressResponse.getMessage());
+            showCenteredToast(lyParent,this, deleteAddressResponse.getMessage());
             if (addressAdapter != null) {
                 addressDataArrayList.remove(deletedPosition);
                 addressAdapter.notifyDataSetChanged();
             }
         } else {
-            showCenteredToast(this, deleteAddressResponse.getMessage());
+            showCenteredToast(lyParent,this, deleteAddressResponse.getMessage());
         }
     }
 
@@ -185,7 +187,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         if (Util.isDeviceOnline(this)) {
                             addressPresenter.deteleAddress(addressData.getmId());
                         } else {
-                            showCenteredToast(this, getString(R.string.network_connection));
+                            showCenteredToast(lyParent,this, getString(R.string.network_connection));
 
                         }
                     }
@@ -249,7 +251,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
                 } else {
-                    showCenteredToast(this, getString(R.string.network_connection));
+                    showCenteredToast(lyParent,this, getString(R.string.network_connection));
 
                 }
             }

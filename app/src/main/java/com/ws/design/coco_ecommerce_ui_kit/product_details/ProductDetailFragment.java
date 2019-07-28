@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -125,6 +126,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private ColorData selectedColorData;
     private boolean isColorVewVisible = false;
     private LinearLayout lyColor;
+    private ScrollView scrollViewTop;
+    private RelativeLayout ryParent;
 
 
     @Nullable
@@ -166,6 +169,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     private void init(View view) {
+        ryParent = view.findViewById(R.id.ryParent);
+        scrollViewTop = view.findViewById(R.id.scrollViewTop);
         lyColor = view.findViewById(R.id.lyColor);
         rvColor = view.findViewById(R.id.rvColor);
         rvProductAttr = view.findViewById(R.id.rvProductAttr);
@@ -262,7 +267,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
         }
 
@@ -280,7 +285,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
 
                 } else {
-                    showCenteredToast(getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                 }
                 break;
@@ -297,11 +302,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                                 productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
 
                             } else {
-                                showCenteredToast(getActivity(), getString(R.string.network_connection));
+                                showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                             }
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.select_color));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.select_color));
 
                         }
 
@@ -312,7 +317,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                             productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                         }
                     }
@@ -334,11 +339,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                                 productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
 
                             } else {
-                                showCenteredToast(getActivity(), getString(R.string.network_connection));
+                                showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                             }
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.select_color));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.select_color));
 
                         }
                     }else{
@@ -346,7 +351,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                             productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                         }
                     }
@@ -365,7 +370,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.removeWishList(wishListId);
 
                     } else {
-                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+                        showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                     }
 
@@ -391,7 +396,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1", "");
 
                     } else {
-                        showCenteredToast(getActivity(), getString(R.string.network_connection));
+                        showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                     }
 
@@ -414,6 +419,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 setProductShortDes(productShortDesc);
                 break;
             case R.id.lyProduct:
+                scrollViewTop.fullScroll(ScrollView.FOCUS_UP);
 
                 ProductDetailsSimilier productDetailsSimilier = (ProductDetailsSimilier) v.getTag();
                 if (productDetailsSimilier != null) {
@@ -427,6 +433,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 break;
             case R.id.lyBroughtProduct:
 
+                scrollViewTop.fullScroll(ScrollView.FOCUS_UP);
                 productBroughtData = (ProductBroughtData) v.getTag();
                 if (productBroughtData != null) {
                     unSelectAllTabs();
@@ -487,17 +494,17 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(getActivity(), appErrorMessage);
+        showCenteredToast(ryParent,getActivity(), appErrorMessage);
     }
 
     @Override
     public void addToWishList(AddToWishListResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToWishListResponse.getmMessage());
 
 
         } else {
-            showCenteredToast(getActivity(), addToWishListResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToWishListResponse.getmMessage());
         }
     }
 
@@ -832,7 +839,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
 
             if (isClickOnBuyNow) {
 
@@ -843,18 +850,18 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             }
 
         } else {
-            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
         }
     }
 
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(getActivity(), removeWishListResponse.getmMessage());
+            showCenteredToast(ryParent,getActivity(), removeWishListResponse.getmMessage());
             txtAddToWishlist.setVisibility(View.VISIBLE);
             txtRemoveWishlist.setVisibility(View.GONE);
         } else {
-            showCenteredToast(getActivity(), removeWishListResponse.getmData());
+            showCenteredToast(ryParent,getActivity(), removeWishListResponse.getmData());
         }
     }
 
@@ -873,7 +880,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                             productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
 
                         } else {
-                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
 
                         }
 

@@ -44,6 +44,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     private TextView txtRating;
     private LinearLayout lyCustomerRating;
     private boolean isReviewAdded = false;
+    private LinearLayout lyParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +58,14 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
         productRatingPresenter = new ProductRatingPresenter(this);
 
-        if (Util.isDeviceOnline(this)) {
-            productRatingPresenter.getProductRating(productId);
 
-        } else {
-            showCenteredToast(this, getString(R.string.network_connection));
-
-        }
 
 
         init();
     }
 
     private void init() {
+        lyParent = findViewById(R.id.lyParent);
         lyCustomerRating = findViewById(R.id.lyCustomerRating);
         txtRating = findViewById(R.id.txtRating);
         txtReview = findViewById(R.id.txtReview);
@@ -86,6 +82,14 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvRating.setLayoutManager(layoutManager);
+
+        if (Util.isDeviceOnline(this)) {
+            productRatingPresenter.getProductRating(productId);
+
+        } else {
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
+
+        }
     }
 
     @Override
@@ -149,7 +153,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage);
     }
 
 
@@ -215,7 +219,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     @Override
     public void addRating(AddRatingResponse addRatingResponse) {
         if (!TextUtils.isEmpty(addRatingResponse.getmStatus()) && ("1".equalsIgnoreCase(addRatingResponse.getmStatus()))) {
-            showCenteredToast(this, "Review added successfully");
+            showCenteredToast(lyParent,this, "Review added successfully");
 
             isReviewAdded = true;
 
@@ -224,7 +228,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
             productRatingPresenter.getProductRating(productId);
 
         } else {
-            showCenteredToast(this, getString(R.string.somethingWentWrong));
+            showCenteredToast(lyParent,this, getString(R.string.somethingWentWrong));
         }
     }
 
@@ -232,17 +236,17 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(comment)) {
-                showCenteredToast(this, getString(R.string.comment_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.comment_validation_message));
                 etxtReview.requestFocus();
             } else if (rating == 0.0) {
-                showCenteredToast(this, getString(R.string.rating_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.rating_validation_message));
                 productRating.requestFocus();
             } else {
                 validation_detials_flag = true;
 
             }
         } else {
-            showCenteredToast(this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection));
         }
         return validation_detials_flag;
     }

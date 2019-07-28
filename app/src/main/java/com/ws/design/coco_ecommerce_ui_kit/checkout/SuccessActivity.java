@@ -3,6 +3,7 @@ package com.ws.design.coco_ecommerce_ui_kit.checkout;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +54,9 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
     private AddressListResponse.AddressData addressData = null;
     private TextView txtOrderStatus;
     private TextView txtDateTime;
+    private String orderId;
+    private TextView txtOrderId;
+    private ConstraintLayout clParent;
 
 
     @Override
@@ -67,6 +71,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
         if (intent != null) {
             totalPrice = intent.getStringExtra("totalPrice");
             orderStatus = intent.getStringExtra("orderStatus");
+            orderId = intent.getStringExtra("orderId");
             addressData = (AddressListResponse.AddressData) intent.getSerializableExtra("addressData");
 
 
@@ -77,6 +82,8 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
             }
         }
 
+        clParent = findViewById(R.id.clParent);
+        txtOrderId = findViewById(R.id.txtOrderId);
         txtDateTime = findViewById(R.id.txtDateTime);
         txtOrderStatus = findViewById(R.id.txtOrderStatus);
         txtRetry = findViewById(R.id.txtRetry);
@@ -101,6 +108,15 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
             }
         } else {
             paymentFailed();
+        }
+
+        if (!TextUtils.isEmpty(orderId)) {
+            txtOrderId.setVisibility(View.VISIBLE);
+
+            txtOrderId.setText(getString(R.string.orderid) + orderId);
+        } else {
+            txtOrderId.setVisibility(View.GONE);
+
         }
 
 
@@ -164,7 +180,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(this, appErrorMessage);
+        showCenteredToast(clParent,this, appErrorMessage);
        /* if (addressData == null) {
             txtAddAddress.setVisibility(View.VISIBLE);
 
@@ -264,7 +280,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
 
 
             } else {
-                showCenteredToast(this, getString(R.string.network_connection));
+                showCenteredToast(clParent,this, getString(R.string.network_connection));
 
             }
 
@@ -310,7 +326,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
             paymentSuccess();
 
         } else {
-            showCenteredToast(this, checkoutPaymentResponse.getMessage());
+            showCenteredToast(clParent,this, checkoutPaymentResponse.getMessage());
         }
     }
 }
