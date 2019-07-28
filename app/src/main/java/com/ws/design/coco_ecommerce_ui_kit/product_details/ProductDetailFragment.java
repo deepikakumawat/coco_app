@@ -667,6 +667,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         String attributeRelatedData = "";
         String attributeId = "";
         String attributeName = "";
+        isColorVewVisible = false;
         try {
             for (ProductAttributeData productAttributeData : productAttributeDataArrayList) {
                 if (productAttributeData.getmAttrType().equalsIgnoreCase("COLOR")) {
@@ -717,6 +718,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
 
+            } else {
+                lyColor.setVisibility(View.GONE);
             }
 
 
