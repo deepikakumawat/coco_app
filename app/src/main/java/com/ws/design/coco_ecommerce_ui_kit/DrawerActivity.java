@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
@@ -84,6 +85,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     String[] PERMISSIONS = {Manifest.permission.CALL_PHONE};
     private final int PERMISSION_ALL = 11;
     private TextView txtTitle;
+    private ImageView imgSearch;
 
 
     @Override
@@ -152,11 +154,12 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             public void onItemClick(View v, int position) {
                 if (position == 0) {
                     setScreenTitle(getString(R.string.home));
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
                 } else if (position == 1) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                        setScreenTitle(getString(R.string.my_cart));
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", false, false);
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
@@ -244,7 +247,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         invalidateOptionsMenu();
 
         setScreenTitle(getString(R.string.home));
-        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), null, false, false);
+        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
     }
 
@@ -304,7 +307,10 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             }
         });
 
-        toolbar.findViewById(R.id.search).setOnClickListener(new View.OnClickListener() {
+        imgSearch = findViewById(R.id.imgSearch);
+
+
+        toolbar.findViewById(R.id.imgSearch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DrawerActivity.this, CocoSearch1.class));
@@ -315,7 +321,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                    startActivity(new Intent(DrawerActivity.this, CartActivity.class));
+                    setScreenTitle(getString(R.string.my_cart));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                 } else {
                     startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                 }
@@ -373,6 +380,17 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         if (!TextUtils.isEmpty(title)) {
             txtTitle.setText(title);
         }
+    }
+
+    @Override
+    public void isCartIconVisible(boolean isCartIconVisible) {
+        toolbar.findViewById(R.id.btn_cart).setVisibility(isCartIconVisible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void isSearchIconVisible(boolean isSearchIconVisible) {
+
+        imgSearch.setVisibility(isSearchIconVisible ? View.VISIBLE : View.GONE);
     }
 
     class MyOnClickListener implements View.OnClickListener {
@@ -504,8 +522,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         }
 
     }
-
-
 
 
 }

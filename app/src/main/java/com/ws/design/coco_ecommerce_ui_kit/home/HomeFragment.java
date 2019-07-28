@@ -22,6 +22,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.ExploreActivity;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
@@ -44,7 +45,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class HomeFragment extends ToolbarBaseFragment implements View.OnClickListener, HomeView {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, HomeView {
 
 
     private ArrayList<HomeBannerModelClass> homeBannerModelClasses;
@@ -303,21 +304,17 @@ public class HomeFragment extends ToolbarBaseFragment implements View.OnClickLis
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        if (this.mListener != null ) {
-            this.mListener.setScreenTitle(getString(R.string.home));
-
-        }
-
+    protected boolean isCartIconVisible() {
+        return  true;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (DrawerActivity) context;
-
+    protected boolean isSearchIconVisible() {
+        return  true;
     }
 
+    @Override
+    protected String getActionbarTitle() {
+        return getString(R.string.home);
+    }
 }

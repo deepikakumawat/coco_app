@@ -7,10 +7,7 @@
     android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.Cart1Activity">
 
-    <include
-        android:id="@+id/inTop"
-        layout="@layout/include_shimmer_layout"
-        android:visibility="gone" />
+
 
 
     <RelativeLayout
