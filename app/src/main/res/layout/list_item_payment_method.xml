@@ -6,30 +6,34 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/linear_radio"
+        android:id="@+id/lyPaymentType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="17dp"
         android:paddingLeft="18dp"
-        android:paddingTop="18dp">
+        android:paddingTop="18dp"
+        android:paddingBottom="17dp">
 
 
 
-        <RadioButton
-            android:id="@+id/button1"
-            style="@style/radionbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingLeft="10dp"
-            android:textColor="#666666"
-            android:textSize="12sp" />
+            <RadioButton
+                android:id="@+id/rbPaymentType"
+                style="@style/radionbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:checked="false"
+                android:clickable="false"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+
 
 
 
         <customfonts.MyTextView_Roboto_Medium
-            android:id="@+id/paymentType"
+            android:id="@+id/txtPaymentType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,7 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="26dp"
-            android:src="@drawable/credit_card" />
+            android:src="@drawable/credit_card"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

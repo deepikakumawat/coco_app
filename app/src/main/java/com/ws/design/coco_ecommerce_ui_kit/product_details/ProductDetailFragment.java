@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
@@ -53,7 +54,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class ProductDetailFragment extends ToolbarBaseFragment implements ProductDetailsView, View.OnClickListener {
+public class ProductDetailFragment extends BaseFragment implements ProductDetailsView, View.OnClickListener {
 
     private static final int ADD_REVIEW_ACTION = 201;
     RelativeLayout rightNav;
@@ -420,7 +421,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     onClick(txtProductShortDesc);
                     productId = productDetailsSimilier.getmProductId();
 
-                    productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductSlug(), CocoPreferences.getUserId());
+                    productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductId(), CocoPreferences.getUserId());
                 }
 
                 break;
@@ -432,7 +433,7 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
                     onClick(txtProductShortDesc);
                     productId = productBroughtData.getmProductId();
 
-                    productDetailsPresenter.getProductDetails(productBroughtData.getmProductSlug(), CocoPreferences.getUserId());
+                    productDetailsPresenter.getProductDetails(productBroughtData.getmProductId(), CocoPreferences.getUserId());
                 }
 
                 break;
@@ -881,22 +882,20 @@ public class ProductDetailFragment extends ToolbarBaseFragment implements Produc
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (DrawerActivity) context;
 
+
+    @Override
+    protected String getActionbarTitle() {
+        return getString(R.string.product_details);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        if (this.mListener != null ) {
-            this.mListener.setScreenTitle(getString(R.string.product_details));
-
-        }
-
+    protected boolean isSearchIconVisible() {
+        return true;
     }
 
+    @Override
+    protected boolean isCartIconVisible() {
+        return true;
+    }
 }

@@ -1,6 +1,5 @@
 package com.ws.design.coco_ecommerce_ui_kit.my_wishlist;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,8 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -24,13 +22,12 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import java.util.ArrayList;
 
 import fragment.FragmentManagerUtils;
-import fragment.ToolbarBaseFragment;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class MyWishlistFragment extends ToolbarBaseFragment implements MyWishListView, View.OnClickListener {
+public class MyWishlistFragment extends BaseFragment implements MyWishListView, View.OnClickListener {
     TextView txtTitle;
 
     private MyWishListAdapter myWishListAdapter;
@@ -41,7 +38,6 @@ public class MyWishlistFragment extends ToolbarBaseFragment implements MyWishLis
     private int removePosstion = -1;
     private ImageView imgBack;
     private View mView;
-    private IFragmentListener mListener;
 
 
     @Nullable
@@ -206,21 +202,10 @@ public class MyWishlistFragment extends ToolbarBaseFragment implements MyWishLis
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (DrawerActivity) context;
 
-    }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        if (this.mListener != null ) {
-            this.mListener.setScreenTitle(getString(R.string.my_wishlist));
-
-        }
-
+    protected String getActionbarTitle() {
+        return getString(R.string.my_wishlist);
     }
 }

@@ -23,7 +23,7 @@
         android:layout_marginLeft="30dp"
         android:text="COCO Ecommerce"/>
     <ImageView
-        android:id="@+id/search"
+        android:id="@+id/imgSearch"
         android:layout_width="19dp"
         android:layout_height="19dp"
         android:layout_gravity="right"

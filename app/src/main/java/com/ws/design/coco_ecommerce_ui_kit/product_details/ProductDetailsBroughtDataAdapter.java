@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 
 import java.util.ArrayList;
@@ -44,13 +45,13 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
             holder.txtProductName.setText(productBroughtData.getmProductName());
 
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmPrice());
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmSalePrice());
             holder. txtRating .setText(!TextUtils.isEmpty(productBroughtData.getmAvgRating()) ? productBroughtData.getmAvgRating() : "0");
 
 
 
-            String thumbnail =  productBroughtData.getmProductImg();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productBroughtData.getmProductImg();
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
 

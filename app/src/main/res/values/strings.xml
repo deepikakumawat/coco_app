@@ -153,7 +153,7 @@
     <string name="msg_token_fmt">FCM Message Token</string>
     <string name="your_cart_empty">Your cart is empty.</string>
     <string name="continue_shopping">Continue Shopping</string>
-    <string name="no_data_found">No Data Found.</string>
+    <string name="no_data_found">No Data Found</string>
     <string name="home_success">Success</string>
     <string name="retry">Retry?</string>
     <string name="go_to_home">Go To Home</string>
@@ -164,6 +164,11 @@
     <string name="categories">Categories</string>
     <string name="my_wishlist">My Wishlist</string>
     <string name="trandings">Trandings</string>
+    <string name="order_cancel_reason_title">Order Cancel Reason</string>
+    <string name="my_cart">My Cart</string>
+    <string name="date_time"><![CDATA[Date & Time: ]]></string>
+    <string name="cash_on_delivery">Cash On Delivery</string>
+    <string name="frequently_bought_product">Frequently Brought Together</string>
 
 
 </resources>

@@ -60,11 +60,17 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
+            holder.rbProductRating.setRating(!TextUtils.isEmpty(productData.getmAvgRating()) ? Float.parseFloat(productData.getmAvgRating()) : 0);
+
 
 
             holder.lyProduct.setTag(productData);
-            holder.lyProduct.setTag(R.id.ly_root, position);
+            holder.lyProduct.setTag(R.id.lyProduct, position);
             holder.lyProduct.setOnClickListener(mpopularListFragment);
+
+            holder.lyAddToCart.setTag(productData);
+            holder.lyAddToCart.setTag(R.id.lyAddToCart, position);
+            holder.lyAddToCart.setOnClickListener(mpopularListFragment);
         }
 
 
@@ -81,6 +87,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
 
         TextView txtProductSalePrice, offer, txtProductName;
         ImageView imgProduct;
+        LinearLayout lyAddToCart;
         LinearLayout linear;
         private LinearLayout lyProduct;
         private RatingBar rbProductRating;
@@ -93,9 +100,10 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             imgProduct =  view.findViewById(R.id.imgProduct);
             txtProductName =  view.findViewById(R.id.txtProductName);
             txtProductSalePrice =  view.findViewById(R.id.txtProductSalePrice);
-            offer = (TextView) view.findViewById(R.id.offer);
-            linear = (LinearLayout) view.findViewById(R.id.linear);
-            lyProduct = (LinearLayout) view.findViewById(R.id.ly_root);
+            offer =  view.findViewById(R.id.offer);
+            linear =  view.findViewById(R.id.linear);
+            lyProduct =  view.findViewById(R.id.lyProduct);
+            lyAddToCart =  view.findViewById(R.id.lyAddToCart);
 
         }
 

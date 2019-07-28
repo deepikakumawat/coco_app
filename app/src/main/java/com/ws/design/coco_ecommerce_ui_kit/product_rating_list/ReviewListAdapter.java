@@ -6,18 +6,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.Ratings;
-import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 

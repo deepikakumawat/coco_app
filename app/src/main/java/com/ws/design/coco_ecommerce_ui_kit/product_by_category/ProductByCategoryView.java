@@ -1,7 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 
-
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 
 public interface ProductByCategoryView {
 
@@ -14,7 +14,5 @@ public interface ProductByCategoryView {
     void getProductByCategory(ProductByCategoryResponse productByCategoryResponse);
 
 
-
-
-
+    void addToCart(AddToCartResponse addToCartResponse);
 }

@@ -41,7 +41,6 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.CartActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Signup2Activity" />

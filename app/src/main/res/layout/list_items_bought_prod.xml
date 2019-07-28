@@ -1,124 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="196dp"
-        app:cardBackgroundColor="@color/white"
-        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="7dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="7dp"
-        android:layout_marginLeft="7dp">
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/white">
+
         <LinearLayout
-            android:id="@+id/lyBroughtProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingLeft="15dp"
-            android:paddingBottom="15dp"
-            android:paddingRight="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            
-            
-            <ImageView
-                android:id="@+id/imgProduct"
-                android:layout_width="80dp"
-                android:layout_height="150dp"
-                android:src="@drawable/iphnx"/>
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/lyAddToCart"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:layout_weight="2"
+
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgAddToCart"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/dark_cart" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lyBroughtProduct"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp">
+
+
+                <ImageView
+                    android:id="@+id/imgProduct"
+                    android:layout_width="80dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/iphnx" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
                     android:orientation="vertical">
 
-                <customfonts.MyTextView_Roboto_Medium
-                    android:layout_width="200dp"
-                    android:id="@+id/txtProductName"
-                    android:layout_height="wrap_content"
-                    android:textSize="13.3sp"
-                    android:textColor="@color/black"
-                    android:text="I Phone X, 128GB (Black and Silver Color)"/>
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12sp"
-                    android:orientation="horizontal">
-
-
-
-                    <customfonts.MyTextView_Roboto_Bold
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="11.3sp"
-                        android:layout_gravity="center"
-                        android:id="@+id/txtRating"
-                        android:textColor="@color/cut_price"/>
+                        android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-
-                        android:src="@drawable/star"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"/>
+                        <customfonts.MyTextView_Roboto_Medium
+                            android:id="@+id/txtProductName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="I Phone X, 128GB (Black and Silver Color)"
+                            android:textColor="@color/black"
+                            android:textSize="13.3sp" />
 
 
-                    <customfonts.MyTextView_Roboto_Black
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="14.7sp"
-                        android:layout_weight="1"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-
-                        android:id="@+id/txtProductPrice"
-                        android:layout_marginRight="12sp"
-                        android:text="$ 343"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12sp"
+                            android:orientation="horizontal">
 
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
+                            <customfonts.MyTextView_Roboto_Bold
+                                android:id="@+id/txtRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:text="12"
+                                android:textColor="@color/cut_price"
+                                android:textSize="11.3sp" />
 
-                        android:layout_marginRight="15dp"
-                        android:id="@+id/imgAddToCart"
-                        android:src="@drawable/dark_cart"/>
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
 
-                </LinearLayout>
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/star" />
 
+
+                            <customfonts.MyTextView_Roboto_Black
+                                android:id="@+id/txtProductPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginRight="12sp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="$ 343"
+                                android:textColor="@color/black"
+                                android:textSize="14.7sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
-
-
-
 
 
             </LinearLayout>
-
-            
         </LinearLayout>
-
 
     </android.support.v7.widget.CardView>
 

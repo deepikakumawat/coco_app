@@ -44,13 +44,13 @@ public class ProductDetailsTopRatedProductsAdapter extends RecyclerView.Adapter<
 
             holder.txtProductName.setText(productData.getmProductName());
 
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmSalePrice());
             holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
 
 
 
-            String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
             holder.lyProduct.setTag(productData);

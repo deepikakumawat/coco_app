@@ -29,7 +29,10 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -49,6 +52,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
     private CheckoutPresenter checkoutPresenter;
     private AddressListResponse.AddressData addressData = null;
     private TextView txtOrderStatus;
+    private TextView txtDateTime;
 
 
     @Override
@@ -66,7 +70,6 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
             addressData = (AddressListResponse.AddressData) intent.getSerializableExtra("addressData");
 
 
-
             try {
                 totalRazorPrice = totalPrice + "00";
             } catch (NumberFormatException e) {
@@ -74,6 +77,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
             }
         }
 
+        txtDateTime = findViewById(R.id.txtDateTime);
         txtOrderStatus = findViewById(R.id.txtOrderStatus);
         txtRetry = findViewById(R.id.txtRetry);
         txtGoToHome = findViewById(R.id.txtGoToHome);
@@ -85,20 +89,25 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
         txtGoToHome.setOnClickListener(this);
 
 
-        txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+        txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? getString(R.string.Rs) + totalPrice : "-");
 
         if (!TextUtils.isEmpty(orderStatus)) {
             if (orderStatus.equalsIgnoreCase(Constant.ORDER_SUCCESS)) {
-              paymentSuccess();
+                paymentSuccess();
 
             } else {
-               paymentFailed();
+                paymentFailed();
 
             }
         } else {
             paymentFailed();
         }
 
+
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat(Constant.DATE_TIME_FORMAT);
+        String currentDateandTime = sdf.format(currentTime);
+        txtDateTime.setText(getString(R.string.date_time) + currentDateandTime);
 
     }
 
@@ -110,7 +119,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
         txtOrderStatus.setText("Thank your order was successfully placed.");
     }
 
-    private void paymentFailed(){
+    private void paymentFailed() {
         txtRetry.setVisibility(View.VISIBLE);
         txtGoToHome.setVisibility(View.VISIBLE);
         txtGoToHome.setText(getString(R.string.go_to_home));
@@ -172,7 +181,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
         }*/
 
         if (TextUtils.isEmpty(orderStatus)) {
-         paymentFailed();
+            paymentFailed();
         }
 
     }
@@ -225,7 +234,6 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
         try {
 
 
-
             if (Util.isDeviceOnline(this)) {
                 if (addressData != null) {
                     checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
@@ -255,7 +263,7 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
                 }
 
 
-            }else{
+            } else {
                 showCenteredToast(this, getString(R.string.network_connection));
 
             }
@@ -280,14 +288,12 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
 //            showCenteredToast(this,"Payment failed: " + code + " " + response);
 
 
-          paymentFailed();
+            paymentFailed();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 
 
     @Override
@@ -301,10 +307,10 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
 
             orderStatus = Constant.ORDER_SUCCESS;
 
-          paymentSuccess();
+            paymentSuccess();
 
-        }else {
-            showCenteredToast(this,checkoutPaymentResponse.getMessage());
+        } else {
+            showCenteredToast(this, checkoutPaymentResponse.getMessage());
         }
     }
 }

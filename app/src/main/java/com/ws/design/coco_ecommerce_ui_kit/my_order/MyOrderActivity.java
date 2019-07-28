@@ -243,10 +243,11 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
     public void loadReasonData() {
         List<String> reasonList = new ArrayList<>();
         reasonList.add("Choose Reason");
-        reasonList.add("Change Address");
-        reasonList.add("Product is not required anymore.");
-        reasonList.add("Change Product");
-        reasonList.add("Others");
+        reasonList.add("Price Too High");
+        reasonList.add("Buying From Other Places");
+        reasonList.add("Order by Mistake");
+        reasonList.add("Information Not Complete");
+        reasonList.add("Other");
 
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, reasonList);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -259,7 +260,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
         try {
             cancelReason = (String) parent.getItemAtPosition(position);
 
-            if (cancelReason.equalsIgnoreCase("others")) {
+            if (cancelReason.equalsIgnoreCase("other")) {
                 lyReason.setVisibility(View.VISIBLE);
             } else {
                 lyReason.setVisibility(View.GONE);

@@ -51,7 +51,7 @@ public class FilterActivity extends ToolbarBaseFragment {
 
 
         title = (TextView)mView.findViewById(R.id.title);
-        imageView = (ImageView)mView.findViewById(R.id.search);
+        imageView = (ImageView)mView.findViewById(R.id.imgSearch);
 
 
         icon_toolbar = mView.findViewById(R.id.navigation_menu);

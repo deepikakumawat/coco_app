@@ -11,13 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
@@ -26,7 +25,6 @@ import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
-
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -43,6 +41,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     private CheckoutListAdapter checkoutListAdapter;
     private RecyclerView rvCart;
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
+    private ArrayList<PaymentMethodData> paymentMethodDataArrayList = new ArrayList<>();
     private TextView txtConfirmPlaceOrder;
     private TextView txtTitle;
     private ImageView imgBack;
@@ -67,6 +66,8 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     private String totalRazorPrice;
     private String orderStatus = "";
     private int selectedValue;
+    private RecyclerView rvPaymentType;
+    private PaymentMethodAdapter paymentMethodAdapter;
 
 
     @Override
@@ -110,6 +111,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
     }
 
     private void init() {
+        rvPaymentType = findViewById(R.id.rvPaymentType);
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
         rvCart = findViewById(R.id.rvCart);
         imgBack = findViewById(R.id.imgBack);
@@ -133,6 +135,15 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvCart.setLayoutManager(layoutManager);
+
+        LinearLayoutManager layoutManagerPaymentMethod = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvPaymentType.setLayoutManager(layoutManagerPaymentMethod);
+
+
+
+        paymentMethodDataArrayList.add(new PaymentMethodData(false,getString(R.string.cash_on_delivery)));
+        paymentMethodAdapter = new PaymentMethodAdapter(this, paymentMethodDataArrayList, CheckoutActivity.this);
+        rvPaymentType.setAdapter(paymentMethodAdapter);
 
         imgBack.setOnClickListener(this);
 
@@ -164,7 +175,10 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             }
         });
 
+
+
     }
+
 
 
     @Override
@@ -197,6 +211,22 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                 case R.id.txtAddAddress:
                     intent = new Intent(CheckoutActivity.this, AddAddressActivity.class);
                     startActivityForResult(intent, ADD_ADDRESS_ACTION);
+                    break;
+                case R.id.lyPaymentType:
+                    PaymentMethodData paymentMethodData = ((PaymentMethodData) view.getTag());
+                    if (paymentMethodData != null) {
+                        if (paymentMethodAdapter != null) {
+                            if (paymentMethodData.isSelectedPayment()) {
+                                paymentMethodData.setSelectedPayment(false);
+                            }else{
+                                paymentMethodData.setSelectedPayment(true);
+                            }
+                            paymentMethodAdapter.notifyDataSetChanged();
+
+                            callCheckoutPaymentApi("cashondelivery");
+                        }
+                    }
+
                     break;
                 default:
                     break;
@@ -373,46 +403,50 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         try {
 
 
-            if (Util.isDeviceOnline(this)) {
-                if (addressData != null) {
-                    checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
-                            razorpayPaymentID,
-                            "0",
-                            "201600",
-                            "1",
-                            CocoPreferences.getFirstName(),
-                            CocoPreferences.getLastName(),
-                            CocoPreferences.getUserEmail(),
-                            "gurudwara",
-                            CocoPreferences.getUserPhone(),
-                            "Jaipur",
-                            "30252012",
-                            "raj",
-                            "jai",
-                            CocoPreferences.getFirstName(),
-                            CocoPreferences.getLastName(),
-                            CocoPreferences.getUserEmail(),
-                            "gurudwara",
-                            CocoPreferences.getUserPhone(),
-                            "Jaipur",
-                            "30252012",
-                            "raj",
-                            "jai"
-                    );
-
-
-
-                }
-
-
-            } else {
-                showCenteredToast(this, getString(R.string.network_connection));
-
-            }
+           callCheckoutPaymentApi(razorpayPaymentID);
 
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void callCheckoutPaymentApi(String razorpayPaymentID) {
+        if (Util.isDeviceOnline(this)) {
+            if (addressData != null) {
+                checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
+                        razorpayPaymentID,
+                        "0",
+                        "201600",
+                        "1",
+                        CocoPreferences.getFirstName(),
+                        CocoPreferences.getLastName(),
+                        CocoPreferences.getUserEmail(),
+                        "gurudwara",
+                        CocoPreferences.getUserPhone(),
+                        "Jaipur",
+                        "30252012",
+                        "raj",
+                        "jai",
+                        CocoPreferences.getFirstName(),
+                        CocoPreferences.getLastName(),
+                        CocoPreferences.getUserEmail(),
+                        "gurudwara",
+                        CocoPreferences.getUserPhone(),
+                        "Jaipur",
+                        "30252012",
+                        "raj",
+                        "jai"
+                );
+
+
+
+            }
+
+
+        } else {
+            showCenteredToast(this, getString(R.string.network_connection));
+
         }
     }
 
@@ -457,4 +491,6 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             showCenteredToast(this, checkoutPaymentResponse.getMessage());
         }
     }
+
+
 }

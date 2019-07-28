@@ -1,5 +1,6 @@
 package fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,16 +8,21 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryPresenter;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryView;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
+import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -120,10 +126,9 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.ly_root:
+                case R.id.lyProduct:
 
                     ProductData productData = (ProductData) view.getTag();
-//                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
                     if (productData != null) {
 
                         Bundle bundle = new Bundle();
@@ -139,13 +144,41 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     }
 
                     break;
+                case R.id.lyAddToCart:
 
+
+                    productData = ((ProductData) view.getTag());
+
+                    if (productData != null) {
+
+                        if (Util.isDeviceOnline(getActivity())) {
+                            productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
+
+                        } else {
+                            showCenteredToast(getActivity(), getString(R.string.network_connection));
+
+                        }
+
+                    }
+                    break;
 
                 default:
                     break;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addToCart(AddToCartResponse addToCartResponse) {
+        if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
+            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
+
+
+
+        } else {
+            showCenteredToast(getActivity(), addToCartResponse.getmMessage());
         }
     }
 }

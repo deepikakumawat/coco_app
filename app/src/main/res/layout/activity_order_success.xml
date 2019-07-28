@@ -2,149 +2,151 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:ignore="MissingConstraints">
-
-    <include layout="@layout/toolbar_cart"
-        />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="50dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
-        <RelativeLayout
+        <include layout="@layout/toolbar_cart" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints">
-
-
-
-            <ImageView
-                android:id="@+id/imgOrderStatus"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:src="@drawable/payment_fail" />
+            android:padding="50dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical"
-                android:layout_below="@+id/imgOrderStatus"
-
                 tools:ignore="MissingConstraints">
 
-                <android.support.v7.widget.CardView
+
+                <ImageView
+                    android:id="@+id/imgOrderStatus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/payment_fail" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgOrderStatus"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
+
                     tools:ignore="MissingConstraints">
 
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        tools:ignore="MissingConstraints">
 
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                            <customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/txtOrderStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+
+
+                            <customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/txtTotalPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:text="price"
+                                android:textColor="@color/colorAccent"
+                                android:textStyle="bold"
+                                android:textSize="18sp" />
+
+
+                        </LinearLayout>
+
+
+                    </android.support.v7.widget.CardView>
 
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"
                         android:orientation="vertical">
 
-
                         <customfonts.MyTextView_Roboto_Regular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
                             android:layout_marginTop="20dp"
-                            android:id="@+id/txtOrderStatus"
+                            android:text="@string/date_time"
+                            android:id="@+id/txtDateTime"
+                            android:layout_marginBottom="10dp"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
 
-                        <customfonts.MyTextView_Roboto_Regular
+                        <customfonts.Button_Roboto_Medium
+                            android:id="@+id/txtRetry"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:text="price"
-                            android:id="@+id/txtTotalPrice"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:layout_height="38dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="30dp"
+                            android:background="@drawable/shopping_rect"
+                            android:gravity="center"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="30dp"
+                            android:text="@string/retry"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
 
+                        <customfonts.Button_Roboto_Medium
+                            android:id="@+id/txtGoToHome"
+                            android:layout_width="wrap_content"
 
-
+                            android:layout_height="38dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="30dp"
+                            android:background="@drawable/shopping_rect"
+                            android:gravity="center"
+                            android:paddingLeft="30dp"
+                            android:paddingRight="30dp"
+                            android:text="@string/go_to_home"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
 
 
-
-
-                </android.support.v7.widget.CardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="vertical"
-                    >
-
-                    <customfonts.Button_Roboto_Medium
-                        android:id="@+id/txtRetry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="38dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="30dp"
-                        android:background="@drawable/shopping_rect"
-                        android:gravity="center"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:text="@string/retry"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
-
-                    <customfonts.Button_Roboto_Medium
-                        android:layout_width="wrap_content"
-                        android:id="@+id/txtGoToHome"
-
-                        android:layout_height="38dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="30dp"
-                        android:background="@drawable/shopping_rect"
-                        android:gravity="center"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:text="@string/go_to_home"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
-
+                </RelativeLayout>
 
 
             </RelativeLayout>
 
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

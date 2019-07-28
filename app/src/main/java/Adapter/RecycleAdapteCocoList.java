@@ -185,7 +185,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, CheckoutActivity.class);
                     context.startActivity(i);
                 }else if (position == 20) {
-//                    Intent i = new Intent(context, CartActivity.class);
+//                    Intent i = new Intent(context, CartFragment.class);
 //                    context.startActivity(i);
                 } else if (position == 21) {
                     Intent i = new Intent(context, MyWishlistFragment.class);
