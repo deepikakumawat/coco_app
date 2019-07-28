@@ -52,6 +52,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     private TextView txtContinueShopping;
     private View mView;
     private RelativeLayout ryBlank;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
 
     @Nullable
@@ -79,6 +80,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     private void init() {
         txtContinueShopping = mView.findViewById(R.id.txtContinueShopping);
         lyCart = mView.findViewById(R.id.lyCart);
+        mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
         lyBottomView = mView.findViewById(R.id.lyBottomView);
         ryBlank = mView.findViewById(R.id.ryBlank);
         txtNoDataFound = mView.findViewById(R.id.txtNoDataFound);
@@ -109,12 +111,16 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
     @Override
     public void showWait() {
-       showProDialog(getActivity());
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
+        //showProDialog(getActivity());
     }
 
     @Override
     public void removeWait() {
-       dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
+        //dismissProDialog();
     }
 
     @Override

@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.Cart1Activity">
-
-
-
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -181,5 +178,32 @@
             android:visibility="gone" />
 
     </RelativeLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@color/white"
+        shimmer:duration="800">
+
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </RelativeLayout>
