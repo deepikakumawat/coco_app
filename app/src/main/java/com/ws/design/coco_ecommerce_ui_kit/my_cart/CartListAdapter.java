@@ -20,19 +20,19 @@ import java.util.ArrayList;
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<CartListResponse.ProductData> productDataArrayList;
-    private CartActivity cartActivity;
+    private CartFragment cartFragment;
 
 
-    public CartListAdapter(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CartActivity cartActivity) {
+    public CartListAdapter(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CartFragment cartFragment) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.cartActivity = cartActivity;
+        this.cartFragment = cartFragment;
 
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart1, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_cart, parent, false));
     }
 
     @Override
@@ -51,21 +51,21 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
             holder.imgCross.setTag(productData);
             holder.imgCross.setTag(R.id.imgCross, position);
-            holder.imgCross.setOnClickListener(cartActivity);
+            holder.imgCross.setOnClickListener(cartFragment);
 
 
             holder.lyIncrement.setTag(productData);
             holder.lyIncrement.setTag(R.id.lyIncrement, holder.txtIncDec);
-            holder.lyIncrement.setOnClickListener(cartActivity);
+            holder.lyIncrement.setOnClickListener(cartFragment);
 
 
             holder.lyDecrement.setTag(productData);
             holder.lyDecrement.setTag(R.id.lyDecrement, holder.txtIncDec);
-            holder.lyDecrement.setOnClickListener(cartActivity);
+            holder.lyDecrement.setOnClickListener(cartFragment);
 
             holder.lyCartProduct.setTag(productData);
             holder.lyCartProduct.setTag(R.id.lyCartProduct, position);
-            holder.lyCartProduct.setOnClickListener(cartActivity);
+            holder.lyCartProduct.setOnClickListener(cartFragment);
 
 
 
