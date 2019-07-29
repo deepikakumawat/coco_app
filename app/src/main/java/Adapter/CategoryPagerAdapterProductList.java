@@ -28,17 +28,17 @@ public class CategoryPagerAdapterProductList extends FragmentPagerAdapter {
                 switch (position) {
 
                         case 0:
-                                PopularListFragment tab1 = PopularListFragment.newInstance(catId);
+                                PopularListFragment tab1 = PopularListFragment.newInstance(catId, 0);
                                 return tab1;
                         case 1:
-                                PopularListFragment tab2 = PopularListFragment.newInstance(catId);
+                                PopularListFragment tab2 = PopularListFragment.newInstance(catId, 1);
                                 return tab2;
                         case 2:
-                                PopularListFragment tab3 = PopularListFragment.newInstance(catId);
+                                PopularListFragment tab3 = PopularListFragment.newInstance(catId, 2);
                                 return tab3;
 
                         case 3:
-                                PopularListFragment tab4 = PopularListFragment.newInstance(catId);
+                                PopularListFragment tab4 = PopularListFragment.newInstance(catId, 3);
                                 return tab4;
 
 

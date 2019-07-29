@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
@@ -29,7 +30,6 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class MyWishlistFragment extends BaseFragment implements MyWishListView, View.OnClickListener {
-    TextView txtTitle;
 
     private MyWishListAdapter myWishListAdapter;
     private RecyclerView rvMyWishList;
@@ -37,9 +37,10 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     private MyWishListPresenter myWishListPresenter;
     private LinearLayout lyEmpty;
     private int removePosstion = -1;
-    private ImageView imgBack;
     private View mView;
     private RelativeLayout ryParent;
+    private TextView txtNoDataFound;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
 
     @Nullable
@@ -57,22 +58,21 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
 
         myWishListPresenter = new MyWishListPresenter(this);
 
-        ryParent =  view.findViewById(R.id.ryParent);
-        txtTitle = (TextView) view.findViewById(R.id.txtTitle);
-        lyEmpty = (LinearLayout)view. findViewById(R.id.lyEmpty);
-        imgBack =view. findViewById(R.id.imgBack);
-        rvMyWishList = (RecyclerView)view. findViewById(R.id.rvMyWishList);
-        txtTitle.setText("Whishlist");
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
+        ryParent = view.findViewById(R.id.ryParent);
+        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
+        lyEmpty = (LinearLayout) view.findViewById(R.id.lyEmpty);
+        rvMyWishList = (RecyclerView) view.findViewById(R.id.rvMyWishList);
 
         if (Util.isDeviceOnline(getActivity())) {
             myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
 
-        }else{
-            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+        } else {
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
 
         }
 
-        imgBack.setOnClickListener(this);
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -89,31 +89,35 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     @Override
     public void showWait() {
         lyEmpty.setVisibility(View.GONE);
-        showProDialog(getActivity());
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
         if (productDataArrayList.isEmpty()) {
             lyEmpty.setVisibility(View.VISIBLE);
+            txtNoDataFound.setVisibility(View.VISIBLE);
+            txtNoDataFound.setText(appErrorMessage);
 
         } else {
             lyEmpty.setVisibility(View.GONE);
 
         }
-        showCenteredToast(ryParent,getActivity(), appErrorMessage);
+//        showCenteredToast(ryParent,getActivity(), appErrorMessage);
     }
 
     @Override
     public void getMyWishList(MyWishListResponse myWishListResponse) {
         if (myWishListResponse != null) {
 
-            if(myWishListResponse.getmMyWishlistData().getmProductData()!=null) {
+            if (myWishListResponse.getmMyWishlistData().getmProductData() != null) {
 
                 if (!myWishListResponse.getmMyWishlistData().getmProductData().isEmpty()) {
 
@@ -141,13 +145,13 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(ryParent,getActivity(), removeWishListResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage());
             if (myWishListAdapter != null) {
                 productDataArrayList.remove(removePosstion);
                 myWishListAdapter.notifyDataSetChanged();
             }
         } else {
-            showCenteredToast(ryParent,getActivity(), removeWishListResponse.getmData());
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmData());
         }
     }
 
@@ -166,8 +170,8 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                         if (Util.isDeviceOnline(getActivity())) {
                             myWishListPresenter.removeWishList(productData.getmWishList());
 
-                        }else{
-                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+                        } else {
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
 
                         }
 
@@ -175,7 +179,7 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                     break;
 
                 case R.id.lyProduct:
-                   productData = ((MyWishListResponse.ProductData) view.getTag());
+                    productData = ((MyWishListResponse.ProductData) view.getTag());
 
                     if (productData != null) {
 
@@ -194,9 +198,7 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                     }
                     break;
 
-                case R.id.imgBack:
-                    getActivity().finish();
-                    break;
+
                 default:
                     break;
             }
@@ -206,9 +208,18 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     }
 
 
-
     @Override
     protected String getActionbarTitle() {
         return getString(R.string.my_wishlist);
+    }
+
+    @Override
+    protected boolean isCartIconVisible() {
+        return  true;
+    }
+
+    @Override
+    protected boolean isSearchIconVisible() {
+        return true;
     }
 }

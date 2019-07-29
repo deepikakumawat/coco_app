@@ -1,8 +1,6 @@
 package com.ws.design.coco_ecommerce_ui_kit.my_wishlist;
 
 
-
-
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -39,17 +37,19 @@ public class MyWishListPresenter {
                 public void onResponse(Call<MyWishListResponse> call, Response<MyWishListResponse> response) {
                     Log.d(TAG, call.request().url().toString());
                     view.removeWait();
-                    try{
+                    try {
                         if (response.isSuccessful()) {
 
                             view.getMyWishList(response.body());
-                        }else{
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                         e.printStackTrace();
                     }
                 }
@@ -61,7 +61,8 @@ public class MyWishListPresenter {
                         JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
                         view.onFailure(jsonObject.getString("message"));
                     } catch (Exception ee) {
-
+                        view.onFailure("Something Went Wrong. Please try again later");
+                        e.printStackTrace();
                     }
 
                 }
@@ -71,9 +72,6 @@ public class MyWishListPresenter {
         }
 
     }
-
-
-
 
 
     public void removeWishList(String wishlistId) {
@@ -86,17 +84,17 @@ public class MyWishListPresenter {
                 public void onResponse(Call<RemoveWishListResponse> call, Response<RemoveWishListResponse> response) {
                     Log.d(TAG, call.request().url().toString());
                     view.removeWait();
-                    try{
+                    try {
                         if (response.isSuccessful()) {
 
                             view.removeWishList(response.body());
-                        }else{
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

@@ -3,16 +3,22 @@ package com.ws.design.coco_ecommerce_ui_kit.address;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
@@ -38,7 +44,9 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private static final int ADD_ADDRESS_ACTION = 101;
     int selectedValue = 0;
     private String screen ="";
-    private LinearLayout lyParent;
+    private RelativeLayout ryParent;
+    private ShimmerFrameLayout mShimmerViewContainer;
+
 
 
     @Override
@@ -65,7 +73,8 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     }
 
     private void init() {
-        lyParent = findViewById(R.id.lyParent);
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+        ryParent = findViewById(R.id.ryParent);
         title = findViewById(R.id.title);
         rvMyAddress = findViewById(R.id.rvMyOrder);
         imgBack = findViewById(R.id.imgBack);
@@ -95,7 +104,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
             } else {
-                showCenteredToast(lyParent,this, getString(R.string.network_connection));
+                showCenteredToast(ryParent,this, getString(R.string.network_connection));
 
             }
 
@@ -104,17 +113,19 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
     @Override
     public void showWait() {
-        showProDialog(this);
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage);
+        showCenteredToast(ryParent,this, appErrorMessage);
     }
 
     @Override
@@ -158,13 +169,13 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     @Override
     public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
         if (!TextUtils.isEmpty(deleteAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(deleteAddressResponse.getmStatus()))) {
-            showCenteredToast(lyParent,this, deleteAddressResponse.getMessage());
+            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage());
             if (addressAdapter != null) {
                 addressDataArrayList.remove(deletedPosition);
                 addressAdapter.notifyDataSetChanged();
             }
         } else {
-            showCenteredToast(lyParent,this, deleteAddressResponse.getMessage());
+            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage());
         }
     }
 
@@ -187,7 +198,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         if (Util.isDeviceOnline(this)) {
                             addressPresenter.deteleAddress(addressData.getmId());
                         } else {
-                            showCenteredToast(lyParent,this, getString(R.string.network_connection));
+                            showCenteredToast(ryParent,this, getString(R.string.network_connection));
 
                         }
                     }
@@ -251,7 +262,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
                 } else {
-                    showCenteredToast(lyParent,this, getString(R.string.network_connection));
+                    showCenteredToast(ryParent,this, getString(R.string.network_connection));
 
                 }
             }

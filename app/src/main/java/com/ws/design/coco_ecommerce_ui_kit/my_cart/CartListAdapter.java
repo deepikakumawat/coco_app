@@ -1,6 +1,11 @@
 package com.ws.design.coco_ecommerce_ui_kit.my_cart;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,9 +17,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ColorData;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailsColorAdapter;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductAttributeData;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> implements View.OnClickListener {
@@ -63,10 +74,26 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             holder.lyDecrement.setTag(R.id.lyDecrement, holder.txtIncDec);
             holder.lyDecrement.setOnClickListener(cartFragment);
 
-            holder.lyCartProduct.setTag(productData);
-            holder.lyCartProduct.setTag(R.id.lyCartProduct, position);
-            holder.lyCartProduct.setOnClickListener(cartFragment);
+            holder.txtProductName.setTag(productData);
+            holder.txtProductName.setTag(R.id.txtProductName, position);
+            holder.txtProductName.setOnClickListener(cartFragment);
 
+
+         /*   if (productData.getmAttributes() == null && productData.getmAttributes().isEmpty()) {
+
+                holder.lyColorTop.setVisibility(View.GONE);
+
+
+
+
+            }else{
+
+                holder.lyColorTop.setVisibility(View.VISIBLE);
+
+                setColorCode(productData.getmAttributes(),holder.lyColorView,holder.lyColorTop);
+            }
+*/
+            setColorCode(productData.getmAttributes(),holder.lyColorView,holder.lyColorTop);
 
 
 
@@ -95,6 +122,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         private TextView txtIncDec;
         private ImageView imgProduct;
         private LinearLayout lyCartProduct;
+        private LinearLayout lyColorTop;
+        private LinearLayout lyColorView;
 
 
         public ViewHolder(View view) {
@@ -108,9 +137,99 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
 
             imgCross = view.findViewById(R.id.imgCross);
+            lyColorView = view.findViewById(R.id.lyColorView);
             lyCartProduct = view.findViewById(R.id.lyCartProduct);
+            lyColorTop = view.findViewById(R.id.lyColorTop);
 
 
         }
     }
+
+
+    private void setColorCode(ArrayList<CartListResponse.AttributesData> attributesDataArrayList, LinearLayout lyColorView, LinearLayout lyColorTop) {
+        String attributeRelatedData = "";
+        List<ColorData> colorCodeList = null;
+
+
+        try {
+            for (CartListResponse.AttributesData attributesData : attributesDataArrayList) {
+                if (attributesData.getmAttributeType().equalsIgnoreCase("COLOR")) {
+
+                    attributeRelatedData = attributesData.getmAttributeRelatedData();
+                }
+            }
+
+            if (!TextUtils.isEmpty(attributeRelatedData)) {
+                List<String> attributeRelatedDataList = Arrays.asList(attributeRelatedData.split("\\s*,\\s*"));
+
+
+                colorCodeList = new ArrayList<>();
+
+
+                for (int i = 0; i < attributeRelatedDataList.size(); i++) {
+
+                    ColorData colorData = new ColorData();
+
+                    if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
+
+                        colorData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
+
+                    }
+
+                    colorCodeList.add(colorData);
+                }
+
+
+                if (!colorCodeList.isEmpty()) {
+
+                    lyColorTop.setVisibility(View.VISIBLE);
+                    lyColorView.removeAllViews();
+
+
+                    LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+
+
+                    View view;
+                    for (int i = 0; i < colorCodeList.size(); i++) {
+                        view = layoutInflater.inflate(R.layout.color_layout_cart, lyColorView, false);
+                        LinearLayout lyColor = view.findViewById(R.id.lyColor);
+
+
+                        Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.black_circle);
+                        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+                        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#"+colorCodeList.get(i).getmAttrbuteRelatedData()));
+
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+                        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            lyColor.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.black_circle) );
+                        } else {
+                            lyColor.setBackground(ContextCompat.getDrawable(context, R.drawable.black_circle));
+                        }
+
+                        lyColorView.addView(lyColor);
+
+                    }
+
+                } else {
+                    lyColorTop.setVisibility(View.GONE);
+                }
+
+
+            } else {
+                lyColorTop.setVisibility(View.GONE);
+            }
+
+
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            lyColorTop.setVisibility(View.GONE);
+
+        }
+
+    }
+
 }

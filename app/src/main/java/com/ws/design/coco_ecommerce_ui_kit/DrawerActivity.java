@@ -37,6 +37,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
+import com.ws.design.coco_ecommerce_ui_kit.legal_policies.LegalPoliciesFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
@@ -44,7 +45,6 @@ import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
-import com.ws.design.coco_ecommerce_ui_kit.terms_condition.TermsConditionFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -70,10 +70,10 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
     private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Address", "Help", "Contact Us", "Terms & Conditions"};
+            "Address", "Help", "Contact Us", "Legal Policies"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
-            "Address", "Help", "Contact Us", "Terms & Conditions", "Logout"};
+            "Address", "Help", "Contact Us", "Legal Policies", "Logout"};
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -159,7 +159,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                 } else if (position == 1) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         setScreenTitle(getString(R.string.my_cart));
-                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
@@ -172,7 +172,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         setScreenTitle(getString(R.string.my_wishlist));
-                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), null, false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), "MyWishlistFragment", true, false);
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     }
@@ -201,8 +201,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
                 } else if (position == 10) {
-                    setScreenTitle(getString(R.string.terms_conditions));
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new TermsConditionFragment(), null, false, false);
+                    setScreenTitle(getString(R.string.legal_policies));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new LegalPoliciesFragment(), "LegalPoliciesFragment", true, false);
 
 
                 } else if (position == 11) {
@@ -247,7 +247,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         invalidateOptionsMenu();
 
         setScreenTitle(getString(R.string.home));
-        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+//        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+        FragmentManagerUtils.addFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
     }
 
@@ -467,7 +468,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             navigationModelClasses.remove(11);
                             mAdapter.notifyDataSetChanged();
 
-                            Util.showCenteredToast(drawer,DrawerActivity.this, "Logout Successfully!");
+                            Util.showCenteredToast(drawer, DrawerActivity.this, "Logout Successfully!");
 
                             init();
 

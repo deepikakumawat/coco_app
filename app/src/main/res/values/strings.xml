@@ -170,6 +170,27 @@
     <string name="cash_on_delivery">Cash On Delivery</string>
     <string name="frequently_bought_product">Frequently Brought Together</string>
     <string name="orderid">Order Id :</string>
+    <string name="products">Products</string>
+    <string name="legal_policies">Legal Policies</string>
+
+
+    <string-array name="legal_policies_array">
+        <item>PRIVACY POLICY</item>
+        <item>TERMS &amp; CONDITIONS</item>
+        <item>RETURN &amp; REFUND POLICY</item>
+        <item>PAYMENT &amp; SECURITY’S</item>
+        <item>SHIPPING</item>
+        <item>ABOUT US</item>
+        <item>PAYMENTS</item>
+    </string-array>
+
+
+
+
+
+
+
+
 
 
 </resources>

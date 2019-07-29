@@ -1,79 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f6f7"
-    android:id="@+id/ryParent"
+
     android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment">
-
-    <include
-        android:id="@+id/includeLayout"
-        android:visibility="gone"
-        layout="@layout/toolbar_cart"></include>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/txtStartShopping"
-        android:layout_below="@+id/includeLayout"
-        android:orientation="vertical">
 
-        <LinearLayout
+        android:layout_marginTop="15dp">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:id="@+id/lyEmpty"
-            >
+            android:layout_above="@+id/txtStartShopping"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgEmptyWishlist"
-                android:layout_width="165dp"
-                android:layout_height="170dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="150dp"
-                android:background="#f5f6f7"
-                android:src="@drawable/empty" />
+            <LinearLayout
+                android:id="@+id/lyEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
 
-            <customfonts.MyTextView_Roboto_Medium
+                <ImageView
+                    android:id="@+id/imgEmptyWishlist"
+                    android:layout_width="165dp"
+                    android:layout_height="170dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="150dp"
+                    android:background="#f5f6f7"
+                    android:src="@drawable/empty" />
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtNoDataFound"
+                    android:layout_marginTop="32dp"
+                    android:gravity="center_horizontal"
+                    android:text="You have no items in your wishlist"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvMyWishList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:gravity="center_horizontal"
-                android:text="You have no items in your wishlist"
-                android:textColor="@color/black" />
+                android:layout_gravity="center" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMyWishList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+        <customfonts.Button_Roboto_Medium
+            android:id="@+id/txtStartShopping"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/shopping_rect"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+
+            android:paddingRight="30dp"
+            android:text="Start Shoping"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
 
-    <customfonts.Button_Roboto_Medium
-        android:id="@+id/txtStartShopping"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/shopping_rect"
-        android:gravity="center"
-        android:paddingLeft="30dp"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/inTop"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical"
+        shimmer:duration="800">
 
-        android:paddingRight="30dp"
-        android:text="Start Shoping"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 </RelativeLayout>

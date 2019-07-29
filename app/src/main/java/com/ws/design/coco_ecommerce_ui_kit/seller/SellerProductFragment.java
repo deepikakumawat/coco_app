@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListPresenter;
@@ -40,7 +41,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class SellerProductFragment extends ToolbarBaseFragment implements SellerView, View.OnClickListener {
+public class SellerProductFragment extends BaseFragment implements SellerView, View.OnClickListener {
 
 
     private SellerProductAdapter sellerProductAdapter;
@@ -183,5 +184,20 @@ public class SellerProductFragment extends ToolbarBaseFragment implements Seller
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected String getActionbarTitle() {
+        return getString(R.string.products);
+    }
+
+    @Override
+    protected boolean isSearchIconVisible() {
+        return  true;
+    }
+
+    @Override
+    protected boolean isCartIconVisible() {
+        return true;
     }
 }

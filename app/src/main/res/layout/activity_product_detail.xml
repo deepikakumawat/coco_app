@@ -91,6 +91,38 @@
 
                         </HorizontalScrollView>
 
+                        <RelativeLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/ryVideo"
+                            android:orientation="vertical">
+
+
+
+
+                            <ImageView
+                                android:id="@+id/imgVideo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/video_place_holder"/>
+
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:tint="@color/white"
+                                android:src="@drawable/videoicon" />
+
+                        </RelativeLayout>
+
 
                         <View
                             android:layout_width="match_parent"
@@ -303,6 +335,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="#d7d4d4" />
+
+
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

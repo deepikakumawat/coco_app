@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.terms_condition;
+package com.ws.design.coco_ecommerce_ui_kit.legal_policies;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListPresenter;
@@ -41,7 +42,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class TermsConditionFragment extends ToolbarBaseFragment  {
+public class TermsConditionFragment extends BaseFragment {
 
     private View mView;
 
@@ -114,23 +115,20 @@ public class TermsConditionFragment extends ToolbarBaseFragment  {
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (DrawerActivity) context;
 
+
+    @Override
+    protected String getActionbarTitle() {
+        return getString(R.string.terms_conditions);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        if (this.mListener != null ) {
-            this.mListener.setScreenTitle(getString(R.string.terms_conditions));
-
-        }
-
+    protected boolean isCartIconVisible() {
+        return  false;
     }
 
-
+    @Override
+    protected boolean isSearchIconVisible() {
+        return false;
+    }
 }

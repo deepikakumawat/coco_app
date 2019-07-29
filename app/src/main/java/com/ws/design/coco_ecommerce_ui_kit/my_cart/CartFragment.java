@@ -210,7 +210,8 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
             } else {
                 productDataArrayList.remove(removeCorssPostion);
-                cartListAdapter.notifyDataSetChanged();
+                totalPrice = removeCartByCrossResponse.getmData().getmTotalPrice();
+                setAdapter(productDataArrayList, totalPrice);
                 if (removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
                     noDataFound(getString(R.string.your_cart_empty));
 
@@ -250,7 +251,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
                     }
                     break;
-                case R.id.lyCartProduct:
+                case R.id.txtProductName:
                     productData = ((CartListResponse.ProductData) view.getTag());
                     if (productData != null) {
 

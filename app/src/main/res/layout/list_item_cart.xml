@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/lyCartProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -14,16 +13,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/lyProduct"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:orientation="horizontal"
-              >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imgProduct"
@@ -36,16 +32,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="28.4dp"
-                    android:layout_marginTop="17.3dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="28.4dp"
                     android:orientation="vertical">
 
                     <customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtProductName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
 
                         android:letterSpacing="0.03"
                         android:text="Iphone X | 128 GB, Black | 6 GB ram |
@@ -107,10 +101,9 @@
                         </LinearLayout>
 
 
-
                     </LinearLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10.3dp"
@@ -118,12 +111,79 @@
 
                         <customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtProductPrice"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="24.3dp"
                             android:text="$288"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
+
+                        <ImageView
+                            android:id="@+id/imgCross"
+                            android:layout_width="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_gravity="right"
+                            android:src="@drawable/delete"
+                            android:textColor="@color/black" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#d7d4d4" />
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:id="@+id/lyColorTop"
+                        android:orientation="vertical"
+
+                   >
+
+
+
+
+                        <customfonts.MyTextView_Roboto_Bold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="10.3dp"
+                            android:text="Color"
+                            android:textColor="@color/storage"
+                            android:textSize="12.3sp" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="10.3dp"
+                            android:id="@+id/lyColorView"
+                            android:orientation="horizontal">
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="17dp"
+                            android:background="@color/viewline" />
+
+
 
 
                     </LinearLayout>
@@ -134,26 +194,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
 
-                android:orientation="horizontal">
-
-
-                <ImageView
-                    android:id="@+id/imgCross"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/delete"
-                    android:layout_margin="15dp"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -165,4 +206,4 @@
             android:orientation="vertical" />
 
     </LinearLayout>
-    </LinearLayout>
+</LinearLayout>

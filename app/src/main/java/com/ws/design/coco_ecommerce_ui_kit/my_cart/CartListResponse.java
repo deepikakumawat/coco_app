@@ -81,6 +81,10 @@ public class CartListResponse implements Serializable {
         @Expose
         private String mCartId;
 
+        @SerializedName("attributes")
+        @Expose
+        private ArrayList<AttributesData> mAttributes;
+
 
         @SerializedName("productid")
         @Expose
@@ -185,6 +189,65 @@ public class CartListResponse implements Serializable {
 
         public void setmCartId(String mCartId) {
             this.mCartId = mCartId;
+        }
+
+        public ArrayList<AttributesData> getmAttributes() {
+            return mAttributes;
+        }
+
+        public void setmAttributes(ArrayList<AttributesData> mAttributes) {
+            this.mAttributes = mAttributes;
+        }
+    }
+
+    public class AttributesData implements Serializable {
+
+        @SerializedName("attribute_id")
+        @Expose
+        private String mAttributeId;
+
+        @SerializedName("attribute_type")
+        @Expose
+        private String mAttributeType;
+
+        @SerializedName("attribute_name")
+        @Expose
+        private String mAttributeName;
+
+        @SerializedName("attributereleteddata")
+        @Expose
+        private String mAttributeRelatedData;
+
+        public String getmAttributeId() {
+            return mAttributeId;
+        }
+
+        public void setmAttributeId(String mAttributeId) {
+            this.mAttributeId = mAttributeId;
+        }
+
+        public String getmAttributeType() {
+            return mAttributeType;
+        }
+
+        public void setmAttributeType(String mAttributeType) {
+            this.mAttributeType = mAttributeType;
+        }
+
+        public String getmAttributeName() {
+            return mAttributeName;
+        }
+
+        public void setmAttributeName(String mAttributeName) {
+            this.mAttributeName = mAttributeName;
+        }
+
+        public String getmAttributeRelatedData() {
+            return mAttributeRelatedData;
+        }
+
+        public void setmAttributeRelatedData(String mAttributeRelatedData) {
+            this.mAttributeRelatedData = mAttributeRelatedData;
         }
     }
 }

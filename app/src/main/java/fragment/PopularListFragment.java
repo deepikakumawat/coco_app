@@ -1,6 +1,5 @@
 package fragment;
 
-import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,18 +17,19 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryPresenter;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryView;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryAdapter;
 
@@ -46,11 +46,13 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private ShimmerFrameLayout mShimmerViewContainer;
     private TextView txtNoDataFound;
     private RelativeLayout ryParent;
+    private int tabPostion;
 
-    public static PopularListFragment newInstance(String catId) {
+    public static PopularListFragment newInstance(String catId, int tabPostion) {
         PopularListFragment fragment = new PopularListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("catId", catId);
+        bundle.putInt("tabPostion", tabPostion);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -74,6 +76,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         if (getArguments() != null) {
             catId = getArguments().getString("catId");
+            tabPostion = getArguments().getInt("tabPostion", 0);
 
 
         }
@@ -90,7 +93,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
             productByCategoryPresenter.getProductByCat(catId);
 
         } else {
-            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
 
         }
 
@@ -128,6 +131,15 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
                     recyclerview.setVisibility(View.VISIBLE);
                     txtNoDataFound.setVisibility(View.GONE);
+
+                   /* if (tabPostion == 0) {
+                        sortByRating(productGridModellClasses);
+
+                    } else */if (tabPostion == 1) {
+                        sortByLowPrice(productGridModellClasses);
+                    } else if (tabPostion == 2) {
+                        sortByHighPrice(productGridModellClasses);
+                    }
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -180,7 +192,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                             productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
 
                         } else {
-                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
 
                         }
 
@@ -198,11 +210,60 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
 
 
         } else {
-            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
         }
+    }
+
+
+    private void sortByRating(ArrayList<ProductData> productDataArrayList) {
+        Collections.sort(productDataArrayList, new Comparator<ProductData>() {
+            @Override
+            public int compare(ProductData productData1, ProductData productData2) {
+
+                int rating1 = 0;
+                int rating2 = 0;
+
+                if (!TextUtils.isEmpty(productData1.getmAvgRating())) {
+                     rating1 = Integer.parseInt(productData1.getmAvgRating());
+
+                }
+
+                if (!TextUtils.isEmpty(productData2.getmAvgRating())) {
+                     rating2 = Integer.parseInt(productData2.getmAvgRating());
+
+                }
+
+
+
+
+                return Integer.compare(rating2, rating1);
+            }
+        });
+    }
+
+    private void sortByLowPrice(ArrayList<ProductData> productDataArrayList) {
+        Collections.sort(productDataArrayList, new Comparator<ProductData>() {
+            @Override
+            public int compare(ProductData productData1, ProductData productData2) {
+                int salesPrice2 = Integer.parseInt(productData2.getmSalePrice());
+                int salesPrice1 = Integer.parseInt(productData1.getmSalePrice());
+                return Integer.compare(salesPrice1, salesPrice2);
+            }
+        });
+    }
+
+    private void sortByHighPrice(ArrayList<ProductData> productDataArrayList) {
+        Collections.sort(productDataArrayList, new Comparator<ProductData>() {
+            @Override
+            public int compare(ProductData productData1, ProductData productData2) {
+                int salesPrice2 = Integer.parseInt(productData2.getmSalePrice());
+                int salesPrice1 = Integer.parseInt(productData1.getmSalePrice());
+                return Integer.compare(salesPrice2, salesPrice1);
+            }
+        });
     }
 }
