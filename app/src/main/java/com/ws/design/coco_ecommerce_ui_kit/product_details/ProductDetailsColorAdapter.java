@@ -7,30 +7,26 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductAttributeData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class ProductDetailsColorAdapter extends RecyclerView.Adapter<ProductDetailsColorAdapter.ViewHolder> {
     private Context context;
-    private List<ColorData> productColorDataArrayList;
+    private List<ColorSizeData> productColorSizeDataArrayList;
     private ProductDetailFragment productDetailFragment;
 
 
-    public ProductDetailsColorAdapter(Context context, List<ColorData> productColorDataArrayList, ProductDetailFragment productDetailFragment) {
+    public ProductDetailsColorAdapter(Context context, List<ColorSizeData> productColorSizeDataArrayList, ProductDetailFragment productDetailFragment) {
         this.context = context;
-        this.productColorDataArrayList = productColorDataArrayList;
+        this.productColorSizeDataArrayList = productColorSizeDataArrayList;
         this.productDetailFragment = productDetailFragment;
 
     }
@@ -44,7 +40,7 @@ public class ProductDetailsColorAdapter extends RecyclerView.Adapter<ProductDeta
     public void onBindViewHolder(ViewHolder holder, int position) {
 
       try{
-          ColorData colorCode = productColorDataArrayList.get(position);
+          ColorSizeData colorCode = productColorSizeDataArrayList.get(position);
           if (colorCode!=null) {
 
 
@@ -81,7 +77,7 @@ public class ProductDetailsColorAdapter extends RecyclerView.Adapter<ProductDeta
 
     @Override
     public int getItemCount() {
-        return productColorDataArrayList.size();
+        return productColorSizeDataArrayList.size();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {

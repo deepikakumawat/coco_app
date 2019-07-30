@@ -43,7 +43,7 @@ public class HomeLikeProductsAdapter extends RecyclerView.Adapter<HomeLikeProduc
 
             holder.txtProductName.setText(productData.getmProductName());
 
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmSalePrice());
 
 
 

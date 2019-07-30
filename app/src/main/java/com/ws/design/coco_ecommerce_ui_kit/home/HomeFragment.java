@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -75,8 +76,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private ProductData productData;
     private DealProducts dealProduct;
     private IFragmentListener mListener;
-    private LinearLayout lyParent;
-//    private ShimmerFrameLayout shimmerContainer;
+    private RelativeLayout ryParent;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
 
     @Nullable
@@ -94,13 +95,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         homePresenter = new HomePresenter(this);
 
-        lyParent=   mView.findViewById(R.id.lyParent);
+        ryParent=   mView.findViewById(R.id.ryParent);
+
+        mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
+
 
         if (Util.isDeviceOnline(getActivity())) {
             homePresenter.getHomeData();
 
         } else {
-            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
 
         }
 
@@ -247,23 +251,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void showWait() {
-       showProDialog(getActivity());
-//        shimmerContainer.startShimmerAnimation();
-
+//       showProDialog(getActivity());
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
-//        shimmerContainer.stopShimmerAnimation();
-
+//        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
 
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(lyParent,getActivity(), appErrorMessage);
+        showCenteredToast(ryParent,getActivity(), appErrorMessage);
     }
 
     @Override

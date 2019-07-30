@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lyParent"
+    android:background="@color/white"
+    android:clickable="true"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
@@ -13,169 +16,193 @@
         android:layout_height="match_parent"
         android:scrollbars="none">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-    <!--Banner Recyclerview-->
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:elevation="5dp"
-            android:layout_marginBottom="20dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingTop="20dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:elevation="5dp"
-        android:nestedScrollingEnabled="false"
-        android:id="@+id/rvBanner"/>
+            <!--Banner Recyclerview-->
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:elevation="5dp"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:elevation="5dp"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="15dp" />
+
+
+            </LinearLayout>
+
+
+            <!--Category Recyclerview-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/top_rated_products"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="View More"
+                    android:textColor="@color/red"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!--Top Rated Recyclerview-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvTopRatedProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:orientation="horizontal">
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/you_may_like"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="View More"
+                    android:textColor="@color/red"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!--Like Recyclerview-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvLike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="193dp"
+                android:layout_marginTop="24dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image96" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Recently Viewed"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="View All"
+                    android:textColor="@color/red"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!--Top Rated Recyclerview-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recent_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="25dp" />
 
         </LinearLayout>
-
-
-    <!--Category Recyclerview-->
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:nestedScrollingEnabled="false"
-        android:id="@+id/rvCategory"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp">
-        
-        <customfonts.MyTextView_Roboto_Medium
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:text="@string/top_rated_products"/>
-
-        <customfonts.MyTextView_Roboto_Medium
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View More"
-            android:textSize="13sp"
-            android:textColor="@color/red"
-            android:layout_marginRight="20dp"/>
-    </LinearLayout>
-
-    <!--Top Rated Recyclerview-->
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingTop="15dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="15dp"
-        android:nestedScrollingEnabled="false"
-        android:id="@+id/rvTopRatedProducts"/>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="24dp">
-
-            <customfonts.MyTextView_Roboto_Medium
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="@string/you_may_like"/>
-
-            <customfonts.MyTextView_Roboto_Medium
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View More"
-                android:textSize="13sp"
-                android:textColor="@color/red"
-                android:layout_marginRight="20dp"/>
-        </LinearLayout>
-
-        <!--Like Recyclerview-->
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingTop="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="15dp"
-            android:nestedScrollingEnabled="false"
-            android:id="@+id/rvLike"/>
-        
-        
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="193dp"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/image96"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp">
-
-            <customfonts.MyTextView_Roboto_Medium
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="Recently Viewed"/>
-
-            <customfonts.MyTextView_Roboto_Medium
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View All"
-                android:textSize="13sp"
-                android:textColor="@color/red"
-                android:layout_marginRight="20dp"/>
-        </LinearLayout>
-
-        <!--Top Rated Recyclerview-->
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingTop="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="25dp"
-            android:nestedScrollingEnabled="false"
-            android:id="@+id/recent_recyclerview"/>
-
-    </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
-</LinearLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/inTop"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical"
+        shimmer:duration="800">
+
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <include layout="@layout/shimmer_place_holder" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</RelativeLayout>

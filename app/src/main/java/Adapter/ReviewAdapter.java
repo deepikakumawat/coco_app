@@ -54,7 +54,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
 
-            great=itemView.findViewById(R.id.great);
 
         }
     }

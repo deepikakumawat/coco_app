@@ -1,6 +1,5 @@
 package fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +20,7 @@ import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryPresenter;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryView;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
@@ -29,7 +29,6 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryAdapter;
 
@@ -41,7 +40,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
     private ProductByCategoryAdapter mAdapter2;
-    ProductByCategoryPresenter productByCategoryPresenter;
+    private ProductByCategoryPresenter productByCategoryPresenter;
     private String catId;
     private ShimmerFrameLayout mShimmerViewContainer;
     private TextView txtNoDataFound;
@@ -132,14 +131,17 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     recyclerview.setVisibility(View.VISIBLE);
                     txtNoDataFound.setVisibility(View.GONE);
 
-                   /* if (tabPostion == 0) {
+                    if (tabPostion == 0) {
                         sortByRating(productGridModellClasses);
 
-                    } else */if (tabPostion == 1) {
+                    } else if (tabPostion == 1) {
                         sortByLowPrice(productGridModellClasses);
                     } else if (tabPostion == 2) {
                         sortByHighPrice(productGridModellClasses);
                     }
+
+                    ( (ProductListByCategoryFragment) getParentFragment() ).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -220,29 +222,30 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
 
     private void sortByRating(ArrayList<ProductData> productDataArrayList) {
-        Collections.sort(productDataArrayList, new Comparator<ProductData>() {
-            @Override
-            public int compare(ProductData productData1, ProductData productData2) {
+        try {
+            Collections.sort(productDataArrayList, new Comparator<ProductData>() {
+                @Override
+                public int compare(ProductData productData1, ProductData productData2) {
 
-                int rating1 = 0;
-                int rating2 = 0;
+                    float rating1 = 0;
+                    float rating2 = 0;
 
-                if (!TextUtils.isEmpty(productData1.getmAvgRating())) {
-                     rating1 = Integer.parseInt(productData1.getmAvgRating());
+                    if (!TextUtils.isEmpty(productData1.getmAvgRating())) {
+                        rating1 = Float.parseFloat(productData1.getmAvgRating());
 
+                    }
+
+                    if (!TextUtils.isEmpty(productData2.getmAvgRating())) {
+                        rating2 = Float.parseFloat(productData2.getmAvgRating());
+
+                    }
+
+                    return (int) (rating2 - rating1);
                 }
-
-                if (!TextUtils.isEmpty(productData2.getmAvgRating())) {
-                     rating2 = Integer.parseInt(productData2.getmAvgRating());
-
-                }
-
-
-
-
-                return Integer.compare(rating2, rating1);
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void sortByLowPrice(ArrayList<ProductData> productDataArrayList) {

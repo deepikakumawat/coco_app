@@ -172,6 +172,8 @@
     <string name="orderid">Order Id :</string>
     <string name="products">Products</string>
     <string name="legal_policies">Legal Policies</string>
+    <string name="size">Size</string>
+    <string name="out_of_stock">Out of Stock</string>
 
 
     <string-array name="legal_policies_array">

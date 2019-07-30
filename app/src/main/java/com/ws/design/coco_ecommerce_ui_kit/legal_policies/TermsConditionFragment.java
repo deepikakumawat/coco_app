@@ -46,11 +46,13 @@ public class TermsConditionFragment extends BaseFragment {
 
     private View mView;
 
-    private final String url = "https://www.richkart.com/terms-conditions";
+//    private final String webUrl = "https://www.richkart.com/terms-conditions";
 
     private WebView webView;
     private IFragmentListener mListener;
     private RelativeLayout ryParent;
+    private String webUrl;
+    private String screenTitle;
 
 
     @Nullable
@@ -66,34 +68,36 @@ public class TermsConditionFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+
+        if (getArguments() != null) {
+            webUrl = getArguments().getString("webUrl");
+            screenTitle = getArguments().getString("screenTitle");
+
+
+        }
+
+
         ryParent = view.findViewById(R.id.ryParent);
         webView = view.findViewById(R.id.webView);
         showWebPage();
 
 
-
     }
-
-
-
 
 
     private void showWebPage() {
 
 
         if (Util.isDeviceOnline(getActivity())) {
-            webView.loadUrl(url);
+            webView.loadUrl(webUrl);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.setWebViewClient(new NavFreshWebClient());
 
         } else {
-            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
 
         }
     }
-
-
-
 
 
     private class NavFreshWebClient extends WebViewClient {
@@ -115,16 +119,14 @@ public class TermsConditionFragment extends BaseFragment {
     }
 
 
-
-
     @Override
     protected String getActionbarTitle() {
-        return getString(R.string.terms_conditions);
+        return screenTitle;
     }
 
     @Override
     protected boolean isCartIconVisible() {
-        return  false;
+        return false;
     }
 
     @Override

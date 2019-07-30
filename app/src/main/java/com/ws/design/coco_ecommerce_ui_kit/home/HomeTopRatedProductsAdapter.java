@@ -43,7 +43,7 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
         if (productData != null) {
 
             holder.txtProductName.setText(productData.getmProductName());
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmPrice());
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmSalePrice());
 
             holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
 

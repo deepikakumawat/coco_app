@@ -17,10 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ColorData;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailsColorAdapter;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductAttributeData;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ColorSizeData;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
@@ -148,7 +145,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     private void setColorCode(ArrayList<CartListResponse.AttributesData> attributesDataArrayList, LinearLayout lyColorView, LinearLayout lyColorTop) {
         String attributeRelatedData = "";
-        List<ColorData> colorCodeList = null;
+        List<ColorSizeData> colorCodeList = null;
 
 
         try {
@@ -168,15 +165,15 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
                 for (int i = 0; i < attributeRelatedDataList.size(); i++) {
 
-                    ColorData colorData = new ColorData();
+                    ColorSizeData colorSizeData = new ColorSizeData();
 
                     if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
 
-                        colorData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
+                        colorSizeData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
 
                     }
 
-                    colorCodeList.add(colorData);
+                    colorCodeList.add(colorSizeData);
                 }
 
 

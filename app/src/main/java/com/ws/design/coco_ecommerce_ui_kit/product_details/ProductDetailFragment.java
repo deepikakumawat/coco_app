@@ -1,14 +1,9 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -26,12 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
@@ -55,7 +48,6 @@ import java.util.List;
 
 import Adapter.ViewpagerProductDetailsAdapter;
 import fragment.FragmentManagerUtils;
-import fragment.ToolbarBaseFragment;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -125,18 +117,25 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private TextView txtSellerName;
     private RecyclerView rvColor;
     private ProductDetailsColorAdapter productDetailsColorAdapter;
+    private ProductDetailsSizeAdapter productDetailsSizeAdapter;
     private ProductDetailsRecentViewsProductsAdapter productDetailsRecentViewsProductsAdapter;
     private RecyclerView rvRecentViewsProducts;
     private LinearLayout lyRecentViewsProduct;
     private String sellerId;
-    private ColorData selectedColorData;
+    private ColorSizeData selectedColorData;
+    private ColorSizeData selectedSizeData;
     private boolean isColorVewVisible = false;
+    private boolean isSizeVewVisible = false;
     private LinearLayout lyColor;
     private ScrollView scrollViewTop;
     private RelativeLayout ryParent;
     private ImageView imgVideo;
     private RelativeLayout ryVideo;
     private String videoUrl;
+    private LinearLayout lySize;
+    private RecyclerView rvSize;
+    private TextView txtOutOfStock;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
 
     @Nullable
@@ -178,12 +177,15 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     private void init(View view) {
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         ryVideo = view.findViewById(R.id.ryVideo);
         imgVideo = view.findViewById(R.id.imgVideo);
         ryParent = view.findViewById(R.id.ryParent);
         scrollViewTop = view.findViewById(R.id.scrollViewTop);
         lyColor = view.findViewById(R.id.lyColor);
         rvColor = view.findViewById(R.id.rvColor);
+        lySize = view.findViewById(R.id.lySize);
+        rvSize = view.findViewById(R.id.rvSize);
         rvProductAttr = view.findViewById(R.id.rvProductAttr);
         txtProductDesc = view.findViewById(R.id.txtProductDesc);
         txtProductShortDesc = view.findViewById(R.id.txtProductShortDesc);
@@ -196,6 +198,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         lyTopReview = view.findViewById(R.id.lyTopReview);
         lyImageView = view.findViewById(R.id.lyImageView);
         txtBuyNow = view.findViewById(R.id.txtBuyNow);
+        txtOutOfStock = view.findViewById(R.id.txtOutOfStock);
         txtAddToWishlist = view.findViewById(R.id.txtAddToWishlist);
         txtRemoveWishlist = view.findViewById(R.id.txtRemoveWishlist);
         txtAddToCart = view.findViewById(R.id.txtAddToCart);
@@ -262,6 +265,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         rvColor.setItemAnimator(new DefaultItemAnimator());
 
 
+        RecyclerView.LayoutManager mLayoutManagerSizeData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvSize.setLayoutManager(mLayoutManagerSizeData);
+        rvSize.setLayoutManager(mLayoutManagerSizeData);
+        rvSize.setItemAnimator(new DefaultItemAnimator());
+
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         rvProductAttr.setLayoutManager(mLayoutManager);
         rvProductAttr.setItemAnimator(new DefaultItemAnimator());
@@ -306,34 +315,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
 
-                    if (isColorVewVisible) {
 
-                        if (selectedColorData != null) {
-                            if (Util.isDeviceOnline(getActivity())) {
-                                isClickOnBuyNow = true;
-                                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
-
-                            } else {
-                                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
-
-                            }
-                        } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
-
-                        }
-
-
-                    } else {
-                        if (Util.isDeviceOnline(getActivity())) {
-                            isClickOnBuyNow = true;
-                            productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
-
-                        } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
-
-                        }
-                    }
-
+                    onClickViewButNow();
 
                 } else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -345,28 +328,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
 
-                    if (isColorVewVisible) {
-                        if (selectedColorData != null) {
-                            if (Util.isDeviceOnline(getActivity())) {
-                                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
-
-                            } else {
-                                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
-
-                            }
-                        } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
-
-                        }
-                    } else {
-                        if (Util.isDeviceOnline(getActivity())) {
-                            productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
-
-                        } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
-
-                        }
-                    }
+                    onClickViewAddToCart();
 
                 } else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -466,13 +428,25 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 break;
             case R.id.lyColor:
 
-                selectedColorData = ((ColorData) v.getTag());
+                selectedColorData = ((ColorSizeData) v.getTag());
                 if (productDetailsColorAdapter != null) {
                     selectedColorData.setSelected(true);
                     productDetailsColorAdapter.notifyDataSetChanged();
                 }
 
                 break;
+
+            case R.id.lySize:
+
+                selectedSizeData = ((ColorSizeData) v.getTag());
+                if (productDetailsSizeAdapter != null) {
+                    selectedSizeData.setSelected(true);
+                    productDetailsSizeAdapter.notifyDataSetChanged();
+                }
+
+                break;
+
+
             case R.id.imgVideo:
                 openYouTube();
                 break;
@@ -482,6 +456,138 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
     }
 
+    private void onClickViewButNow() {
+        if (isColorVewVisible && isSizeVewVisible) {
+
+            if (selectedColorData != null && selectedSizeData != null) {
+                if (Util.isDeviceOnline(getActivity())) {
+                    isClickOnBuyNow = true;
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId() + "," + selectedSizeData.getmAttributeId());
+
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+                }
+            } else {
+                if (selectedColorData == null) {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+
+                } else if (selectedSizeData == null) {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+
+                }
+
+            }
+
+
+        } else if (isColorVewVisible) {
+
+            if (selectedColorData != null) {
+                if (Util.isDeviceOnline(getActivity())) {
+                    isClickOnBuyNow = true;
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
+
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+                }
+            } else {
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+
+            }
+
+
+        } else if (isSizeVewVisible) {
+
+            if (selectedSizeData != null) {
+                if (Util.isDeviceOnline(getActivity())) {
+                    isClickOnBuyNow = true;
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedSizeData.getmAttributeId());
+
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+                }
+            } else {
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+
+            }
+
+
+        } else {
+            if (Util.isDeviceOnline(getActivity())) {
+                isClickOnBuyNow = true;
+                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
+
+            } else {
+                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+            }
+        }
+    }
+
+    private void onClickViewAddToCart() {
+
+        if (isColorVewVisible && isSizeVewVisible) {
+
+            if (selectedColorData != null && selectedSizeData != null) {
+                if (Util.isDeviceOnline(getActivity())) {
+
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId() + "," + selectedSizeData.getmAttributeId());
+
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+                }
+            } else {
+
+                if (selectedColorData == null) {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+
+                } else if (selectedSizeData == null) {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+
+                }
+
+
+            }
+
+        } else if (isColorVewVisible) {
+            if (selectedColorData != null) {
+                if (Util.isDeviceOnline(getActivity())) {
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
+
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+                }
+            } else {
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+
+            }
+        } else if (isSizeVewVisible) {
+            if (selectedSizeData != null) {
+                if (Util.isDeviceOnline(getActivity())) {
+                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedSizeData.getmAttributeId());
+
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+                }
+            } else {
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+
+            }
+        } else {
+            if (Util.isDeviceOnline(getActivity())) {
+                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
+
+            } else {
+                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+
+            }
+        }
+    }
 
 
     private void selectClickedTab(TextView view) {
@@ -500,12 +606,16 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void showWait() {
-        showProDialog(getActivity());
+//        showProDialog(getActivity());
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-        dismissProDialog();
+//        dismissProDialog();
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -547,9 +657,21 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productAttributeDataArrayList.addAll(productDetailsResponse.getmData().getmProductAttributes());
                         setProductSpecfication(productAttributeDataArrayList);
                         setColorCode(productAttributeDataArrayList);
+                        setSize(productAttributeDataArrayList);
 
                     }
 
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductQty())
+                            && Integer.parseInt(productDetailsResponse.getmData().getmProduct().getmProductQty()) == 0) {
+                        txtBuyNow.setVisibility(View.GONE);
+                        txtAddToCart.setVisibility(View.GONE);
+                        txtOutOfStock.setVisibility(View.VISIBLE);
+                    } else {
+                        txtBuyNow.setVisibility(View.VISIBLE);
+                        txtAddToCart.setVisibility(View.VISIBLE);
+                        txtOutOfStock.setVisibility(View.GONE);
+
+                    }
 
                     productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList);
                     viewPager.setAdapter(productDetailsViewPager);
@@ -564,7 +686,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
                     videoUrl = productDetailsResponse.getmData().getmProduct().getmProductVideo();
-                    ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl)?View.VISIBLE:View.GONE);
+                    ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? View.VISIBLE : View.GONE);
 
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
@@ -652,7 +774,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
 
-
     private void openYouTube() {
 
 //        String thumbnail = "https://www.youtube.com/watch?v=9Aebjmgn0bw&list=RD9Aebjmgn0bw&start_radio=1";
@@ -725,25 +846,25 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 List<String> attrTypeList = Arrays.asList(attributeName.split("\\s*,\\s*"));
 
 
-                List<ColorData> colorCodeList = new ArrayList<>();
+                List<ColorSizeData> colorCodeList = new ArrayList<>();
 
 
                 for (int i = 0; i < attributeRelatedDataList.size(); i++) {
 
-                    ColorData colorData = new ColorData();
+                    ColorSizeData colorSizeData = new ColorSizeData();
 
                     if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
 
-                        colorData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
-                        colorData.setmAttributeId(attrIdList.get(i));
-                        colorData.setmAttrbuteType(attrTypeList.get(i));
-                        colorData.setSelected(false);
+                        colorSizeData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
+                        colorSizeData.setmAttributeId(attrIdList.get(i));
+                        colorSizeData.setmAttrbuteType(attrTypeList.get(i));
+                        colorSizeData.setSelected(false);
 
                         isColorVewVisible = true;
 
                     }
 
-                    colorCodeList.add(colorData);
+                    colorCodeList.add(colorSizeData);
                 }
 
 
@@ -768,6 +889,72 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
     }
+
+    private void setSize(ArrayList<ProductAttributeData> productAttributeDataArrayList) {
+        String attributeRelatedData = "";
+        String attributeId = "";
+        String attributeName = "";
+        isSizeVewVisible = false;
+        try {
+            for (ProductAttributeData productAttributeData : productAttributeDataArrayList) {
+                if (productAttributeData.getmAttrType().equalsIgnoreCase("SIZE-UK/INDIA")) {
+
+                    attributeRelatedData = productAttributeData.getmAttributeRelatedData();
+                    attributeId = productAttributeData.getmAttributeId();
+                    attributeName = productAttributeData.getmAttributeName();
+                }
+            }
+
+            if (!TextUtils.isEmpty(attributeRelatedData)) {
+                List<String> attributeRelatedDataList = Arrays.asList(attributeRelatedData.split("\\s*,\\s*"));
+                List<String> attrIdList = Arrays.asList(attributeId.split("\\s*,\\s*"));
+                List<String> attrTypeList = Arrays.asList(attributeName.split("\\s*,\\s*"));
+
+
+                List<ColorSizeData> sizeList = new ArrayList<>();
+
+
+                for (int i = 0; i < attributeRelatedDataList.size(); i++) {
+
+                    ColorSizeData colorSizeData = new ColorSizeData();
+
+                    if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
+
+                        colorSizeData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
+                        colorSizeData.setmAttributeId(attrIdList.get(i));
+                        colorSizeData.setmAttrbuteType(attrTypeList.get(i));
+                        colorSizeData.setSelected(false);
+
+                        isSizeVewVisible = true;
+
+                    }
+
+                    sizeList.add(colorSizeData);
+                }
+
+
+                if (isSizeVewVisible) {
+
+                    lySize.setVisibility(View.VISIBLE);
+                    productDetailsSizeAdapter = new ProductDetailsSizeAdapter(getActivity(), sizeList, ProductDetailFragment.this);
+                    rvSize.setAdapter(productDetailsSizeAdapter);
+
+                } else {
+                    lySize.setVisibility(View.GONE);
+                }
+
+
+            } else {
+                lySize.setVisibility(View.GONE);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     private void setProductSpecfication(ArrayList<ProductAttributeData> productAttributeDataArrayList) {
         try {

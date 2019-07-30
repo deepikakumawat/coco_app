@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 
 import fragment.FragmentManagerUtils;
 
@@ -36,14 +38,10 @@ public class LegalPoliciesFragment extends BaseFragment implements View.OnClickL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 
+        rvLegalPoliciesList = view.findViewById(R.id.rvLegalPoliciesList);
 
 
-        rvLegalPoliciesList =  view.findViewById(R.id.rvLegalPoliciesList);
-
-
-
-
-       LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvLegalPoliciesList.setLayoutManager(layoutManager);
 
         String[] legalPoliciesArray = getResources().getStringArray(R.array.legal_policies_array);
@@ -55,16 +53,42 @@ public class LegalPoliciesFragment extends BaseFragment implements View.OnClickL
     }
 
 
-
-
-
     @Override
     public void onClick(View view) {
         try {
             int vId = view.getId();
             switch (vId) {
                 case R.id.txtLegalPolicies:
-                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new TermsConditionFragment(), null, true, false);
+                    int position = ((int) view.getTag());
+                    TextView  txtLegalPolicies = ((TextView) view.getTag(R.id.txtLegalPolicies));
+
+                    String screenTitle = txtLegalPolicies.getText().toString().trim();
+                    String webUrl = "";
+
+                    Bundle bundle = new Bundle();
+                    if (position == 0) {
+                        webUrl = "https://www.richkart.com/privacy-policy";
+                    } else if (position == 1) {
+                        webUrl = "https://www.richkart.com/terms-conditions";
+                    } else if (position == 2) {
+                        webUrl = "https://www.richkart.com/return-policy";
+                    } else if (position == 3) {
+                        webUrl = "https://www.richkart.com/payment-security";
+                    } else if (position == 4) {
+                        webUrl = "https://www.richkart.com/shipping";
+                    } else if (position == 5) {
+                        webUrl = "https://www.richkart.com/about-us";
+                    } else if (position == 6) {
+                        webUrl = "https://www.richkart.com/payments";
+                    }
+                    bundle.putString("webUrl", webUrl);
+                    bundle.putString("screenTitle", screenTitle);
+
+
+                    TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
+                    termsConditionFragment.setArguments(bundle);
+
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), termsConditionFragment, null, true, false);
 
                     break;
 
@@ -85,7 +109,7 @@ public class LegalPoliciesFragment extends BaseFragment implements View.OnClickL
 
     @Override
     protected boolean isCartIconVisible() {
-        return  false;
+        return false;
     }
 
     @Override

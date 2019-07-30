@@ -43,6 +43,8 @@ public class LegalPoliciesAdapter extends RecyclerView.Adapter<LegalPoliciesAdap
         String legal = legalPoliciesArray[position];
         holder.txtLegalPolicies.setText(legal);
 
+        holder.txtLegalPolicies.setTag(position);
+        holder.txtLegalPolicies.setTag(R.id.txtLegalPolicies,holder.txtLegalPolicies);
         holder.txtLegalPolicies.setOnClickListener(legalPoliciesFragment);
 
     }

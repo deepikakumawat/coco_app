@@ -248,7 +248,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
+                .findViewById(R.id.txtAttributeType);
         lblListHeader.setText(headerTitle);
 
 //        final ExpandableListView lvExp = (ExpandableListView) convertView.findViewById(R.id.lvExp);

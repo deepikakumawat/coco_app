@@ -1,8 +1,10 @@
 package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
@@ -21,13 +24,18 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -94,7 +102,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         if (Util.isDeviceOnline(this)) {
             checkoutPresenter.addressList(CocoPreferences.getUserId());
         } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection));
+            showCenteredToast(lyParent, this, getString(R.string.network_connection));
         }
 
         init();
@@ -142,8 +150,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         rvPaymentType.setLayoutManager(layoutManagerPaymentMethod);
 
 
-
-        paymentMethodDataArrayList.add(new PaymentMethodData(false,getString(R.string.cash_on_delivery)));
+        paymentMethodDataArrayList.add(new PaymentMethodData(false, getString(R.string.cash_on_delivery)));
         paymentMethodAdapter = new PaymentMethodAdapter(this, paymentMethodDataArrayList, CheckoutActivity.this);
         rvPaymentType.setAdapter(paymentMethodAdapter);
 
@@ -178,9 +185,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         });
 
 
-
     }
-
 
 
     @Override
@@ -199,7 +204,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                         startPayment();
 
                     } else {
-                        showCenteredToast(lyParent,this, "You haven't added address. Please add address first");
+                        showCenteredToast(lyParent, this, "You haven't added address. Please add address first");
                     }
 
 
@@ -220,7 +225,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                         if (paymentMethodAdapter != null) {
                             if (paymentMethodData.isSelectedPayment()) {
                                 paymentMethodData.setSelectedPayment(false);
-                            }else{
+                            } else {
                                 paymentMethodData.setSelectedPayment(true);
                             }
                             paymentMethodAdapter.notifyDataSetChanged();
@@ -252,7 +257,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage);
+        showCenteredToast(lyParent, this, appErrorMessage);
         if (addressData == null) {
             txtAddAddress.setVisibility(View.VISIBLE);
 
@@ -268,7 +273,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             txtAddress1.setText("You haven't added address.");
         }
 
-        if (addressData!=null && TextUtils.isEmpty(orderStatus)) {
+        if (addressData != null && TextUtils.isEmpty(orderStatus)) {
             Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
             intent.putExtra("totalPrice", totalPrice);
             intent.putExtra("orderStatus", Constant.ORDER_FAIL);
@@ -332,7 +337,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                     if (Util.isDeviceOnline(this)) {
                         checkoutPresenter.addressList(CocoPreferences.getUserId());
                     } else {
-                        showCenteredToast(lyParent,this, getString(R.string.network_connection));
+                        showCenteredToast(lyParent, this, getString(R.string.network_connection));
                     }
                 }
             }
@@ -407,7 +412,7 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
         try {
 
 
-           callCheckoutPaymentApi(razorpayPaymentID);
+            callCheckoutPaymentApi(razorpayPaymentID);
 
 
         } catch (Exception e) {
@@ -444,12 +449,11 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
                 );
 
 
-
             }
 
 
         } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection));
+            showCenteredToast(lyParent, this, getString(R.string.network_connection));
 
         }
     }
@@ -494,10 +498,42 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
             intent.putExtra("addressData", addressData);
             intent.putExtra("orderId", orderId);
 
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
+            makeRootFragment();
+
+
+
+
 
         } else {
-            showCenteredToast(lyParent,this, checkoutPaymentResponse.getMessage());
+            showCenteredToast(lyParent, this, checkoutPaymentResponse.getMessage());
+        }
+    }
+
+    public void makeRootFragment() {
+        try {
+            popAllFragments(this);
+            FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+
+        }catch (Exception e){
+
+        }
+    }
+
+
+    public static void popAllFragments(Context context) {
+        try {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            if (activity != null) {
+                FragmentManager manager = activity.getSupportFragmentManager();
+                if (manager.getBackStackEntryCount() > 0) {
+                    manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
+            }
+        }catch (Exception e){
+
         }
     }
 

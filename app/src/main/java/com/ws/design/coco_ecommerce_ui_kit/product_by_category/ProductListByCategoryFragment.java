@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.FilterActivity;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
+
+import java.util.ArrayList;
 
 import Adapter.CategoryPagerAdapterProductList;
 import Adapter.WrapContentHeightViewPager;
@@ -22,7 +23,7 @@ import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
 
-public class ProductListByCategoryFragment extends ToolbarBaseFragment {
+public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
 
     private TabLayout tabLayout;
     private Typeface mTypeface;
@@ -32,6 +33,8 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
     private View mView;
     private String catId;
     private IFragmentListener mListener;
+    ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -81,7 +84,19 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
         mView.findViewById(R.id.btn_filter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new FilterActivity(), null, false, false);
+
+             /*   if (filterFragment == null) {
+                    filterFragment = new FilterFragment();
+                }*/
+              /*  FragmentManager fm = getActivity().getFragmentManager();
+                filterFragment.show(fm, "Product Filter");*/
+
+              Bundle bundle = new Bundle();
+              bundle.putSerializable("productAttribueDataArrayList",productAttribueDataArrayList);
+              FilterFragment filterFragment = new FilterFragment();
+              filterFragment.setArguments(bundle);
+
+               FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(),filterFragment, null, false, false);
             }
         });
 
@@ -150,4 +165,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment {
 
     }
 
+    public void getProductByCategory(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
+       this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
+    }
 }

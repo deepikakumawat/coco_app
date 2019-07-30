@@ -2,7 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 
 
-public class ColorData {
+public class ColorSizeData {
 
 
     private String mAttributeId;

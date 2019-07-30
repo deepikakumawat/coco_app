@@ -151,16 +151,6 @@
 
 
 
-                        <customfonts.MyTextView_Roboto_Bold
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginTop="10.3dp"
-                            android:text="Color"
-                            android:textColor="@color/storage"
-                            android:textSize="12.3sp" />
-
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
