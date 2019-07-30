@@ -22,6 +22,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
             } else {
-                showCenteredToast(ryParent,this, getString(R.string.network_connection));
+                showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
 
             }
 
@@ -125,7 +126,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(ryParent,this, appErrorMessage);
+        showCenteredToast(ryParent,this, appErrorMessage,"");
     }
 
     @Override
@@ -169,13 +170,13 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     @Override
     public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
         if (!TextUtils.isEmpty(deleteAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(deleteAddressResponse.getmStatus()))) {
-            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage());
+            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage(), Constant.API_SUCCESS);
             if (addressAdapter != null) {
                 addressDataArrayList.remove(deletedPosition);
                 addressAdapter.notifyDataSetChanged();
             }
         } else {
-            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage());
+            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage(),"");
         }
     }
 
@@ -198,7 +199,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         if (Util.isDeviceOnline(this)) {
                             addressPresenter.deteleAddress(addressData.getmId());
                         } else {
-                            showCenteredToast(ryParent,this, getString(R.string.network_connection));
+                            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
 
                         }
                     }
@@ -262,7 +263,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
                 } else {
-                    showCenteredToast(ryParent,this, getString(R.string.network_connection));
+                    showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
 
                 }
             }

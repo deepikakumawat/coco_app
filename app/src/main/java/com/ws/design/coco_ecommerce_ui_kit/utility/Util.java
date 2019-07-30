@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,10 +84,19 @@ public class Util {
         return isDeviceOnLine;
     }
 
-    public static void showCenteredToast(View view,Context context, String msg) {
-        Snackbar snackbar1 = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+    public static void showCenteredToast(View view,Context context, String msg, String result) {
+        Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+        View snackBarView = snackbar.getView();
 
-        snackbar1.show();
+        if (!TextUtils.isEmpty(result)) {
+            snackBarView.setBackgroundColor(context.getResources().getColor(R.color.greencolor));
+
+        }else{
+            snackBarView.setBackgroundColor(context.getResources().getColor(R.color.red));
+
+        }
+
+        snackbar.show();
 
     }
 

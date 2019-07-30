@@ -91,19 +91,20 @@ public class TermsConditionFragment extends BaseFragment {
         if (Util.isDeviceOnline(getActivity())) {
             webView.loadUrl(webUrl);
             webView.getSettings().setJavaScriptEnabled(true);
-            webView.setWebViewClient(new NavFreshWebClient());
+            webView.setWebViewClient(new TermsConditionWebClient());
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
         }
     }
 
 
-    private class NavFreshWebClient extends WebViewClient {
+    private class TermsConditionWebClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            Util.showProDialog(getActivity());
         }
 
         @Override
@@ -115,6 +116,7 @@ public class TermsConditionFragment extends BaseFragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            Util.dismissProDialog();
         }
     }
 

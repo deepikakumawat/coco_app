@@ -1,10 +1,8 @@
 package com.ws.design.coco_ecommerce_ui_kit.my_cart;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +10,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,11 +17,12 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -106,7 +104,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
         if (Util.isDeviceOnline(getActivity())) {
             cartPresenter.getCartList(CocoPreferences.getUserId());
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
         }
     }
@@ -152,7 +150,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     @Override
     public void emptyCart(EmptyCartResponse emptyCartResponse) {
         if (!TextUtils.isEmpty(emptyCartResponse.getmStatus()) && ("1".equalsIgnoreCase(emptyCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), emptyCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), emptyCartResponse.getmMessage(), Constant.API_SUCCESS);
             productDataArrayList.clear();
             cartListAdapter.notifyDataSetChanged();
 
@@ -160,14 +158,14 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), emptyCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), emptyCartResponse.getmMessage(),"");
         }
     }
 
     @Override
     public void removeCartOneByOne(RemoveCartOneByOneResponse removeCartOneByOneResponse) {
         if (!TextUtils.isEmpty(removeCartOneByOneResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartOneByOneResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage(),Constant.API_SUCCESS);
 
             if (!removeCartOneByOneResponse.getmData().getmProductData().isEmpty()) {
 
@@ -185,14 +183,14 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage(),"");
         }
     }
 
     @Override
     public void removeCartByCross(RemoveCartByCrossResponse removeCartByCrossResponse) {
         if (!TextUtils.isEmpty(removeCartByCrossResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartByCrossResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage(),Constant.API_SUCCESS);
 
             if (removeCorssPostion == -1) {
                 if (!removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
@@ -219,7 +217,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
             }
 
         } else {
-            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage(),"");
         }
     }
 
@@ -234,7 +232,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         cartPresenter.emptyCart(CocoPreferences.getUserId());
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                     }
                     break;
@@ -246,7 +244,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         if (Util.isDeviceOnline(getActivity())) {
                             cartPresenter.removeCartByCross(productData.getmCartId());
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
                         }
 
                     }
@@ -273,12 +271,20 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                 case R.id.txtCheckout:
 
                     if (!productDataArrayList.isEmpty()) {
-                        Intent intent = new Intent(getActivity(), CheckoutActivity.class);
-                        intent.putExtra("cartList", productDataArrayList);
-                        intent.putExtra("totalPrice", totalPrice);
-                        startActivity(intent);
+
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("cartList", productDataArrayList);
+                        bundle.putString("totalPrice", totalPrice);
+
+                        CheckoutFragment checkoutFragment = new CheckoutFragment();
+                        checkoutFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), checkoutFragment, "CheckoutFragment", true, false);
+
+
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.your_cart_empty));
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.your_cart_empty),"");
                     }
 
 
@@ -294,7 +300,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                             cartPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                         }
 
@@ -327,7 +333,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),Constant.API_SUCCESS);
 
             if (!addToCartResponse.getmData().getmProductData().isEmpty()) {
                 productDataArrayList.clear();
@@ -340,7 +346,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
         }
     }
 

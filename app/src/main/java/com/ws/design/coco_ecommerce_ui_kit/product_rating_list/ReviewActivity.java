@@ -21,6 +21,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.Ratings;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
             productRatingPresenter.getProductRating(productId);
 
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection));
+            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
 
         }
     }
@@ -167,7 +168,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(ryParent,this, appErrorMessage);
+        showCenteredToast(ryParent,this, appErrorMessage,"");
     }
 
 
@@ -233,7 +234,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
     @Override
     public void addRating(AddRatingResponse addRatingResponse) {
         if (!TextUtils.isEmpty(addRatingResponse.getmStatus()) && ("1".equalsIgnoreCase(addRatingResponse.getmStatus()))) {
-            showCenteredToast(ryParent,this, "Review added successfully");
+            showCenteredToast(ryParent,this, "Review added successfully", Constant.API_SUCCESS);
 
             isReviewAdded = true;
 
@@ -242,7 +243,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
             productRatingPresenter.getProductRating(productId);
 
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.somethingWentWrong));
+            showCenteredToast(ryParent,this, getString(R.string.somethingWentWrong),"");
         }
     }
 
@@ -250,17 +251,17 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(comment)) {
-                showCenteredToast(ryParent,this, getString(R.string.comment_validation_message));
+                showCenteredToast(ryParent,this, getString(R.string.comment_validation_message),"");
                 etxtReview.requestFocus();
             } else if (rating == 0.0) {
-                showCenteredToast(ryParent,this, getString(R.string.rating_validation_message));
+                showCenteredToast(ryParent,this, getString(R.string.rating_validation_message),"");
                 productRating.requestFocus();
             } else {
                 validation_detials_flag = true;
 
             }
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection));
+            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
         }
         return validation_detials_flag;
     }

@@ -175,6 +175,8 @@
     <string name="size">Size</string>
     <string name="out_of_stock">Out of Stock</string>
     <string name="app_not_insalled">App not installed in this device.</string>
+    <string name="checkout">Checkout</string>
+    <string name="order_status">Order Status</string>
 
 
     <string-array name="legal_policies_array">

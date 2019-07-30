@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
@@ -137,6 +137,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private RecyclerView rvSize;
     private TextView txtOutOfStock;
     private ShimmerFrameLayout mShimmerViewContainer;
+    boolean isShimmerShow = true;
 
 
     @Nullable
@@ -289,7 +290,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
         }
 
@@ -304,10 +305,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
             case R.id.txtAddToWishlist:
                 if (Util.isDeviceOnline(getActivity())) {
+                    isShimmerShow = false;
                     productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
                 break;
@@ -342,10 +344,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 if (!TextUtils.isEmpty(wishListId)) {
 
                     if (Util.isDeviceOnline(getActivity())) {
+                        isShimmerShow = false;
                         productDetailsPresenter.removeWishList(wishListId);
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                     }
 
@@ -368,10 +371,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 if (productBroughtData != null) {
 
                     if (Util.isDeviceOnline(getActivity())) {
+                        isShimmerShow = false;
                         productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1", "");
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                     }
 
@@ -402,6 +406,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     onClick(txtProductShortDesc);
                     productId = productDetailsSimilier.getmProductId();
 
+                    isShimmerShow = true;
+
                     productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductId(), CocoPreferences.getUserId());
                 }
 
@@ -414,6 +420,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     unSelectAllTabs();
                     onClick(txtProductShortDesc);
                     productId = productBroughtData.getmProductId();
+
+                    isShimmerShow = true;
 
                     productDetailsPresenter.getProductDetails(productBroughtData.getmProductId(), CocoPreferences.getUserId());
                 }
@@ -463,18 +471,19 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (selectedColorData != null && selectedSizeData != null) {
                 if (Util.isDeviceOnline(getActivity())) {
                     isClickOnBuyNow = true;
+                    isShimmerShow = false;
                     productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId() + "," + selectedSizeData.getmAttributeId());
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
             } else {
                 if (selectedColorData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
 
                 } else if (selectedSizeData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
 
                 }
 
@@ -486,14 +495,15 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (selectedColorData != null) {
                 if (Util.isDeviceOnline(getActivity())) {
                     isClickOnBuyNow = true;
+                    isShimmerShow = false;
                     productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
             } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
 
             }
 
@@ -503,14 +513,15 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (selectedSizeData != null) {
                 if (Util.isDeviceOnline(getActivity())) {
                     isClickOnBuyNow = true;
+                    isShimmerShow = false;
                     productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedSizeData.getmAttributeId());
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
             } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
 
             }
 
@@ -518,10 +529,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         } else {
             if (Util.isDeviceOnline(getActivity())) {
                 isClickOnBuyNow = true;
+                isShimmerShow = false;
                 productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
             } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
             }
         }
@@ -534,19 +546,20 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (selectedColorData != null && selectedSizeData != null) {
                 if (Util.isDeviceOnline(getActivity())) {
 
+                    isShimmerShow = false;
                     productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId() + "," + selectedSizeData.getmAttributeId());
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
             } else {
 
                 if (selectedColorData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
 
                 } else if (selectedSizeData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
 
                 }
 
@@ -556,35 +569,38 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         } else if (isColorVewVisible) {
             if (selectedColorData != null) {
                 if (Util.isDeviceOnline(getActivity())) {
+                    isShimmerShow = false;
                     productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
             } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color));
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
 
             }
         } else if (isSizeVewVisible) {
             if (selectedSizeData != null) {
                 if (Util.isDeviceOnline(getActivity())) {
+                    isShimmerShow = false;
                     productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedSizeData.getmAttributeId());
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                 }
             } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size));
+                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
 
             }
         } else {
             if (Util.isDeviceOnline(getActivity())) {
+                isShimmerShow = false;
                 productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
             } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
             }
         }
@@ -607,32 +623,46 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void showWait() {
-//        showProDialog(getActivity());
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.startShimmerAnimation();
+
+        if (isShimmerShow) {
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            mShimmerViewContainer.startShimmerAnimation();
+        } else {
+            showProDialog(getActivity());
+
+        }
+
+
     }
 
     @Override
     public void removeWait() {
-//        dismissProDialog();
-        mShimmerViewContainer.stopShimmerAnimation();
-        mShimmerViewContainer.setVisibility(View.GONE);
+
+
+        if (isShimmerShow) {
+            mShimmerViewContainer.stopShimmerAnimation();
+            mShimmerViewContainer.setVisibility(View.GONE);
+        } else {
+            dismissProDialog();
+        }
+
+
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(ryParent, getActivity(), appErrorMessage);
+        showCenteredToast(ryParent, getActivity(), appErrorMessage,"");
     }
 
     @Override
     public void addToWishList(AddToWishListResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(),Constant.API_SUCCESS);
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(),"");
         }
     }
 
@@ -786,14 +816,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     intent.setPackage(Constant.YOUTUBE_PACKAGES_NAME);
                     startActivity(intent);
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.app_not_insalled));
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.app_not_insalled),"");
                 }
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            showCenteredToast(ryParent,getActivity(),getString(R.string.somethingWentWrong));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.somethingWentWrong),"");
         }
     }
 
@@ -1083,29 +1113,35 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),Constant.API_SUCCESS);
 
             if (isClickOnBuyNow) {
 
-                Intent intent = new Intent(getActivity(), CheckoutActivity.class);
-                intent.putExtra("cartList", addToCartResponse.getmData().getmProductData());
-                intent.putExtra("totalPrice", addToCartResponse.getmData().getmTotalPrice());
-                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cartList", addToCartResponse.getmData().getmProductData());
+                bundle.putString("totalPrice", addToCartResponse.getmData().getmTotalPrice());
+
+                CheckoutFragment checkoutFragment = new CheckoutFragment();
+                checkoutFragment.setArguments(bundle);
+
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), checkoutFragment, "CheckoutFragment", true, false);
+
+
             }
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
         }
     }
 
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(),Constant.API_SUCCESS);
             txtAddToWishlist.setVisibility(View.VISIBLE);
             txtRemoveWishlist.setVisibility(View.GONE);
         } else {
-            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmData());
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(),"");
         }
     }
 
@@ -1124,7 +1160,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                             productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                         }
 

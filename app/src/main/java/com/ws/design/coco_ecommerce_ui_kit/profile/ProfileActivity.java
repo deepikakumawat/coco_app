@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -62,19 +63,19 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(fName)) {
-                showCenteredToast(lyParent,this, getString(R.string.first_name_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.first_name_validation_message),"");
                 etFname.requestFocus();
             } else if (TextUtils.isEmpty(lName)) {
-                showCenteredToast(lyParent,this, getString(R.string.last_name_validation_message));
+                showCenteredToast(lyParent,this, getString(R.string.last_name_validation_message),"");
                 etLname.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.invalid_mobile_number));
+                showCenteredToast(lyParent,this, getString(R.string.invalid_mobile_number),"");
                 etPhone.requestFocus();
             }  else {
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection),"");
         }
         return validation_detials_flag;
     }
@@ -120,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage,"");
     }
 
     @Override
@@ -134,9 +135,9 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
             CocoPreferences.setLastName(updateProfileResponse.getmLoginData().getmLastName());
             CocoPreferences.savePreferencese();
 
-            showCenteredToast(lyParent,this,updateProfileResponse.getMessage());
+            showCenteredToast(lyParent,this,updateProfileResponse.getMessage(), Constant.API_SUCCESS);
         }else {
-            showCenteredToast(lyParent,this,updateProfileResponse.getMessage());
+            showCenteredToast(lyParent,this,updateProfileResponse.getMessage(),"");
         }
 
     }

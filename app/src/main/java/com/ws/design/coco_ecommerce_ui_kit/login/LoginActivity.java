@@ -68,14 +68,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(ryParent,this, getString(R.string.email_validation_message));
+                showCenteredToast(ryParent,this, getString(R.string.email_validation_message),"");
                 etEmail.requestFocus();
             } else if (TextUtils.isEmpty(password)) {
-                showCenteredToast(ryParent,this, getString(R.string.invalid_password));
+                showCenteredToast(ryParent,this, getString(R.string.invalid_password),"");
                 etPassword.requestFocus();
             } else {
                 if (!Util.isEmailValid(email)) {
-                    showCenteredToast(ryParent,this, getString(R.string.invalid_email));
+                    showCenteredToast(ryParent,this, getString(R.string.invalid_email),"");
                     etEmail.requestFocus();
                 } else {
                     validation_detials_flag = true;
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
             }
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection));
+            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
         }
         return validation_detials_flag;
     }
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
     @Override
     public void onFailure(String appErrorMessage) {
-        Util.showCenteredToast(ryParent,this, appErrorMessage);
+        Util.showCenteredToast(ryParent,this, appErrorMessage,"");
     }
 
 
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                     startActivity(intent);
                     finish();
                 } else {
-                    showCenteredToast(ryParent,this, loginResponse.getMessage());
+                    showCenteredToast(ryParent,this, loginResponse.getMessage(),"");
                 }
 
             }

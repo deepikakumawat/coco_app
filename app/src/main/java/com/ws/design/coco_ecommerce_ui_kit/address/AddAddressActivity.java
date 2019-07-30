@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
@@ -73,7 +74,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage);
+        showCenteredToast(lyParent,this, appErrorMessage,"");
     }
 
     @Override
@@ -89,7 +90,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
     @Override
     public void addUpdateAddress(AddUpdateAddressResponse addUpdateAddressResponse) {
         if (!TextUtils.isEmpty(addUpdateAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(addUpdateAddressResponse.getmStatus()))) {
-            showCenteredToast(lyParent,this, addUpdateAddressResponse.getMessage());
+            showCenteredToast(lyParent,this, addUpdateAddressResponse.getMessage(), Constant.API_SUCCESS);
 
             Intent data = new Intent();
             setResult(Activity.RESULT_OK, data);
@@ -97,7 +98,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
 
 
         } else {
-            showCenteredToast(lyParent,this, addUpdateAddressResponse.getMessage());
+            showCenteredToast(lyParent,this, addUpdateAddressResponse.getMessage(),"");
         }
     }
 
@@ -105,37 +106,37 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
            if (TextUtils.isEmpty(primaryAddress)) {
-                showCenteredToast(lyParent,this, getString(R.string.primary_address));
+                showCenteredToast(lyParent,this, getString(R.string.primary_address),"");
                 txtPrimaryAddress.requestFocus();
             } else if (TextUtils.isEmpty(area)) {
-                showCenteredToast(lyParent,this, getString(R.string.area));
+                showCenteredToast(lyParent,this, getString(R.string.area),"");
                 txtArea.requestFocus();
             } else if (TextUtils.isEmpty(landmark)) {
-                showCenteredToast(lyParent,this, getString(R.string.landmark));
+                showCenteredToast(lyParent,this, getString(R.string.landmark),"");
                 txtLandmark.requestFocus();
             } else if (TextUtils.isEmpty(city)) {
-                showCenteredToast(lyParent,this, getString(R.string.city));
+                showCenteredToast(lyParent,this, getString(R.string.city),"");
                 txtCity.requestFocus();
             } else if (TextUtils.isEmpty(state)) {
-                showCenteredToast(lyParent,this, getString(R.string.state));
+                showCenteredToast(lyParent,this, getString(R.string.state),"");
                 txtState.requestFocus();
             } else if (TextUtils.isEmpty(country)) {
-                showCenteredToast(lyParent,this, getString(R.string.country));
+                showCenteredToast(lyParent,this, getString(R.string.country),"");
                 txtCountry.requestFocus();
             } else if (TextUtils.isEmpty(zipcode)) {
-                showCenteredToast(lyParent,this, getString(R.string.zipcode_blank));
+                showCenteredToast(lyParent,this, getString(R.string.zipcode_blank),"");
                 txtZipcode.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.phone));
+                showCenteredToast(lyParent,this, getString(R.string.phone),"");
                 txtPhone.requestFocus();
             } else if (!isValidMobile(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.mobile_number));
+                showCenteredToast(lyParent,this, getString(R.string.mobile_number),"");
                 txtPhone.requestFocus();
             } else {
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection));
+            showCenteredToast(lyParent,this, getString(R.string.network_connection),"");
         }
         return validation_detials_flag;
     }

@@ -35,6 +35,7 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.SuccessFragment;
 import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.legal_policies.LegalPoliciesFragment;
@@ -45,6 +46,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -468,7 +470,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             navigationModelClasses.remove(11);
                             mAdapter.notifyDataSetChanged();
 
-                            Util.showCenteredToast(drawer, DrawerActivity.this, "Logout Successfully!");
+                            Util.showCenteredToast(drawer, DrawerActivity.this, "Logout Successfully!", Constant.API_SUCCESS);
 
                             init();
 
@@ -508,19 +510,28 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     @Override
     public void onBackPressed() {
 
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
 
-            drawer.closeDrawer(Gravity.LEFT); //OPEN Nav Drawer!
-
+        Fragment f = getCurrentFragmentInRootLayout();
+        if (f instanceof SuccessFragment) {
+            FragmentManagerUtils.makeRootFragment(getSupportFragmentManager(), new HomeFragment(), this, "HomeFragment");
         } else {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
 
+                drawer.closeDrawer(Gravity.LEFT); //OPEN Nav Drawer!
 
-            if (getFragmentManager().getBackStackEntryCount() > 0) {
-                getFragmentManager().popBackStack();
             } else {
-                super.onBackPressed();
+
+
+                if (getFragmentManager().getBackStackEntryCount() > 0) {
+
+
+                    getFragmentManager().popBackStack();
+                } else {
+                    super.onBackPressed();
+                }
             }
         }
+
 
     }
 

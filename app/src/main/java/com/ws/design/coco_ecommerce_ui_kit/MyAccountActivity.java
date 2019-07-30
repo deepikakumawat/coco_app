@@ -17,6 +17,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 public class MyAccountActivity extends AppCompatActivity implements View.OnClickListener {
@@ -108,7 +109,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                             txtUserName.setText("");
                             txtUserEmail.setText("");
 
-                            Util.showCenteredToast(ryParent,MyAccountActivity.this, "Logout Successfully!");
+                            Util.showCenteredToast(ryParent,MyAccountActivity.this, "Logout Successfully!", Constant.API_SUCCESS);
 
 
                             Intent data = new Intent();

@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.MarshMallowPermissions;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -86,7 +87,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
             myOrderPresenter.myOrder(CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection));
+            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
 
         }
 
@@ -112,7 +113,6 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
 
     @Override
     public void onFailure(String appErrorMessage) {
-//        showCenteredToast(this, appErrorMessage);
       nodataFound(appErrorMessage);
 
 
@@ -146,7 +146,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
     @Override
     public void cancelOrder(CancelOrderResponse cancelOrderResponse) {
         if (!TextUtils.isEmpty(cancelOrderResponse.getmStatus()) && ("1".equalsIgnoreCase(cancelOrderResponse.getmStatus()))) {
-            showCenteredToast(ryParent,this, cancelOrderResponse.getmMessage());
+            showCenteredToast(ryParent,this, cancelOrderResponse.getmMessage(), Constant.API_SUCCESS);
             if (myOrderAdapter != null) {
                 myOrderDataArrayList.remove(cancelOrderPosition);
                 myOrderAdapter.notifyDataSetChanged();
@@ -156,7 +156,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                 }
             }
         } else {
-            showCenteredToast(ryParent,this, cancelOrderResponse.getmData());
+            showCenteredToast(ryParent,this, cancelOrderResponse.getmData(),"");
         }
     }
 
@@ -216,7 +216,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                         Util.hideKeyBoardMethod(this, view);
 
                     } else {
-                        showCenteredToast(ryParent,this, getString(R.string.order_cancel_reason));
+                        showCenteredToast(ryParent,this, getString(R.string.order_cancel_reason),"");
 
                     }
 

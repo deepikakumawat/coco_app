@@ -24,6 +24,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCate
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -32,7 +33,9 @@ import java.util.Comparator;
 
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryAdapter;
 
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
 public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
@@ -46,6 +49,8 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private TextView txtNoDataFound;
     private RelativeLayout ryParent;
     private int tabPostion;
+    boolean isShimmerShow = true;
+
 
     public static PopularListFragment newInstance(String catId, int tabPostion) {
         PopularListFragment fragment = new PopularListFragment();
@@ -92,7 +97,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
             productByCategoryPresenter.getProductByCat(catId);
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
         }
 
@@ -101,21 +106,29 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void showWait() {
-//        showProDialog(getActivity());
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.startShimmerAnimation();
+        if (isShimmerShow) {
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            mShimmerViewContainer.startShimmerAnimation();
+        } else {
+            showProDialog(getActivity());
+
+        }
     }
 
     @Override
     public void removeWait() {
-//        dismissProDialog();
-        mShimmerViewContainer.stopShimmerAnimation();
-        mShimmerViewContainer.setVisibility(View.GONE);
+
+        if (isShimmerShow) {
+            mShimmerViewContainer.stopShimmerAnimation();
+            mShimmerViewContainer.setVisibility(View.GONE);
+        }else{
+            dismissProDialog();
+        }
+
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
-//        showCenteredToast(getActivity(), appErrorMessage);
         nodataFound(appErrorMessage);
     }
 
@@ -140,7 +153,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                         sortByHighPrice(productGridModellClasses);
                     }
 
-                    ( (ProductListByCategoryFragment) getParentFragment() ).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+                    ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
 
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
@@ -191,10 +204,11 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     if (productData != null) {
 
                         if (Util.isDeviceOnline(getActivity())) {
+                            isShimmerShow = false;
                             productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                         }
 
@@ -212,11 +226,11 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), Constant.API_SUCCESS);
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
         }
     }
 

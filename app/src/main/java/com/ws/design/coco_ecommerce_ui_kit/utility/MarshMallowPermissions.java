@@ -154,7 +154,7 @@ public class MarshMallowPermissions {
 */
     public void requestPermissionForPhone(View view) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CALL_PHONE)) {
-            Util.showCenteredToast(view,activity, "Camera permission needed. Please allow in App Settings for additional functionality.");
+            Util.showCenteredToast(view,activity, "Camera permission needed. Please allow in App Settings for additional functionality.","");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE}, PHONE_PERMISSION_REQUEST_CODE);
         }

@@ -1,11 +1,16 @@
 package fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 
 public final class FragmentManagerUtils {
@@ -30,9 +35,6 @@ public final class FragmentManagerUtils {
             transaction.replace(containerId, fragment, tag).commit();
         });
     }
-
-
-
 
 
     public static void replaceFragmentInRoot(FragmentManager fragmentManager, Fragment fragment, String tag, boolean addToBackStack, boolean animate) {
@@ -80,5 +82,40 @@ public final class FragmentManagerUtils {
     }
 
 
+    public static void makeRootFragment(FragmentManager fragmentManager, Fragment fragment, Context context, String tag) {
+        try {
+            popAllFragments(context);
+            replaceFragmentInRoot(fragmentManager, fragment, tag, false, false);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void popAllFragments(Context context) {
+        try {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            if (activity != null) {
+                FragmentManager manager = activity.getSupportFragmentManager();
+                if (manager.getBackStackEntryCount() > 0) {
+                    manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            String msg = e.getMessage();
+            Log.d("payment", e.getMessage());
+        }
+    }
+
+    public static void popFragment(FragmentManager fragmentManager) {
+        try {
+            if (fragmentManager.getBackStackEntryCount() > 0) {
+                fragmentManager.popBackStack();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

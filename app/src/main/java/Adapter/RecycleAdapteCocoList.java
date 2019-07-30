@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.FilterFragment;
 import com.ws.design.coco_ecommerce_ui_kit.ProductByCategoryActivity1;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CategoryActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity;
-import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoEcommerceHomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.CocoFilter1_Activity;
@@ -182,7 +182,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, CocoAddNewAddress1Activity.class);
                     context.startActivity(i);
                 }else if (position == 19) {
-                    Intent i = new Intent(context, CheckoutActivity.class);
+                    Intent i = new Intent(context, CheckoutFragment.class);
                     context.startActivity(i);
                 }else if (position == 20) {
 //                    Intent i = new Intent(context, CartFragment.class);

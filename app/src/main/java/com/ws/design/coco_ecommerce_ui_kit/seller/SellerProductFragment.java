@@ -1,17 +1,14 @@
 package com.ws.design.coco_ecommerce_ui_kit.seller;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,23 +16,13 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListAdapter;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListPresenter;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListView;
-import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
-
-import fragment.FragmentManagerUtils;
-import fragment.ToolbarBaseFragment;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -55,6 +42,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     private LinearLayout lySellerProduct;
     private ShimmerFrameLayout mShimmerViewContainer;
     private RelativeLayout ryParent;
+    private boolean isShimmerShow = true;
 
 
     @Nullable
@@ -84,7 +72,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         if (Util.isDeviceOnline(getActivity())) {
             sellerPresenter.getSellerProduct(sellerId);
         } else {
-            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
         }
 
@@ -96,23 +84,33 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
     @Override
     public void showWait() {
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.startShimmerAnimation();
-//        showProDialog(getActivity());
+        if (isShimmerShow) {
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            mShimmerViewContainer.startShimmerAnimation();
+        }else {
+
+            showProDialog(getActivity());
+        }
     }
 
     @Override
     public void removeWait() {
-        mShimmerViewContainer.stopShimmerAnimation();
-        mShimmerViewContainer.setVisibility(View.GONE);
-//        dismissProDialog();
+
+        if (isShimmerShow) {
+            mShimmerViewContainer.stopShimmerAnimation();
+            mShimmerViewContainer.setVisibility(View.GONE);
+        }else{
+            dismissProDialog();
+
+        }
+
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
         txtNoDataFound.setVisibility(View.GONE);
         lySellerProduct.setVisibility(View.VISIBLE);
-        showCenteredToast(ryParent,getActivity(), appErrorMessage);
+        showCenteredToast(ryParent, getActivity(), appErrorMessage,"");
     }
 
     @Override
@@ -146,13 +144,11 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
-
-
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), Constant.API_SUCCESS);
 
 
         } else {
-            showCenteredToast(ryParent,getActivity(), addToCartResponse.getmMessage());
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
         }
     }
 
@@ -168,10 +164,11 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
                     if (sellerProductData != null) {
 
                         if (Util.isDeviceOnline(getActivity())) {
+                            isShimmerShow = false;
                             sellerPresenter.addToCart(CocoPreferences.getUserId(), sellerProductData.getmProductId(), "1");
 
                         } else {
-                            showCenteredToast(ryParent,getActivity(), getString(R.string.network_connection));
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
                         }
 
@@ -193,7 +190,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
     @Override
     protected boolean isSearchIconVisible() {
-        return  true;
+        return true;
     }
 
     @Override

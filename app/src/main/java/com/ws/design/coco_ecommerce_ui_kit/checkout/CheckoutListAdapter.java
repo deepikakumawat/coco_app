@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,13 +20,13 @@ import java.util.ArrayList;
 public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<CartListResponse.ProductData> productDataArrayList;
-    private CheckoutActivity checkoutActivity;
+    private CheckoutFragment checkoutFragment;
 
 
-    public CheckoutListAdapter(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CheckoutActivity checkoutActivity) {
+    public CheckoutListAdapter(Context context, ArrayList<CartListResponse.ProductData> productDataArrayList, CheckoutFragment checkoutFragment) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.checkoutActivity = checkoutActivity;
+        this.checkoutFragment = checkoutFragment;
 
     }
 

@@ -104,7 +104,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             homePresenter.getHomeData();
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection));
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
         }
 
@@ -267,7 +267,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(ryParent,getActivity(), appErrorMessage);
+        showCenteredToast(ryParent,getActivity(), appErrorMessage,"");
     }
 
     @Override

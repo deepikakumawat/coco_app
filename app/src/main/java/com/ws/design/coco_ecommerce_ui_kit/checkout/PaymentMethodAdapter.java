@@ -6,17 +6,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.razorpay.PaymentData;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 
@@ -24,13 +18,13 @@ import java.util.ArrayList;
 public class PaymentMethodAdapter extends RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<PaymentMethodData> productDataArrayList;
-    private CheckoutActivity checkoutActivity;
+    private CheckoutFragment checkoutFragment;
 
 
-    public PaymentMethodAdapter(Context context, ArrayList<PaymentMethodData> productDataArrayList, CheckoutActivity checkoutActivity) {
+    public PaymentMethodAdapter(Context context, ArrayList<PaymentMethodData> productDataArrayList, CheckoutFragment checkoutFragment) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.checkoutActivity = checkoutActivity;
+        this.checkoutFragment = checkoutFragment;
 
     }
 
@@ -55,7 +49,7 @@ public class PaymentMethodAdapter extends RecyclerView.Adapter<PaymentMethodAdap
 
             holder.lyPaymentType.setTag(paymentMethodData);
             holder.lyPaymentType.setTag(R.id.lyPaymentType, position);
-            holder.lyPaymentType.setOnClickListener(checkoutActivity);
+            holder.lyPaymentType.setOnClickListener(checkoutFragment);
         }
 
     }
