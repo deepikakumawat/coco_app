@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -775,13 +776,36 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
     private void openYouTube() {
+        try {
+            if (!TextUtils.isEmpty(videoUrl)) {
+                boolean isAppInstalled = appInstalledOrNot(Constant.YOUTUBE_PACKAGES_NAME);
 
-//        String thumbnail = "https://www.youtube.com/watch?v=9Aebjmgn0bw&list=RD9Aebjmgn0bw&start_radio=1";
+                if (isAppInstalled) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(videoUrl));
+                    intent.setPackage(Constant.YOUTUBE_PACKAGES_NAME);
+                    startActivity(intent);
+                } else {
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.app_not_insalled));
+                }
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(videoUrl));
-        intent.setPackage("com.google.android.youtube");
-        startActivity(intent);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showCenteredToast(ryParent,getActivity(),getString(R.string.somethingWentWrong));
+        }
+    }
+
+    private boolean appInstalledOrNot(String uri) {
+        PackageManager pm = getActivity().getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        return false;
     }
 
     private void setProductShortDes(String productShortDese) {

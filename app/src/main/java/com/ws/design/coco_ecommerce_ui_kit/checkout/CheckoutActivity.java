@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +27,7 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
+import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -485,57 +487,34 @@ public class CheckoutActivity extends AppCompatActivity implements CheckoutView,
 
     @Override
     public void getCheckoutPayment(CheckoutPaymentResponse checkoutPaymentResponse) {
-        if (!TextUtils.isEmpty(checkoutPaymentResponse.getmStatus()) && ("1".equalsIgnoreCase(checkoutPaymentResponse.getmStatus()))) {
+      try{
+          if (!TextUtils.isEmpty(checkoutPaymentResponse.getmStatus()) && ("1".equalsIgnoreCase(checkoutPaymentResponse.getmStatus()))) {
 
 
-            String orderId = checkoutPaymentResponse.getmData().getmOrderId();
+              String orderId = checkoutPaymentResponse.getmData().getmOrderId();
 
-            orderStatus = Constant.ORDER_SUCCESS;
+              orderStatus = Constant.ORDER_SUCCESS;
 
-            Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
-            intent.putExtra("totalPrice", totalPrice);
-            intent.putExtra("orderStatus", Constant.ORDER_SUCCESS);
-            intent.putExtra("addressData", addressData);
-            intent.putExtra("orderId", orderId);
+              Intent intent = new Intent(CheckoutActivity.this, SuccessActivity.class);
+              intent.putExtra("totalPrice", totalPrice);
+              intent.putExtra("orderStatus", Constant.ORDER_SUCCESS);
+              intent.putExtra("addressData", addressData);
+              intent.putExtra("orderId", orderId);
 
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            makeRootFragment();
-
+              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              startActivity(intent);
+              finish();
 
 
-
-
-        } else {
-            showCenteredToast(lyParent, this, checkoutPaymentResponse.getMessage());
-        }
-    }
-
-    public void makeRootFragment() {
-        try {
-            popAllFragments(this);
-            FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
-
-        }catch (Exception e){
-
-        }
+          } else {
+              showCenteredToast(lyParent, this, checkoutPaymentResponse.getMessage());
+          }
+      }catch (Exception e){
+          e.printStackTrace();
+      }
     }
 
 
-    public static void popAllFragments(Context context) {
-        try {
-            AppCompatActivity activity = (AppCompatActivity) context;
-            if (activity != null) {
-                FragmentManager manager = activity.getSupportFragmentManager();
-                if (manager.getBackStackEntryCount() > 0) {
-                    manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
-            }
-        }catch (Exception e){
-
-        }
-    }
 
 
 }

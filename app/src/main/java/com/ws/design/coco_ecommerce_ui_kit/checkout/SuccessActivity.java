@@ -1,13 +1,16 @@
 package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +26,7 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -34,6 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -327,6 +333,41 @@ public class SuccessActivity extends AppCompatActivity implements CheckoutView, 
 
         } else {
             showCenteredToast(clParent,this, checkoutPaymentResponse.getMessage());
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        makeRootFragment();
+    }
+
+    public void makeRootFragment() {
+        try {
+            popAllFragments(this);
+            FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void popAllFragments(Context context) {
+        try {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            if (activity != null) {
+                FragmentManager manager = activity.getSupportFragmentManager();
+                if (manager.getBackStackEntryCount() > 0) {
+                    manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            String msg = e.getMessage();
+            Log.d("payment",e.getMessage());
         }
     }
 }
