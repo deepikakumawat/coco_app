@@ -14,13 +14,15 @@ public class CategoryPagerAdapterProductList extends FragmentPagerAdapter {
 
         int mNoOfTabs;
         String catId;
+        String filterAttribues;
 
-        public CategoryPagerAdapterProductList(FragmentManager fm, int NumberOfTabs, String catId)
+        public CategoryPagerAdapterProductList(FragmentManager fm, int NumberOfTabs, String catId, String filterAttribues)
 
         {
                 super(fm);
                 this.mNoOfTabs = NumberOfTabs;
                 this.catId = catId;
+                this.filterAttribues = filterAttribues;
         }
 
         @Override
@@ -28,17 +30,17 @@ public class CategoryPagerAdapterProductList extends FragmentPagerAdapter {
                 switch (position) {
 
                         case 0:
-                                PopularListFragment tab1 = PopularListFragment.newInstance(catId, 0);
+                                PopularListFragment tab1 = PopularListFragment.newInstance(catId, 0, filterAttribues);
                                 return tab1;
                         case 1:
-                                PopularListFragment tab2 = PopularListFragment.newInstance(catId, 1);
+                                PopularListFragment tab2 = PopularListFragment.newInstance(catId, 1, filterAttribues);
                                 return tab2;
                         case 2:
-                                PopularListFragment tab3 = PopularListFragment.newInstance(catId, 2);
+                                PopularListFragment tab3 = PopularListFragment.newInstance(catId, 2, filterAttribues);
                                 return tab3;
 
                         case 3:
-                                PopularListFragment tab4 = PopularListFragment.newInstance(catId, 3);
+                                PopularListFragment tab4 = PopularListFragment.newInstance(catId, 3, filterAttribues);
                                 return tab4;
 
 

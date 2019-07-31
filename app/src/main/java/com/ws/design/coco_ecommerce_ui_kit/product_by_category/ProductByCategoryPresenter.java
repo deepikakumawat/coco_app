@@ -32,11 +32,11 @@ public class ProductByCategoryPresenter {
 
 
 
-    public void getProductByCat(String catId) {
+    public void getProductByCat(String catId, String filterAttribues) {
         view.showWait();
         try {
 
-            Call call = service.getProductByCategory(catId);
+            Call call = service.getProductByCategory(catId, filterAttribues);
             call.enqueue(new Callback<ProductByCategoryResponse>() {
                 @Override
                 public void onResponse(Call<ProductByCategoryResponse> call, Response<ProductByCategoryResponse> response) {

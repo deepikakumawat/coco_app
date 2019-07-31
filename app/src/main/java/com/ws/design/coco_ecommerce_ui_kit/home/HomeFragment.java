@@ -1,30 +1,21 @@
 package com.ws.design.coco_ecommerce_ui_kit.home;
 
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.ExploreActivity;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
+import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.DealProducts;
@@ -40,11 +31,8 @@ import Model.HomeBannerModelClass;
 import Model.HomeCategoryModelClass;
 import Model.TopTenModelClass;
 import fragment.FragmentManagerUtils;
-import fragment.ToolbarBaseFragment;
 
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class HomeFragment extends BaseFragment implements View.OnClickListener, HomeView {
 

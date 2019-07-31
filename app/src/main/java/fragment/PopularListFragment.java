@@ -38,7 +38,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
-public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
+public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView  {
 
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
@@ -50,13 +50,15 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private RelativeLayout ryParent;
     private int tabPostion;
     boolean isShimmerShow = true;
+    private String filterAttribues;
 
 
-    public static PopularListFragment newInstance(String catId, int tabPostion) {
+    public static PopularListFragment newInstance(String catId, int tabPostion, String filterAttribues) {
         PopularListFragment fragment = new PopularListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("catId", catId);
         bundle.putInt("tabPostion", tabPostion);
+        bundle.putString("filterAttribues", filterAttribues);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -81,7 +83,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         if (getArguments() != null) {
             catId = getArguments().getString("catId");
             tabPostion = getArguments().getInt("tabPostion", 0);
-
+            filterAttribues = getArguments().getString("filterAttribues");
 
         }
 
@@ -93,14 +95,20 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         productGridModellClasses = new ArrayList<>();
 
+       callProductByCategoryAPI();
+
+    }
+
+    private void callProductByCategoryAPI() {
         if (Util.isDeviceOnline(getActivity())) {
-            productByCategoryPresenter.getProductByCat(catId);
+
+            productByCategoryPresenter.getProductByCat(catId, filterAttribues);
+
 
         } else {
             showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
 
         }
-
 
     }
 
@@ -283,4 +291,9 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
             }
         });
     }
+
+
+
+
+
 }

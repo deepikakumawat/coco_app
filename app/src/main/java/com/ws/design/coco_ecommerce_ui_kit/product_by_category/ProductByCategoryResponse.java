@@ -95,6 +95,8 @@ public class ProductByCategoryResponse implements Serializable {
 
     public class Attribtues implements Serializable{
 
+        private boolean isSelected;
+
         @SerializedName("attribute_id")
         @Expose
         private String mAttributeId;
@@ -141,6 +143,14 @@ public class ProductByCategoryResponse implements Serializable {
 
         public void setmAttributeRelatedData(String mAttributeRelatedData) {
             this.mAttributeRelatedData = mAttributeRelatedData;
+        }
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
         }
     }
 }

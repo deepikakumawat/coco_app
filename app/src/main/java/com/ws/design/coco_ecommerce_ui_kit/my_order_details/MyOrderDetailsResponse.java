@@ -40,5 +40,21 @@ public class MyOrderDetailsResponse {
         @SerializedName("product")
         @Expose
         private ArrayList<OrderProduct> mProduct;
+
+        public OrderDetailsData getmOrderDetail() {
+            return mOrderDetail;
+        }
+
+        public void setmOrderDetail(OrderDetailsData mOrderDetail) {
+            this.mOrderDetail = mOrderDetail;
+        }
+
+        public ArrayList<OrderProduct> getmProduct() {
+            return mProduct;
+        }
+
+        public void setmProduct(ArrayList<OrderProduct> mProduct) {
+            this.mProduct = mProduct;
+        }
     }
 }

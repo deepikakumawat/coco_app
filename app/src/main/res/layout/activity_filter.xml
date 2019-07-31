@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:id="@+id/lyParent"
     android:orientation="vertical"
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.FilterActivity">
 
@@ -13,6 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/txtFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/filer"
+            android:textColor="@color/red"
+            android:textSize="16.3sp"
+            android:textStyle="bold" />
 
 
         <customfonts.MyTextView_Roboto_Medium
@@ -59,7 +73,7 @@
                 android:paddingTop="10dp"
                 android:paddingRight="25dp"
                 android:paddingBottom="10dp"
-                android:text="$ 100"
+                android:text="@string/hundrad"
                 android:textColor="#000000" />
 
             <View
@@ -80,7 +94,7 @@
                 android:paddingTop="10dp"
                 android:paddingRight="25dp"
                 android:paddingBottom="10dp"
-                android:text="$ 100"
+                android:text="@string/one_lac"
                 android:textColor="#000000" />
 
         </LinearLayout>
@@ -90,12 +104,6 @@
             android:layout_height="1dp"
             android:background="#dfe1e3" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_expantable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:groupIndicator="@null"
-            android:visibility="gone" />
 
         <ExpandableListView
             android:id="@+id/expandableListView"
@@ -103,7 +111,7 @@
             android:layout_height="match_parent"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="0.5dp"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+            android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorLeft" />
 
     </LinearLayout>
 

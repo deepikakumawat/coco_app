@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
+import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 
 import fragment.ToolbarBaseFragment;
 

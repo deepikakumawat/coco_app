@@ -22,6 +22,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity" />
@@ -72,10 +73,6 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Reviews" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Cocoproductdetail5" />
 
-
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Expantable">
-
-        </activity>
 
         <!-- Add your API key here -->
         <meta-data

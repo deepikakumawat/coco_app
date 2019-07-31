@@ -8,6 +8,7 @@ import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.CancelOrderResponse;
+import com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
@@ -212,7 +213,8 @@ public interface APIService {
 
     @POST("get-products-by-category")
     @FormUrlEncoded
-    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId);
+    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId,
+                                                         @Field("fattributes")  String filterAttribues);
 
     @POST("cancel_order")
     @FormUrlEncoded
@@ -222,5 +224,9 @@ public interface APIService {
     @POST("vendordata")
     @FormUrlEncoded
     Call<SellerResponse> getSellerProduct(@Field("vendor_id") String venderId);
+
+    @POST("vieworder")
+    @FormUrlEncoded
+    Call<MyOrderDetailsResponse> getOrderDetails(@Field("orderid") String orderId);
 }
 

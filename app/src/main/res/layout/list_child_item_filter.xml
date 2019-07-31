@@ -17,7 +17,7 @@
 
 
         <RadioButton
-            android:id="@+id/rbPaymentType"
+            android:id="@+id/rbChildItem"
             style="@style/radionbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

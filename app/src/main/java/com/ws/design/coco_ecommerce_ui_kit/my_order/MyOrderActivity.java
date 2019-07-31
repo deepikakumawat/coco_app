@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.MarshMallowPermissions;
@@ -221,6 +222,17 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                     }
 
 
+                    break;
+
+                case R.id.lyOrder:
+                    myOrderData = ((MyOrderResponse.MyOrderData) view.getTag());
+
+                    if (myOrderData != null) {
+
+                        Intent intent = new Intent(MyOrderActivity.this, MyOrderDetailsActivity.class);
+                        intent.putExtra("orderId",myOrderData.getmOrderId());
+                        startActivity(intent);
+                    }
                     break;
 
                 default:

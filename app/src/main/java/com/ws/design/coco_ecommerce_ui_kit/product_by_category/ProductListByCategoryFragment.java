@@ -13,17 +13,19 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
+import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFilterListener;
+import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 
 import java.util.ArrayList;
 
 import Adapter.CategoryPagerAdapterProductList;
 import Adapter.WrapContentHeightViewPager;
 import fragment.FragmentManagerUtils;
+import fragment.PopularListFragment;
 import fragment.ToolbarBaseFragment;
 
 
-public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
+public class ProductListByCategoryFragment extends ToolbarBaseFragment implements IFilterListener {
 
     private TabLayout tabLayout;
     private Typeface mTypeface;
@@ -34,6 +36,8 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
     private String catId;
     private IFragmentListener mListener;
     ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
+    private String filterAttribues;
+    private CategoryPagerAdapterProductList adapter;
 
 
     @Nullable
@@ -50,10 +54,11 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
 
         return mView;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        tabLayout =  mView.findViewById(R.id.tab_layout);
+        tabLayout = mView.findViewById(R.id.tab_layout);
 
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.addTab(tabLayout.newTab().setText("Popular"));
@@ -85,27 +90,21 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
             @Override
             public void onClick(View view) {
 
-             /*   if (filterFragment == null) {
-                    filterFragment = new FilterFragment();
-                }*/
-              /*  FragmentManager fm = getActivity().getFragmentManager();
-                filterFragment.show(fm, "Product Filter");*/
 
-              Bundle bundle = new Bundle();
-              bundle.putSerializable("productAttribueDataArrayList",productAttribueDataArrayList);
-              FilterFragment filterFragment = new FilterFragment();
-              filterFragment.setArguments(bundle);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("productAttribueDataArrayList", productAttribueDataArrayList);
+                FilterFragment filterFragment = new FilterFragment();
+                filterFragment.setmIFilterListener(ProductListByCategoryFragment.this);
+                filterFragment.setArguments(bundle);
 
-               FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(),filterFragment, null, false, false);
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), filterFragment, null, true, false);
             }
         });
 
 
-        wrapContentHeightViewPager =  mView.findViewById(R.id.pager);
+        wrapContentHeightViewPager = mView.findViewById(R.id.pager);
 //        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4, catId);
-        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId);
-        wrapContentHeightViewPager.setAdapter(adapter);
-        wrapContentHeightViewPager.setOffscreenPageLimit(1);
+        setAdapter();
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -123,6 +122,12 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
             }
         });
 
+    }
+
+    private void setAdapter() {
+        adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId, filterAttribues);
+        wrapContentHeightViewPager.setAdapter(adapter);
+        wrapContentHeightViewPager.setOffscreenPageLimit(1);
     }
 
 
@@ -158,7 +163,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
     public void onResume() {
         super.onResume();
 
-        if (this.mListener != null ) {
+        if (this.mListener != null) {
             this.mListener.setScreenTitle(getString(R.string.trandings));
 
         }
@@ -166,6 +171,13 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment  {
     }
 
     public void getProductByCategory(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
-       this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
+        this.productAttribueDataArrayList.clear();
+        this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
+    }
+
+    @Override
+    public void setSearchFilter(String filterAttribues) {
+        this.filterAttribues = filterAttribues;
+        setAdapter();
     }
 }

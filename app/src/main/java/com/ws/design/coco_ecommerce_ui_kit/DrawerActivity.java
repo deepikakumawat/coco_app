@@ -36,7 +36,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.SuccessFragment;
-import com.ws.design.coco_ecommerce_ui_kit.common_interface.IFragmentListener;
+import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.legal_policies.LegalPoliciesFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -48,6 +49,10 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             holder.txtCancelOrder.setTag(myOrderData);
             holder.txtCancelOrder.setTag(R.id.txtCancelOrder, position);
             holder.txtCancelOrder.setOnClickListener(myOrderActivity);
+
+            holder.lyOrder.setTag(myOrderData);
+            holder.lyOrder.setTag(R.id.lyOrder, position);
+            holder.lyOrder.setOnClickListener(myOrderActivity);
         }
 
     }
@@ -66,6 +71,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         private TextView txtStatus;
         private TextView txtSupport;
         private TextView txtCancelOrder;
+        private LinearLayout lyOrder;
 
 
         public ViewHolder(View view) {
@@ -76,6 +82,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             txtDate = view.findViewById(R.id.txtDate);
             txtSupport = view.findViewById(R.id.txtSupport);
             txtCancelOrder = view.findViewById(R.id.txtCancelOrder);
+            lyOrder = view.findViewById(R.id.lyOrder);
 
         }
     }

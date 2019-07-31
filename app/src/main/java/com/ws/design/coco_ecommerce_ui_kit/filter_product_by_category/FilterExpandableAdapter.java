@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -19,10 +20,12 @@ public class FilterExpandableAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList;
+    private FilterFragment filterFragment;
 
     public FilterExpandableAdapter(Context context, ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList, FilterFragment filterFragment) {
         this.context = context;
         this.productAttribueDataArrayList = productAttribueDataArrayList;
+        this.filterFragment = filterFragment;
     }
 
     @Override
@@ -38,15 +41,26 @@ public class FilterExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final ProductByCategoryResponse.Attribtues productAttributes = (ProductByCategoryResponse.Attribtues) getChild(listPosition, expandedListPosition);
+        ProductByCategoryResponse.Attribtues productAttributes = (ProductByCategoryResponse.Attribtues) getChild(expandedListPosition, listPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_child_item_filter, null);
         }
-        TextView txtAttributeName = (TextView) convertView
-                .findViewById(R.id.txtAttributeName);
+        TextView txtAttributeName = convertView.findViewById(R.id.txtAttributeName);
+        RadioButton rbChildItem = convertView.findViewById(R.id.rbChildItem);
+
         txtAttributeName.setText(productAttributes.getmAttributeName());
+
+        if (productAttributes.isSelected()) {
+            rbChildItem.setChecked(true);
+        } else {
+            rbChildItem.setChecked(false);
+        }
+
+        txtAttributeName.setTag(productAttributes);
+        txtAttributeName.setOnClickListener(filterFragment);
+
         return convertView;
     }
 

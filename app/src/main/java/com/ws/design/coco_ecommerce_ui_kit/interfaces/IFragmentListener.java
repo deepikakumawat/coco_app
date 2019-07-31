@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.common_interface;
+package com.ws.design.coco_ecommerce_ui_kit.interfaces;
 
 public interface IFragmentListener {
 

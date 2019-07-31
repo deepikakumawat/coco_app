@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ryParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.MyOrderActivity">
+
+
+    <include
+        android:id="@+id/inTop"
+        layout="@layout/toolbar_product_grid_detail" />
+
+    <ScrollView
+        android:id="@+id/svTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inTop"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lyOrderDetails"
+            android:orientation="vertical">
+
+            <!--Order Details-->
+
+            <customfonts.MyTextView_Roboto_Medium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11sp"
+                android:layout_marginTop="11sp"
+                android:layout_marginRight="11sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/order_details"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11sp"
+
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="11dp">
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtOrderId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="@string/orderid"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Price"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Sender Data-->
+
+            <customfonts.MyTextView_Roboto_Medium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11sp"
+                android:layout_marginTop="11sp"
+                android:layout_marginRight="11sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/sender_data"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11sp"
+
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="11dp">
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtSenderName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="sender name"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtSenderContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="Sender Contact"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtSenderAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="Sender address"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtSenderEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="Sender email"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Reciver data-->
+
+            <customfonts.MyTextView_Roboto_Medium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11sp"
+                android:layout_marginTop="11sp"
+                android:layout_marginRight="11sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/receiver_details"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11sp"
+
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="11dp">
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtReceiverName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="receiver name"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtReceiverEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="reciver email"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Delivery Data-->
+
+            <customfonts.MyTextView_Roboto_Medium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11sp"
+                android:layout_marginTop="11sp"
+                android:layout_marginRight="11sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/delivery_details"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11sp"
+
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="11dp">
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:text="delivery contact"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="delivery address"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryPincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="delivery pincode"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="delivery city"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="delivery state"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryLandmark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="25dp"
+                        android:text="delivery landmark"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+            <!--product list-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lyProductDetails"
+            android:orientation="vertical">
+
+
+            <customfonts.MyTextView_Roboto_Medium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11sp"
+                android:layout_marginTop="11sp"
+                android:layout_marginRight="11sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/product_details"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvMyOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <customfonts.MyTextView_Roboto_Regular
+        android:id="@+id/txtNoDataFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:text="@string/no_data_found"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:ignore="MissingConstraints" />
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/inTop"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        shimmer:duration="800">
+
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
+            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+</RelativeLayout>

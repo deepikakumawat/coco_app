@@ -169,7 +169,7 @@
     <string name="date_time"><![CDATA[Date & Time: ]]></string>
     <string name="cash_on_delivery">Cash On Delivery</string>
     <string name="frequently_bought_product">Frequently Brought Together</string>
-    <string name="orderid">Order Id :</string>
+    <string name="orderid">Order Id : </string>
     <string name="products">Products</string>
     <string name="legal_policies">Legal Policies</string>
     <string name="size">Size</string>
@@ -177,6 +177,23 @@
     <string name="app_not_insalled">App not installed in this device.</string>
     <string name="checkout">Checkout</string>
     <string name="order_status">Order Status</string>
+    <string name="filer">Filter</string>
+    <string name="hundrad">100</string>
+    <string name="one_lac">100000</string>
+    <string name="select_filter">Select filter.</string>
+    <string name="order_details">Order Details</string>
+    <string name="sender_data">Sender Details</string>
+    <string name="receiver_details">Receiver Details</string>
+    <string name="delivery_details">Delivery Details</string>
+    <string name="amount">Amount : </string>
+    <string name="name">Name : </string>
+    <string name="contact">Contact : </string>
+    <string name="address">Address : </string>
+    <string name="email">Email : </string>
+    <string name="pincode">Pincode : </string>
+    <string name="deliver_city">City : </string>
+    <string name="delivery_state">State : </string>
+    <string name="delivery_landmark">Landmark : </string>
 
 
     <string-array name="legal_policies_array">
