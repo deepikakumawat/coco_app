@@ -3,6 +3,7 @@ package Network;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
+import com.ws.design.coco_ecommerce_ui_kit.categories.CategoriesResponse;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutPaymentResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
@@ -232,5 +233,8 @@ public interface APIService {
     @POST("vieworder")
     @FormUrlEncoded
     Call<MyOrderDetailsResponse> getOrderDetails(@Field("orderid") String orderId);
+
+    @POST("all_categories")
+    Call<CategoriesResponse> getCategories();
 }
 

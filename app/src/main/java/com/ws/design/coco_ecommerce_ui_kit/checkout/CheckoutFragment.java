@@ -24,6 +24,7 @@ import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.interfaces.IPaymentListener;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -39,7 +40,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class CheckoutFragment extends BaseFragment implements CheckoutView, View.OnClickListener, PaymentResultListener {
+public class CheckoutFragment extends BaseFragment implements CheckoutView, View.OnClickListener, IPaymentListener {
 
     RadioButton button1, button2;
     LinearLayout radio1, radio2;

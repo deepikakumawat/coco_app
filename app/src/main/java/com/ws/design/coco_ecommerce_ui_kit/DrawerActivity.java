@@ -34,8 +34,10 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
+import com.razorpay.PaymentResultListener;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.categories.CategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.SuccessFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
@@ -57,7 +59,7 @@ import Model.NavigationModelClass;
 import fragment.CustomItemClickListener;
 import fragment.FragmentManagerUtils;
 
-public class DrawerActivity extends AppCompatActivity implements IFragmentListener, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class DrawerActivity extends AppCompatActivity implements IFragmentListener, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, PaymentResultListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
@@ -395,6 +397,27 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     public void isSearchIconVisible(boolean isSearchIconVisible) {
 
         imgSearch.setVisibility(isSearchIconVisible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onPaymentSuccess(String s) {
+        try {
+            Fragment f = getCurrentFragmentInRootLayout();
+            ((CheckoutFragment) f).onPaymentSuccess(s);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        try {
+            Fragment f = getCurrentFragmentInRootLayout();
+            ((CheckoutFragment) f).onPaymentError(i, s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     class MyOnClickListener implements View.OnClickListener {
