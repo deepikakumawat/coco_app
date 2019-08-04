@@ -21,6 +21,9 @@ android {
         buildConfigField "String", "BASEURL", "\"https://richkart.com/api\""
         buildConfigField "int", "CACHETIME", "432000" // 5days
 
+        multiDexEnabled true
+
+
     }
     buildTypes {
         release {
@@ -105,6 +108,8 @@ dependencies {
 
 //    implementation 'com.facebook.shimmer:shimmer:0.4.0'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 
 

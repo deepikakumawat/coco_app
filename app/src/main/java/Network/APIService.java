@@ -19,6 +19,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
@@ -26,7 +27,10 @@ import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.seller.SellerResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -164,7 +168,7 @@ public interface APIService {
 
     @POST("product-detail")
     @FormUrlEncoded
-    Call<ProductDetailsResponse> getProductDetails(@Field("productid") String slug,  @Field("user_id") String userId);
+    Call<ProductDetailsResponse> getProductDetails(@Field("productid") String slug, @Field("user_id") String userId);
 
     @POST("product-ratings")
     @FormUrlEncoded
@@ -213,8 +217,8 @@ public interface APIService {
 
     @POST("get-products-by-category")
     @FormUrlEncoded
-    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId,
-                                                         @Field("fattributes")  String filterAttribues);
+    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId
+                                                        );
 
     @POST("cancel_order")
     @FormUrlEncoded

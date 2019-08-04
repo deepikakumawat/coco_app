@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.ProductDetailActivity">
 
     <LinearLayout
@@ -219,6 +218,8 @@
                                     android:textColor="@color/white"
                                     android:textSize="13.7sp" />
 
+
+
                                 <customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtRemoveWishlist"
                                     android:layout_width="0dp"
@@ -357,57 +358,32 @@
                     android:background="#d7d4d4" />
 
 
-                <!--Color layout-->
 
-                <LinearLayout
-                    android:id="@+id/lyColor"
-                    android:layout_width="match_parent"
+
+                <!--color and size layout-->
+                <HorizontalScrollView
+                    android:id="@+id/hsvColorSize"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingTop="17dp">
+                    android:layout_alignParentTop="true"
+                    android:fillViewport="true"
+                    android:measureAllChildren="false"
+                    android:background="@drawable/rect_gray"
 
-
-                    <customfonts.MyTextView_Roboto_Bold
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Color"
-                        android:textColor="@color/storage"
-                        android:textSize="12.3sp" />
-
+                    android:scrollbars="none">
 
                     <LinearLayout
+                        android:id="@+id/lyColorSize"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
+
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="vertical" />
+
+                </HorizontalScrollView>
 
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rvColor"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="15dp"
-                            android:paddingBottom="20dp" />
-
-
-                    </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginTop="17dp"
-                        android:background="@color/viewline" />
-
-
-                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -415,61 +391,7 @@
                     android:background="#d7d4d4" />
 
 
-                <!--Size layout-->
-                <LinearLayout
-                    android:id="@+id/lySize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingTop="17dp">
 
-
-                    <customfonts.MyTextView_Roboto_Bold
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/size"
-                        android:textColor="@color/storage"
-                        android:textSize="12.3sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
-
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rvSize"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="15dp"
-                            android:paddingBottom="20dp" />
-
-
-                    </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginTop="17dp"
-                        android:background="@color/viewline" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#d7d4d4" />
 
                 <include layout="@layout/include_product_details_specification" />
 
@@ -583,6 +505,7 @@
         android:layout_marginTop="15dp"
         android:background="@color/white"
         android:clickable="true"
+        android:visibility="gone"
         android:orientation="vertical"
         shimmer:duration="800">
 

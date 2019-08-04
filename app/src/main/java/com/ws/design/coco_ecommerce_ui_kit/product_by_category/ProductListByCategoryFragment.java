@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import Adapter.CategoryPagerAdapterProductList;
 import Adapter.WrapContentHeightViewPager;
 import fragment.FragmentManagerUtils;
-import fragment.PopularListFragment;
 import fragment.ToolbarBaseFragment;
 
 
@@ -37,7 +36,6 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment implement
     private IFragmentListener mListener;
     ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
     private String filterAttribues;
-    private CategoryPagerAdapterProductList adapter;
 
 
     @Nullable
@@ -125,7 +123,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment implement
     }
 
     private void setAdapter() {
-        adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId, filterAttribues);
+        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId, filterAttribues);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(1);
     }
@@ -178,6 +176,11 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment implement
     @Override
     public void setSearchFilter(String filterAttribues) {
         this.filterAttribues = filterAttribues;
-        setAdapter();
+
+    }
+
+    public String getSearchFilter() {
+        return filterAttribues;
+
     }
 }

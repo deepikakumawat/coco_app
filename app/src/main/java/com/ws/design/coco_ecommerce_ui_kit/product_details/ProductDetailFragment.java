@@ -3,12 +3,17 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,8 +49,6 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import Adapter.ViewpagerProductDetailsAdapter;
 import fragment.FragmentManagerUtils;
@@ -116,28 +119,23 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private TextView txtProductShortDesc;
     private String productShortDesc;
     private TextView txtSellerName;
-    private RecyclerView rvColor;
-    private ProductDetailsColorAdapter productDetailsColorAdapter;
-    private ProductDetailsSizeAdapter productDetailsSizeAdapter;
     private ProductDetailsRecentViewsProductsAdapter productDetailsRecentViewsProductsAdapter;
     private RecyclerView rvRecentViewsProducts;
     private LinearLayout lyRecentViewsProduct;
     private String sellerId;
-    private ColorSizeData selectedColorData;
-    private ColorSizeData selectedSizeData;
-    private boolean isColorVewVisible = false;
-    private boolean isSizeVewVisible = false;
+
     private LinearLayout lyColor;
     private ScrollView scrollViewTop;
     private RelativeLayout ryParent;
     private ImageView imgVideo;
     private RelativeLayout ryVideo;
     private String videoUrl;
-    private LinearLayout lySize;
-    private RecyclerView rvSize;
+
     private TextView txtOutOfStock;
     private ShimmerFrameLayout mShimmerViewContainer;
     boolean isShimmerShow = true;
+    private LinearLayout lyColorSize;
+    private View mView;
 
 
     @Nullable
@@ -145,7 +143,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View mView = inflater.inflate(R.layout.activity_product_detail, container, false);
+        mView = inflater.inflate(R.layout.fragment_product_detail, container, false);
 
 
         Bundle bundle = getArguments();
@@ -185,9 +183,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         ryParent = view.findViewById(R.id.ryParent);
         scrollViewTop = view.findViewById(R.id.scrollViewTop);
         lyColor = view.findViewById(R.id.lyColor);
-        rvColor = view.findViewById(R.id.rvColor);
-        lySize = view.findViewById(R.id.lySize);
-        rvSize = view.findViewById(R.id.rvSize);
+        lyColorSize = view.findViewById(R.id.lyColorSize);
+
         rvProductAttr = view.findViewById(R.id.rvProductAttr);
         txtProductDesc = view.findViewById(R.id.txtProductDesc);
         txtProductShortDesc = view.findViewById(R.id.txtProductShortDesc);
@@ -261,18 +258,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         rvRecentViewsProducts.setItemAnimator(new DefaultItemAnimator());
 
 
-        RecyclerView.LayoutManager mLayoutManagerColorData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        rvColor.setLayoutManager(mLayoutManagerColorData);
-        rvColor.setLayoutManager(mLayoutManagerColorData);
-        rvColor.setItemAnimator(new DefaultItemAnimator());
-
-
-        RecyclerView.LayoutManager mLayoutManagerSizeData = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        rvSize.setLayoutManager(mLayoutManagerSizeData);
-        rvSize.setLayoutManager(mLayoutManagerSizeData);
-        rvSize.setItemAnimator(new DefaultItemAnimator());
-
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         rvProductAttr.setLayoutManager(mLayoutManager);
         rvProductAttr.setItemAnimator(new DefaultItemAnimator());
@@ -286,15 +271,19 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             txtAddToWishlist.setVisibility(View.VISIBLE);
         }
 
+        callAPI(productId);
+
+
+    }
+
+    private void callAPI(String productId) {
         if (Util.isDeviceOnline(getActivity())) {
             productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
         }
-
-
     }
 
 
@@ -309,7 +298,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
                 }
                 break;
@@ -348,7 +337,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.removeWishList(wishListId);
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
                     }
 
@@ -375,7 +364,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1", "");
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
                     }
 
@@ -408,7 +397,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     isShimmerShow = true;
 
-                    productDetailsPresenter.getProductDetails(productDetailsSimilier.getmProductId(), CocoPreferences.getUserId());
+                    callAPI(productDetailsSimilier.getmProductId());
+
                 }
 
                 break;
@@ -423,7 +413,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     isShimmerShow = true;
 
-                    productDetailsPresenter.getProductDetails(productBroughtData.getmProductId(), CocoPreferences.getUserId());
+                    callAPI(productBroughtData.getmProductId());
                 }
 
                 break;
@@ -433,25 +423,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 bundle.putString("sellerId", sellerId);
                 sellerProductFragment.setArguments(bundle);
                 FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), sellerProductFragment, "SellerProductFragment", true, false);
-
-                break;
-            case R.id.lyColor:
-
-                selectedColorData = ((ColorSizeData) v.getTag());
-                if (productDetailsColorAdapter != null) {
-                    selectedColorData.setSelected(true);
-                    productDetailsColorAdapter.notifyDataSetChanged();
-                }
-
-                break;
-
-            case R.id.lySize:
-
-                selectedSizeData = ((ColorSizeData) v.getTag());
-                if (productDetailsSizeAdapter != null) {
-                    selectedSizeData.setSelected(true);
-                    productDetailsSizeAdapter.notifyDataSetChanged();
-                }
 
                 break;
 
@@ -466,144 +437,30 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     private void onClickViewButNow() {
-        if (isColorVewVisible && isSizeVewVisible) {
-
-            if (selectedColorData != null && selectedSizeData != null) {
-                if (Util.isDeviceOnline(getActivity())) {
-                    isClickOnBuyNow = true;
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId() + "," + selectedSizeData.getmAttributeId());
-
-                } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-                }
-            } else {
-                if (selectedColorData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
-
-                } else if (selectedSizeData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
-
-                }
-
-            }
-
-
-        } else if (isColorVewVisible) {
-
-            if (selectedColorData != null) {
-                if (Util.isDeviceOnline(getActivity())) {
-                    isClickOnBuyNow = true;
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
-
-                } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-                }
-            } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
-
-            }
-
-
-        } else if (isSizeVewVisible) {
-
-            if (selectedSizeData != null) {
-                if (Util.isDeviceOnline(getActivity())) {
-                    isClickOnBuyNow = true;
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedSizeData.getmAttributeId());
-
-                } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-                }
-            } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
-
-            }
-
+        if (Util.isDeviceOnline(getActivity())) {
+            isClickOnBuyNow = true;
+            isShimmerShow = false;
+            productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
         } else {
-            if (Util.isDeviceOnline(getActivity())) {
-                isClickOnBuyNow = true;
-                isShimmerShow = false;
-                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
-            } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-            }
         }
     }
 
     private void onClickViewAddToCart() {
 
-        if (isColorVewVisible && isSizeVewVisible) {
+        if (Util.isDeviceOnline(getActivity())) {
 
-            if (selectedColorData != null && selectedSizeData != null) {
-                if (Util.isDeviceOnline(getActivity())) {
+            isShimmerShow = false;
+            productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId() + "," + selectedSizeData.getmAttributeId());
-
-                } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-                }
-            } else {
-
-                if (selectedColorData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
-
-                } else if (selectedSizeData == null) {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
-
-                }
-
-
-            }
-
-        } else if (isColorVewVisible) {
-            if (selectedColorData != null) {
-                if (Util.isDeviceOnline(getActivity())) {
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedColorData.getmAttributeId());
-
-                } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-                }
-            } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_color),"");
-
-            }
-        } else if (isSizeVewVisible) {
-            if (selectedSizeData != null) {
-                if (Util.isDeviceOnline(getActivity())) {
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", selectedSizeData.getmAttributeId());
-
-                } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-                }
-            } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.select_size),"");
-
-            }
         } else {
-            if (Util.isDeviceOnline(getActivity())) {
-                isShimmerShow = false;
-                productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
-            } else {
-                showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
-            }
         }
+
+
     }
 
 
@@ -652,17 +509,17 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(ryParent, getActivity(), appErrorMessage,"");
+        showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
     }
 
     @Override
     public void addToWishList(AddToWishListResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(),Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), Constant.API_SUCCESS);
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), "");
         }
     }
 
@@ -687,10 +544,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productAttributeDataArrayList.clear();
                         productAttributeDataArrayList.addAll(productDetailsResponse.getmData().getmProductAttributes());
                         setProductSpecfication(productAttributeDataArrayList);
-                        setColorCode(productAttributeDataArrayList);
-                        setSize(productAttributeDataArrayList);
 
                     }
+
+                    setColorSize(productDetailsResponse.getmData().getmProAttrArray());
+
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductQty())
                             && Integer.parseInt(productDetailsResponse.getmData().getmProduct().getmProductQty()) == 0) {
@@ -816,14 +674,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     intent.setPackage(Constant.YOUTUBE_PACKAGES_NAME);
                     startActivity(intent);
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.app_not_insalled),"");
+                    showCenteredToast(ryParent, getActivity(), getString(R.string.app_not_insalled), "");
                 }
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            showCenteredToast(ryParent, getActivity(), getString(R.string.somethingWentWrong),"");
+            showCenteredToast(ryParent, getActivity(), getString(R.string.somethingWentWrong), "");
         }
     }
 
@@ -879,129 +737,118 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
 
-    private void setColorCode(ArrayList<ProductAttributeData> productAttributeDataArrayList) {
-        String attributeRelatedData = "";
-        String attributeId = "";
-        String attributeName = "";
-        isColorVewVisible = false;
+    private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
+
         try {
-            for (ProductAttributeData productAttributeData : productAttributeDataArrayList) {
-                if (productAttributeData.getmAttrType().equalsIgnoreCase("COLOR")) {
-
-                    attributeRelatedData = productAttributeData.getmAttributeRelatedData();
-                    attributeId = productAttributeData.getmAttributeId();
-                    attributeName = productAttributeData.getmAttributeName();
-                }
-            }
-
-            if (!TextUtils.isEmpty(attributeRelatedData)) {
-                List<String> attributeRelatedDataList = Arrays.asList(attributeRelatedData.split("\\s*,\\s*"));
-                List<String> attrIdList = Arrays.asList(attributeId.split("\\s*,\\s*"));
-                List<String> attrTypeList = Arrays.asList(attributeName.split("\\s*,\\s*"));
 
 
-                List<ColorSizeData> colorCodeList = new ArrayList<>();
+            lyColorSize.removeAllViews();
+
+            LayoutInflater layoutInflater = getLayoutInflater();
+            View view;
+            for (int i = 0; i < productAttrAraay.size(); i++) {
+                view = layoutInflater.inflate(R.layout.attribtue_product_details_layout, lyColorSize, false);
+
+                LinearLayout lyColorSizeAttrName = view.findViewById(R.id.lyColorSizeAttrName);
+                TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
+                txtAttributeType.setText(productAttrAraay.get(i).getmType());
+
+                /*set attribute name*/
+                lyColorSizeAttrName.removeAllViews();
+
+                LayoutInflater layoutInflater2 = getLayoutInflater();
+                View view2;
+                for (int j = 0; j < productAttrAraay.get(i).getmProductAttrAraayData().size(); j++) {
 
 
-                for (int i = 0; i < attributeRelatedDataList.size(); i++) {
+                    view2 = layoutInflater2.inflate(R.layout.text_layout, lyColorSizeAttrName, false);
+                    TextView txtAttributeName = view2.findViewById(R.id.txtAttributeName);
+                    LinearLayout lyTop = view2.findViewById(R.id.lyTop);
+                    LinearLayout lyColor = view2.findViewById(R.id.lyColor);
+                    ImageView imgSelectColor = view2.findViewById(R.id.imgSelectColor);
 
-                    ColorSizeData colorSizeData = new ColorSizeData();
 
-                    if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
+                    if (!productAttrAraay.get(i).getmType().equalsIgnoreCase("color")) {
 
-                        colorSizeData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
-                        colorSizeData.setmAttributeId(attrIdList.get(i));
-                        colorSizeData.setmAttrbuteType(attrTypeList.get(i));
-                        colorSizeData.setSelected(false);
+                        lyTop.setVisibility(View.VISIBLE);
+                        lyColor.setVisibility(View.GONE);
 
-                        isColorVewVisible = true;
+                        txtAttributeName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName());
 
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+
+                        if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
+                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.gray));
+                            } else {
+                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.gray));
+                            }
+                        } else {
+                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.background));
+                            } else {
+                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.background));
+                            }
+                        }
+                    } else {
+                        lyTop.setVisibility(View.GONE);
+                        lyColor.setVisibility(View.VISIBLE);
+
+
+                        Drawable unwrappedDrawable = AppCompatResources.getDrawable(getActivity(), R.drawable.black_circle);
+                        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+                        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#" + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData()));
+
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            lyColor.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.black_circle));
+                        } else {
+                            lyColor.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.black_circle));
+                        }
+
+
+                        if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
+                            imgSelectColor.setVisibility(View.VISIBLE);
+                        } else {
+                            imgSelectColor.setVisibility(View.GONE);
+
+                        }
                     }
 
-                    colorCodeList.add(colorSizeData);
+
+                    txtAttributeName.setTag(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductId());
+                    txtAttributeName.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            productId = ((String) view.getTag());
+                            callAPI(productId);
+
+
+                        }
+                    });
+
+
+                    lyColor.setTag(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductId());
+                    lyColor.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            productId = ((String) view.getTag());
+                            callAPI(productId);
+
+
+                        }
+                    });
+
+
+                    lyColorSizeAttrName.addView(view2, j);
+
+
                 }
 
 
-                if (isColorVewVisible) {
+                lyColorSize.addView(view);
 
-                    lyColor.setVisibility(View.VISIBLE);
-                    productDetailsColorAdapter = new ProductDetailsColorAdapter(getActivity(), colorCodeList, ProductDetailFragment.this);
-                    rvColor.setAdapter(productDetailsColorAdapter);
-
-                } else {
-                    lyColor.setVisibility(View.GONE);
-                }
-
-
-            } else {
-                lyColor.setVisibility(View.GONE);
             }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void setSize(ArrayList<ProductAttributeData> productAttributeDataArrayList) {
-        String attributeRelatedData = "";
-        String attributeId = "";
-        String attributeName = "";
-        isSizeVewVisible = false;
-        try {
-            for (ProductAttributeData productAttributeData : productAttributeDataArrayList) {
-                if (productAttributeData.getmAttrType().equalsIgnoreCase("SIZE-UK/INDIA")) {
-
-                    attributeRelatedData = productAttributeData.getmAttributeRelatedData();
-                    attributeId = productAttributeData.getmAttributeId();
-                    attributeName = productAttributeData.getmAttributeName();
-                }
-            }
-
-            if (!TextUtils.isEmpty(attributeRelatedData)) {
-                List<String> attributeRelatedDataList = Arrays.asList(attributeRelatedData.split("\\s*,\\s*"));
-                List<String> attrIdList = Arrays.asList(attributeId.split("\\s*,\\s*"));
-                List<String> attrTypeList = Arrays.asList(attributeName.split("\\s*,\\s*"));
-
-
-                List<ColorSizeData> sizeList = new ArrayList<>();
-
-
-                for (int i = 0; i < attributeRelatedDataList.size(); i++) {
-
-                    ColorSizeData colorSizeData = new ColorSizeData();
-
-                    if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
-
-                        colorSizeData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
-                        colorSizeData.setmAttributeId(attrIdList.get(i));
-                        colorSizeData.setmAttrbuteType(attrTypeList.get(i));
-                        colorSizeData.setSelected(false);
-
-                        isSizeVewVisible = true;
-
-                    }
-
-                    sizeList.add(colorSizeData);
-                }
-
-
-                if (isSizeVewVisible) {
-
-                    lySize.setVisibility(View.VISIBLE);
-                    productDetailsSizeAdapter = new ProductDetailsSizeAdapter(getActivity(), sizeList, ProductDetailFragment.this);
-                    rvSize.setAdapter(productDetailsSizeAdapter);
-
-                } else {
-                    lySize.setVisibility(View.GONE);
-                }
-
-
-            } else {
-                lySize.setVisibility(View.GONE);
-            }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1113,7 +960,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), Constant.API_SUCCESS);
 
             if (isClickOnBuyNow) {
 
@@ -1130,18 +977,18 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             }
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), "");
         }
     }
 
     @Override
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(),Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(), Constant.API_SUCCESS);
             txtAddToWishlist.setVisibility(View.VISIBLE);
             txtRemoveWishlist.setVisibility(View.GONE);
         } else {
-            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(), "");
         }
     }
 
@@ -1157,10 +1004,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     if (isReviewAdded) {
                         if (Util.isDeviceOnline(getActivity())) {
-                            productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
+
+                            callAPI(productId);
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
                         }
 

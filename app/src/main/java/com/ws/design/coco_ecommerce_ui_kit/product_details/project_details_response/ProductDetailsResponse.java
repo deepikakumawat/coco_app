@@ -1,7 +1,10 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -53,6 +56,10 @@ public class ProductDetailsResponse {
         @Expose
         private String mBrudrumdata;
 
+        @SerializedName("pro_attr_array")
+        @Expose
+        private ArrayList<ProductAttrAraay> mProAttrArray;
+
         @SerializedName("product")
         @Expose
         private ProductDetailsSimilier mProduct;
@@ -82,6 +89,14 @@ public class ProductDetailsResponse {
         @Expose
         private ArrayList<ProductDetailsSimilier> mUserRecentViews;
 
+
+        public ArrayList<ProductAttrAraay> getmProAttrArray() {
+            return mProAttrArray;
+        }
+
+        public void setmProAttrArray(ArrayList<ProductAttrAraay> mProAttrArray) {
+            this.mProAttrArray = mProAttrArray;
+        }
 
         public ArrayList<ProductDetailsSimilier> getmUserRecentViews() {
             return mUserRecentViews;
@@ -180,6 +195,131 @@ public class ProductDetailsResponse {
 
         public void setmProductAttributes(ArrayList<ProductAttributeData> mProductAttributes) {
             this.mProductAttributes = mProductAttributes;
+        }
+    }
+
+    public class ProductAttrAraay {
+        @SerializedName("type")
+        @Expose
+        private String mType;
+
+        @SerializedName("data")
+        @Expose
+        private ArrayList<ProductAttrAraayData> mProductAttrAraayData;
+
+        public String getmType() {
+            return mType;
+        }
+
+        public void setmType(String mType) {
+            this.mType = mType;
+        }
+
+        public ArrayList<ProductAttrAraayData> getmProductAttrAraayData() {
+            return mProductAttrAraayData;
+        }
+
+        public void setmProductAttrAraayData(ArrayList<ProductAttrAraayData> mProductAttrAraayData) {
+            this.mProductAttrAraayData = mProductAttrAraayData;
+        }
+    }
+
+    public class ProductAttrAraayData {
+
+        @SerializedName("productid")
+        @Expose
+        private String mProductId;
+
+        @SerializedName("productslug")
+        @Expose
+        private String mProductSlug;
+
+        @SerializedName("attr_type")
+        @Expose
+        private String mAttrType;
+
+        @SerializedName("attribute_id")
+        @Expose
+        private String mAttributeId;
+
+        @SerializedName("productimg")
+        @Expose
+        private String mProductImg;
+
+        @SerializedName("attribute_name")
+        @Expose
+        private String mAttributeName;
+
+        @SerializedName("attributereleteddata")
+        @Expose
+        private String mAttributeRelatedData;
+
+        @SerializedName("slected")
+        @Expose
+        private boolean mSelected;
+
+        public String getmProductId() {
+            return mProductId;
+        }
+
+        public void setmProductId(String mProductId) {
+            this.mProductId = mProductId;
+        }
+
+        public String getmProductSlug() {
+            return mProductSlug;
+        }
+
+        public void setmProductSlug(String mProductSlug) {
+            this.mProductSlug = mProductSlug;
+        }
+
+        public String getmAttrType() {
+            return mAttrType;
+        }
+
+        public void setmAttrType(String mAttrType) {
+            this.mAttrType = mAttrType;
+        }
+
+        public String getmAttributeId() {
+            return mAttributeId;
+        }
+
+        public void setmAttributeId(String mAttributeId) {
+            this.mAttributeId = mAttributeId;
+        }
+
+        public String getmProductImg() {
+            return mProductImg;
+        }
+
+        public void setmProductImg(String mProductImg) {
+            this.mProductImg = mProductImg;
+        }
+
+        public String getmAttributeName() {
+            return mAttributeName;
+        }
+
+        public void setmAttributeName(String mAttributeName) {
+            this.mAttributeName = mAttributeName;
+        }
+
+        public String getmAttributeRelatedData() {
+            return mAttributeRelatedData;
+        }
+
+        public void setmAttributeRelatedData(String mAttributeRelatedData) {
+            this.mAttributeRelatedData = mAttributeRelatedData;
+        }
+
+        public boolean getmSelected() {
+            return mSelected;
+        }
+
+        public void setmSelected(boolean mSelected) {
+            this.mSelected = mSelected;
         }
     }
 }

@@ -35,6 +35,7 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.categories.CategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.SuccessFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
@@ -169,7 +170,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
                     setScreenTitle(getString(R.string.categories));
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryActivity(), null, false, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryFragment(), null, false, false);
                 } else if (position == 4) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {

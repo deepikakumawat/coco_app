@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit;
+package com.ws.design.coco_ecommerce_ui_kit.categories;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.Item_Fashion_Adapter;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import Model.HomeBannerModelClass;
 import Model.Item_Fashion_Model;
 import fragment.ToolbarBaseFragment;
 
-public class CategoryActivity extends ToolbarBaseFragment {
+public class CategoryFragment extends ToolbarBaseFragment {
 
     TextView title;
 
@@ -44,7 +46,7 @@ public class CategoryActivity extends ToolbarBaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = inflater.inflate(R.layout.activity_category, container, false);
+        mView = inflater.inflate(R.layout.fragment_category, container, false);
         return  mView;
     }
     @Override

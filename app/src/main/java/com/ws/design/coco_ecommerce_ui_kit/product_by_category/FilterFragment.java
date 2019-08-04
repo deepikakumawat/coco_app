@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fragment.FragmentManagerUtils;
-import fragment.PopularListFragment;
 
 public class FilterFragment extends BaseFragment implements View.OnClickListener {
 

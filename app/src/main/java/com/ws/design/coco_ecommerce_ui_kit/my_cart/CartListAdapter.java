@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ColorSizeData;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
@@ -76,22 +75,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             holder.txtProductName.setOnClickListener(cartFragment);
 
 
-         /*   if (productData.getmAttributes() == null && productData.getmAttributes().isEmpty()) {
 
-                holder.lyColorTop.setVisibility(View.GONE);
-
-
-
-
-            }else{
-
-                holder.lyColorTop.setVisibility(View.VISIBLE);
-
-                setColorCode(productData.getmAttributes(),holder.lyColorView,holder.lyColorTop);
-            }
-*/
-            setColorCode(productData.getmAttributes(),holder.lyColorView,holder.lyColorTop);
-
+            setAttribute(productData.getmAttributes(), holder.lyColorView, holder.lyColorTop);
 
 
         }
@@ -143,81 +128,61 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     }
 
 
-    private void setColorCode(ArrayList<CartListResponse.AttributesData> attributesDataArrayList, LinearLayout lyColorView, LinearLayout lyColorTop) {
-        String attributeRelatedData = "";
-        List<ColorSizeData> colorCodeList = null;
 
+    private void setAttribute(ArrayList<CartListResponse.AttributesData> attributesDataArrayList, LinearLayout lyColorView, LinearLayout lyColorTop) {
 
         try {
-            for (CartListResponse.AttributesData attributesData : attributesDataArrayList) {
-                if (attributesData.getmAttributeType().equalsIgnoreCase("COLOR")) {
 
-                    attributeRelatedData = attributesData.getmAttributeRelatedData();
-                }
-            }
+            if (!attributesDataArrayList.isEmpty()) {
 
-            if (!TextUtils.isEmpty(attributeRelatedData)) {
-                List<String> attributeRelatedDataList = Arrays.asList(attributeRelatedData.split("\\s*,\\s*"));
+                lyColorTop.setVisibility(View.VISIBLE);
+                lyColorView.removeAllViews();
 
 
-                colorCodeList = new ArrayList<>();
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-                for (int i = 0; i < attributeRelatedDataList.size(); i++) {
+                View view;
+                for (int i = 0; i < attributesDataArrayList.size(); i++) {
+                    view = layoutInflater.inflate(R.layout.attribtue_cart_layout, lyColorView, false);
 
-                    ColorSizeData colorSizeData = new ColorSizeData();
+                    TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
+                    TextView txtAttributeName = view.findViewById(R.id.txtAttributeName);
+                    LinearLayout lyColorCode = view.findViewById(R.id.lyColorCode);
 
-                    if (!TextUtils.isEmpty(attributeRelatedDataList.get(i)) && !attributeRelatedDataList.get(i).equalsIgnoreCase("NO")) {
-
-                        colorSizeData.setmAttrbuteRelatedData(attributeRelatedDataList.get(i));
-
-                    }
-
-                    colorCodeList.add(colorSizeData);
-                }
+                    txtAttributeType.setText(attributesDataArrayList.get(i).getmAttributeType());
 
 
-                if (!colorCodeList.isEmpty()) {
+                    if (attributesDataArrayList.get(i).getmAttributeType().equalsIgnoreCase("color")) {
 
-                    lyColorTop.setVisibility(View.VISIBLE);
-                    lyColorView.removeAllViews();
-
-
-                    LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-
-
-                    View view;
-                    for (int i = 0; i < colorCodeList.size(); i++) {
-                        view = layoutInflater.inflate(R.layout.color_layout_cart, lyColorView, false);
-                        LinearLayout lyColor = view.findViewById(R.id.lyColor);
-
+                        txtAttributeName.setVisibility(View.GONE);
+                        lyColorCode.setVisibility(View.VISIBLE);
 
                         Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.black_circle);
                         Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-                        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#"+colorCodeList.get(i).getmAttrbuteRelatedData()));
+                        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#" + attributesDataArrayList.get(i).getmAttributeRelatedData()));
 
                         final int sdk = android.os.Build.VERSION.SDK_INT;
-                        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            lyColor.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.black_circle) );
+                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            lyColorCode.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.black_circle));
                         } else {
-                            lyColor.setBackground(ContextCompat.getDrawable(context, R.drawable.black_circle));
+                            lyColorCode.setBackground(ContextCompat.getDrawable(context, R.drawable.black_circle));
                         }
 
-                        lyColorView.addView(lyColor);
+                    } else {
+                        lyColorCode.setVisibility(View.GONE);
+                        txtAttributeName.setVisibility(View.VISIBLE);
+
+                        txtAttributeName.setText(attributesDataArrayList.get(i).getmAttributeName());
 
                     }
 
-                } else {
-                    lyColorTop.setVisibility(View.GONE);
+                    lyColorView.addView(view);
+
                 }
-
-
-            } else {
+            }else{
                 lyColorTop.setVisibility(View.GONE);
             }
-
-
-
 
 
 
@@ -228,5 +193,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         }
 
     }
+
+
 
 }

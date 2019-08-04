@@ -1,5 +1,7 @@
 package Network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.IOException;
@@ -92,6 +94,10 @@ public class ApiUtils {
 
 //            OkHttpClient client = httpClient.build();
 
+
+       /*     Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();*/
 
             OkHttpClient client = httpClient
                     .connectTimeout(100, TimeUnit.SECONDS)

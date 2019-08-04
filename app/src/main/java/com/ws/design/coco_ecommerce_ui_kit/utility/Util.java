@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 public class Util {
-    private  ProgressBar mProgressBar = null;
+    private ProgressBar mProgressBar = null;
 
     public static boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -50,7 +50,7 @@ public class Util {
 
         customProgressBar = new CustomProgressBar(context); // In onCreate
         customProgressBar.show(); // To show the progress bar
-        return  null;
+        return null;
     }
 
     public static Dialog dismissProDialog() {
@@ -84,22 +84,27 @@ public class Util {
         return isDeviceOnLine;
     }
 
-    public static void showCenteredToast(View view,Context context, String msg, String result) {
-        Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
-        View snackBarView = snackbar.getView();
+    public static void showCenteredToast(View view, Context context, String msg, String result) {
+        try {
+            if (view != null) {
+                Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+                View snackBarView = snackbar.getView();
 
-        if (!TextUtils.isEmpty(result)) {
-            snackBarView.setBackgroundColor(context.getResources().getColor(R.color.greencolor));
+                if (!TextUtils.isEmpty(result)) {
+                    snackBarView.setBackgroundColor(context.getResources().getColor(R.color.greencolor));
 
-        }else{
-            snackBarView.setBackgroundColor(context.getResources().getColor(R.color.red));
+                } else {
+                    snackBarView.setBackgroundColor(context.getResources().getColor(R.color.red));
 
+                }
+
+                snackbar.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        snackbar.show();
-
     }
-
 
 
     public static void openKeyBoard(final Context context, View textView) {

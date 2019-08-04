@@ -38,7 +38,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
-public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView  {
+public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
 
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
@@ -87,6 +87,11 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         }
 
+        if (TextUtils.isEmpty(filterAttribues)) {
+            filterAttribues = ((ProductListByCategoryFragment) getParentFragment()).getSearchFilter();
+        }
+
+
         ryParent = view.findViewById(R.id.ryParent);
         recyclerview = view.findViewById(R.id.recyclerview);
         txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
@@ -95,7 +100,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         productGridModellClasses = new ArrayList<>();
 
-       callProductByCategoryAPI();
+        callProductByCategoryAPI();
 
     }
 
@@ -106,7 +111,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
         }
 
@@ -129,7 +134,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         if (isShimmerShow) {
             mShimmerViewContainer.stopShimmerAnimation();
             mShimmerViewContainer.setVisibility(View.GONE);
-        }else{
+        } else {
             dismissProDialog();
         }
 
@@ -216,7 +221,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                             productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
                         }
 
@@ -238,7 +243,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), "");
         }
     }
 
@@ -291,9 +296,6 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
             }
         });
     }
-
-
-
 
 
 }
