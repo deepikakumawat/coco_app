@@ -59,35 +59,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <customfonts.MyTextView_Roboto_Medium
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="27dp"
-                        android:layout_marginTop="20dp"
-                        android:text="FASHION"
-                        android:textColor="@color/red" />
+                    >
 
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvCategory"
+                        android:id="@+id/rvMainCategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:paddingLeft="5dp" />
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp" />
+
+
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/lyAllCategories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:orientation="vertical">
-
-
-                </LinearLayout>
 
 
             </android.support.v7.widget.CardView>

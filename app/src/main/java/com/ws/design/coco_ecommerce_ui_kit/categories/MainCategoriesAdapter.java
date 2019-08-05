@@ -1,16 +1,17 @@
 package com.ws.design.coco_ecommerce_ui_kit.categories;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
+import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 
@@ -19,16 +20,15 @@ import java.util.ArrayList;
  * Created by wolfsoft3 on 30/8/18.
  */
 
-public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdapter.ViewHolder> {
+public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAdapter.ViewHolder> {
 
 
     private Context context;
     private ArrayList<CategoriesResponse.MainCategoriesData> categoriesResponseArrayList;
     private CategoryFragment categoryFragment;
 
-    private int myPos = 0;
 
-    public AllCategoriesAdapter(Context context, ArrayList<CategoriesResponse.MainCategoriesData> categoriesResponseArrayList, CategoryFragment categoryFragment) {
+    public MainCategoriesAdapter(Context context, ArrayList<CategoriesResponse.MainCategoriesData> categoriesResponseArrayList, CategoryFragment categoryFragment) {
         this.context = context;
         this.categoriesResponseArrayList = categoriesResponseArrayList;
         this.categoryFragment = categoryFragment;
@@ -36,7 +36,7 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_sub_categories, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_catreogires, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,17 +45,18 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
 
         CategoriesResponse.MainCategoriesData mainCategoriesData = categoriesResponseArrayList.get(position);
         if (mainCategoriesData != null) {
-            holder.text.setText(mainCategoriesData.getmCatName());
+
+
+            holder.txtCategories.setText(mainCategoriesData.getmCatName());
+
+            holder.rvSubCategory.setLayoutManager(new GridLayoutManager(context, 3));
+            holder.rvSubCategory.setFocusableInTouchMode(false);
+            holder.rvSubCategory.setNestedScrollingEnabled(false);
+
+            SubCategoriesAdapter allCategories_adapter = new SubCategoriesAdapter(context, mainCategoriesData.getmSubCategories(), categoryFragment);
+            holder.rvSubCategory.setAdapter(allCategories_adapter);
 
         }
-
-
-      /*  String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + categoriesResponse.getmData().getmMainCategories().getmCatIconImg();
-        Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgCategories);
-
-*/
-
-
 
 
     }
@@ -68,17 +69,19 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgCategories;
-        LinearLayout linear1;
-        TextView text;
+        RecyclerView rvSubCategory;
+        TextView txtCategories;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imgCategories = itemView.findViewById(R.id.imgCategories);
-            text = itemView.findViewById(R.id.text);
-            linear1 = itemView.findViewById(R.id.linear1);
+            txtCategories = itemView.findViewById(R.id.txtCategories);
+
+
+             rvSubCategory = itemView.findViewById(R.id.rvSubCategory);
+
+
 
 
         }

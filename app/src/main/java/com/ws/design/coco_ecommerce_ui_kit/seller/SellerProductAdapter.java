@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.seller;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,8 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
             holder.txtProductSalePrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
 
+            holder.txtProductDesc.setText(!TextUtils.isEmpty(productData.getmProductShortDetails()) ? Html.fromHtml(productData.getmProductShortDetails()) : "-");
+
 
             holder. rbProductRating .setRating(!TextUtils.isEmpty(productData.getmAvgRating()) ? Float.parseFloat(productData.getmAvgRating()) : 0);
 
@@ -78,6 +81,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
         private TextView txtProductName;
 
         private TextView txtProductSalePrice;
+        private TextView txtProductDesc;
         private ImageView imgProduct;
         private ImageView imgAddToCart;
         private RatingBar rbProductRating;
@@ -90,6 +94,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductName = view.findViewById(R.id.txtProductName);
             rbProductRating = view.findViewById(R.id.rbProductRating);
+            txtProductDesc =  view.findViewById(R.id.txtProductDesc);
 
             txtProductSalePrice = view.findViewById(R.id.txtProductSalePrice);
 

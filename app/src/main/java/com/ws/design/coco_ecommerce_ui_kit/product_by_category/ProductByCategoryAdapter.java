@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
 
             holder.rbProductRating.setRating(!TextUtils.isEmpty(productData.getmAvgRating()) ? Float.parseFloat(productData.getmAvgRating()) : 0);
 
+            holder.txtProductDesc.setText(!TextUtils.isEmpty(productData.getmProductShortDetails()) ? Html.fromHtml(productData.getmProductShortDetails()) : "-");
 
 
             holder.lyProduct.setTag(productData);
@@ -85,7 +87,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView txtProductSalePrice, offer, txtProductName;
+        TextView txtProductSalePrice, offer, txtProductName,txtProductDesc;
         ImageView imgProduct;
         LinearLayout lyAddToCart;
         LinearLayout linear;
@@ -99,6 +101,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             rbProductRating =  view.findViewById(R.id.rbProductRating);
             imgProduct =  view.findViewById(R.id.imgProduct);
             txtProductName =  view.findViewById(R.id.txtProductName);
+            txtProductDesc =  view.findViewById(R.id.txtProductDesc);
             txtProductSalePrice =  view.findViewById(R.id.txtProductSalePrice);
             offer =  view.findViewById(R.id.offer);
             linear =  view.findViewById(R.id.linear);

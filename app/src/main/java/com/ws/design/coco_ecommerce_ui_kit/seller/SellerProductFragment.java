@@ -43,6 +43,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     private ShimmerFrameLayout mShimmerViewContainer;
     private RelativeLayout ryParent;
     private boolean isShimmerShow = true;
+    private String sellerName;
 
 
     @Nullable
@@ -61,6 +62,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         sellerPresenter = new SellerPresenter(this);
         Bundle bundle = getArguments();
         sellerId = bundle.getString("sellerId");
+        sellerName = bundle.getString("sellerName");
 
         ryParent = view.findViewById(R.id.ryParent);
         lySellerProduct = view.findViewById(R.id.lySellerProduct);
@@ -185,7 +187,12 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
     @Override
     protected String getActionbarTitle() {
+        if (!TextUtils.isEmpty(sellerName)) {
+            return sellerName;
+
+        }
         return getString(R.string.products);
+
     }
 
     @Override

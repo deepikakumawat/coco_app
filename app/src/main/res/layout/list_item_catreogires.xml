@@ -21,14 +21,12 @@
             android:layout_marginLeft="27dp"/>
 
 
-
-        <LinearLayout
-            android:id="@+id/lySubCategory"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSubCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal" />
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp" />
 
 
     </LinearLayout>

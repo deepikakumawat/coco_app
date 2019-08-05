@@ -123,6 +123,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private RecyclerView rvRecentViewsProducts;
     private LinearLayout lyRecentViewsProduct;
     private String sellerId;
+    private String sellerName;
 
     private LinearLayout lyColor;
     private ScrollView scrollViewTop;
@@ -421,6 +422,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 SellerProductFragment sellerProductFragment = new SellerProductFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("sellerId", sellerId);
+                bundle.putString("sellerName", sellerName);
                 sellerProductFragment.setArguments(bundle);
                 FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), sellerProductFragment, "SellerProductFragment", true, false);
 
@@ -570,6 +572,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     txtProductName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductName()) ? productDetailsResponse.getmData().getmProduct().getmProductName() : "-");
                     sellerId = productDetailsResponse.getmData().getmProduct().getmSellerId();
+                    sellerName = productDetailsResponse.getmData().getmProduct().getmSellerName();
                     txtSellerName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSellerName()) ? "Sold by: " + productDetailsResponse.getmData().getmProduct().getmSellerName() : "-");
                     txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
 
