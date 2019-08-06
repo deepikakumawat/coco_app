@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -25,7 +26,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
     private TextView txtTitle;
     private ImageView imgBack;
     private LinearLayout lyConfirmationMail;
-    private LinearLayout lyParent;
+    private RelativeLayout ryParent;
 
 
     @Override
@@ -33,7 +34,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        lyParent = findViewById(R.id.lyParent);
+        ryParent = findViewById(R.id.ryParent);
         txtTitle = findViewById(R.id.txtTitle);
         imgBack = findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
@@ -62,11 +63,11 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(lyParent,this, getString(R.string.email_validation_message),"");
+                showCenteredToast(ryParent,this, getString(R.string.email_validation_message),"");
                 etEmail.requestFocus();
             }  else {
                 if (!Util.isEmailValid(email)) {
-                    showCenteredToast(lyParent,this, getString(R.string.invalid_email),"");
+                    showCenteredToast(ryParent,this, getString(R.string.invalid_email),"");
                     etEmail.requestFocus();
                 } else {
                     validation_detials_flag = true;
@@ -74,7 +75,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
             }
         } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection),"");
+            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
         }
         return validation_detials_flag;
     }
@@ -94,7 +95,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
     @Override
     public void onFailure(String appErrorMessage) {
-        Util.showCenteredToast(lyParent,this, appErrorMessage,"");
+        Util.showCenteredToast(ryParent,this, appErrorMessage,"");
         lyConfirmationMail.setVisibility(View.GONE);
     }
 
@@ -130,7 +131,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
                     startActivity(intent);
                     finish();
                 } else {
-                    showCenteredToast(lyParent,this, loginResponse.getMessage(),"");
+                    showCenteredToast(ryParent,this, loginResponse.getMessage(),"");
                 }
 
             }

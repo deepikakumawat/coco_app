@@ -20,7 +20,10 @@ import com.ws.design.coco_ecommerce_ui_kit.filter_product_by_category.FilterExpa
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFilterListener;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fragment.FragmentManagerUtils;
@@ -110,6 +113,22 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                         }
 
                         filterAttribuesList.add(productAttributes.getmAttributeId());
+
+
+                        JSONObject jsonObject = new JSONObject();
+
+                        if (jsonObject != null) {
+                            Iterator iterator= jsonObject.keys();
+                            while(iterator.hasNext()){
+                                String key = (String)iterator.next();
+
+                            }
+                        }
+
+
+                        jsonObject.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeName());
+
+
 
                         int size = filterAttribuesList.size();
                         Log.d("size", size + "");

@@ -421,7 +421,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private void callCheckoutPaymentApi(String razorpayPaymentID) {
         if (Util.isDeviceOnline(getActivity())) {
             if (addressData != null) {
-                checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
+             /*   checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
                         razorpayPaymentID,
                         "0",
                         "201600",
@@ -444,6 +444,32 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                         "30252012",
                         "raj",
                         "jai"
+                );
+*/
+
+                checkoutPresenter.getCheckoutPayment(CocoPreferences.getUserId(),
+                        razorpayPaymentID,
+                        "0",
+                        totalPrice,
+                        "1",
+                        CocoPreferences.getFirstName(),
+                        CocoPreferences.getLastName(),
+                        CocoPreferences.getUserEmail(),
+                        addressData.getmLandmark(),
+                        CocoPreferences.getUserPhone(),
+                        addressData.getmAddress1() +" "+ addressData.getmAddress2(),
+                        addressData.getmZipcode(),
+                        addressData.getmState(),
+                        addressData.getmCity(),
+                        CocoPreferences.getFirstName(),
+                        CocoPreferences.getLastName(),
+                        CocoPreferences.getUserEmail(),
+                        addressData.getmLandmark(),
+                        CocoPreferences.getUserPhone(),
+                        addressData.getmAddress1() +" "+ addressData.getmAddress2(),
+                        addressData.getmZipcode(),
+                        addressData.getmState(),
+                        addressData.getmCity()
                 );
 
 
