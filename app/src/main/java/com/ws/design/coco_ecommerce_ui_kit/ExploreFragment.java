@@ -17,7 +17,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import Adapter.CategoryPagerAdapterExplor;
 import fragment.ToolbarBaseFragment;
 
-public class ExploreActivity extends ToolbarBaseFragment {
+public class ExploreFragment extends ToolbarBaseFragment {
 
 
     private TabLayout tabLayout;

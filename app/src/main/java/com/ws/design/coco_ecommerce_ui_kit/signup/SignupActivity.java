@@ -37,6 +37,9 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     private LinearLayout lyParent;
+    private TextView txtGetOtp;
+    private String VCToken;
+    private EditText etOtp;
 
     // [START declare_auth]
 //    private FirebaseAuth mAuth;
@@ -68,23 +71,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
 
         init();
 
-        btnSignup.setOnClickListener(view -> {
-
-            String email = etEmail.getText().toString().trim();
-            String fName = etFname.getText().toString().trim();
-            String lName = etLname.getText().toString().trim();
-            String phone = etPhone.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
-            String confirmPassword = etConfirmPassword.getText().toString().trim();
-
-            try {
-                if (isValid(email, fName, lName, phone, password, confirmPassword)) {
-                    signUpPresenter.doSignUp(email, fName, lName, phone, password, confirmPassword);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
 
 
     }
@@ -100,58 +86,83 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
     // [END on_start_check_user]
 
 
-    private boolean isValid(String email, String fName, String lName, String phone, String password, String confirmPassword) throws Exception {
+    private boolean isValid(String email, String fName, String lName, String phone, String otp, String password, String confirmPassword) throws Exception {
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(lyParent,this, getString(R.string.email_validation_message),"");
+                showCenteredToast(lyParent, this, getString(R.string.email_validation_message), "");
                 etEmail.requestFocus();
             } else if (TextUtils.isEmpty(fName)) {
-                showCenteredToast(lyParent,this, getString(R.string.first_name_validation_message),"");
+                showCenteredToast(lyParent, this, getString(R.string.first_name_validation_message), "");
                 etFname.requestFocus();
             } else if (TextUtils.isEmpty(lName)) {
-                showCenteredToast(lyParent,this, getString(R.string.last_name_validation_message),"");
+                showCenteredToast(lyParent, this, getString(R.string.last_name_validation_message), "");
                 etLname.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.invalid_mobile_number),"");
+                showCenteredToast(lyParent, this, getString(R.string.invalid_mobile_number), "");
                 etPhone.requestFocus();
+            } else if (TextUtils.isEmpty(otp)) {
+                showCenteredToast(lyParent, this, getString(R.string.invalid_otp), "");
+                etOtp.requestFocus();
             } else if (TextUtils.isEmpty(password)) {
-                showCenteredToast(lyParent,this, getString(R.string.invalid_password),"");
+                showCenteredToast(lyParent, this, getString(R.string.invalid_password), "");
                 etPassword.requestFocus();
             } else if (TextUtils.isEmpty(confirmPassword)) {
-                showCenteredToast(lyParent,this, getString(R.string.invalid_password),"");
+                showCenteredToast(lyParent, this, getString(R.string.invalid_password), "");
                 etConfirmPassword.requestFocus();
             } else if (!isEmailValid(email)) {
-                showCenteredToast(lyParent,this, getString(R.string.invalid_email),"");
+                showCenteredToast(lyParent, this, getString(R.string.invalid_email), "");
                 etEmail.requestFocus();
             } else if (!isValidMobile(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.mobile_number),"");
+                showCenteredToast(lyParent, this, getString(R.string.mobile_number), "");
                 etPhone.requestFocus();
             } else if (!confirmPassword.equalsIgnoreCase(password)) {
-                showCenteredToast(lyParent,this, getString(R.string.password_confirm_password),"");
+                showCenteredToast(lyParent, this, getString(R.string.password_confirm_password), "");
                 etConfirmPassword.requestFocus();
 
             } else {
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection),"");
+            showCenteredToast(lyParent, this, getString(R.string.network_connection), "");
         }
         return validation_detials_flag;
     }
 
+    private boolean isValidPhone(String phone) throws Exception {
+        boolean validation_detials_flag = false;
+        if (Util.isDeviceOnline(this)) {
+            if (TextUtils.isEmpty(phone)) {
+                showCenteredToast(lyParent, this, getString(R.string.invalid_mobile_number), "");
+                etPhone.requestFocus();
+            } else if (!isValidMobile(phone)) {
+                showCenteredToast(lyParent, this, getString(R.string.mobile_number), "");
+                etPhone.requestFocus();
+            } else {
+                validation_detials_flag = true;
+            }
+        } else {
+            showCenteredToast(lyParent, this, getString(R.string.network_connection), "");
+        }
+        return validation_detials_flag;
+    }
 
     private void init() {
-        lyParent =  findViewById(R.id.lyParent);
+        lyParent = findViewById(R.id.lyParent);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etPhone = (EditText) findViewById(R.id.etPhone);
+        etOtp = (EditText) findViewById(R.id.etOtp);
+        txtGetOtp = (TextView) findViewById(R.id.txtGetOtp);
         btnSignup = (TextView) findViewById(R.id.btnSignup);
+        txtGetOtp = (TextView) findViewById(R.id.txtGetOtp);
         btnGoogle = (TextView) findViewById(R.id.btnGoogle);
         btnGoogle.setOnClickListener(this);
+        txtGetOtp.setOnClickListener(this);
+        btnSignup.setOnClickListener(this);
 
 
     }
@@ -168,7 +179,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage,"");
+        showCenteredToast(lyParent, this, appErrorMessage, "");
     }
 
     @Override
@@ -177,9 +188,9 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
         if (!TextUtils.isEmpty(signUpResponse.getmStatus()) && ("1".equalsIgnoreCase(signUpResponse.getmStatus()))) {
 
             CocoPreferences.setUserId(TextUtils.isEmpty(signUpResponse.getmLoginData().getmId()) ? "" : signUpResponse.getmLoginData().getmId());
-            CocoPreferences.setUserEmail(TextUtils.isEmpty(signUpResponse.getmLoginData().getmEmail()) ? "": signUpResponse.getmLoginData().getmEmail());
-            CocoPreferences.setUserPhone(TextUtils.isEmpty(signUpResponse.getmLoginData().getmMobileNo())? "" : signUpResponse.getmLoginData().getmMobileNo());
-            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmName())? "" :signUpResponse.getmLoginData().getmName());
+            CocoPreferences.setUserEmail(TextUtils.isEmpty(signUpResponse.getmLoginData().getmEmail()) ? "" : signUpResponse.getmLoginData().getmEmail());
+            CocoPreferences.setUserPhone(TextUtils.isEmpty(signUpResponse.getmLoginData().getmMobileNo()) ? "" : signUpResponse.getmLoginData().getmMobileNo());
+            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmName()) ? "" : signUpResponse.getmLoginData().getmName());
             CocoPreferences.setLastName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmLastName()) ? "" : signUpResponse.getmLoginData().getmLastName());
             CocoPreferences.savePreferencese();
 
@@ -188,24 +199,73 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
             startActivity(intent);
             finish();
 
-        }else {
-            showCenteredToast(lyParent,this,signUpResponse.getMessage(),"");
+        } else {
+            showCenteredToast(lyParent, this, signUpResponse.getMessage(), "");
+        }
+    }
+
+    @Override
+    public void getOTP(GetOTPResponse getOTPResponse) {
+        try {
+            showCenteredToast(lyParent, this, getOTPResponse.getMessage(), "");
+
+            if (getOTPResponse.getmOTPData() != null) {
+                if (!TextUtils.isEmpty(getOTPResponse.getmOTPData().getmVcToken())) {
+                    VCToken = getOTPResponse.getmOTPData().getmVcToken();
+
+                } else {
+                    showCenteredToast(lyParent, this, getString(R.string.no_vc_token_found), "");
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onClick(View view) {
-        try{
+        try {
             int vId = view.getId();
-            switch (vId){
+            switch (vId) {
                 case R.id.btnGoogle:
                    /* Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                     startActivityForResult(signInIntent, RC_SIGN_IN);*/
                     break;
-                    default:
-                        break;
+                case R.id.txtGetOtp:
+                    String phone = etPhone.getText().toString().trim();
+                    try {
+                        if (isValidPhone(phone)) {
+                            signUpPresenter.getOtp(phone);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+                case R.id.btnSignup:
+                    String email = etEmail.getText().toString().trim();
+                    String fName = etFname.getText().toString().trim();
+                    String lName = etLname.getText().toString().trim();
+                    phone = etPhone.getText().toString().trim();
+                    String password = etPassword.getText().toString().trim();
+                    String confirmPassword = etConfirmPassword.getText().toString().trim();
+                    String otp = etOtp.getText().toString().trim();
+
+                    try {
+                        if (isValid(email, fName, lName, phone, otp, password, confirmPassword)) {
+                            signUpPresenter.doSignUp(email, fName, lName, phone,otp, VCToken, password, confirmPassword);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    break;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

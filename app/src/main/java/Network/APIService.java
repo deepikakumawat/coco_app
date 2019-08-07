@@ -26,6 +26,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.seller.SellerResponse;
+import com.ws.design.coco_ecommerce_ui_kit.signup.GetOTPResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 
 import org.json.JSONObject;
@@ -64,6 +65,8 @@ public interface APIService {
                                   @Field("fname") String fName,
                                   @Field("lname") String lName,
                                   @Field("mobileno") String phone,
+                                  @Field("otp") String otp,
+                                  @Field("vctoken") String VCToken,
                                   @Field("password") String password,
                                   @Field("cn_password") String confirmPassword);
 
@@ -219,7 +222,7 @@ public interface APIService {
     @POST("get-products-by-category")
     @FormUrlEncoded
     Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId
-                                                        );
+    );
 
     @POST("cancel_order")
     @FormUrlEncoded
@@ -236,5 +239,9 @@ public interface APIService {
 
     @POST("all_categories")
     Call<CategoriesResponse> getCategories();
+
+    @POST("generateotp")
+    @FormUrlEncoded
+    Call<GetOTPResponse> getOTP(@Field("mobile_number") String phone);
 }
 

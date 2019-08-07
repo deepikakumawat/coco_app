@@ -203,6 +203,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
                 } else if (position == 9) {
+                    setScreenTitle(getString(R.string.explore));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ExploreFragment(), "ExploreFragment", true, false);
 
 
                 } else if (position == 10) {

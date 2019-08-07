@@ -134,6 +134,7 @@
     <string name="last_name_validation_message">Last name can\'t be blank!</string>
     <string name="password_confirm_password">Confirm password should be same as password.</string>
     <string name="invalid_mobile_number">Mobile number can\'t be blank!</string>
+    <string name="invalid_otp">OTP can\'t be blank!</string>
     <string name="mobile_number">Incorrect mobile number.</string>
     <string name="do_you_want_to_logout">Do you want to Log Out ?</string>
     <string name="yes">YES</string>
@@ -195,6 +196,9 @@
     <string name="delivery_state">State : </string>
     <string name="delivery_landmark">Landmark : </string>
     <string name="desc">Desc:</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="no_vc_token_found">No VCToken Found!</string>
+    <string name="explore">Explore</string>
 
 
     <string-array name="legal_policies_array">

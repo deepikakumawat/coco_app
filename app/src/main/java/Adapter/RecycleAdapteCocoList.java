@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ws.design.coco_ecommerce_ui_kit.ExploreFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.FilterFragment;
 import com.ws.design.coco_ecommerce_ui_kit.ProductByCategoryActivity1;
@@ -43,7 +44,6 @@ import com.ws.design.coco_ecommerce_ui_kit.Cocoproductlistgrid6;
 import com.ws.design.coco_ecommerce_ui_kit.Cocoproductlistgrid7;
 import com.ws.design.coco_ecommerce_ui_kit.Cocoproductlistgrid9;
 import com.ws.design.coco_ecommerce_ui_kit.Cocoreviews2Activity;
-import com.ws.design.coco_ecommerce_ui_kit.ExploreActivity;
 import com.ws.design.coco_ecommerce_ui_kit.KitchenActivity;
 import com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity;
 import com.ws.design.coco_ecommerce_ui_kit.MyAccountActivity;
@@ -131,7 +131,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, DrawerActivity.class);
                     context.startActivity(i);
                 } else if (position == 2) {
-                    Intent i = new Intent(context, ExploreActivity.class);
+                    Intent i = new Intent(context, ExploreFragment.class);
                     context.startActivity(i);
                 } else if (position == 3) {
                     Intent i = new Intent(context, CategoryFragment.class);

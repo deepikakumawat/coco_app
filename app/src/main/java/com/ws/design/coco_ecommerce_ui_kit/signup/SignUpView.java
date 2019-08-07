@@ -9,4 +9,6 @@ public interface SignUpView {
         void onFailure(String appErrorMessage);
 
         void onSignSuccess(SignUpResponse signUpResponse);
+
+        void getOTP(GetOTPResponse getOTPResponse);
 }

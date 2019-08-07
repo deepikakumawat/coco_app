@@ -26,40 +26,13 @@ public class SignUpPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void doSignUp(String email, String fName, String lName, String phone, String password, String confirmPassword) {
+    public void doSignUp(String email, String fName, String lName, String phone,String otp, String VCToken ,String password, String confirmPassword) {
         view.showWait();
-
-     /*   service.doSignUp(email,fName,lName, phone, password,confirmPassword).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<SignUpResponse>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        view.removeWait();
-                        try {
-                            JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
-                            view.onFailure(jsonObject.getString("message"));
-                        } catch (Exception ee) {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onNext(SignUpResponse signUpResponse) {
-                        view.removeWait();
-                        view.onSignSuccess(signUpResponse);
-                    }
-                });*/
 
 
         try {
 
-            Call call = service.doSignUp(email, fName, lName, phone, password, confirmPassword);
+            Call call = service.doSignUp(email, fName, lName, phone,otp,VCToken, password, confirmPassword);
             call.enqueue(new Callback<SignUpResponse>() {
                 @Override
                 public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
@@ -97,5 +70,52 @@ public class SignUpPresenter {
             e.printStackTrace();
         }
     }
+
+    public void getOtp(String phone) {
+        view.showWait();
+
+
+        try {
+
+            Call call = service.getOTP(phone);
+            call.enqueue(new Callback<GetOTPResponse>() {
+                @Override
+                public void onResponse(Call<GetOTPResponse> call, Response<GetOTPResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+
+                    try{
+                        if (response.isSuccessful()) {
+                            view.getOTP(response.body());
+                        }else{
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<GetOTPResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
     android:id="@+id/lyParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity">
 
     <android.support.v4.widget.NestedScrollView
@@ -12,256 +12,301 @@
         android:layout_height="wrap_content">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="15dp">
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="50dp"
-            android:src="@drawable/logo"/>
-
-        <customfonts.TextViewSFProDisplaySemibold
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="WORLD’s Leading Ecommerce Platform"
-            android:textColor="@color/black"
-            android:paddingLeft="16.5dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            android:orientation="vertical">
 
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="23dp"
-            android:layout_marginLeft="24.7dp"
-            android:textColorHint="@color/black"
-            android:layout_marginTop="42dp">
-
-            <customfonts.EditText_SF_Pro_Display_Medium
-                android:id="@+id/etEmail"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:hint="E-mail Address"
-                android:drawablePadding="10dp"
-                android:paddingRight="10dp"
-                android:letterSpacing="0.03"
-                android:paddingBottom="18dp"
-                android:drawableRight="@drawable/envelope"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp" />
+                android:layout_marginLeft="29dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="23dp"
-            android:textColorHint="@color/black"
-            android:layout_marginLeft="24.7dp">
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo" />
 
-            <customfonts.EditText_SF_Pro_Display_Medium
-                android:id="@+id/etFname"
+                <customfonts.TextViewSFProDisplaySemibold
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16.5dp"
+                    android:text="WORLD’s Leading Ecommerce Platform"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1"
-                android:hint="First Name"
-                android:drawablePadding="10dp"
-                android:paddingRight="10dp"
-                android:letterSpacing="0.03"
-                android:paddingBottom="18dp"
-                android:drawableRight="@drawable/user"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp" />
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
 
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="23dp"
-            android:textColorHint="@color/black"
-            android:layout_marginLeft="24.7dp">
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/envelope"
+                    android:drawablePadding="10dp"
+                    android:hint="E-mail Address"
+                    android:inputType="textEmailAddress"
+                    android:letterSpacing="0.03"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="18dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
 
-            <customfonts.EditText_SF_Pro_Display_Medium
-                android:id="@+id/etLname"
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1"
-                android:hint="Last Name"
-                android:paddingRight="10dp"
-                android:drawablePadding="10dp"
-                android:paddingBottom="18dp"
-                android:drawableRight="@drawable/user"
-                android:paddingTop="10dp"
-                android:letterSpacing="0.03"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp" />
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
 
-        </android.support.design.widget.TextInputLayout>
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etFname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/user"
+                    android:drawablePadding="10dp"
+                    android:hint="First Name"
+                    android:inputType="text"
+                    android:letterSpacing="0.03"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="18dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="23dp"
-            android:textColorHint="@color/black"
-            android:layout_marginLeft="24.7dp">
+            </android.support.design.widget.TextInputLayout>
 
-            <customfonts.EditText_SF_Pro_Display_Medium
-                android:id="@+id/etPhone"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLines="1"
-                android:hint="Phone"
-                android:drawablePadding="10dp"
-                android:paddingRight="10dp"
-                android:letterSpacing="0.03"
-                android:paddingBottom="18dp"
-                android:drawableRight="@drawable/user"
-                android:paddingTop="10dp"
-                android:maxLength="10"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp" />
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
 
-        </android.support.design.widget.TextInputLayout>
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etLname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/user"
+                    android:drawablePadding="10dp"
+                    android:hint="Last Name"
+                    android:inputType="text"
+                    android:letterSpacing="0.03"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="18dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
 
+            </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="23dp"
-            android:textColorHint="@color/black"
-            android:layout_marginLeft="24.7dp">
-
-            <customfonts.EditText_SF_Pro_Display_Medium
-                android:id="@+id/etPassword"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:hint="Password"
-                android:drawablePadding="10dp"
-                android:paddingBottom="15dp"
-                android:letterSpacing="0.03"
-                android:drawableRight="@drawable/eye"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp" />
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
 
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="23dp"
-            android:textColorHint="@color/black"
-            android:layout_marginLeft="24.7dp">
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/user"
+                    android:drawablePadding="10dp"
+                    android:hint="Phone"
+                    android:inputType="number"
+                    android:letterSpacing="0.03"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="18dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
 
-            <customfonts.EditText_SF_Pro_Display_Medium
-                android:id="@+id/etConfirmPassword"
+            </android.support.design.widget.TextInputLayout>
+
+            <customfonts.TextViewSFProDisplayMedium
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:hint="Confirm Password"
-                android:drawablePadding="10dp"
-                android:letterSpacing="0.03"
-                android:drawableRight="@drawable/eye"
-                android:paddingRight="10dp"
-                android:paddingBottom="15dp"
-                android:paddingTop="10dp"
+                android:padding="16dp"
+                android:gravity="right"
+                android:text="@string/get_otp"
+                android:id="@+id/txtGetOtp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
-        </android.support.design.widget.TextInputLayout>
-    <customfonts.TextViewSFProDisplayMedium
-        android:id="@+id/btnSignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Create Account"
-        android:textSize="17sp"
-        android:gravity="center_horizontal"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/button_rect22"/>
-    <customfonts.TextViewSFProDisplayMedium
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Or signup with social media"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:layout_marginTop="17.3dp"
-        android:layout_marginBottom="13dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-        <customfonts.TextViewSFProDisplayRegular
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Gmail"
-            android:gravity="center"
-            android:id="@+id/btnGoogle"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:paddingTop="13.5dp"
-            android:paddingBottom="13.5dp"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
 
-            android:background="@drawable/button_rect22"/>
-        <customfonts.TextViewSFProDisplayRegular
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Facebook"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:layout_marginLeft="5.5dp"
-            android:gravity="center"
-            android:paddingTop="13.5dp"
-            android:paddingBottom="13.5dp"
-            android:backgroundTint="#2c55ac"
-            android:background="@drawable/button_rect22"/>
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/eye"
+                    android:drawablePadding="10dp"
+                    android:hint="OTP"
+                    android:inputType="number"
+                    android:letterSpacing="0.03"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
 
 
-    <!--    <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
+
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/eye"
+                    android:drawablePadding="10dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:letterSpacing="0.03"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24.7dp"
+                android:layout_marginRight="23dp"
+                android:textColorHint="@color/black">
+
+                <customfonts.EditText_SF_Pro_Display_Medium
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/eye"
+                    android:drawablePadding="10dp"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:letterSpacing="0.03"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
 
 
-    </LinearLayout>
-    </LinearLayout>
+            <customfonts.TextViewSFProDisplayMedium
+                android:id="@+id/btnSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/button_rect22"
+                android:gravity="center_horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="Create Account"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+            <customfonts.TextViewSFProDisplayMedium
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:text="Or signup with social media"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="17.3dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="13dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <customfonts.TextViewSFProDisplayRegular
+                    android:id="@+id/btnGoogle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_rect22"
+                    android:gravity="center"
+                    android:paddingTop="13.5dp"
+                    android:paddingBottom="13.5dp"
+                    android:text="Gmail"
+                    android:textColor="@color/white"
+
+                    android:textSize="15sp" />
+
+                <customfonts.TextViewSFProDisplayRegular
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_rect22"
+                    android:backgroundTint="#2c55ac"
+                    android:gravity="center"
+                    android:paddingTop="13.5dp"
+                    android:paddingBottom="13.5dp"
+                    android:text="Facebook"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+
+                <!--    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/sign_in_button"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />-->
+
+
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
