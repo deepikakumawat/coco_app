@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,6 +48,7 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
         if (mainCategoriesData != null) {
 
 
+
             holder.txtCategories.setText(mainCategoriesData.getmCatName());
 
             holder.rvSubCategory.setLayoutManager(new GridLayoutManager(context, 3));
@@ -71,6 +73,7 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
 
         RecyclerView rvSubCategory;
         TextView txtCategories;
+        LinearLayout lyTop;
 
 
         public ViewHolder(View itemView) {
@@ -81,6 +84,7 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
 
              rvSubCategory = itemView.findViewById(R.id.rvSubCategory);
 
+            lyTop = itemView.findViewById(R.id.lyTop);
 
 
 

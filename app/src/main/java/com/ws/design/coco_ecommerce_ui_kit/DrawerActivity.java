@@ -74,10 +74,10 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     long back_pressed = 0;
 
 
-    private String title[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
+    private String title[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trandings",
             "Address", "Help", "Contact Us", "Legal Policies"};
 
-    private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Categories", "My Wishlist", "My Account", "Trandings",
+    private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trandings",
             "Address", "Help", "Contact Us", "Legal Policies", "Logout"};
 
     private TextView txtUserEmail;

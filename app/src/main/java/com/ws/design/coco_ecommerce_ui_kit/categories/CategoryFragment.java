@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
@@ -22,6 +24,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCate
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import fragment.FragmentManagerUtils;
 
@@ -37,9 +40,10 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
 
     private MainCategoriesAdapter mainCategoriesAdapter;
     private View mView;
-    CategoriesPresenter categoriesPresenter;
-    private LinearLayout lyParent;
+    private CategoriesPresenter categoriesPresenter;
+    private RelativeLayout ryParent;
     private RecyclerView rvMainCategory;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     @Nullable
     @Override
@@ -55,8 +59,10 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
 
         categoriesPresenter = new CategoriesPresenter(this);
 
-        lyParent = mView.findViewById(R.id.lyParent);
+        ryParent = mView.findViewById(R.id.ryParent);
         rvMainCategory = mView.findViewById(R.id.rvMainCategory);
+        mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvMainCategory.setLayoutManager(layoutManager);
@@ -65,7 +71,7 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
             categoriesPresenter.getCategories();
 
         } else {
-            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection), "");
+            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
 
         }
 
@@ -75,7 +81,7 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
 
     @Override
     protected String getActionbarTitle() {
-        return getString(R.string.categories);
+        return getString(R.string.departments);
     }
 
     @Override
@@ -90,17 +96,19 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
 
     @Override
     public void showWait() {
-
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent, getActivity(), appErrorMessage, "");
+        showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
 
     }
 
@@ -109,7 +117,34 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
         if (categoriesResponse != null) {
 
             mainCategoriesDataArrayList.clear();
-            mainCategoriesDataArrayList.addAll(categoriesResponse.getmData().getmMainCategories());
+
+
+            if (categoriesResponse.getmData() != null) {
+                if (!categoriesResponse.getmData().getmMainCategories().isEmpty()) {
+
+                    for(CategoriesResponse.MainCategoriesData mainCategoriesData : categoriesResponse.getmData().getmMainCategories()){
+
+                        if (!mainCategoriesData.getmSubCategories().isEmpty()) {
+
+                            for(CategoriesResponse.SubCategoriesData subCategoriesData : mainCategoriesData.getmSubCategories()){
+
+                                if(subCategoriesData.getmProductCount()>0){
+
+                                    mainCategoriesDataArrayList.add(mainCategoriesData);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            HashSet<CategoriesResponse.MainCategoriesData> hashSet = new HashSet<CategoriesResponse.MainCategoriesData>();
+            hashSet.addAll(mainCategoriesDataArrayList);
+            mainCategoriesDataArrayList.clear();
+            mainCategoriesDataArrayList.addAll(hashSet);
+
+//            mainCategoriesDataArrayList.addAll(categoriesResponse.getmData().getmMainCategories());
 
 
             mainCategoriesAdapter = new MainCategoriesAdapter(getActivity(), mainCategoriesDataArrayList, CategoryFragment.this);

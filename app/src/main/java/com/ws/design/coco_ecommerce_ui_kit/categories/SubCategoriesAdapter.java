@@ -25,14 +25,13 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
 
     private Context context;
-    private ArrayList<CategoriesResponse.SubCategoriesData> categoriesResponseArrayList;
+    private ArrayList<CategoriesResponse.SubCategoriesData> subCategoriesResponseArrayList;
     private CategoryFragment categoryFragment;
 
-    private int myPos = 0;
 
-    public SubCategoriesAdapter(Context context, ArrayList<CategoriesResponse.SubCategoriesData> categoriesResponseArrayList, CategoryFragment categoryFragment) {
+    public SubCategoriesAdapter(Context context, ArrayList<CategoriesResponse.SubCategoriesData> subCategoriesResponseArrayList, CategoryFragment categoryFragment) {
         this.context = context;
-        this.categoriesResponseArrayList = categoriesResponseArrayList;
+        this.subCategoriesResponseArrayList = subCategoriesResponseArrayList;
         this.categoryFragment = categoryFragment;
     }
 
@@ -45,8 +44,8 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        CategoriesResponse.SubCategoriesData subCategoriesData = categoriesResponseArrayList.get(position);
-        if (subCategoriesData != null) {
+        CategoriesResponse.SubCategoriesData subCategoriesData = subCategoriesResponseArrayList.get(position);
+        if (subCategoriesData != null ) {
 
 
             holder.txtSubCategory.setText(subCategoriesData.getmCatName());
@@ -65,7 +64,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
     @Override
     public int getItemCount() {
-        return categoriesResponseArrayList.size();
+        return subCategoriesResponseArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -73,6 +72,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
         ImageView imgCategories;
         TextView txtSubCategory;
         LinearLayout lySubCategory;
+        LinearLayout lyTop;
 
 
         public ViewHolder(View itemView) {
@@ -83,6 +83,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
             imgCategories = itemView.findViewById(R.id.imgCategories);
             lySubCategory = itemView.findViewById(R.id.lySubCategory);
+            lyTop = itemView.findViewById(R.id.lyTop);
 
 
         }

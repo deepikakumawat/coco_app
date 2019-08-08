@@ -38,7 +38,9 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MyAccountActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.NavigationActivity2" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Navigation1" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />

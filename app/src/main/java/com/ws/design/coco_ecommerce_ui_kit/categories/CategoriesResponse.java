@@ -2,20 +2,6 @@ package com.ws.design.coco_ecommerce_ui_kit.categories;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.BestOfFassion;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.BestSeller;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.BudgetBuy;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Clothing;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.DealProducts;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Electronics;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.FassionAccesory;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Featured;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.SpecialDeal;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.SpecialOffer;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Watches;
 
 import java.util.ArrayList;
 
@@ -285,7 +271,17 @@ public class CategoriesResponse {
         @Expose
         private String mModifiedDate;
 
+        @SerializedName("product_count")
+        @Expose
+        private int mProductCount;
 
+        public int getmProductCount() {
+            return mProductCount;
+        }
+
+        public void setmProductCount(int mProductCount) {
+            this.mProductCount = mProductCount;
+        }
 
         public String getmCatId() {
             return mCatId;

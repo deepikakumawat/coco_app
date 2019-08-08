@@ -8,25 +8,20 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="5dp"
         app:cardBackgroundColor="@color/white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+
 
             <LinearLayout
                 android:id="@+id/lyProduct"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="8"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
@@ -44,9 +39,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
-                    android:layout_weight="3"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -100,6 +93,24 @@
                                 android:textSize="14.7sp" />
 
 
+                            <LinearLayout
+                                android:id="@+id/lyAddToCart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="15dp"
+                                    android:padding="5dp"
+                                    android:src="@drawable/dark_cart" />
+
+                            </LinearLayout>
+
                         </LinearLayout>
 
                         <View
@@ -115,27 +126,14 @@
 
                             android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/txtProductDesc"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <customfonts.MyTextView_Roboto_Regular
-                                    android:layout_width="40dp"
-                                    android:layout_height="wrap_content"
-                                    android:text="Desc: "
-                                    android:textColor="#b3b3b3"
-                                    android:textSize="11.7sp" />
-
-                                <customfonts.MyTextView_Roboto_Regular
-                                    android:id="@+id/txtProductDesc"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:maxLines="3"
-                                    android:ellipsize="end"
-                                    android:textColor="#666666"
-                                    android:textSize="11.7sp" />
-                            </LinearLayout>
+                                android:maxLines="4"
+                                android:ellipsize="end"
+                                android:textColor="#666666"
+                                android:textSize="11.7sp" />
 
 
                         </LinearLayout>
@@ -149,26 +147,8 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/lyAddToCart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2"
 
-                android:gravity="center">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:padding="5dp"
-                    android:src="@drawable/dark_cart" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
 
     </android.support.v7.widget.CardView>

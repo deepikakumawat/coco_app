@@ -176,7 +176,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             int vId = view.getId();
             switch (vId) {
                 case R.id.txtCategories:
-//                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreActivity(), null, false, false);
+//                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new ExploreFragment(), null, false, false);
 
                     Categories categories = (Categories) view.getTag();
 

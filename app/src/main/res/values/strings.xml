@@ -199,6 +199,7 @@
     <string name="get_otp">Get OTP</string>
     <string name="no_vc_token_found">No VCToken Found!</string>
     <string name="explore">Explore</string>
+    <string name="departments">Departments</string>
 
 
     <string-array name="legal_policies_array">

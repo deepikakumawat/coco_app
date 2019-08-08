@@ -22,6 +22,7 @@ public class CustomProgressBar {
         mProgressBar.setIndeterminate(true);
 
 
+
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
         RelativeLayout rl = new RelativeLayout(context);
