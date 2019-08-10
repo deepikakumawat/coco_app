@@ -5,7 +5,6 @@
     android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
 
@@ -19,6 +18,29 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--Banner Recyclerview-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:elevation="5dp"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:elevation="5dp"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="15dp" />
+
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -84,19 +106,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
 
-            <include layout="@layout/shimmer_place_holder_list_item_cart" />
+            <include layout="@layout/shimmer_place_holder_catreogires" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -22,10 +23,9 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.isValidMobile;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
 
-public class SignupActivity extends AppCompatActivity implements SignUpView, View.OnClickListener {
+public class SignupActivity extends AppCompatActivity implements  View.OnClickListener, SignUpView {
 
 
-    private SignUpPresenter signUpPresenter;
     private EditText etEmail;
     private TextView btnSignup;
     private EditText etLname;
@@ -33,41 +33,24 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
     private EditText etConfirmPassword;
     private EditText etPassword;
     private EditText etPhone;
-    private TextView btnGoogle;
-    private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
     private LinearLayout lyParent;
-    private TextView txtGetOtp;
-    private String VCToken;
-    private EditText etOtp;
-
-    // [START declare_auth]
-//    private FirebaseAuth mAuth;
-    // [END declare_auth]
-
-//    private GoogleSignInClient mGoogleSignInClient;
+    private SignUpPresenter signUpPresenter;
+    private String email;
+    private String fName;
+    private String lName;
+    private String phone;
+    private String password;
+    private String confirmPassword;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        signUpPresenter = new SignUpPresenter(this);
         setContentView(R.layout.activity_signup);
+        signUpPresenter = new SignUpPresenter(this);
 
-        // [START config_signin]
-        // Configure Google Sign In
-       /* GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("AIzaSyDbNunswocOrMepo2lZGO4PCQlTAs7v_kU")
-                .requestEmail()
-                .build();*/
-        // [END config_signin]
 
-//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-//        mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
         init();
 
@@ -75,18 +58,9 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
 
     }
 
-    // [START on_start_check_user]
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-    }
-    // [END on_start_check_user]
 
 
-    private boolean isValid(String email, String fName, String lName, String phone, String otp, String password, String confirmPassword) throws Exception {
+    private boolean isValid(String email, String fName, String lName, String phone,  String password, String confirmPassword) throws Exception {
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
@@ -101,10 +75,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
             } else if (TextUtils.isEmpty(phone)) {
                 showCenteredToast(lyParent, this, getString(R.string.invalid_mobile_number), "");
                 etPhone.requestFocus();
-            } else if (TextUtils.isEmpty(otp)) {
-                showCenteredToast(lyParent, this, getString(R.string.invalid_otp), "");
-                etOtp.requestFocus();
-            } else if (TextUtils.isEmpty(password)) {
+            }  else if (TextUtils.isEmpty(password)) {
                 showCenteredToast(lyParent, this, getString(R.string.invalid_password), "");
                 etPassword.requestFocus();
             } else if (TextUtils.isEmpty(confirmPassword)) {
@@ -129,23 +100,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
         return validation_detials_flag;
     }
 
-    private boolean isValidPhone(String phone) throws Exception {
-        boolean validation_detials_flag = false;
-        if (Util.isDeviceOnline(this)) {
-            if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(lyParent, this, getString(R.string.invalid_mobile_number), "");
-                etPhone.requestFocus();
-            } else if (!isValidMobile(phone)) {
-                showCenteredToast(lyParent, this, getString(R.string.mobile_number), "");
-                etPhone.requestFocus();
-            } else {
-                validation_detials_flag = true;
-            }
-        } else {
-            showCenteredToast(lyParent, this, getString(R.string.network_connection), "");
-        }
-        return validation_detials_flag;
-    }
+
 
     private void init() {
         lyParent = findViewById(R.id.lyParent);
@@ -155,17 +110,56 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etPhone = (EditText) findViewById(R.id.etPhone);
-        etOtp = (EditText) findViewById(R.id.etOtp);
-        txtGetOtp = (TextView) findViewById(R.id.txtGetOtp);
         btnSignup = (TextView) findViewById(R.id.btnSignup);
-        txtGetOtp = (TextView) findViewById(R.id.txtGetOtp);
-        btnGoogle = (TextView) findViewById(R.id.btnGoogle);
-        btnGoogle.setOnClickListener(this);
-        txtGetOtp.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
 
 
     }
+
+
+
+
+
+
+    @Override
+    public void onClick(View view) {
+        try {
+            int vId = view.getId();
+            switch (vId) {
+
+
+                case R.id.btnSignup:
+                     email = etEmail.getText().toString().trim();
+                     fName = etFname.getText().toString().trim();
+                     lName = etLname.getText().toString().trim();
+                    phone = etPhone.getText().toString().trim();
+                     password = etPassword.getText().toString().trim();
+                     confirmPassword = etConfirmPassword.getText().toString().trim();
+
+                    try {
+                        if (isValid(email, fName, lName, phone,  password, confirmPassword)) {
+
+                            signUpPresenter.getOtp(phone);
+
+
+
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void showWait() {
@@ -185,24 +179,9 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
     @Override
     public void onSignSuccess(SignUpResponse signUpResponse) {
 
-        if (!TextUtils.isEmpty(signUpResponse.getmStatus()) && ("1".equalsIgnoreCase(signUpResponse.getmStatus()))) {
-
-            CocoPreferences.setUserId(TextUtils.isEmpty(signUpResponse.getmLoginData().getmId()) ? "" : signUpResponse.getmLoginData().getmId());
-            CocoPreferences.setUserEmail(TextUtils.isEmpty(signUpResponse.getmLoginData().getmEmail()) ? "" : signUpResponse.getmLoginData().getmEmail());
-            CocoPreferences.setUserPhone(TextUtils.isEmpty(signUpResponse.getmLoginData().getmMobileNo()) ? "" : signUpResponse.getmLoginData().getmMobileNo());
-            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmName()) ? "" : signUpResponse.getmLoginData().getmName());
-            CocoPreferences.setLastName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmLastName()) ? "" : signUpResponse.getmLoginData().getmLastName());
-            CocoPreferences.savePreferencese();
-
-
-            Intent intent = new Intent(SignupActivity.this, DrawerActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else {
-            showCenteredToast(lyParent, this, signUpResponse.getMessage(), "");
-        }
+       // do nothing
     }
+
 
     @Override
     public void getOTP(GetOTPResponse getOTPResponse) {
@@ -211,7 +190,22 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
 
             if (getOTPResponse.getmOTPData() != null) {
                 if (!TextUtils.isEmpty(getOTPResponse.getmOTPData().getmVcToken())) {
-                    VCToken = getOTPResponse.getmOTPData().getmVcToken();
+                    String VCToken = getOTPResponse.getmOTPData().getmVcToken();
+
+                    Intent intent = new Intent(SignupActivity.this, MobileVerificationActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("email",email);
+                    bundle.putString("fName",fName);
+                    bundle.putString("lName",lName);
+                    bundle.putString("phone",phone);
+                    bundle.putString("password",password);
+                    bundle.putString("confirmPassword",confirmPassword);
+                    bundle.putString("VCToken",VCToken);
+
+                    intent.putExtra("signupdata",bundle);
+
+                    startActivity(intent);
 
                 } else {
                     showCenteredToast(lyParent, this, getString(R.string.no_vc_token_found), "");
@@ -225,143 +219,4 @@ public class SignupActivity extends AppCompatActivity implements SignUpView, Vie
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        try {
-            int vId = view.getId();
-            switch (vId) {
-                case R.id.btnGoogle:
-                   /* Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                    startActivityForResult(signInIntent, RC_SIGN_IN);*/
-                    break;
-                case R.id.txtGetOtp:
-                    String phone = etPhone.getText().toString().trim();
-                    try {
-                        if (isValidPhone(phone)) {
-                            signUpPresenter.getOtp(phone);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    break;
-                case R.id.btnSignup:
-                    String email = etEmail.getText().toString().trim();
-                    String fName = etFname.getText().toString().trim();
-                    String lName = etLname.getText().toString().trim();
-                    phone = etPhone.getText().toString().trim();
-                    String password = etPassword.getText().toString().trim();
-                    String confirmPassword = etConfirmPassword.getText().toString().trim();
-                    String otp = etOtp.getText().toString().trim();
-
-                    try {
-                        if (isValid(email, fName, lName, phone, otp, password, confirmPassword)) {
-                            signUpPresenter.doSignUp(email, fName, lName, phone,otp, VCToken, password, confirmPassword);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-  /*  @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                // [START_EXCLUDE]
-//                updateUI(null);
-                // [END_EXCLUDE]
-            }
-        }
-    }*/
-
- /*   private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
-        }
-    }*/
-
-    // [START auth_with_google]
-  /*  private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-        // [START_EXCLUDE silent]
-//        showProgressDialog();
-        // [END_EXCLUDE]
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Snackbar.make(findViewById(R.id.txtSignup), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-//                            updateUI(null);
-                        }
-
-                        // [START_EXCLUDE]
-//                        hideProgressDialog();
-                        // [END_EXCLUDE]
-                    }
-                });
-    }
-    // [END auth_with_google]
-
-    private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-//                        updateUI(null);
-                    }
-                });
-    }
-
-    private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google revoke access
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-//                        updateUI(null);
-                    }
-                });
-    }*/
 }

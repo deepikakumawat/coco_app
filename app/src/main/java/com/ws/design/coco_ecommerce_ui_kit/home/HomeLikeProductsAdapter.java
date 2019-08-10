@@ -47,7 +47,7 @@ public class HomeLikeProductsAdapter extends RecyclerView.Adapter<HomeLikeProduc
 
 
 
-            String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 

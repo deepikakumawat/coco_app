@@ -17,7 +17,7 @@ import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.FilterFragment;
 import com.ws.design.coco_ecommerce_ui_kit.ProductByCategoryActivity1;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
-import com.ws.design.coco_ecommerce_ui_kit.categories.CategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.departments.DepartmentFragment;
 import com.ws.design.coco_ecommerce_ui_kit.CocoAddNewAddress1Activity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoEcommerceHomeActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
@@ -58,7 +58,6 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity;
 import com.ws.design.coco_ecommerce_ui_kit.Reviews;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
-import com.ws.design.coco_ecommerce_ui_kit.Signup2Activity;
 
 import java.util.List;
 
@@ -134,7 +133,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, ExploreFragment.class);
                     context.startActivity(i);
                 } else if (position == 3) {
-                    Intent i = new Intent(context, CategoryFragment.class);
+                    Intent i = new Intent(context, DepartmentFragment.class);
                     context.startActivity(i);
                 } else if (position == 4) {
                     Intent i = new Intent(context, KitchenActivity.class);
@@ -201,9 +200,6 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     context.startActivity(i);
                 }else if (position == 25) {
                     Intent i = new Intent(context, SignupActivity.class);
-                    context.startActivity(i);
-                }else if (position == 26) {
-                    Intent i = new Intent(context, Signup2Activity.class);
                     context.startActivity(i);
                 }else if (position == 27) {
                     Intent i = new Intent(context, ReviewActivity.class);

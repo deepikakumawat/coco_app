@@ -36,7 +36,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.razorpay.PaymentResultListener;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
-import com.ws.design.coco_ecommerce_ui_kit.categories.CategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.departments.DepartmentFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.SuccessFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
@@ -171,8 +171,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                 } else if (position == 2) {
                     startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
                 } else if (position == 3) {
-                    setScreenTitle(getString(R.string.categories));
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CategoryFragment(), null, false, false);
+                    setScreenTitle(getString(R.string.departments));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new DepartmentFragment(), null, true, false);
                 } else if (position == 4) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {

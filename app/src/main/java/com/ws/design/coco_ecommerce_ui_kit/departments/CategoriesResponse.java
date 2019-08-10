@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.categories;
+package com.ws.design.coco_ecommerce_ui_kit.departments;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

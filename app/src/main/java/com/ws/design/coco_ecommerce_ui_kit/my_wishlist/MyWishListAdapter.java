@@ -40,21 +40,21 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
 
         MyWishListResponse.ProductData productData = myWishProductDataArrayList.get(position);
         if (productData != null) {
-            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" :productData.getmProductName());
-            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : productData.getmSalePrice());
+            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
+            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
 
 
-            String thumbnail = Constant.THUMBNAIL_BASE_URL + productData.getmProductImg();
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
             holder.txtProductName.setTag(productData);
-            holder.txtProductName.setTag(R.id.txtProductName,position);
+            holder.txtProductName.setTag(R.id.txtProductName, position);
             holder.txtProductName.setOnClickListener(myWishlistFragment);
 
 
             holder.lyProduct.setTag(productData);
-            holder.lyProduct.setTag(R.id.lyProduct,position);
+            holder.lyProduct.setTag(R.id.lyProduct, position);
             holder.lyProduct.setOnClickListener(myWishlistFragment);
         }
 
@@ -72,8 +72,6 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
         private TextView txtProductName;
         private ImageView imgProduct;
         private LinearLayout lyProduct;
-
-
 
 
         public ViewHolder(View view) {

@@ -41,7 +41,7 @@ public class GetOTPResponse {
         this.mOTPData = mOTPData;
     }
 
-    protected class GetOTPData {
+    public class GetOTPData {
 
         @SerializedName("vctoken")
         @Expose

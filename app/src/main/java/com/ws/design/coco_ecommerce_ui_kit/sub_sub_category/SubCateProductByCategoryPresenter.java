@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.categories;
+package com.ws.design.coco_ecommerce_ui_kit.sub_sub_category;
 
 
 import android.util.Log;
@@ -16,60 +16,64 @@ import rx.subscriptions.CompositeSubscription;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class CategoriesPresenter {
+public class SubCateProductByCategoryPresenter {
 
     private final APIService service;
-    private final CategoriesView view;
+    private final SubCatProductByCategoryView view;
     private CompositeSubscription subscriptions;
 
-    public CategoriesPresenter(CategoriesView view) {
+    public SubCateProductByCategoryPresenter(SubCatProductByCategoryView view) {
         this.view = view;
         service = ApiUtils.getAPIService();
         this.subscriptions = new CompositeSubscription();
     }
 
 
-
-    public void getCategories() {
+    public void getSubCateProductByCat(String catId, String filterAttribues) {
         view.showWait();
-
         try {
 
-            Call call = service.getCategories();
-            call.enqueue(new Callback<CategoriesResponse>() {
+
+            Call call = service.getSubCateProductByCategory(catId);
+            call.enqueue(new Callback<SubSubCategoriesResponse>() {
                 @Override
-                public void onResponse(Call<CategoriesResponse> call, Response<CategoriesResponse> response) {
+                public void onResponse(Call<SubSubCategoriesResponse> call, Response<SubSubCategoriesResponse> response) {
                     Log.d(TAG, call.request().url().toString());
                     view.removeWait();
-                    try{
+                    try {
                         if (response.isSuccessful()) {
 
-                            view.getCategories(response.body());
-                        }else{
+                            view.getSubCatProductByCategory(response.body());
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
                     }
                 }
 
                 @Override
-                public void onFailure(Call<CategoriesResponse> call, Throwable e) {
+                public void onFailure(Call<SubSubCategoriesResponse> call, Throwable e) {
                     view.removeWait();
                     try {
                         JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
                         view.onFailure(jsonObject.getString("message"));
                     } catch (Exception ee) {
-
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
                     }
 
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
+            view.onFailure("Something Went Wrong. Please try again later");
+
         }
 
     }

@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.home;
+package com.ws.design.coco_ecommerce_ui_kit.sub_sub_category;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,28 +9,20 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
-import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 
 
-public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.ViewHolder> {
+public class SubSubBannerAdapter extends RecyclerView.Adapter<SubSubBannerAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Banner> bannerArrayList;
-    private HomeFragment homeFragment;
     private SubCategoryFragment subCategoryFragment;
 
 
-    public HomeBannerAdapter(Context context, ArrayList<Banner> bannerArrayList, HomeFragment homeFragment) {
-        this.context = context;
-        this.bannerArrayList = bannerArrayList;
-        this.homeFragment = homeFragment;
-
-    }
-
-    public HomeBannerAdapter(Context context, ArrayList<Banner> bannerArrayList, SubCategoryFragment subCategoryFragment) {
+    public SubSubBannerAdapter(Context context, ArrayList<Banner> bannerArrayList, SubCategoryFragment subCategoryFragment) {
         this.context = context;
         this.bannerArrayList = bannerArrayList;
         this.subCategoryFragment = subCategoryFragment;
@@ -47,7 +39,7 @@ public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.Vi
 
         Banner banner = bannerArrayList.get(position);
         if (banner != null) {
-            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + banner.getmImageUrl();
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + banner.getmImageId();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.banner).dontAnimate().into(holder.imgBanner);
 
 

@@ -1,19 +1,13 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 
-import android.text.TextUtils;
 import android.util.Log;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 
 import org.json.JSONObject;
 
-import java.util.Collection;
 
 import Network.APIService;
 import Network.ApiUtils;

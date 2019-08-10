@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.categories;
+package com.ws.design.coco_ecommerce_ui_kit.sub_sub_category;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.departments.CategoriesResponse;
+import com.ws.design.coco_ecommerce_ui_kit.departments.DepartmentFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
@@ -21,18 +22,18 @@ import java.util.ArrayList;
  * Created by wolfsoft3 on 30/8/18.
  */
 
-public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
+public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAdapter.ViewHolder> {
 
 
     private Context context;
-    private ArrayList<CategoriesResponse.SubCategoriesData> subCategoriesResponseArrayList;
-    private CategoryFragment categoryFragment;
+    private ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList;
+    private SubCategoryFragment subCategoryFragment;
 
 
-    public SubCategoriesAdapter(Context context, ArrayList<CategoriesResponse.SubCategoriesData> subCategoriesResponseArrayList, CategoryFragment categoryFragment) {
+    public SubSubCategoryAdapter(Context context, ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList, SubCategoryFragment subCategoryFragment) {
         this.context = context;
-        this.subCategoriesResponseArrayList = subCategoriesResponseArrayList;
-        this.categoryFragment = categoryFragment;
+        this.mainSubCategoriesDataArrayList = mainSubCategoriesDataArrayList;
+        this.subCategoryFragment = subCategoryFragment;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        CategoriesResponse.SubCategoriesData subCategoriesData = subCategoriesResponseArrayList.get(position);
+        SubSubCategoriesResponse.MainSubCategoriesData subCategoriesData = mainSubCategoriesDataArrayList.get(position);
         if (subCategoriesData != null ) {
 
 
@@ -54,7 +55,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgCategories);
 
             holder.lySubCategory.setTag(subCategoriesData);
-            holder.lySubCategory.setOnClickListener(categoryFragment);
+            holder.lySubCategory.setOnClickListener(subCategoryFragment);
 
         }
 
@@ -64,7 +65,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
     @Override
     public int getItemCount() {
-        return subCategoriesResponseArrayList.size();
+        return mainSubCategoriesDataArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

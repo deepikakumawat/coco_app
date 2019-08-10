@@ -1,26 +1,21 @@
-package com.ws.design.coco_ecommerce_ui_kit.categories;
+package com.ws.design.coco_ecommerce_ui_kit.departments;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Categories;
-import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
-import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -30,7 +25,7 @@ import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class CategoryFragment extends BaseFragment implements CategoriesView, View.OnClickListener {
+public class DepartmentFragment extends BaseFragment implements DepartmentView, View.OnClickListener {
 
     TextView title;
 
@@ -38,9 +33,9 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
     private ArrayList<CategoriesResponse.MainCategoriesData> mainCategoriesDataArrayList = new ArrayList<>();
 
 
-    private MainCategoriesAdapter mainCategoriesAdapter;
+    private MainDepartmentsAdapter mainDepartmentsAdapter;
     private View mView;
-    private CategoriesPresenter categoriesPresenter;
+    private DepartmentsPresenter departmentsPresenter;
     private RelativeLayout ryParent;
     private RecyclerView rvMainCategory;
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -57,7 +52,7 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        categoriesPresenter = new CategoriesPresenter(this);
+        departmentsPresenter = new DepartmentsPresenter(this);
 
         ryParent = mView.findViewById(R.id.ryParent);
         rvMainCategory = mView.findViewById(R.id.rvMainCategory);
@@ -66,9 +61,10 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvMainCategory.setLayoutManager(layoutManager);
+        rvMainCategory.setNestedScrollingEnabled(false);
 
         if (Util.isDeviceOnline(getActivity())) {
-            categoriesPresenter.getCategories();
+            departmentsPresenter.getCategories();
 
         } else {
             showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
@@ -147,8 +143,8 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
 //            mainCategoriesDataArrayList.addAll(categoriesResponse.getmData().getmMainCategories());
 
 
-            mainCategoriesAdapter = new MainCategoriesAdapter(getActivity(), mainCategoriesDataArrayList, CategoryFragment.this);
-            rvMainCategory.setAdapter(mainCategoriesAdapter);
+            mainDepartmentsAdapter = new MainDepartmentsAdapter(getActivity(), mainCategoriesDataArrayList, DepartmentFragment.this);
+            rvMainCategory.setAdapter(mainDepartmentsAdapter);
 
 
         }
@@ -167,12 +163,15 @@ public class CategoryFragment extends BaseFragment implements CategoriesView, Vi
                     if (subCategoriesData != null) {
                         Bundle bundle = new Bundle();
                         bundle.putString("catId", subCategoriesData.getmCatId());
+                        bundle.putString("catName", subCategoriesData.getmCatName());
 
 
-                        ProductListByCategoryFragment productListByCategoryFragment = new ProductListByCategoryFragment();
-                        productListByCategoryFragment.setArguments(bundle);
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productListByCategoryFragment, "ProductListByCategoryFragment", true, false);
+
+                        SubCategoryFragment subCategoryFragment = new SubCategoryFragment();
+                        subCategoryFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), subCategoryFragment, "ProductListByCategoryFragment", true, false);
 
 
                     }

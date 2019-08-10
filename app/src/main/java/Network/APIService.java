@@ -3,7 +3,7 @@ package Network;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
-import com.ws.design.coco_ecommerce_ui_kit.categories.CategoriesResponse;
+import com.ws.design.coco_ecommerce_ui_kit.departments.CategoriesResponse;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutPaymentResponse;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.HomeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordResponse;
@@ -20,7 +20,6 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
@@ -28,11 +27,9 @@ import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.seller.SellerResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.GetOTPResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
-
-import org.json.JSONObject;
+import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubSubCategoriesResponse;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -221,8 +218,7 @@ public interface APIService {
 
     @POST("get-products-by-category")
     @FormUrlEncoded
-    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId
-    );
+    Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId);
 
     @POST("cancel_order")
     @FormUrlEncoded
@@ -243,5 +239,9 @@ public interface APIService {
     @POST("generateotp")
     @FormUrlEncoded
     Call<GetOTPResponse> getOTP(@Field("mobile_number") String phone);
+
+    @POST("get_sub_cats_with_products")
+    @FormUrlEncoded
+    Call<SubSubCategoriesResponse> getSubCateProductByCategory(@Field("cat_id") String catId);
 }
 

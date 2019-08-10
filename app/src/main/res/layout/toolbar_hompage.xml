@@ -14,14 +14,13 @@
 
     <customfonts.MyTextView_Roboto_Medium
         android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:maxLength="20"
-        android:singleLine="true"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:singleLine="true"
         android:letterSpacing="0.03"
+        android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="16.7sp" />
 

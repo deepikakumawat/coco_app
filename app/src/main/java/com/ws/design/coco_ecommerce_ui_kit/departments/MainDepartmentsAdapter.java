@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.categories;
+package com.ws.design.coco_ecommerce_ui_kit.departments;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -6,13 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 
@@ -21,18 +18,18 @@ import java.util.ArrayList;
  * Created by wolfsoft3 on 30/8/18.
  */
 
-public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAdapter.ViewHolder> {
+public class MainDepartmentsAdapter extends RecyclerView.Adapter<MainDepartmentsAdapter.ViewHolder> {
 
 
     private Context context;
     private ArrayList<CategoriesResponse.MainCategoriesData> categoriesResponseArrayList;
-    private CategoryFragment categoryFragment;
+    private DepartmentFragment departmentFragment;
 
 
-    public MainCategoriesAdapter(Context context, ArrayList<CategoriesResponse.MainCategoriesData> categoriesResponseArrayList, CategoryFragment categoryFragment) {
+    public MainDepartmentsAdapter(Context context, ArrayList<CategoriesResponse.MainCategoriesData> categoriesResponseArrayList, DepartmentFragment departmentFragment) {
         this.context = context;
         this.categoriesResponseArrayList = categoriesResponseArrayList;
-        this.categoryFragment = categoryFragment;
+        this.departmentFragment = departmentFragment;
     }
 
     @Override
@@ -55,7 +52,7 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
             holder.rvSubCategory.setFocusableInTouchMode(false);
             holder.rvSubCategory.setNestedScrollingEnabled(false);
 
-            SubCategoriesAdapter allCategories_adapter = new SubCategoriesAdapter(context, mainCategoriesData.getmSubCategories(), categoryFragment);
+            SubDepartmentAdapter allCategories_adapter = new SubDepartmentAdapter(context, mainCategoriesData.getmSubCategories(), departmentFragment);
             holder.rvSubCategory.setAdapter(allCategories_adapter);
 
         }

@@ -146,41 +146,8 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <customfonts.TextViewSFProDisplayMedium
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:gravity="right"
-                android:text="@string/get_otp"
-                android:id="@+id/txtGetOtp"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24.7dp"
-                android:layout_marginRight="23dp"
-                android:textColorHint="@color/black">
 
-                <customfonts.EditText_SF_Pro_Display_Medium
-                    android:id="@+id/etOtp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/eye"
-                    android:drawablePadding="10dp"
-                    android:hint="OTP"
-                    android:inputType="number"
-                    android:letterSpacing="0.03"
-                    android:maxLines="1"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="15dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="16sp" />
-
-            </android.support.design.widget.TextInputLayout>
 
 
             <android.support.design.widget.TextInputLayout
@@ -251,62 +218,9 @@
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
-            <customfonts.TextViewSFProDisplayMedium
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center_horizontal"
-                android:text="Or signup with social media"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="17.3dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="13dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <customfonts.TextViewSFProDisplayRegular
-                    android:id="@+id/btnGoogle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_rect22"
-                    android:gravity="center"
-                    android:paddingTop="13.5dp"
-                    android:paddingBottom="13.5dp"
-                    android:text="Gmail"
-                    android:textColor="@color/white"
-
-                    android:textSize="15sp" />
-
-                <customfonts.TextViewSFProDisplayRegular
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5.5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_rect22"
-                    android:backgroundTint="#2c55ac"
-                    android:gravity="center"
-                    android:paddingTop="13.5dp"
-                    android:paddingBottom="13.5dp"
-                    android:text="Facebook"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
 
 
-                <!--    <com.google.android.gms.common.SignInButton
-                        android:id="@+id/sign_in_button"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />-->
 
-
-            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
