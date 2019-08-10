@@ -22,7 +22,7 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 public class MyAccountActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView title, edit, test, edit_txt, txtProfile;
+    private TextView title, edit, test, edit_txt;
     private ImageView imgBack;
     private Button btnLogout;
     private TextView txtUserName;
@@ -41,7 +41,6 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         edit_txt.setVisibility(View.GONE);
         edit = findViewById(R.id.edit);
         imgBack = (ImageView) findViewById(R.id.imgBack);
-        txtProfile = findViewById(R.id.txtProfile);
         btnLogout = findViewById(R.id.btnLogout);
         txtUserName = findViewById(R.id.txtUserName);
         txtUserEmail = findViewById(R.id.txtUserEmail);
@@ -50,9 +49,9 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         title.setVisibility(View.VISIBLE);
 
         imgBack.setOnClickListener(this);
-        txtProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         lyMyOrder.setOnClickListener(this);
+        edit.setOnClickListener(this);
 
         txtUserName.setText(CocoPreferences.getFirstName() + " " + CocoPreferences.getLastName());
         txtUserEmail.setText(CocoPreferences.getUserEmail());
@@ -67,9 +66,11 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                 case R.id.imgBack:
                     finish();
                     break;
-                case R.id.txtProfile:
+                case R.id.edit:
                     startActivity(new Intent(MyAccountActivity.this, ProfileActivity.class));
+
                     break;
+
                 case R.id.btnLogout:
                     logout();
                     break;
