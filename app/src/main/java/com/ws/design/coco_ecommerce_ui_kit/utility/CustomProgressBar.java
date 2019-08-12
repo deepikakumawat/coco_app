@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 public class CustomProgressBar {
 
+    private final RelativeLayout rl;
     private ProgressBar mProgressBar;
     private Context mContext;
 
@@ -25,10 +26,11 @@ public class CustomProgressBar {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
-        RelativeLayout rl = new RelativeLayout(context);
+        rl = new RelativeLayout(context);
 
         rl.setGravity(Gravity.CENTER);
         rl.addView(mProgressBar, 100, 100);
+
 
         layout.addView(rl, params);
 
@@ -36,10 +38,12 @@ public class CustomProgressBar {
     }
 
     public void show() {
+        rl.setClickable(true);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
     public void hide() {
+        rl.setClickable(false);
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 }

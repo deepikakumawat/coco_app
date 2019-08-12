@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFilterListener;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 
@@ -24,7 +25,7 @@ import fragment.FragmentManagerUtils;
 import fragment.ToolbarBaseFragment;
 
 
-public class ProductListByCategoryFragment extends ToolbarBaseFragment implements IFilterListener {
+public class ProductListByCategoryFragment extends BaseFragment implements IFilterListener {
 
     private TabLayout tabLayout;
     private Typeface mTypeface;
@@ -150,23 +151,7 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment implement
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (DrawerActivity) context;
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (this.mListener != null) {
-            this.mListener.setScreenTitle(getString(R.string.trandings));
-
-        }
-
-    }
 
     public void getProductByCategory(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
         this.productAttribueDataArrayList.clear();
@@ -182,5 +167,20 @@ public class ProductListByCategoryFragment extends ToolbarBaseFragment implement
     public String getSearchFilter() {
         return filterAttribues;
 
+    }
+
+    @Override
+    protected String getActionbarTitle() {
+        return getString(R.string.trandings);
+    }
+
+    @Override
+    protected boolean isSearchIconVisible() {
+        return true;
+    }
+
+    @Override
+    protected boolean isCartIconVisible() {
+        return true;
     }
 }

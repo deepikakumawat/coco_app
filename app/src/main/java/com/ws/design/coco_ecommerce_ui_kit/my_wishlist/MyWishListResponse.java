@@ -63,6 +63,10 @@ public class MyWishListResponse {
 
     public class ProductData {
 
+        @SerializedName("avg_rating")
+        @Expose
+        private String mAvgRating;
+
         @SerializedName("wishlist")
         @Expose
         private String mWishList;
@@ -195,6 +199,13 @@ public class MyWishListResponse {
         @Expose
         private String mProductDateModify;
 
+        public String getmAvgRating() {
+            return mAvgRating;
+        }
+
+        public void setmAvgRating(String mAvgRating) {
+            this.mAvgRating = mAvgRating;
+        }
 
         public String getmProductId() {
             return mProductId;

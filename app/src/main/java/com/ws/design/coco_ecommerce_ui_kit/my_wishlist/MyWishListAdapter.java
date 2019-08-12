@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,6 +48,8 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
+            holder.rbProductRating.setRating(!TextUtils.isEmpty(productData.getmAvgRating()) ? Float.parseFloat(productData.getmAvgRating()) : 0);
+
 
             holder.txtProductName.setTag(productData);
             holder.txtProductName.setTag(R.id.txtProductName, position);
@@ -72,6 +75,7 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
         private TextView txtProductName;
         private ImageView imgProduct;
         private LinearLayout lyProduct;
+        private RatingBar rbProductRating;
 
 
         public ViewHolder(View view) {
@@ -81,6 +85,7 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.Vi
             txtProductName = view.findViewById(R.id.txtProductName);
             imgProduct = view.findViewById(R.id.imgProduct);
             lyProduct = view.findViewById(R.id.lyProduct);
+            rbProductRating =  view.findViewById(R.id.rbProductRating);
 
 
         }

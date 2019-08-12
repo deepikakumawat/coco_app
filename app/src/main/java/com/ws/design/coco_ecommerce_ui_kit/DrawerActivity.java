@@ -75,10 +75,10 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     long back_pressed = 0;
 
 
-    private String title[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trandings",
+    private String title[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trendings",
             "Address", "Help", "Legal Policies"};
 
-    private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trandings",
+    private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trendings",
             "Address", "Help",  "Legal Policies", "Logout"};
 
     private TextView txtUserEmail;
@@ -190,7 +190,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     startActivityForResult(intent, MYACCOUNT_ACTION);
 
                 } else if (position == 6) {
-                    setScreenTitle(getString(R.string.trandings));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), "ProductByCategoryFragment", false, false);
 
                 } else if (position == 7) {
