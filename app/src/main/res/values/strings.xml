@@ -204,6 +204,8 @@
     <string name="security">Security</string>
     <string name="saved_address">Saved Address</string>
     <string name="your_richkart_profile">Your Richkart Profile</string>
+    <string name="search_title">Search</string>
+    <string name="add_new_address"><u>Add New Address</u></string>
 
 
     <string-array name="legal_policies_array">

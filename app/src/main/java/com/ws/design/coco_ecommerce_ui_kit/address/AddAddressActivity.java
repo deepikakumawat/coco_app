@@ -16,6 +16,8 @@ import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
+import java.io.Serializable;
+
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.isValidMobile;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -34,14 +36,30 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
     private TextView txtLandmark;
     private TextView txtZipcode;
     private LinearLayout lyParent;
+    private AddressListResponse.AddressData addressData;
+    private String id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
         addressPresenter = new AddressPresenter(this);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getBundleExtra("addressData");
+            if (bundle != null) {
+                if (bundle.containsKey("addressData")) {
+                    addressData = (AddressListResponse.AddressData) bundle.getSerializable("addressData");
+
+                }
+            }
+        }
+
         init();
+        setPreviousData();
     }
+
 
     private void init() {
         lyParent = findViewById(R.id.lyParent);
@@ -62,83 +80,20 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
         imgBack.setOnClickListener(this);
     }
 
-    @Override
-    public void showWait() {
-        showProDialog(this);
-    }
+    private void setPreviousData() {
+        if (addressData != null) {
+            id = addressData.getmId();
 
-    @Override
-    public void removeWait() {
-        dismissProDialog();
-    }
+            txtPrimaryAddress.setText(addressData.getmAddress1());
+            txtArea.setText(addressData.getmAddress2());
+            txtLandmark.setText(addressData.getmLandmark());
+            txtCity.setText(addressData.getmCity());
+            txtState.setText(addressData.getmState());
+            txtPhone.setText(addressData.getmPhone());
+            txtCountry.setText(addressData.getmCountry());
+            txtZipcode.setText(addressData.getmZipcode());
 
-    @Override
-    public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage,"");
-    }
-
-    @Override
-    public void getAddressList(AddressListResponse addressListResponse) {
-//do nothing
-    }
-
-    @Override
-    public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
-// do nothing
-    }
-
-    @Override
-    public void addUpdateAddress(AddUpdateAddressResponse addUpdateAddressResponse) {
-        if (!TextUtils.isEmpty(addUpdateAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(addUpdateAddressResponse.getmStatus()))) {
-            showCenteredToast(lyParent,this, addUpdateAddressResponse.getMessage(), Constant.API_SUCCESS);
-
-            Intent data = new Intent();
-            setResult(Activity.RESULT_OK, data);
-            finish();
-
-
-        } else {
-            showCenteredToast(lyParent,this, addUpdateAddressResponse.getMessage(),"");
         }
-    }
-
-    private boolean isValid( String primaryAddress, String area, String landmark, String city, String state, String country, String phone, String zipcode) throws Exception {
-        boolean validation_detials_flag = false;
-        if (Util.isDeviceOnline(this)) {
-           if (TextUtils.isEmpty(primaryAddress)) {
-                showCenteredToast(lyParent,this, getString(R.string.primary_address),"");
-                txtPrimaryAddress.requestFocus();
-            } else if (TextUtils.isEmpty(area)) {
-                showCenteredToast(lyParent,this, getString(R.string.area),"");
-                txtArea.requestFocus();
-            } else if (TextUtils.isEmpty(landmark)) {
-                showCenteredToast(lyParent,this, getString(R.string.landmark),"");
-                txtLandmark.requestFocus();
-            } else if (TextUtils.isEmpty(city)) {
-                showCenteredToast(lyParent,this, getString(R.string.city),"");
-                txtCity.requestFocus();
-            } else if (TextUtils.isEmpty(state)) {
-                showCenteredToast(lyParent,this, getString(R.string.state),"");
-                txtState.requestFocus();
-            } else if (TextUtils.isEmpty(country)) {
-                showCenteredToast(lyParent,this, getString(R.string.country),"");
-                txtCountry.requestFocus();
-            } else if (TextUtils.isEmpty(zipcode)) {
-                showCenteredToast(lyParent,this, getString(R.string.zipcode_blank),"");
-                txtZipcode.requestFocus();
-            } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.phone),"");
-                txtPhone.requestFocus();
-            } else if (!isValidMobile(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.mobile_number),"");
-                txtPhone.requestFocus();
-            } else {
-                validation_detials_flag = true;
-            }
-        } else {
-            showCenteredToast(lyParent,this, getString(R.string.network_connection),"");
-        }
-        return validation_detials_flag;
     }
 
 
@@ -158,7 +113,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
                     String landmark = txtLandmark.getText().toString().trim();
                     String zipcode = txtZipcode.getText().toString().trim();
 
-                    if (isValid(primaryAddress,area,landmark,city,state,country,phone,zipcode)) {
+                    if (isValid(primaryAddress, area, landmark, city, state, country, phone, zipcode)) {
                         addressPresenter.addAddress(CocoPreferences.getFirstName() + " " + CocoPreferences.getLastName(),
                                 CocoPreferences.getUserId(),
                                 primaryAddress,
@@ -168,7 +123,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
                                 state,
                                 country,
                                 phone,
-                                "",
+                                id,
                                 zipcode,
                                 "1");
                     }
@@ -184,4 +139,87 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
             e.printStackTrace();
         }
     }
+
+    private boolean isValid(String primaryAddress, String area, String landmark, String city, String state, String country, String phone, String zipcode) throws Exception {
+        boolean validation_detials_flag = false;
+        if (Util.isDeviceOnline(this)) {
+            if (TextUtils.isEmpty(primaryAddress)) {
+                showCenteredToast(lyParent, this, getString(R.string.primary_address), "");
+                txtPrimaryAddress.requestFocus();
+            } else if (TextUtils.isEmpty(area)) {
+                showCenteredToast(lyParent, this, getString(R.string.area), "");
+                txtArea.requestFocus();
+            } else if (TextUtils.isEmpty(landmark)) {
+                showCenteredToast(lyParent, this, getString(R.string.landmark), "");
+                txtLandmark.requestFocus();
+            } else if (TextUtils.isEmpty(city)) {
+                showCenteredToast(lyParent, this, getString(R.string.city), "");
+                txtCity.requestFocus();
+            } else if (TextUtils.isEmpty(state)) {
+                showCenteredToast(lyParent, this, getString(R.string.state), "");
+                txtState.requestFocus();
+            } else if (TextUtils.isEmpty(country)) {
+                showCenteredToast(lyParent, this, getString(R.string.country), "");
+                txtCountry.requestFocus();
+            } else if (TextUtils.isEmpty(zipcode)) {
+                showCenteredToast(lyParent, this, getString(R.string.zipcode_blank), "");
+                txtZipcode.requestFocus();
+            } else if (TextUtils.isEmpty(phone)) {
+                showCenteredToast(lyParent, this, getString(R.string.phone), "");
+                txtPhone.requestFocus();
+            } else if (!isValidMobile(phone)) {
+                showCenteredToast(lyParent, this, getString(R.string.mobile_number), "");
+                txtPhone.requestFocus();
+            } else {
+                validation_detials_flag = true;
+            }
+        } else {
+            showCenteredToast(lyParent, this, getString(R.string.network_connection), "");
+        }
+        return validation_detials_flag;
+    }
+
+
+    @Override
+    public void showWait() {
+        showProDialog(this);
+    }
+
+    @Override
+    public void removeWait() {
+        dismissProDialog();
+    }
+
+    @Override
+    public void onFailure(String appErrorMessage) {
+        showCenteredToast(lyParent, this, appErrorMessage, "");
+    }
+
+    @Override
+    public void getAddressList(AddressListResponse addressListResponse) {
+//do nothing
+    }
+
+    @Override
+    public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
+// do nothing
+    }
+
+    @Override
+    public void addUpdateAddress(AddUpdateAddressResponse addUpdateAddressResponse) {
+        if (!TextUtils.isEmpty(addUpdateAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(addUpdateAddressResponse.getmStatus()))) {
+            showCenteredToast(lyParent, this, addUpdateAddressResponse.getMessage(), Constant.API_SUCCESS);
+
+            Intent data = new Intent();
+            setResult(Activity.RESULT_OK, data);
+            finish();
+
+
+        } else {
+            showCenteredToast(lyParent, this, addUpdateAddressResponse.getMessage(), "");
+        }
+    }
+
+
+
 }

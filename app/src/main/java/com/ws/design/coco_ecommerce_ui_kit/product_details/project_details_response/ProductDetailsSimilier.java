@@ -427,4 +427,6 @@ public class ProductDetailsSimilier {
     public void setmAvgRating(String mAvgRating) {
         this.mAvgRating = mAvgRating;
     }
+
+
 }

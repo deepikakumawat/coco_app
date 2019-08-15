@@ -38,12 +38,12 @@ public class CustomProgressBar {
     }
 
     public void show() {
-        rl.setClickable(true);
+//        rl.setClickable(true);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
     public void hide() {
-        rl.setClickable(false);
+//        rl.setClickable(false);
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 }

@@ -37,6 +37,8 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         this.context = context;
     }
 
+
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items_product_by_category, parent, false);

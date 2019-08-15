@@ -29,6 +29,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="11dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+
+                    <customfonts.MyTextView_Roboto_Medium
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:text="@string/add_new_address"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16.3sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,6 +169,7 @@
         android:background="@color/white"
         android:clickable="true"
         android:orientation="vertical"
+        android:visibility="gone"
         shimmer:duration="800">
 
         <!-- Adding 7 rows of placeholders -->

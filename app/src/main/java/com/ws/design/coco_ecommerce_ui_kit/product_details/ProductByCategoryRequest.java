@@ -13,18 +13,42 @@ public class ProductByCategoryRequest {
 
     @SerializedName("fattributes")
     @Expose
-    private JSONObject jsonObject;
+    private String[] mFAttributes;
 
     @SerializedName("cat_id")
     @Expose
     private String cateId;
 
-    public JSONObject getJsonObject() {
-        return jsonObject;
+  /*  @SerializedName("min_price")
+    @Expose
+    private int minValue;
+
+    @SerializedName("max_price")
+    @Expose
+    private int maxValue;*/
+
+   /* public int getMinValue() {
+        return minValue;
     }
 
-    public void setJsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
+    public void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }*/
+
+    public String[] getmFAttributes() {
+        return mFAttributes;
+    }
+
+    public void setmFAttributes(String[] mFAttributes) {
+        this.mFAttributes = mFAttributes;
     }
 
     public String getCateId() {

@@ -740,6 +740,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
 
+/*
     private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
 
         try {
@@ -756,7 +757,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
                 txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
-                /*set attribute name*/
+                */
+/*set attribute name*//*
+
                 lyColorSizeAttrName.removeAllViews();
 
                 LayoutInflater layoutInflater2 = getLayoutInflater();
@@ -833,6 +836,85 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     lyColor.setTag(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductId());
                     lyColor.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            productId = ((String) view.getTag());
+                            callAPI(productId);
+
+
+                        }
+                    });
+
+
+                    lyColorSizeAttrName.addView(view2, j);
+
+
+                }
+
+
+                lyColorSize.addView(view);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+*/
+
+    private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
+
+        try {
+
+
+            lyColorSize.removeAllViews();
+
+            LayoutInflater layoutInflater = getLayoutInflater();
+            View view;
+            for (int i = 0; i < productAttrAraay.size(); i++) {
+                view = layoutInflater.inflate(R.layout.attribtue_product_details_layout, lyColorSize, false);
+
+                LinearLayout lyColorSizeAttrName = view.findViewById(R.id.lyColorSizeAttrName);
+                TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
+                txtAttributeType.setText(productAttrAraay.get(i).getmType());
+
+                /*set attribute name*/
+                lyColorSizeAttrName.removeAllViews();
+
+                LayoutInflater layoutInflater2 = getLayoutInflater();
+                View view2;
+                for (int j = 0; j < productAttrAraay.get(i).getmProductAttrAraayData().size(); j++) {
+
+
+                    view2 = layoutInflater2.inflate(R.layout.text_layout, lyColorSizeAttrName, false);
+                    TextView txtAttributeName = view2.findViewById(R.id.txtAttributeName);
+                    LinearLayout lyTop = view2.findViewById(R.id.lyTop);
+
+
+
+                    txtAttributeName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName());
+
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+
+                        if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
+                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.gray));
+                            } else {
+                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.gray));
+                            }
+                        } else {
+                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.background));
+                            } else {
+                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.background));
+                            }
+                        }
+
+
+
+                    txtAttributeName.setTag(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductId());
+                    txtAttributeName.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             productId = ((String) view.getTag());

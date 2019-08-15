@@ -1,6 +1,5 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,17 +11,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFilterListener;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 
 import java.util.ArrayList;
 
 import Adapter.CategoryPagerAdapterProductList;
 import Adapter.WrapContentHeightViewPager;
 import fragment.FragmentManagerUtils;
-import fragment.ToolbarBaseFragment;
 
 
 public class ProductListByCategoryFragment extends BaseFragment implements IFilterListener {
@@ -36,7 +34,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     private String catId;
     private IFragmentListener mListener;
     ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
-    private String filterAttribues;
+    private String[] filterAttribues;
+    private int maximumValue;
+    private int minimumValue;
 
 
     @Nullable
@@ -124,7 +124,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     }
 
     private void setAdapter() {
-        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId, filterAttribues);
+        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(1);
     }
@@ -159,13 +159,19 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     }
 
     @Override
-    public void setSearchFilter(String filterAttribues) {
+    public void setSearchFilter(String[] filterAttribues, int minimumValue, int maximumValue) {
         this.filterAttribues = filterAttribues;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
 
     }
 
-    public String getSearchFilter() {
-        return filterAttribues;
+    public ProductByCategoryRequest getSearchFilter() {
+        ProductByCategoryRequest productByCategoryRequest = new ProductByCategoryRequest();
+        productByCategoryRequest.setmFAttributes(filterAttribues);
+     /*   productByCategoryRequest.setMinValue(minimumValue);
+        productByCategoryRequest.setMaxValue(maximumValue);*/
+        return productByCategoryRequest;
 
     }
 

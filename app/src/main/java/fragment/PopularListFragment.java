@@ -22,6 +22,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategory
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryView;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -50,15 +51,14 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private RelativeLayout ryParent;
     private int tabPostion;
     boolean isShimmerShow = true;
-    private String filterAttribues;
+    private ProductByCategoryRequest productByCategoryRequest;
 
 
-    public static PopularListFragment newInstance(String catId, int tabPostion, String filterAttribues) {
+    public static PopularListFragment newInstance(String catId, int tabPostion) {
         PopularListFragment fragment = new PopularListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("catId", catId);
         bundle.putInt("tabPostion", tabPostion);
-        bundle.putString("filterAttribues", filterAttribues);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -83,13 +83,12 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         if (getArguments() != null) {
             catId = getArguments().getString("catId");
             tabPostion = getArguments().getInt("tabPostion", 0);
-            filterAttribues = getArguments().getString("filterAttribues");
 
         }
 
-        if (TextUtils.isEmpty(filterAttribues)) {
-            filterAttribues = ((ProductListByCategoryFragment) getParentFragment()).getSearchFilter();
-        }
+
+        productByCategoryRequest = ((ProductListByCategoryFragment) getParentFragment()).getSearchFilter();
+        productByCategoryRequest.setCateId(catId);
 
 
         ryParent = view.findViewById(R.id.ryParent);
@@ -107,7 +106,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private void callProductByCategoryAPI() {
         if (Util.isDeviceOnline(getActivity())) {
 
-            productByCategoryPresenter.getProductByCat(catId, filterAttribues);
+            productByCategoryPresenter.getProductByCat(productByCategoryRequest);
 
 
         } else {

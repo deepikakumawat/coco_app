@@ -204,6 +204,26 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         }
                     }
                     break;
+
+                case R.id.btnUpdate:
+                     addressData = ((AddressListResponse.AddressData) view.getTag());
+                    if (addressData != null) {
+                        if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                            Intent intent = new Intent(AddressListActivity.this, AddAddressActivity.class);
+
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("addressData", addressData);
+
+                            intent.putExtra("addressData",bundle);
+                            startActivityForResult(intent, ADD_ADDRESS_ACTION);
+                        } else {
+                            Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+                    break;
+
                 case R.id.imgBack:
                     finish();
                     break;

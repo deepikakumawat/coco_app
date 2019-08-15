@@ -30,7 +30,7 @@ import com.ws.design.coco_ecommerce_ui_kit.CocoProductDetails3;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductDetails4;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductListGrid2Activity;
 import com.ws.design.coco_ecommerce_ui_kit.CocoProductListGridwithTabActivity;
-import com.ws.design.coco_ecommerce_ui_kit.CocoSearch1;
+import com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment;
 import com.ws.design.coco_ecommerce_ui_kit.Coco_Search2;
 import com.ws.design.coco_ecommerce_ui_kit.Coco_Search3;
 import com.ws.design.coco_ecommerce_ui_kit.Coco_Search_Activity;
@@ -154,7 +154,7 @@ public class RecycleAdapteCocoList extends RecyclerView.Adapter<RecycleAdapteCoc
                     Intent i = new Intent(context, Coco_Search_Activity.class);
                     context.startActivity(i);
                 }else if (position == 10) {
-                    Intent i = new Intent(context, CocoSearch1.class);
+                    Intent i = new Intent(context, SearchFragment.class);
                     context.startActivity(i);
                 }else if (position == 11) {
                     Intent i = new Intent(context, Coco_Search2.class);

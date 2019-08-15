@@ -48,6 +48,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -318,7 +319,9 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         toolbar.findViewById(R.id.imgSearch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DrawerActivity.this, CocoSearch1.class));
+//                startActivity(new Intent(DrawerActivity.this, SearchFragment.class));
+                FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new SearchFragment(), "SearchFragment", true, false);
+
             }
         });
 

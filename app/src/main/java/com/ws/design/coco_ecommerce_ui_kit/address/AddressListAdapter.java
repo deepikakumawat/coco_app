@@ -22,7 +22,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private AddressListActivity addressListActivity;
 
 
-    public AddressListAdapter(Context context, ArrayList<AddressListResponse.AddressData> addressDataArrayList,  AddressListActivity addressListActivity) {
+    public AddressListAdapter(Context context, ArrayList<AddressListResponse.AddressData> addressDataArrayList, AddressListActivity addressListActivity) {
         this.context = context;
         this.addressDataArrayList = addressDataArrayList;
         this.addressListActivity = addressListActivity;
@@ -52,21 +52,24 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
             if (addressData.ismSelecetdAddress()) {
                 holder.imgSelectAddress.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 holder.imgSelectAddress.setVisibility(View.GONE);
             }
 
             if (addressData.isDeleteButtonVisible()) {
                 holder.btnDelete.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 holder.btnDelete.setVisibility(View.GONE);
             }
-
 
 
             holder.btnDelete.setTag(addressData);
             holder.btnDelete.setTag(R.id.btnDelete, position);
             holder.btnDelete.setOnClickListener(addressListActivity);
+
+            holder.btnUpdate.setTag(addressData);
+            holder.btnUpdate.setTag(R.id.btnUpdate, position);
+            holder.btnUpdate.setOnClickListener(addressListActivity);
 
             holder.lyAddress.setTag(addressData);
             holder.lyAddress.setTag(R.id.lyAddress, position);
@@ -94,6 +97,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         private TextView txtZipcode;
         private TextView txtPhone;
         private Button btnDelete;
+        private Button btnUpdate;
         private LinearLayout lyAddress;
         private ImageView imgSelectAddress;
 
@@ -114,6 +118,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             btnDelete = view.findViewById(R.id.btnDelete);
             lyAddress = view.findViewById(R.id.lyAddress);
             imgSelectAddress = view.findViewById(R.id.imgSelectAddress);
+            btnUpdate = view.findViewById(R.id.btnUpdate);
 
 
         }

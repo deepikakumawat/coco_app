@@ -31,7 +31,7 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.KitchenActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.ProductGridActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Coco_Search_Activity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.CocoSearch1" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Coco_Search2" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.Coco_Search3" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity" />

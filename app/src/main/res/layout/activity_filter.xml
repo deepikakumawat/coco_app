@@ -50,8 +50,8 @@
             app:bar_highlight_color="@color/red"
             app:left_thumb_color="@color/red"
             app:left_thumb_color_pressed="@color/red"
-            app:max_value="1000"
-            app:min_value="50"
+            app:max_value="100000"
+            app:min_value="100"
             app:right_thumb_color="@color/red"
             app:right_thumb_color_pressed="@color/red" />
 

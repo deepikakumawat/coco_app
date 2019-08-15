@@ -4,10 +4,17 @@ package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 import android.util.Log;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 
 import org.json.JSONObject;
 
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import Network.APIService;
 import Network.ApiUtils;
@@ -32,30 +39,12 @@ public class ProductByCategoryPresenter {
     }
 
 
-    public void getProductByCat(String catId, String filterAttribues) {
+    public void getProductByCat(ProductByCategoryRequest productByCategoryRequest) {
         view.showWait();
         try {
 
+            Call call = service.getProductByCategory(productByCategoryRequest);
 
-         /*   ProductByCategoryRequest productByCategoryRequest = new ProductByCategoryRequest();
-            productByCategoryRequest.setCateId(catId);
-
-            if (!TextUtils.isEmpty(filterAttribues)) {
-                JSONObject jsonObj = new JSONObject(filterAttribues);
-                productByCategoryRequest.setJsonObject(jsonObj);
-
-            }
-
-
-
-
-            Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(Collection.class, new CollectionAdapter()).disableHtmlEscaping().create();
-            String requestBody = gson.toJson(productByCategoryRequest);
-
-            Call call = service.getProductByCategory(requestBody);*/
-
-
-            Call call = service.getProductByCategory(catId);
             call.enqueue(new Callback<ProductByCategoryResponse>() {
                 @Override
                 public void onResponse(Call<ProductByCategoryResponse> call, Response<ProductByCategoryResponse> response) {

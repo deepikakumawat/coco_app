@@ -37,10 +37,10 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/imgSelectAddress"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="right"
-                        android:id="@+id/imgSelectAddress"
                         android:layout_marginRight="10dp"
                         android:src="@drawable/tick" />
 
@@ -217,6 +217,8 @@
                         android:layout_width="0dp"
                         android:layout_height="33.3dp"
                         android:layout_marginLeft="8dp"
+                        android:id="@+id/btnUpdate"
+
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/filter_gray_rect1"
@@ -227,8 +229,7 @@
                         android:paddingBottom="8dp"
                         android:text="Update"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:visibility="gone" />
+                        android:textSize="12sp" />
 
                     <customfonts.Button_Roboto_Medium
                         android:layout_width="0dp"

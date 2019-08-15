@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.seller;
+package com.ws.design.coco_ecommerce_ui_kit.search;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,28 +13,27 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
-import com.ws.design.coco_ecommerce_ui_kit.search.SearchListFragment;
+import com.ws.design.coco_ecommerce_ui_kit.seller.SellerProductFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
 
 
-public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdapter.ViewHolder> implements View.OnClickListener {
+public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<ProductDetailsSimilier> productDataArrayList;
-    private SellerProductFragment sellerProductFragment;
+    private SearchListFragment searchListFragment;
 
 
-    public SellerProductAdapter(Context context, ArrayList<ProductDetailsSimilier> productDataArrayList, SellerProductFragment sellerProductFragment) {
+
+
+    public SearchProductAdapter(Context context, ArrayList<ProductDetailsSimilier> productDataArrayList, SearchListFragment searchListFragment) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
-        this.sellerProductFragment = sellerProductFragment;
+        this.searchListFragment = searchListFragment;
 
     }
-
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,12 +57,15 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
+            holder.txtProductName.setTag(productData);
+            holder.txtProductName.setOnClickListener(searchListFragment);
 
 
-            holder.imgAddToCart.setTag(productData);
+
+
+        /*    holder.imgAddToCart.setTag(productData);
             holder.imgAddToCart.setTag(R.id.imgAddToCart, position);
-
-            holder.imgAddToCart.setOnClickListener(sellerProductFragment);
+            holder.imgAddToCart.setOnClickListener(searchListFragment);*/
 
 
         }
