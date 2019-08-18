@@ -70,7 +70,8 @@ public class TermsConditionFragment extends BaseFragment {
             webView.setWebViewClient(new TermsConditionWebClient());
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(getActivity());
 
         }
     }

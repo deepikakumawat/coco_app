@@ -109,8 +109,8 @@ public class MyOrderDetailsActivity extends AppCompatActivity implements OrderDe
             myOrderPresenter.getOrderDetails(orderId);
 
         } else {
-            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
-
+//            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+Util.showNoInternetDialog(this);
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

@@ -110,8 +110,8 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+Util.showNoInternetDialog(getActivity());
         }
 
     }
@@ -220,8 +220,8 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                             productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-
+//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+Util.showNoInternetDialog(getActivity());
                         }
 
                     }

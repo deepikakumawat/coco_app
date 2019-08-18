@@ -70,10 +70,9 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
             myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(getActivity());
         }
-
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -151,7 +150,7 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                 myWishListAdapter.notifyDataSetChanged();
             }
         } else {
-            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmData(),"");
+            showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmData(), "");
         }
     }
 
@@ -171,8 +170,8 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                             myWishListPresenter.removeWishList(productData.getmWishList());
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            Util.showNoInternetDialog(getActivity());
                         }
 
                     }
@@ -215,7 +214,7 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
 
     @Override
     protected boolean isCartIconVisible() {
-        return  true;
+        return true;
     }
 
     @Override

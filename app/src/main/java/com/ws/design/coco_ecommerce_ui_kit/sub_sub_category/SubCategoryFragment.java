@@ -87,8 +87,8 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
             subCateProductByCategoryPresenter.getSubCateProductByCat(catId, filterAttributes);
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+Util.showNoInternetDialog(getActivity());
         }
 
 

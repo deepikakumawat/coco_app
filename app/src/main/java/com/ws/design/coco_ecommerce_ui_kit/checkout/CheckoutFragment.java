@@ -109,7 +109,8 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         if (Util.isDeviceOnline(getActivity())) {
             checkoutPresenter.addressList(CocoPreferences.getUserId());
         } else {
-            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
+//            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(getActivity());
         }
 
         init();
@@ -334,7 +335,8 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                     if (Util.isDeviceOnline(getActivity())) {
                         checkoutPresenter.addressList(CocoPreferences.getUserId());
                     } else {
-                        showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
+//                        showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
+                        Util.showNoInternetDialog(getActivity());
                     }
                 }
             }
@@ -477,8 +479,8 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
 
         } else {
-            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
-
+//            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
+Util.showNoInternetDialog(getActivity());
         }
     }
 

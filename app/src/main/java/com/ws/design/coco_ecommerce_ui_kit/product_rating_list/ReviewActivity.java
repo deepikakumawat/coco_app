@@ -94,7 +94,8 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
             productRatingPresenter.getProductRating(productId);
 
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(this);
 
         }
     }
@@ -240,7 +241,14 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
             etxtReview.getText().clear();
             productRating.setRating(0);
-            productRatingPresenter.getProductRating(productId);
+
+            if (Util.isDeviceOnline(this)) {
+                productRatingPresenter.getProductRating(productId);
+
+            }else {
+                Util.showNoInternetDialog(this);
+            }
+
 
         } else {
             showCenteredToast(ryParent,this, getString(R.string.somethingWentWrong),"");
@@ -261,7 +269,9 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
 
             }
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(this);
+
         }
         return validation_detials_flag;
     }

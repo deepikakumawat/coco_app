@@ -104,8 +104,8 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
         if (Util.isDeviceOnline(getActivity())) {
             cartPresenter.getCartList(CocoPreferences.getUserId());
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(getActivity());
         }
     }
 
@@ -158,14 +158,14 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), emptyCartResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), emptyCartResponse.getmMessage(), "");
         }
     }
 
     @Override
     public void removeCartOneByOne(RemoveCartOneByOneResponse removeCartOneByOneResponse) {
         if (!TextUtils.isEmpty(removeCartOneByOneResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartOneByOneResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage(),Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage(), Constant.API_SUCCESS);
 
             if (!removeCartOneByOneResponse.getmData().getmProductData().isEmpty()) {
 
@@ -183,14 +183,14 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), removeCartOneByOneResponse.getmMessage(), "");
         }
     }
 
     @Override
     public void removeCartByCross(RemoveCartByCrossResponse removeCartByCrossResponse) {
         if (!TextUtils.isEmpty(removeCartByCrossResponse.getmStatus()) && ("1".equalsIgnoreCase(removeCartByCrossResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage(),Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage(), Constant.API_SUCCESS);
 
             if (removeCorssPostion == -1) {
                 if (!removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
@@ -217,7 +217,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
             }
 
         } else {
-            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), removeCartByCrossResponse.getmMessage(), "");
         }
     }
 
@@ -232,8 +232,8 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         cartPresenter.emptyCart(CocoPreferences.getUserId());
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                        Util.showNoInternetDialog(getActivity());
                     }
                     break;
 
@@ -244,7 +244,8 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         if (Util.isDeviceOnline(getActivity())) {
                             cartPresenter.removeCartByCross(productData.getmCartId());
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            Util.showNoInternetDialog(getActivity());
                         }
 
                     }
@@ -284,7 +285,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.your_cart_empty),"");
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.your_cart_empty), "");
                     }
 
 
@@ -300,8 +301,8 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                             cartPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            Util.showNoInternetDialog(getActivity());
                         }
 
 
@@ -314,9 +315,20 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         int count = Integer.parseInt(String.valueOf(txtIncDec.getText()));
                         if (count > 1) {
                             count--;
-                            cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
+
+                            if (Util.isDeviceOnline(getActivity())) {
+                                cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
+
+                            }else{
+                                Util.showNoInternetDialog(getActivity());
+                            }
                         } else {
-                            cartPresenter.removeCartByCross(productData.getmCartId());
+                            if (Util.isDeviceOnline(getActivity())) {
+                                cartPresenter.removeCartByCross(productData.getmCartId());
+
+                            }else{
+                                Util.showNoInternetDialog(getActivity());
+                            }
                         }
                     }
                     break;
@@ -333,7 +345,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
         if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), Constant.API_SUCCESS);
 
             if (!addToCartResponse.getmData().getmProductData().isEmpty()) {
                 productDataArrayList.clear();
@@ -346,7 +358,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), "");
         }
     }
 

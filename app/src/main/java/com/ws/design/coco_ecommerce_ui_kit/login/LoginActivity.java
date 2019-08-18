@@ -83,7 +83,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
             }
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;
     }

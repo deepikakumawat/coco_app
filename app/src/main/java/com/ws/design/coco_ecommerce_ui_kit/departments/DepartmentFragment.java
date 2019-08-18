@@ -67,8 +67,8 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
             departmentsPresenter.getCategories();
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+Util.showNoInternetDialog(getActivity());
         }
 
 

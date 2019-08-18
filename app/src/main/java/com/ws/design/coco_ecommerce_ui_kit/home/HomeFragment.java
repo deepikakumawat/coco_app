@@ -73,6 +73,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         mView = inflater.inflate(R.layout.activity_home, container, false);
 
         return mView;
@@ -92,8 +94,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             homePresenter.getHomeData();
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+Util.showNoInternetDialog(getActivity());
         }
 
 

@@ -282,8 +282,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             productDetailsPresenter.getProductDetails(productId, CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(getActivity());
         }
     }
 
@@ -299,7 +299,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
 
                 } else {
-                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+//                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+                    Util.showNoInternetDialog(getActivity());
 
                 }
                 break;
@@ -338,7 +339,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.removeWishList(wishListId);
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+//                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+                        Util.showNoInternetDialog(getActivity());
 
                     }
 
@@ -365,7 +367,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1", "");
 
                     } else {
-                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+//                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+                        Util.showNoInternetDialog(getActivity());
 
                     }
 
@@ -445,7 +448,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(getActivity());
 
         }
     }
@@ -458,7 +462,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
 
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(getActivity());
 
         }
 
@@ -758,7 +763,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
                 */
-/*set attribute name*//*
+    /*set attribute name*//*
 
                 lyColorSizeAttrName.removeAllViews();
 
@@ -892,25 +897,23 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     LinearLayout lyTop = view2.findViewById(R.id.lyTop);
 
 
-
                     txtAttributeName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName());
 
-                        final int sdk = android.os.Build.VERSION.SDK_INT;
+                    final int sdk = android.os.Build.VERSION.SDK_INT;
 
-                        if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
-                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.gray));
-                            } else {
-                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.gray));
-                            }
+                    if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
+                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.gray));
                         } else {
-                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.background));
-                            } else {
-                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.background));
-                            }
+                            lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.gray));
                         }
-
+                    } else {
+                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.background));
+                        } else {
+                            lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.background));
+                        }
+                    }
 
 
                     txtAttributeName.setTag(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductId());

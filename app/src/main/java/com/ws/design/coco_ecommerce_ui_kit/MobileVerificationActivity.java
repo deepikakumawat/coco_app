@@ -107,7 +107,8 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
                         signUpPresenter.getOtp(phone);
 
                     } else {
-                        showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+//                        showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+                        Util.showNoInternetDialog(this);
                     }
                     break;
                 case R.id.txtEditPhone:
@@ -192,7 +193,8 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+//            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;
     }

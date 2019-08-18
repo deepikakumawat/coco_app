@@ -153,4 +153,18 @@ public class Util {
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
+    public static void showNoInternetDialog(Context context){
+        final Dialog dialog1 = new Dialog(context, R.style.df_dialog);
+        dialog1.setContentView(R.layout.dialog_no_internet);
+        dialog1.setCancelable(true);
+        dialog1.setCanceledOnTouchOutside(true);
+        dialog1.findViewById(R.id.btnSpinAndWinRedeem).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog1.dismiss();
+            }
+        });
+        dialog1.show();
+    }
+
 }

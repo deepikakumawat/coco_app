@@ -69,7 +69,12 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
         lyParent = view.findViewById(R.id.lyParent);
         rvProducts = view.findViewById(R.id.rvProducts);
 
-        searchPresenter.getSearchItem(searchTerm);
+        if (Util.isDeviceOnline(getActivity())) {
+            searchPresenter.getSearchItem(searchTerm);
+
+        }else{
+            Util.showNoInternetDialog(getActivity());
+        }
 
     }
 

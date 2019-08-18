@@ -53,6 +53,10 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             holder.lyOrder.setTag(myOrderData);
             holder.lyOrder.setTag(R.id.lyOrder, position);
             holder.lyOrder.setOnClickListener(myOrderActivity);
+
+            holder.txtTrack.setTag(myOrderData);
+            holder.txtTrack.setTag(R.id.txtTrack, position);
+            holder.txtTrack.setOnClickListener(myOrderActivity);
         }
 
     }
@@ -71,6 +75,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         private TextView txtStatus;
         private TextView txtSupport;
         private TextView txtCancelOrder;
+        private TextView txtTrack;
         private LinearLayout lyOrder;
 
 
@@ -81,6 +86,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             txtStatus = view.findViewById(R.id.txtStatus);
             txtDate = view.findViewById(R.id.txtDate);
             txtSupport = view.findViewById(R.id.txtSupport);
+            txtTrack = view.findViewById(R.id.txtTrack);
             txtCancelOrder = view.findViewById(R.id.txtCancelOrder);
             lyOrder = view.findViewById(R.id.lyOrder);
 

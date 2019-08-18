@@ -95,7 +95,8 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
                 validation_detials_flag = true;
             }
         } else {
-            showCenteredToast(lyParent, this, getString(R.string.network_connection), "");
+//            showCenteredToast(lyParent, this, getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;
     }

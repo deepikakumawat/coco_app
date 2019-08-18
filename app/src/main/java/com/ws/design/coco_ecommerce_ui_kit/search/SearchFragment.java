@@ -1,5 +1,9 @@
 package com.ws.design.coco_ecommerce_ui_kit.search;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
@@ -41,6 +47,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
     private ImageView imgSearch;
     private RecyclerView rvProducts;
     private SearchAutoProductAdapter mAdapter2;
+    private ImageView imgGoogleSearch;
 
 
     @Nullable
@@ -69,10 +76,12 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
         lyParent = view.findViewById(R.id.lyParent);
         imgSearch = view.findViewById(R.id.imgSearch);
         autoTxtSearch = view.findViewById(R.id.autoTxtSearch);
+        imgGoogleSearch = view.findViewById(R.id.imgGoogleSearch);
         rvProducts = view.findViewById(R.id.rvProducts);
         autoTxtSearch.addTextChangedListener(this);
         autoTxtSearch.setOnEditorActionListener(this);
         imgSearch.setOnClickListener(this);
+        imgGoogleSearch.setOnClickListener(this);
     }
 
 
@@ -132,7 +141,12 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
         if (s != null) {
             String str = s.toString().trim();
             if (str.length() >= 3) {
-                searchPresenter.getSearchItem(str);
+                if (Util.isDeviceOnline(getActivity())) {
+                    searchPresenter.getSearchItem(str);
+
+                }else{
+                    Util.showNoInternetDialog(getActivity());
+                }
             }
 
             if (str.length() < 3) {
@@ -167,6 +181,15 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
                     break;
                 case R.id.imgSearch:
                     openSearchList(autoTxtSearch.getText().toString());
+                    break;
+                case R.id.imgGoogleSearch:
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+                    try {
+                        startActivityForResult(intent, 1);
+                    } catch (ActivityNotFoundException a) {
+                        Toast.makeText(getActivity(), "Oops! Your device doesn't support Speech to Text", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 default:
                     break;
@@ -214,5 +237,22 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 
         FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), searchListFragment, "SearchListFragment", true, false);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 1: {
+                if (resultCode == Activity.RESULT_OK && null != data) {
+                    String yourResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
+                    Log.d("result",yourResult);
+                    autoTxtSearch.setText(yourResult);
+
+                }
+                break;
+            }
+        }
     }
 }

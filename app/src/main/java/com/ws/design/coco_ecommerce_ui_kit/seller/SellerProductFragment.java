@@ -74,8 +74,8 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         if (Util.isDeviceOnline(getActivity())) {
             sellerPresenter.getSellerProduct(sellerId);
         } else {
-            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(getActivity());
         }
 
 
@@ -89,7 +89,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         if (isShimmerShow) {
             mShimmerViewContainer.setVisibility(View.VISIBLE);
             mShimmerViewContainer.startShimmerAnimation();
-        }else {
+        } else {
 
             showProDialog(getActivity());
         }
@@ -101,7 +101,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         if (isShimmerShow) {
             mShimmerViewContainer.stopShimmerAnimation();
             mShimmerViewContainer.setVisibility(View.GONE);
-        }else{
+        } else {
             dismissProDialog();
 
         }
@@ -112,7 +112,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     public void onFailure(String appErrorMessage) {
         txtNoDataFound.setVisibility(View.GONE);
         lySellerProduct.setVisibility(View.VISIBLE);
-        showCenteredToast(ryParent, getActivity(), appErrorMessage,"");
+        showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
     }
 
     @Override
@@ -150,7 +150,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
 
         } else {
-            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(),"");
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), "");
         }
     }
 
@@ -170,8 +170,8 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
                             sellerPresenter.addToCart(CocoPreferences.getUserId(), sellerProductData.getmProductId(), "1");
 
                         } else {
-                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-
+//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            Util.showNoInternetDialog(getActivity());
                         }
 
                     }

@@ -44,10 +44,9 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private LinearLayout linear;
     private static final int ADD_ADDRESS_ACTION = 101;
     int selectedValue = 0;
-    private String screen ="";
+    private String screen = "";
     private RelativeLayout ryParent;
     private ShimmerFrameLayout mShimmerViewContainer;
-
 
 
     @Override
@@ -105,7 +104,8 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
             } else {
-                showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+//                showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+                Util.showNoInternetDialog(this);
 
             }
 
@@ -126,7 +126,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(ryParent,this, appErrorMessage,"");
+        showCenteredToast(ryParent, this, appErrorMessage, "");
     }
 
     @Override
@@ -150,7 +150,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                     if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("Checkout")) {
                         addressListResponse.getmAddressData().get(i).setDeleteButtonVisible(false);
 
-                    }else{
+                    } else {
                         addressListResponse.getmAddressData().get(i).setDeleteButtonVisible(true);
                     }
 
@@ -159,7 +159,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
                 addressDataArrayList.addAll(dataArrayList);
 
-                addressAdapter = new AddressListAdapter(this, addressDataArrayList,  AddressListActivity.this);
+                addressAdapter = new AddressListAdapter(this, addressDataArrayList, AddressListActivity.this);
                 rvMyAddress.setAdapter(addressAdapter);
             }
         }
@@ -170,13 +170,13 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     @Override
     public void deleteAddress(DeleteAddressResponse deleteAddressResponse) {
         if (!TextUtils.isEmpty(deleteAddressResponse.getmStatus()) && ("1".equalsIgnoreCase(deleteAddressResponse.getmStatus()))) {
-            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage(), Constant.API_SUCCESS);
+            showCenteredToast(ryParent, this, deleteAddressResponse.getMessage(), Constant.API_SUCCESS);
             if (addressAdapter != null) {
                 addressDataArrayList.remove(deletedPosition);
                 addressAdapter.notifyDataSetChanged();
             }
         } else {
-            showCenteredToast(ryParent,this, deleteAddressResponse.getMessage(),"");
+            showCenteredToast(ryParent, this, deleteAddressResponse.getMessage(), "");
         }
     }
 
@@ -199,14 +199,14 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                         if (Util.isDeviceOnline(this)) {
                             addressPresenter.deteleAddress(addressData.getmId());
                         } else {
-                            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
-
+//                            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+                            Util.showNoInternetDialog(this);
                         }
                     }
                     break;
 
                 case R.id.btnUpdate:
-                     addressData = ((AddressListResponse.AddressData) view.getTag());
+                    addressData = ((AddressListResponse.AddressData) view.getTag());
                     if (addressData != null) {
                         if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                             Intent intent = new Intent(AddressListActivity.this, AddAddressActivity.class);
@@ -214,7 +214,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("addressData", addressData);
 
-                            intent.putExtra("addressData",bundle);
+                            intent.putExtra("addressData", bundle);
                             startActivityForResult(intent, ADD_ADDRESS_ACTION);
                         } else {
                             Intent intent = new Intent(AddressListActivity.this, LoginActivity.class);
@@ -283,8 +283,8 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
                 } else {
-                    showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
-
+//                    showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+                    Util.showNoInternetDialog(this);
                 }
             }
         }

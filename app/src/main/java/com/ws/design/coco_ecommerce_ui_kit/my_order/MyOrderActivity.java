@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.TimelineTest;
 import com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsActivity;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -88,8 +89,8 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
             myOrderPresenter.myOrder(CocoPreferences.getUserId());
 
         } else {
-            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
-
+//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+Util.showNoInternetDialog(this);
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -212,9 +213,16 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                     }
 
                     if (!TextUtils.isEmpty(cancelReason) && !cancelReason.equalsIgnoreCase("Choose Reason")) {
-                        myOrderPresenter.cancelOrder(myOrderData.getmOrderId(), cancelReason);
-                        addContactDialog.dismiss();
-                        Util.hideKeyBoardMethod(this, view);
+
+                        if (Util.isDeviceOnline(this)) {
+                            myOrderPresenter.cancelOrder(myOrderData.getmOrderId(), cancelReason);
+                            addContactDialog.dismiss();
+                            Util.hideKeyBoardMethod(this, view);
+                        }else{
+                            Util.showNoInternetDialog(this);
+                        }
+
+
 
                     } else {
                         showCenteredToast(ryParent,this, getString(R.string.order_cancel_reason),"");
@@ -233,6 +241,10 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
                         intent.putExtra("orderId",myOrderData.getmOrderId());
                         startActivity(intent);
                     }
+                    break;
+                case R.id.txtTrack:
+                    Intent intent = new Intent(MyOrderActivity.this, TimelineTest.class);
+                    startActivity(intent);
                     break;
 
                 default:
