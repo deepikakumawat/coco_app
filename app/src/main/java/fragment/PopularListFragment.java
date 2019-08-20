@@ -22,7 +22,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategory
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryView;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryRequest;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -70,7 +70,6 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         View view = inflater.inflate(R.layout.fragment_popular_list, container, false);
 
-
         return view;
     }
 
@@ -111,7 +110,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         } else {
 //            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-Util.showNoInternetDialog(getActivity());
+            Util.showNoInternetDialog(getActivity());
         }
 
     }
@@ -221,7 +220,7 @@ Util.showNoInternetDialog(getActivity());
 
                         } else {
 //                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-Util.showNoInternetDialog(getActivity());
+                            Util.showNoInternetDialog(getActivity());
                         }
 
                     }

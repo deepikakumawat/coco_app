@@ -1,4 +1,4 @@
-package com.ws.design.coco_ecommerce_ui_kit.product_details;
+package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
@@ -19,29 +19,29 @@ public class ProductByCategoryRequest {
     @Expose
     private String cateId;
 
-  /*  @SerializedName("min_price")
+    @SerializedName("min_price")
     @Expose
-    private int minValue;
+    private String minValue;
 
     @SerializedName("max_price")
     @Expose
-    private int maxValue;*/
+    private String maxValue;
 
-   /* public int getMinValue() {
+    public String getMinValue() {
         return minValue;
     }
 
-    public void setMinValue(int minValue) {
+    public void setMinValue(String minValue) {
         this.minValue = minValue;
     }
 
-    public int getMaxValue() {
+    public String getMaxValue() {
         return maxValue;
     }
 
-    public void setMaxValue(int maxValue) {
+    public void setMaxValue(String maxValue) {
         this.maxValue = maxValue;
-    }*/
+    }
 
     public String[] getmFAttributes() {
         return mFAttributes;

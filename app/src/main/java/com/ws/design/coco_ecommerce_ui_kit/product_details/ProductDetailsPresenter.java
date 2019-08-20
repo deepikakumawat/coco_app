@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListView;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.CheckPincodeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 
 import org.json.JSONObject;
@@ -215,6 +216,50 @@ public class ProductDetailsPresenter {
         }
 
     }
+
+    public void checkPincode(String pincode) {
+        view.showWait();
+        try {
+
+            Call call = service.checkPincode(pincode);
+            call.enqueue(new Callback<CheckPincodeResponse>() {
+                @Override
+                public void onResponse(Call<CheckPincodeResponse> call, Response<CheckPincodeResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try{
+                        if (response.isSuccessful()) {
+
+                            view.checkPincode(response.body());
+                        }else{
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CheckPincodeResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 }

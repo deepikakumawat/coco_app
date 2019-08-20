@@ -1,6 +1,5 @@
 package Network;
 
-import com.google.gson.JsonObject;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.DeleteAddressResponse;
@@ -21,7 +20,8 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryRequest;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.CheckPincodeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
@@ -32,14 +32,9 @@ import com.ws.design.coco_ecommerce_ui_kit.signup.GetOTPResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubSubCategoriesResponse;
 
-import org.json.JSONObject;
-
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -262,8 +257,8 @@ public interface APIService {
     @FormUrlEncoded
     Call<SearchResponse> getSearchItem(@Field("term") String term);
 
-  /*  @POST("get-products-by-category")
+    @POST("checkpincode")
     @FormUrlEncoded
-    Call<ProductByCategoryResponse> getProductByCategory(@FieldMap Map<String, Object> body);*/
+    Call<CheckPincodeResponse> checkPincode(@Field("pincode") String pincode);
 }
 

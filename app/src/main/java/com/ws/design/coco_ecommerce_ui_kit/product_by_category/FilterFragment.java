@@ -42,8 +42,8 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     private TextView txtFilter;
     private LinearLayout lyParent;
     private IFilterListener iFilterListener;
-    private int minimumValue;
-    private int maximumValue;
+    private String minimumValue;
+    private String maximumValue;
 
     public void setmIFilterListener(IFilterListener iFilterListener) {
         this.iFilterListener = iFilterListener;
@@ -92,8 +92,6 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                     tvMin.setText(String.valueOf(minValue));
                     tvMax.setText(String.valueOf(maxValue));
 
-                  /*  minimumValue = (int) minValue;
-                    maximumValue = (int) maxValue;*/
                 }
             });
 
@@ -102,6 +100,10 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                 @Override
                 public void finalValue(Number minValue, Number maxValue) {
                     Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+
+
+                    minimumValue = String.valueOf(minValue);
+                    maximumValue = String.valueOf(maxValue);
                 }
             });
         } catch (Exception e) {
@@ -188,7 +190,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                     break;
                 case R.id.txtFilter:
 
-                    if (!filerHaspMap.isEmpty()) {
+                    if (!filerHaspMap.isEmpty() || !TextUtils.isEmpty(minimumValue) || !TextUtils.isEmpty(maximumValue)) {
                         String[] result = filerHaspMap.values().toArray(new String[0]);
                         iFilterListener.setSearchFilter(result, minimumValue, maximumValue);
                         FragmentManagerUtils.popFragment(getFragmentManager());

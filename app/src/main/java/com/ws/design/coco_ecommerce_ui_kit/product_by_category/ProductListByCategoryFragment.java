@@ -14,7 +14,6 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFilterListener;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductByCategoryRequest;
 
 import java.util.ArrayList;
 
@@ -35,8 +34,8 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     private IFragmentListener mListener;
     ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
     private String[] filterAttribues;
-    private int maximumValue;
-    private int minimumValue;
+    private String maximumValue;
+    private String minimumValue;
 
 
     @Nullable
@@ -152,14 +151,13 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     }
 
 
-
     public void getProductByCategory(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
         this.productAttribueDataArrayList.clear();
         this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
     }
 
     @Override
-    public void setSearchFilter(String[] filterAttribues, int minimumValue, int maximumValue) {
+    public void setSearchFilter(String[] filterAttribues, String minimumValue, String maximumValue) {
         this.filterAttribues = filterAttribues;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
@@ -169,8 +167,8 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     public ProductByCategoryRequest getSearchFilter() {
         ProductByCategoryRequest productByCategoryRequest = new ProductByCategoryRequest();
         productByCategoryRequest.setmFAttributes(filterAttribues);
-     /*   productByCategoryRequest.setMinValue(minimumValue);
-        productByCategoryRequest.setMaxValue(maximumValue);*/
+        productByCategoryRequest.setMinValue(minimumValue);
+        productByCategoryRequest.setMaxValue(maximumValue);
         return productByCategoryRequest;
 
     }

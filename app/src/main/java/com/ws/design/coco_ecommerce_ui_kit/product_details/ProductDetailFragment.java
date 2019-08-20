@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -36,6 +37,7 @@ import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.CheckPincodeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductAttributeData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductBroughtData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductGalleryData;
@@ -137,6 +139,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     boolean isShimmerShow = true;
     private LinearLayout lyColorSize;
     private View mView;
+    private EditText etPincode;
+    private TextView txtCheckPincode;
 
 
     @Nullable
@@ -185,6 +189,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         scrollViewTop = view.findViewById(R.id.scrollViewTop);
         lyColor = view.findViewById(R.id.lyColor);
         lyColorSize = view.findViewById(R.id.lyColorSize);
+        etPincode = view.findViewById(R.id.etPincode);
+        txtCheckPincode = view.findViewById(R.id.txtCheckPincode);
 
         rvProductAttr = view.findViewById(R.id.rvProductAttr);
         txtProductDesc = view.findViewById(R.id.txtProductDesc);
@@ -229,6 +235,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         txtProductShortDesc.setOnClickListener(this);
         txtSellerName.setOnClickListener(this);
         imgVideo.setOnClickListener(this);
+        txtCheckPincode.setOnClickListener(this);
 
 
         rightNav = view.findViewById(R.id.rightNav);
@@ -434,6 +441,17 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
             case R.id.imgVideo:
                 openYouTube();
+                break;
+            case R.id.txtCheckPincode:
+                try{
+                    String pincode = etPincode.getText().toString();
+                    if (isValid(pincode)) {
+                        isShimmerShow = false;
+                        productDetailsPresenter.checkPincode(pincode);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;
@@ -1081,6 +1099,24 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     @Override
+    public void checkPincode(CheckPincodeResponse checkPincodeResponse) {
+        try{
+
+            if (!TextUtils.isEmpty(checkPincodeResponse.getmStatus()) && ("1".equalsIgnoreCase(checkPincodeResponse.getmStatus()))) {
+
+                etPincode.setText("");
+                showCenteredToast(ryParent, getActivity(), checkPincodeResponse.getmMessage(), Constant.API_SUCCESS);
+
+            } else {
+                showCenteredToast(ryParent, getActivity(), checkPincodeResponse.getmMessage(), "");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == ADD_REVIEW_ACTION) {
@@ -1123,4 +1159,23 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     protected boolean isCartIconVisible() {
         return true;
     }
+
+    private boolean isValid(String pincode) throws Exception {
+        boolean validation_detials_flag = false;
+        if (Util.isDeviceOnline(getActivity())) {
+            if (TextUtils.isEmpty(pincode)) {
+                showCenteredToast(ryParent,getActivity(), getString(R.string.invalid_pincode),"");
+                etPincode.requestFocus();
+            }  else {
+                validation_detials_flag = true;
+
+
+            }
+        } else {
+//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+            Util.showNoInternetDialog(getActivity());
+        }
+        return validation_detials_flag;
+    }
+
 }

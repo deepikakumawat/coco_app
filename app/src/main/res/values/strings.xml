@@ -124,6 +124,7 @@
 
 
     <string name="email_validation_message">Email can\'t be blank!</string>
+    <string name="invalid_pincode">Pincode can\'t be blank!</string>
     <string name="order_cancel_reason">Reason can\'t be blank!</string>
     <string name="comment_validation_message">Comment can\'t be blank!</string>
     <string name="rating_validation_message">Rating can\'t be blank!</string>

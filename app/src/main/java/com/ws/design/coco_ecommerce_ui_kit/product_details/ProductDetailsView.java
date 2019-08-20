@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.CheckPincodeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 
 public interface ProductDetailsView {
@@ -19,6 +20,8 @@ public interface ProductDetailsView {
     void getProductDetails(ProductDetailsResponse productDetailsResponse);
 
     void removeWishList(RemoveWishListResponse removeWishListResponse);
+
+    void checkPincode(CheckPincodeResponse checkPincodeResponse);
 
 
 
