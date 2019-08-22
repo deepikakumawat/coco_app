@@ -4,6 +4,17 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#d44334</color>
 
+    <!--colors for light mode-->
+    <color name="contentBodyColor">#FFF</color>
+    <color name="contentTextColor">#020000</color>
+    <color name="imageBorderColor">#E01E7A</color>
+    <color name="miniTitle">#2A2E43</color>
+
+
+    <color name="darkModeBackground">#FFF</color>
+    <color name="darkModeTextColor">#777</color>
+
+
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="red">#d44334</color>

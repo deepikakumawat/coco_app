@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.my_cart;
 
 
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 
 public interface CartView {
 
@@ -21,5 +22,6 @@ public interface CartView {
 
     void removeCartByCross(RemoveCartByCrossResponse removeCartByCrossResponse);
 
+    void addToWishList(AddToWishListResponse addToWishListResponse);
 
 }

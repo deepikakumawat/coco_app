@@ -1,5 +1,6 @@
 package fragment;
 
+import android.app.MediaRouteButton;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,11 +12,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryPresenter;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
@@ -47,11 +51,12 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private ProductByCategoryPresenter productByCategoryPresenter;
     private String catId;
     private ShimmerFrameLayout mShimmerViewContainer;
-    private TextView txtNoDataFound;
     private RelativeLayout ryParent;
     private int tabPostion;
     boolean isShimmerShow = true;
     private ProductByCategoryRequest productByCategoryRequest;
+    private ScrollView svNotFound;
+    private Button btnGoToHome;
 
 
     public static PopularListFragment newInstance(String catId, int tabPostion) {
@@ -92,7 +97,10 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         ryParent = view.findViewById(R.id.ryParent);
         recyclerview = view.findViewById(R.id.recyclerview);
-        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
+        svNotFound = view.findViewById(R.id.svNotFound);
+        btnGoToHome = view.findViewById(R.id.btnGoToHome);
+        btnGoToHome.setOnClickListener(this);
+
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
@@ -153,7 +161,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     productGridModellClasses.addAll(productByCategoryResponse.getmData().getmProduct());
 
                     recyclerview.setVisibility(View.VISIBLE);
-                    txtNoDataFound.setVisibility(View.GONE);
+                    svNotFound.setVisibility(View.GONE);
 
                     if (tabPostion == 0) {
                         sortByRating(productGridModellClasses);
@@ -179,8 +187,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     }
 
     private void nodataFound(String appErrorMessage) {
-        txtNoDataFound.setVisibility(View.VISIBLE);
-        txtNoDataFound.setText(appErrorMessage);
+        svNotFound.setVisibility(View.VISIBLE);
         recyclerview.setVisibility(View.GONE);
     }
 
@@ -226,6 +233,10 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     }
                     break;
 
+                case R.id.btnGoToHome:
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
+
+                    break;
                 default:
                     break;
             }

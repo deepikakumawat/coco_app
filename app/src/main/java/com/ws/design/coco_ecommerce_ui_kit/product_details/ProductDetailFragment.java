@@ -32,10 +32,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.RemoveWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.CheckPincodeResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductAttributeData;
@@ -301,15 +304,21 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         switch (v.getId()) {
 
             case R.id.txtAddToWishlist:
-                if (Util.isDeviceOnline(getActivity())) {
-                    isShimmerShow = false;
-                    productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
 
+
+                if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                    if (Util.isDeviceOnline(getActivity())) {
+                        isShimmerShow = false;
+                        productDetailsPresenter.addToWishList(CocoPreferences.getUserId(), productId);
+
+                    } else {
+                        Util.showNoInternetDialog(getActivity());
+
+                    }
                 } else {
-//                    showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-                    Util.showNoInternetDialog(getActivity());
-
+                    startActivity(new Intent(getActivity(), LoginAlertOnWishlistActivity.class));
                 }
+
                 break;
             case R.id.txtBuyNow:
 
@@ -443,13 +452,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 openYouTube();
                 break;
             case R.id.txtCheckPincode:
-                try{
+                try {
                     String pincode = etPincode.getText().toString();
                     if (isValid(pincode)) {
                         isShimmerShow = false;
                         productDetailsPresenter.checkPincode(pincode);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -1100,7 +1109,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void checkPincode(CheckPincodeResponse checkPincodeResponse) {
-        try{
+        try {
 
             if (!TextUtils.isEmpty(checkPincodeResponse.getmStatus()) && ("1".equalsIgnoreCase(checkPincodeResponse.getmStatus()))) {
 
@@ -1111,7 +1120,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 showCenteredToast(ryParent, getActivity(), checkPincodeResponse.getmMessage(), "");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1164,9 +1173,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(getActivity())) {
             if (TextUtils.isEmpty(pincode)) {
-                showCenteredToast(ryParent,getActivity(), getString(R.string.invalid_pincode),"");
+                showCenteredToast(ryParent, getActivity(), getString(R.string.invalid_pincode), "");
                 etPincode.requestFocus();
-            }  else {
+            } else {
                 validation_detials_flag = true;
 
 

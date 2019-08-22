@@ -30,7 +30,7 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
     TextView title;
 
 
-    private ArrayList<CategoriesResponse.MainCategoriesData> mainCategoriesDataArrayList = new ArrayList<>();
+    private static ArrayList<CategoriesResponse.MainCategoriesData> mainCategoriesDataArrayList = new ArrayList<>();
 
 
     private MainDepartmentsAdapter mainDepartmentsAdapter;
@@ -63,14 +63,18 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
         rvMainCategory.setLayoutManager(layoutManager);
         rvMainCategory.setNestedScrollingEnabled(false);
 
-        if (Util.isDeviceOnline(getActivity())) {
-            departmentsPresenter.getCategories();
+        if (mainCategoriesDataArrayList.isEmpty()) {
+            if (Util.isDeviceOnline(getActivity())) {
+                departmentsPresenter.getCategories();
 
-        } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-Util.showNoInternetDialog(getActivity());
+            } else {
+                Util.showNoInternetDialog(getActivity());
+            }
+
+        }else{
+            removeWait();
+            setAdapter();
         }
-
 
     }
 
@@ -143,12 +147,16 @@ Util.showNoInternetDialog(getActivity());
 //            mainCategoriesDataArrayList.addAll(categoriesResponse.getmData().getmMainCategories());
 
 
-            mainDepartmentsAdapter = new MainDepartmentsAdapter(getActivity(), mainCategoriesDataArrayList, DepartmentFragment.this);
-            rvMainCategory.setAdapter(mainDepartmentsAdapter);
+            setAdapter();
 
 
         }
 
+    }
+
+    private void setAdapter() {
+        mainDepartmentsAdapter = new MainDepartmentsAdapter(getActivity(), mainCategoriesDataArrayList, DepartmentFragment.this);
+        rvMainCategory.setAdapter(mainDepartmentsAdapter);
     }
 
     @Override
@@ -164,8 +172,6 @@ Util.showNoInternetDialog(getActivity());
                         Bundle bundle = new Bundle();
                         bundle.putString("catId", subCategoriesData.getmCatId());
                         bundle.putString("catName", subCategoriesData.getmCatName());
-
-
 
 
                         SubCategoryFragment subCategoryFragment = new SubCategoryFragment();

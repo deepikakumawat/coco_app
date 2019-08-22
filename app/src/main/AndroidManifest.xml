@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.DrawerActivity">
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +22,14 @@
             </intent-filter>
 
         </activity>
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.StartActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.DrawerActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.ChangePasswordActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order.LoginAlertOnMyOrderActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.LoginAlertOnMyAccountActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.LoginAlertOnAddressActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.LoginAlertOnCartActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.TimelineTest" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordActivity" />

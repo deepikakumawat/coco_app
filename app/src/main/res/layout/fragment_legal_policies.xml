@@ -1,19 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f6f7"
-    android:orientation="vertical"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment">
+    android:background="@color/contentBodyColor"
+    tools:context="com.appsnipp.mysettings.SettingsActivity">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvLegalPoliciesList"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:orientation="vertical"
+        android:padding="30dp">
 
+        <TextView
+            style="@style/viewParent.headerText"
+            android:layout_width="249dp"
+            android:text="Richkart Policy's" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtPrivacyPolicy"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="23dp"
+            android:text="Privacy policy" />
+
+        <TextView
+            android:id="@+id/txtTermsConditions"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="23dp"
+            android:text="Terms &amp; Conditions" />
+
+        <TextView
+            android:id="@+id/txtReturningPolicy"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_marginTop="23dp"
+            android:text="Returning Policy" />
+
+        <TextView
+            android:id="@+id/txtPaymentSecurity"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_marginTop="23dp"
+            android:text="Payment Security's" />
+
+        <TextView
+            android:id="@+id/txtShipping"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_marginTop="23dp"
+            android:text="Shipping" />
+
+        <TextView
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:layout_marginTop="370dp"
+            android:text="©2017-2019, Richkart.com, Inc. or its affiliates"
+            android:textAlignment="center" />
+    </LinearLayout>
+</ScrollView>
+

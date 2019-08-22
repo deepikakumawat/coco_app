@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/svOrderUnSuccess"
+
+    android:layout_height="match_parent"
+    android:background="@color/contentBodyColor"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="400dp"
+                android:layout_height="250dp"
+                android:layout_margin="30dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_order_unsuccessfully" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="340dp"
+            android:layout_height="1dp"
+            android:background="#777"
+            android:paddingHorizontal="23dp" />
+
+        <TextView
+            style="@style/viewParent.headerText"
+            android:layout_marginTop="13dp"
+            android:text="Oh No,Your Order Failed"
+            android:textAlignment="center"
+            android:textColor="#FF0017"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/txtCustomerName"
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:text="Hello [[CUSTOMER FIRST NAME]]"
+            android:textColor="#000" />
+
+        <TextView
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:layout_marginTop="13dp"
+            android:text="We Can't Process Your Order Right Now,Contact To Richkart Customer Service For Further Assistense"
+            android:textSize="13dp" />
+
+
+        <TextView
+            android:id="@+id/txtOrderDate"
+            style="@style/viewParent.headerText.information"
+            android:layout_width="352dp"
+            android:layout_alignParentStart="true"
+            android:drawableLeft="@drawable/ic_date_order"
+
+            android:text="Order Date: [[ORDER DATE]]"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/txtOrderId"
+            style="@style/viewParent.headerText.information"
+            android:layout_marginTop="13dp"
+            android:drawableLeft="@drawable/ic_order_id"
+            android:text="Order ID: [[RKSC-077-2308-2017-SERIES]]"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/txtOrderAmount"
+            style="@style/viewParent.headerText.information"
+            android:layout_marginTop="13dp"
+            android:drawableLeft="@drawable/ic_amount"
+            android:text="Order Amount: [[ORDER AMOUNT]]"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/txtOrderType"
+            style="@style/viewParent.headerText.information"
+            android:layout_marginTop="13dp"
+            android:drawableLeft="@drawable/ic_order_type"
+            android:text="Order Type: [[COD/PRE-PAYMENT]]"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/txtQuantity"
+            style="@style/viewParent.headerText.information"
+            android:layout_marginTop="13dp"
+            android:drawableLeft="@drawable/ic_order_quantity"
+            android:text="Quantity: [[PRODUCT QUANTITY]]"
+            android:textSize="13dp" />
+
+        <View
+            android:layout_width="340dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="23dp"
+            android:background="#777"
+            android:paddingHorizontal="23dp" />
+
+        <Button
+            android:id="@+id/btnGoToHome"
+            android:layout_width="130dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginRight="120dp"
+            android:background="#ffc700"
+            android:text="Go Home!"
+            android:textStyle="" />
+
+        <TextView
+            style="@style/viewParent.headerText"
+            android:layout_width="97dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="140dp"
+            android:text="View Details"
+            android:visibility="gone"
+            android:textColor="#17c"
+            android:textSize="13dp" />
+
+        <TextView
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:text="©2017-2019, Richkart.com, Inc. or its affiliates"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+</ScrollView>

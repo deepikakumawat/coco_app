@@ -10,8 +10,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -20,6 +22,7 @@ import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -31,7 +34,9 @@ import java.util.ArrayList;
 import fragment.FragmentManagerUtils;
 
 
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
+import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class CartFragment extends BaseFragment implements CartView, View.OnClickListener {
 
@@ -41,17 +46,17 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     private CartListAdapter cartListAdapter;
     private int removeCorssPostion = -1;
     private TextView txtEmptyCart;
-    private TextView txtCheckout;
+    private Button btnCheckout;
     private TextView txtTotalPrice;
     private String totalPrice;
-    private TextView txtNoDataFound;
     private LinearLayout lyBottomView;
-    private LinearLayout lyCart;
-    private TextView txtContinueShopping;
     private View mView;
-    private RelativeLayout ryBlank;
+    private ScrollView svEmptyCartView;
     private ShimmerFrameLayout mShimmerViewContainer;
     private RelativeLayout ryParent;
+    private Button btnAddSomething;
+    boolean isShimmerShow = true;
+
 
 
     @Nullable
@@ -77,20 +82,18 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     }
 
     private void init() {
-        txtContinueShopping = mView.findViewById(R.id.txtContinueShopping);
         ryParent = mView.findViewById(R.id.ryParent);
-        lyCart = mView.findViewById(R.id.lyCart);
         mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
         lyBottomView = mView.findViewById(R.id.lyBottomView);
-        ryBlank = mView.findViewById(R.id.ryBlank);
-        txtNoDataFound = mView.findViewById(R.id.txtNoDataFound);
+        svEmptyCartView = mView.findViewById(R.id.svEmptyCartView);
         txtTotalPrice = mView.findViewById(R.id.txtTotalPrice);
-        txtCheckout = mView.findViewById(R.id.txtCheckout);
+        btnCheckout = mView.findViewById(R.id.btnCheckout);
         txtEmptyCart = mView.findViewById(R.id.txtEmptyCart);
-        txtCheckout.setOnClickListener(this);
-        txtEmptyCart.setOnClickListener(this);
-        txtContinueShopping.setOnClickListener(this);
+        btnAddSomething = mView.findViewById(R.id.btnAddSomething);
         rvCart = mView.findViewById(R.id.rvCart);
+        btnCheckout.setOnClickListener(this);
+        txtEmptyCart.setOnClickListener(this);
+        btnAddSomething.setOnClickListener(this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         rvCart.setLayoutManager(mLayoutManager);
@@ -104,23 +107,31 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
         if (Util.isDeviceOnline(getActivity())) {
             cartPresenter.getCartList(CocoPreferences.getUserId());
         } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
             Util.showNoInternetDialog(getActivity());
         }
     }
 
     @Override
     public void showWait() {
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.startShimmerAnimation();
-        //showProDialog(getActivity());
+
+        if (isShimmerShow) {
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            mShimmerViewContainer.startShimmerAnimation();
+        } else {
+            showProDialog(getActivity());
+
+        }
     }
 
     @Override
     public void removeWait() {
-        mShimmerViewContainer.stopShimmerAnimation();
-        mShimmerViewContainer.setVisibility(View.GONE);
-        //dismissProDialog();
+        if (isShimmerShow) {
+            mShimmerViewContainer.stopShimmerAnimation();
+            mShimmerViewContainer.setVisibility(View.GONE);
+        } else {
+            dismissProDialog();
+        }
+
     }
 
     @Override
@@ -232,19 +243,31 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         cartPresenter.emptyCart(CocoPreferences.getUserId());
 
                     } else {
-//                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
                         Util.showNoInternetDialog(getActivity());
                     }
                     break;
 
-                case R.id.imgCross:
+                case R.id.lyRemove:
                     productData = ((CartListResponse.ProductData) view.getTag());
-                    removeCorssPostion = (int) view.getTag(R.id.imgCross);
+                    removeCorssPostion = (int) view.getTag(R.id.lyRemove);
                     if (productData != null) {
                         if (Util.isDeviceOnline(getActivity())) {
+                            isShimmerShow = false;
                             cartPresenter.removeCartByCross(productData.getmCartId());
                         } else {
-//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
+                            Util.showNoInternetDialog(getActivity());
+                        }
+
+                    }
+                    break;
+                case R.id.lyMovewToWishlist:
+                    productData = ((CartListResponse.ProductData) view.getTag());
+                    removeCorssPostion = (int) view.getTag(R.id.lyMovewToWishlist);
+                    if (productData != null) {
+                        if (Util.isDeviceOnline(getActivity())) {
+                            isShimmerShow = false;
+                            cartPresenter.addToWishList(CocoPreferences.getUserId(), productData.getmProductId());
+                        } else {
                             Util.showNoInternetDialog(getActivity());
                         }
 
@@ -266,10 +289,10 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
                     }
                     break;
-                case R.id.txtContinueShopping:
+                case R.id.btnAddSomething:
                     FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
                     break;
-                case R.id.txtCheckout:
+                case R.id.btnCheckout:
 
                     if (!productDataArrayList.isEmpty()) {
 
@@ -298,10 +321,10 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                         count++;
 
                         if (Util.isDeviceOnline(getActivity())) {
+                            isShimmerShow = false;
                             cartPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
 
                         } else {
-//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
                             Util.showNoInternetDialog(getActivity());
                         }
 
@@ -317,16 +340,18 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                             count--;
 
                             if (Util.isDeviceOnline(getActivity())) {
+                                isShimmerShow = false;
                                 cartPresenter.removeCartOneByOne(CocoPreferences.getUserId(), productData.getmProductId(), String.valueOf(count));
 
-                            }else{
+                            } else {
                                 Util.showNoInternetDialog(getActivity());
                             }
                         } else {
                             if (Util.isDeviceOnline(getActivity())) {
+                                isShimmerShow = false;
                                 cartPresenter.removeCartByCross(productData.getmCartId());
 
-                            }else{
+                            } else {
                                 Util.showNoInternetDialog(getActivity());
                             }
                         }
@@ -341,6 +366,16 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
         }
 
     }
+
+    @Override
+    public void addToWishList(AddToWishListResponse addToWishListResponse) {
+        if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
+            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), Constant.API_SUCCESS);
+        } else {
+            showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), "");
+        }
+    }
+
 
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
@@ -364,11 +399,9 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
     private void setAdapter(ArrayList<CartListResponse.ProductData> productDataArrayList, String totalPrice) {
 
-        lyCart.setVisibility(View.VISIBLE);
+        rvCart.setVisibility(View.VISIBLE);
         lyBottomView.setVisibility(View.VISIBLE);
-        ryBlank.setVisibility(View.GONE);
-        txtNoDataFound.setVisibility(View.GONE);
-        txtContinueShopping.setVisibility(View.GONE);
+        svEmptyCartView.setVisibility(View.GONE);
 
 
         if (cartListAdapter != null) {
@@ -383,12 +416,9 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
     private void noDataFound(String appErrorMessage) {
-        ryBlank.setVisibility(View.VISIBLE);
-        txtNoDataFound.setVisibility(View.VISIBLE);
-        txtContinueShopping.setVisibility(View.VISIBLE);
-        lyCart.setVisibility(View.GONE);
+        svEmptyCartView.setVisibility(View.VISIBLE);
+        rvCart.setVisibility(View.GONE);
         lyBottomView.setVisibility(View.GONE);
-        txtNoDataFound.setText(appErrorMessage);
     }
 
 

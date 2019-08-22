@@ -12,6 +12,7 @@ object CocoPreferences {
     private var editor: SharedPreferences.Editor? = null
     private val PREFERENCES_NAME: String = "test_login_preference"
     private val FCM_REFRESH_TOKEN: String = "fcm_referesh_token"
+    private val  IS_FIRST_TIME_LAUNCH : String = "IsFirstTimeLaunch"
 
 
     @SuppressLint("CommitPrefEdits")
@@ -83,6 +84,15 @@ object CocoPreferences {
         editor!!.putString(FCM_REFRESH_TOKEN, fcmRefreshToken)
     }
 
+    @JvmStatic
+    fun setFirstTimeLaunch(isFirstTime: Boolean) {
+        editor!!.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime)
+    }
+
+    @JvmStatic
+    fun isFirstTimeLaunch(): Boolean {
+        return preferences!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
+    }
 
     @JvmStatic
     fun savePreferencese() {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -36,11 +37,10 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     private RecyclerView rvMyWishList;
     private ArrayList<MyWishListResponse.ProductData> productDataArrayList = new ArrayList<>();
     private MyWishListPresenter myWishListPresenter;
-    private LinearLayout lyEmpty;
+    private ScrollView svEmptyWishlistView;
     private int removePosstion = -1;
     private View mView;
     private RelativeLayout ryParent;
-    private TextView txtNoDataFound;
     private ShimmerFrameLayout mShimmerViewContainer;
 
 
@@ -62,33 +62,26 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         ryParent = view.findViewById(R.id.ryParent);
-        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
-        lyEmpty = (LinearLayout) view.findViewById(R.id.lyEmpty);
-        rvMyWishList = (RecyclerView) view.findViewById(R.id.rvMyWishList);
+        svEmptyWishlistView = view.findViewById(R.id.svEmptyWishlistView);
+        rvMyWishList = view.findViewById(R.id.rvMyWishList);
 
         if (Util.isDeviceOnline(getActivity())) {
             myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
 
         } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
             Util.showNoInternetDialog(getActivity());
         }
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rvMyWishList.setLayoutManager(gridLayoutManager);
-//        rvMyWishList.addItemDecoration(new GridSpacingItemDecoration(2, 30, true));
 
-
-
-     /*   LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rvMyWishList.setLayoutManager(layoutManager);*/
 
     }
 
     @Override
     public void showWait() {
-        lyEmpty.setVisibility(View.GONE);
+        svEmptyWishlistView.setVisibility(View.GONE);
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         mShimmerViewContainer.startShimmerAnimation();
     }
@@ -102,12 +95,11 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     @Override
     public void onFailure(String appErrorMessage) {
         if (productDataArrayList.isEmpty()) {
-            lyEmpty.setVisibility(View.VISIBLE);
-            txtNoDataFound.setVisibility(View.VISIBLE);
-            txtNoDataFound.setText(appErrorMessage);
+            svEmptyWishlistView.setVisibility(View.VISIBLE);
+
 
         } else {
-            lyEmpty.setVisibility(View.GONE);
+            svEmptyWishlistView.setVisibility(View.GONE);
 
         }
     }
@@ -120,24 +112,35 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
 
                 if (!myWishListResponse.getmMyWishlistData().getmProductData().isEmpty()) {
 
-                    lyEmpty.setVisibility(View.GONE);
+                    svEmptyWishlistView.setVisibility(View.GONE);
                     rvMyWishList.setVisibility(View.VISIBLE);
 
                     productDataArrayList.clear();
                     productDataArrayList.addAll(myWishListResponse.getmMyWishlistData().getmProductData());
 
-                    myWishListAdapter = new MyWishListAdapter(getActivity(), productDataArrayList, MyWishlistFragment.this);
-                    rvMyWishList.setAdapter(myWishListAdapter);
+                    setAdapter();
 
 
                 } else {
-                    lyEmpty.setVisibility(View.VISIBLE);
+                    svEmptyWishlistView.setVisibility(View.VISIBLE);
                     rvMyWishList.setVisibility(View.GONE);
                 }
             }
 
 
         }
+    }
+
+    private void setAdapter() {
+
+        if (myWishListAdapter == null) {
+            myWishListAdapter = new MyWishListAdapter(getActivity(), productDataArrayList, MyWishlistFragment.this);
+            rvMyWishList.setAdapter(myWishListAdapter);
+        } else {
+            myWishListAdapter.notifyDataSetChanged();
+        }
+
+
     }
 
 
@@ -147,7 +150,14 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
             showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(), Constant.API_SUCCESS);
             if (myWishListAdapter != null) {
                 productDataArrayList.remove(removePosstion);
-                myWishListAdapter.notifyDataSetChanged();
+
+
+                if (!productDataArrayList.isEmpty()) {
+                    setAdapter();
+                } else {
+                    svEmptyWishlistView.setVisibility(View.VISIBLE);
+                    rvMyWishList.setVisibility(View.GONE);
+                }
             }
         } else {
             showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmData(), "");

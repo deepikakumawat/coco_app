@@ -3,25 +3,24 @@ package com.ws.design.coco_ecommerce_ui_kit.legal_policies;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 
 import fragment.FragmentManagerUtils;
 
 public class LegalPoliciesFragment extends BaseFragment implements View.OnClickListener {
 
-    private LegalPoliciesAdapter legalPoliciesAdapter;
-    private RecyclerView rvLegalPoliciesList;
 
     private View mView;
+    private TextView txtPrivacyPolicy;
+    private TextView txtTermsConditions;
+    private TextView txtReturningPolicy;
+    private TextView txtPaymentSecurity;
+    private TextView txtShipping;
 
 
     @Nullable
@@ -38,60 +37,57 @@ public class LegalPoliciesFragment extends BaseFragment implements View.OnClickL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 
-        rvLegalPoliciesList = view.findViewById(R.id.rvLegalPoliciesList);
+        txtPrivacyPolicy = view.findViewById(R.id.txtPrivacyPolicy);
+        txtTermsConditions = view.findViewById(R.id.txtTermsConditions);
+        txtReturningPolicy = view.findViewById(R.id.txtReturningPolicy);
+        txtPaymentSecurity = view.findViewById(R.id.txtPaymentSecurity);
+        txtShipping = view.findViewById(R.id.txtShipping);
 
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rvLegalPoliciesList.setLayoutManager(layoutManager);
-
-        String[] legalPoliciesArray = getResources().getStringArray(R.array.legal_policies_array);
-
-
-        legalPoliciesAdapter = new LegalPoliciesAdapter(getActivity(), legalPoliciesArray, LegalPoliciesFragment.this);
-        rvLegalPoliciesList.setAdapter(legalPoliciesAdapter);
+        txtPrivacyPolicy.setOnClickListener(this);
+        txtTermsConditions.setOnClickListener(this);
+        txtReturningPolicy.setOnClickListener(this);
+        txtPaymentSecurity.setOnClickListener(this);
+        txtShipping.setOnClickListener(this);
 
     }
 
 
     @Override
     public void onClick(View view) {
+        String screenTitle = "";
+        String webUrl = "";
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtLegalPolicies:
-                    int position = ((int) view.getTag());
-                    TextView  txtLegalPolicies = ((TextView) view.getTag(R.id.txtLegalPolicies));
-
-                    String screenTitle = txtLegalPolicies.getText().toString().trim();
-                    String webUrl = "";
-
-                    Bundle bundle = new Bundle();
-                    if (position == 0) {
-                        webUrl = "https://www.richkart.com/privacy-policy";
-                    } else if (position == 1) {
-                        webUrl = "https://www.richkart.com/terms-conditions";
-                    } else if (position == 2) {
-                        webUrl = "https://www.richkart.com/return-policy";
-                    } else if (position == 3) {
-                        webUrl = "https://www.richkart.com/payment-security";
-                    } else if (position == 4) {
-                        webUrl = "https://www.richkart.com/shipping";
-                    } else if (position == 5) {
-                        webUrl = "https://www.richkart.com/about-us";
-                    } else if (position == 6) {
-                        webUrl = "https://www.richkart.com/payments";
-                    }
-                    bundle.putString("webUrl", webUrl);
-                    bundle.putString("screenTitle", screenTitle);
-
-
-                    TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
-                    termsConditionFragment.setArguments(bundle);
-
-                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), termsConditionFragment, null, true, false);
-
+                case R.id.txtPrivacyPolicy:
+                    screenTitle = txtPrivacyPolicy.getText().toString().trim();
+                    webUrl = "https://www.richkart.com/privacy-policy";
+                    openWebView(webUrl, screenTitle);
                     break;
 
+                case R.id.txtTermsConditions:
+                    screenTitle = txtTermsConditions.getText().toString().trim();
+                    webUrl = "https://www.richkart.com/terms-conditions";
+                    openWebView(webUrl, screenTitle);
+                    break;
+
+                case R.id.txtReturningPolicy:
+                    screenTitle = txtReturningPolicy.getText().toString().trim();
+                    webUrl = "https://www.richkart.com/return-policy";
+                    openWebView(webUrl, screenTitle);
+                    break;
+
+                case R.id.txtPaymentSecurity:
+                    screenTitle = txtPaymentSecurity.getText().toString().trim();
+                    webUrl = "https://www.richkart.com/payment-security";
+                    openWebView(webUrl, screenTitle);
+                    break;
+
+                case R.id.txtShipping:
+                    screenTitle = txtShipping.getText().toString().trim();
+                    webUrl = "https://www.richkart.com/shipping";
+                    openWebView(webUrl, screenTitle);
+                    break;
 
                 default:
                     break;
@@ -115,5 +111,15 @@ public class LegalPoliciesFragment extends BaseFragment implements View.OnClickL
     @Override
     protected boolean isSearchIconVisible() {
         return false;
+    }
+
+    private void openWebView(String webUrl, String screenTitle) {
+        Bundle bundle = new Bundle();
+        bundle.putString("webUrl", webUrl);
+        bundle.putString("screenTitle", screenTitle);
+        TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
+        termsConditionFragment.setArguments(bundle);
+        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), termsConditionFragment, null, true, false);
+
     }
 }

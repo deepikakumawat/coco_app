@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -33,6 +34,7 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
     private SearchProductAdapter mAdapter2;
     private String searchTerm;
     private ShimmerFrameLayout mShimmerViewContainer;
+    private ScrollView svNotFound;
 
 
     @Nullable
@@ -68,11 +70,12 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
 
         lyParent = view.findViewById(R.id.lyParent);
         rvProducts = view.findViewById(R.id.rvProducts);
+        svNotFound = view.findViewById(R.id.svNotFound);
 
         if (Util.isDeviceOnline(getActivity())) {
             searchPresenter.getSearchItem(searchTerm);
 
-        }else{
+        } else {
             Util.showNoInternetDialog(getActivity());
         }
 
@@ -94,7 +97,7 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
 
     @Override
     public void onFailure(String appErrorMessage) {
-        Util.showCenteredToast(lyParent, getActivity(), appErrorMessage, "");
+        nodataFound(appErrorMessage);
     }
 
     @Override
@@ -102,8 +105,11 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
         if (searchResponse != null) {
             if (!searchResponse.getmSearchData().getmProducts().isEmpty()) {
                 productDetailsSimilierList.clear();
-
                 productDetailsSimilierList.addAll(searchResponse.getmSearchData().getmProducts());
+
+                rvProducts.setVisibility(View.VISIBLE);
+                svNotFound.setVisibility(View.GONE);
+
 
                 mAdapter2 = new SearchProductAdapter(getActivity(), productDetailsSimilierList, SearchListFragment.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -111,11 +117,18 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
                 rvProducts.setItemAnimator(new DefaultItemAnimator());
                 rvProducts.setAdapter(mAdapter2);
 
+            } else {
+                rvProducts.setVisibility(View.GONE);
+                svNotFound.setVisibility(View.VISIBLE);
             }
         }
 
     }
 
+    private void nodataFound(String appErrorMessage) {
+        svNotFound.setVisibility(View.VISIBLE);
+        rvProducts.setVisibility(View.GONE);
+    }
 
     @Override
     public void onClick(View view) {

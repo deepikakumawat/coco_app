@@ -2,9 +2,11 @@ package com.ws.design.coco_ecommerce_ui_kit.utility;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -38,12 +40,14 @@ public class CustomProgressBar {
     }
 
     public void show() {
-//        rl.setClickable(true);
         mProgressBar.setVisibility(View.VISIBLE);
+        ((AppCompatActivity) mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     public void hide() {
-//        rl.setClickable(false);
-        mProgressBar.setVisibility(View.INVISIBLE);
+        mProgressBar.setVisibility(View.GONE);
+        ((AppCompatActivity) mContext).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
     }
 }

@@ -1,52 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lyTopSize"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center"
+    android:weightSum="2.5"
     android:orientation="horizontal">
 
     <customfonts.TextViewSFProDisplayMedium
         android:id="@+id/txtAttributeType"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:paddingTop="16.5dp"
-        android:paddingRight="14dp"
-        android:text="1"
+        android:layout_weight="1.2"
+        android:text="1djfhkjfh"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="13sp" />
+
+    <customfonts.TextViewSFProDisplayMedium
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".5"
+        android:text=" :"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="13sp" />
 
     <customfonts.TextViewSFProDisplayMedium
         android:id="@+id/txtAttributeName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/rect"
-        android:gravity="center"
-        android:paddingLeft="14dp"
-        android:paddingTop="8.5dp"
-        android:paddingRight="14dp"
-        android:paddingBottom="8.5dp"
-        android:text="1"
+        android:layout_weight=".8"
+        android:gravity="left"
+
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="13sp" />
-
-
-    <LinearLayout
-        android:id="@+id/lyColorCode"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
-
-
-    </LinearLayout>
 
 
 </LinearLayout>

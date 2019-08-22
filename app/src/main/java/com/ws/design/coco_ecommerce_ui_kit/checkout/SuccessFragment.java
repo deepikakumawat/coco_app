@@ -1,72 +1,49 @@
 package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
+import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.razorpay.Checkout;
-import com.razorpay.PaymentResultListener;
-import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
-import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
-import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
-import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
-
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import fragment.FragmentManagerUtils;
 
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
-
 public class SuccessFragment extends BaseFragment implements View.OnClickListener {
 
 
     private String totalPrice;
-    private TextView txtTotalPrice;
-    private ImageView imgOrderStatus;
     private String orderStatus;
-    private TextView txtGoToHome;
-    private TextView txtRetry;
-    private String totalRazorPrice;
+    private Button btnGoToHome;
     private AddressListResponse.AddressData addressData = null;
-    private TextView txtOrderStatus;
-    private TextView txtDateTime;
     private String orderId;
     private TextView txtOrderId;
     private ConstraintLayout clParent;
     private View mView;
+    private ScrollView svOrderPlacedSuccessfully;
+    private TextView txtCustomerName;
+    private TextView txtQuantity;
+    private TextView txtOrderDate;
+    private TextView txtOrderAmount;
+    private TextView txtOrderType;
+    private ScrollView svOrderUnSuccess;
 
 
     @Nullable
@@ -91,73 +68,61 @@ public class SuccessFragment extends BaseFragment implements View.OnClickListene
             orderId = bundle.getString("orderId");
             addressData = (AddressListResponse.AddressData) bundle.getSerializable("addressData");
 
-
-            try {
-                totalRazorPrice = totalPrice + "00";
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
         }
 
-        clParent = view.findViewById(R.id.clParent);
+        svOrderPlacedSuccessfully = view.findViewById(R.id.svOrderPlacedSuccessfully);
+        svOrderUnSuccess = view.findViewById(R.id.svOrderUnSuccess);
+        txtCustomerName = view.findViewById(R.id.txtCustomerName);
+        txtOrderDate = view.findViewById(R.id.txtOrderDate);
         txtOrderId = view.findViewById(R.id.txtOrderId);
-        txtDateTime = view.findViewById(R.id.txtDateTime);
-        txtOrderStatus = view.findViewById(R.id.txtOrderStatus);
-        txtRetry = view.findViewById(R.id.txtRetry);
-        txtGoToHome = view.findViewById(R.id.txtGoToHome);
-        imgOrderStatus = view.findViewById(R.id.imgOrderStatus);
-        txtTotalPrice = view.findViewById(R.id.txtTotalPrice);
-
-        txtRetry.setOnClickListener(this);
-        txtGoToHome.setOnClickListener(this);
+        txtOrderAmount = view.findViewById(R.id.txtOrderAmount);
+        txtOrderType = view.findViewById(R.id.txtOrderType);
+        txtQuantity = view.findViewById(R.id.txtQuantity);
 
 
-        txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? getString(R.string.Rs) + totalPrice : "-");
+        clParent = view.findViewById(R.id.clParent);
+        btnGoToHome = view.findViewById(R.id.btnGoToHome);
+        btnGoToHome.setOnClickListener(this);
+
 
         if (!TextUtils.isEmpty(orderStatus)) {
             if (orderStatus.equalsIgnoreCase(Constant.ORDER_SUCCESS)) {
                 paymentSuccess();
-
             } else {
                 paymentFailed();
-
             }
         } else {
             paymentFailed();
         }
 
-        if (!TextUtils.isEmpty(orderId)) {
-            txtOrderId.setVisibility(View.VISIBLE);
+        setData();
+    }
 
-            txtOrderId.setText(getString(R.string.orderid) + orderId);
-        } else {
-            txtOrderId.setVisibility(View.GONE);
+    private void paymentSuccess() {
+        svOrderUnSuccess.setVisibility(View.GONE);
+        svOrderPlacedSuccessfully.setVisibility(View.VISIBLE);
+        txtOrderId.setVisibility(View.VISIBLE);
+        txtOrderId.setText(getString(R.string.orderid) + orderId);
 
-        }
+    }
+
+    private void paymentFailed() {
+        svOrderPlacedSuccessfully.setVisibility(View.GONE);
+        svOrderUnSuccess.setVisibility(View.VISIBLE);
+        txtOrderId.setVisibility(View.GONE);
+
+
+    }
+
+    private void setData() {
+        txtOrderAmount.setText(!TextUtils.isEmpty(totalPrice) ? "Order Amount: " + getString(R.string.Rs) + totalPrice : "-");
+        txtCustomerName.setText("Hello " + CocoPreferences.getFirstName());
 
 
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat(Constant.DATE_TIME_FORMAT);
         String currentDateandTime = sdf.format(currentTime);
-        txtDateTime.setText(getString(R.string.date_time) + currentDateandTime);
-
-    }
-
-    private void paymentSuccess() {
-        txtRetry.setVisibility(View.GONE);
-        txtGoToHome.setVisibility(View.VISIBLE);
-        txtGoToHome.setText(getString(R.string.shop_more));
-        imgOrderStatus.setImageResource(R.drawable.payment_sucess);
-        txtOrderStatus.setText("Thank your order was successfully placed.");
-    }
-
-    private void paymentFailed() {
-        txtRetry.setVisibility(View.VISIBLE);
-        txtGoToHome.setVisibility(View.VISIBLE);
-        txtGoToHome.setText(getString(R.string.go_to_home));
-        imgOrderStatus.setImageResource(R.drawable.payment_fail);
-        txtOrderStatus.setText("Oops! your order was not placed.");
-
+        txtOrderDate.setText("Order Date: " + currentDateandTime);
     }
 
 
@@ -166,12 +131,10 @@ public class SuccessFragment extends BaseFragment implements View.OnClickListene
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtGoToHome:
+                case R.id.btnGoToHome:
                     FragmentManagerUtils.makeRootFragment(getActivity().getSupportFragmentManager(), new HomeFragment(), getActivity(), "HomeFragment");
                     break;
-                case R.id.txtRetry:
-                    FragmentManagerUtils.popFragment(getFragmentManager());
-                    break;
+
                 default:
                     break;
             }

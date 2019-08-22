@@ -27,10 +27,13 @@
         android:textSize="15sp"
         tools:ignore="MissingConstraints" />
 
+    <include layout="@layout/not_found"/>
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:background="@color/white"

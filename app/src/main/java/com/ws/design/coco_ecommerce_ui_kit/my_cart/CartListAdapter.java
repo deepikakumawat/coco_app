@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.my_cart;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -11,12 +12,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
@@ -48,7 +51,16 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         CartListResponse.ProductData productData = productDataArrayList.get(position);
         if (productData != null) {
             holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
-            holder.txtProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
+            holder.txtSalesProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
+
+
+            if (!TextUtils.isEmpty(productData.getmPrice())) {
+                holder.txtProductPrice.setText(context.getString(R.string.Rs) + productData.getmPrice());
+                holder.txtProductPrice.setPaintFlags(holder.txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                holder.txtProductPrice.setText("-");
+            }
+
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
@@ -56,9 +68,9 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" : productData.getmQuantity());
 
 
-            holder.imgCross.setTag(productData);
-            holder.imgCross.setTag(R.id.imgCross, position);
-            holder.imgCross.setOnClickListener(cartFragment);
+            holder.lyRemove.setTag(productData);
+            holder.lyRemove.setTag(R.id.lyRemove, position);
+            holder.lyRemove.setOnClickListener(cartFragment);
 
 
             holder.lyIncrement.setTag(productData);
@@ -74,9 +86,13 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             holder.txtProductName.setTag(R.id.txtProductName, position);
             holder.txtProductName.setOnClickListener(cartFragment);
 
+            holder.lyMovewToWishlist.setTag(productData);
+            holder.lyMovewToWishlist.setTag(R.id.lyMovewToWishlist, position);
+            holder.lyMovewToWishlist.setOnClickListener(cartFragment);
 
 
             setAttribute(productData.getmAttributes(), holder.lyColorView, holder.lyColorTop);
+            setTxtDiscout(productData, holder);
 
 
         }
@@ -99,13 +115,16 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         private TextView txtProductName;
         private LinearLayout lyDecrement;
         private LinearLayout lyIncrement;
+        private TextView txtSalesProductPrice;
         private TextView txtProductPrice;
-        private ImageView imgCross;
+        private TextView txtDiscout;
+        private LinearLayout lyRemove;
         private TextView txtIncDec;
         private ImageView imgProduct;
         private LinearLayout lyCartProduct;
         private LinearLayout lyColorTop;
         private LinearLayout lyColorView;
+        private LinearLayout lyMovewToWishlist;
 
 
         public ViewHolder(View view) {
@@ -116,9 +135,12 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             txtProductName = view.findViewById(R.id.txtProductName);
             lyDecrement = view.findViewById(R.id.lyDecrement);
             lyIncrement = view.findViewById(R.id.lyIncrement);
+            txtSalesProductPrice = view.findViewById(R.id.txtSalesProductPrice);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
+            txtDiscout = view.findViewById(R.id.txtDiscout);
 
-            imgCross = view.findViewById(R.id.imgCross);
+            lyRemove = view.findViewById(R.id.lyRemove);
+            lyMovewToWishlist = view.findViewById(R.id.lyMovewToWishlist);
             lyColorView = view.findViewById(R.id.lyColorView);
             lyCartProduct = view.findViewById(R.id.lyCartProduct);
             lyColorTop = view.findViewById(R.id.lyColorTop);
@@ -126,7 +148,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
         }
     }
-
 
 
     private void setAttribute(ArrayList<CartListResponse.AttributesData> attributesDataArrayList, LinearLayout lyColorView, LinearLayout lyColorTop) {
@@ -148,42 +169,21 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
                     TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
                     TextView txtAttributeName = view.findViewById(R.id.txtAttributeName);
-                    LinearLayout lyColorCode = view.findViewById(R.id.lyColorCode);
 
                     txtAttributeType.setText(attributesDataArrayList.get(i).getmAttributeType());
 
 
-                    if (attributesDataArrayList.get(i).getmAttributeType().equalsIgnoreCase("color")) {
+                    txtAttributeName.setVisibility(View.VISIBLE);
 
-                        txtAttributeName.setVisibility(View.GONE);
-                        lyColorCode.setVisibility(View.VISIBLE);
+                    txtAttributeName.setText(attributesDataArrayList.get(i).getmAttributeName());
 
-                        Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.black_circle);
-                        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-                        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#" + attributesDataArrayList.get(i).getmAttributeRelatedData()));
-
-                        final int sdk = android.os.Build.VERSION.SDK_INT;
-                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            lyColorCode.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.black_circle));
-                        } else {
-                            lyColorCode.setBackground(ContextCompat.getDrawable(context, R.drawable.black_circle));
-                        }
-
-                    } else {
-                        lyColorCode.setVisibility(View.GONE);
-                        txtAttributeName.setVisibility(View.VISIBLE);
-
-                        txtAttributeName.setText(attributesDataArrayList.get(i).getmAttributeName());
-
-                    }
 
                     lyColorView.addView(view);
 
                 }
-            }else{
+            } else {
                 lyColorTop.setVisibility(View.GONE);
             }
-
 
 
         } catch (Exception e) {
@@ -195,5 +195,37 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     }
 
 
+    private void setTxtDiscout(CartListResponse.ProductData productData, ViewHolder holder) {
+
+        try {
+
+            if (!TextUtils.isEmpty(productData.getmPrice()) &&
+                    !TextUtils.isEmpty(productData.getmSalePrice())) {
+
+                double price = 0;
+                double salesPrice = 0;
+
+                price = Double.parseDouble(productData.getmPrice());
+                salesPrice = Double.parseDouble(productData.getmSalePrice());
+
+                double increases = price - salesPrice;
+                double divide = increases / price;
+                double dicount = divide * 100;
+
+                int dis = (int) dicount;
+
+                holder.txtDiscout.setText(dis + "% off");
+
+            } else {
+                holder.txtDiscout.setText("0%");
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

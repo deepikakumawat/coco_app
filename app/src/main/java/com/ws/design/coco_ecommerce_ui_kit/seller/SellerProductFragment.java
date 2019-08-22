@@ -9,13 +9,16 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
@@ -23,6 +26,8 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
+
+import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
@@ -38,12 +43,13 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
     private View mView;
     private String sellerId;
-    private TextView txtNoDataFound;
+    private ScrollView svNotFound;
     private LinearLayout lySellerProduct;
     private ShimmerFrameLayout mShimmerViewContainer;
     private RelativeLayout ryParent;
     private boolean isShimmerShow = true;
     private String sellerName;
+    private Button btnGoToHome;
 
 
     @Nullable
@@ -66,10 +72,12 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
         ryParent = view.findViewById(R.id.ryParent);
         lySellerProduct = view.findViewById(R.id.lySellerProduct);
-        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
+        svNotFound = view.findViewById(R.id.svNotFound);
         rvSellerProduct = view.findViewById(R.id.rvSellerProduct);
         mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
 
+        btnGoToHome = view.findViewById(R.id.btnGoToHome);
+        btnGoToHome.setOnClickListener(this);
 
         if (Util.isDeviceOnline(getActivity())) {
             sellerPresenter.getSellerProduct(sellerId);
@@ -110,7 +118,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
     @Override
     public void onFailure(String appErrorMessage) {
-        txtNoDataFound.setVisibility(View.GONE);
+        svNotFound.setVisibility(View.GONE);
         lySellerProduct.setVisibility(View.VISIBLE);
         showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
     }
@@ -123,7 +131,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
                 if (!sellerResponse.getmData().getmSellerProducts().isEmpty()) {
 
-                    txtNoDataFound.setVisibility(View.GONE);
+                    svNotFound.setVisibility(View.GONE);
                     lySellerProduct.setVisibility(View.VISIBLE);
 
                     sellerProductArrayList.clear();
@@ -135,7 +143,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
                 } else {
                     lySellerProduct.setVisibility(View.GONE);
-                    txtNoDataFound.setVisibility(View.VISIBLE);
+                    svNotFound.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -176,7 +184,10 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
                     }
                     break;
+                case R.id.btnGoToHome:
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
 
+                    break;
                 default:
                     break;
             }

@@ -75,7 +75,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
 
 
-        mView = inflater.inflate(R.layout.activity_home, container, false);
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
 
         return mView;
     }

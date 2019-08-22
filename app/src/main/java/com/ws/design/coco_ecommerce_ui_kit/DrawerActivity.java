@@ -37,6 +37,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.razorpay.PaymentResultListener;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.address.LoginAlertOnAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.departments.DepartmentFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.SuccessFragment;
@@ -45,7 +46,10 @@ import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.legal_policies.LegalPoliciesFragment;
 import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartFragment;
+import com.ws.design.coco_ecommerce_ui_kit.my_cart.LoginAlertOnCartActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_order.LoginAlertOnMyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment;
@@ -80,7 +84,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             "Address", "Help", "Legal Policies"};
 
     private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trendings",
-            "Address", "Help",  "Legal Policies", "Logout"};
+            "Address", "Help", "Legal Policies", "Logout"};
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -168,10 +172,17 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                         setScreenTitle(getString(R.string.my_cart));
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                     } else {
-                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
+                        startActivity(new Intent(DrawerActivity.this, LoginAlertOnCartActivity.class));
                     }
                 } else if (position == 2) {
-                    startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
+
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
+
+                    } else {
+                        startActivity(new Intent(DrawerActivity.this, LoginAlertOnMyOrderActivity.class));
+                    }
+
                 } else if (position == 3) {
                     setScreenTitle(getString(R.string.departments));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new DepartmentFragment(), null, true, false);
@@ -181,14 +192,20 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                         setScreenTitle(getString(R.string.my_wishlist));
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), "MyWishlistFragment", true, false);
                     } else {
-                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
+                        startActivity(new Intent(DrawerActivity.this, LoginAlertOnWishlistActivity.class));
                     }
 
 
                 } else if (position == 5) {
 
-                    Intent intent = new Intent(DrawerActivity.this, MyAccountActivity.class);
-                    startActivityForResult(intent, MYACCOUNT_ACTION);
+
+                    if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
+                        Intent intent = new Intent(DrawerActivity.this, MyAccountActivity.class);
+                        startActivityForResult(intent, MYACCOUNT_ACTION);
+                    } else {
+                        startActivity(new Intent(DrawerActivity.this, LoginAlertOnMyAccountActivity.class));
+                    }
+
 
                 } else if (position == 6) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), "ProductByCategoryFragment", false, false);
@@ -197,7 +214,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
                     } else {
-                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
+//                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
+                        startActivity(new Intent(DrawerActivity.this, LoginAlertOnAddressActivity.class));
                     }
 
                 } else if (position == 8) {
@@ -332,7 +350,9 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     setScreenTitle(getString(R.string.my_cart));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                 } else {
-                    startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
+//                    startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
+                    startActivity(new Intent(DrawerActivity.this, LoginAlertOnCartActivity.class));
+
                 }
             }
         });

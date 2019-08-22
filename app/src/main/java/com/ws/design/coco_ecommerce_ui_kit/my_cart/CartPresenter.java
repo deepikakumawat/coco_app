@@ -5,6 +5,7 @@ import android.util.Log;
 
 
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 
 import org.json.JSONObject;
 import Network.APIService;
@@ -253,5 +254,50 @@ public class CartPresenter {
 
     }
 
+    public void addToWishList(String userid, String productId) {
+        view.showWait();
+        try {
+
+            Call call = service.addToWishList(userid, productId);
+            call.enqueue(new Callback<AddToWishListResponse>() {
+                @Override
+                public void onResponse(Call<AddToWishListResponse> call, Response<AddToWishListResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try {
+                        if (response.isSuccessful()) {
+
+                            view.addToWishList(response.body());
+                        } else {
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AddToWishListResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

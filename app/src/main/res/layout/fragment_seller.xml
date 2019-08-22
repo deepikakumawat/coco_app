@@ -42,7 +42,7 @@
 
     </LinearLayout>
 
-
+<include layout="@layout/not_found"/>
     <customfonts.MyTextView_Roboto_Regular
         android:id="@+id/txtNoDataFound"
         android:layout_width="match_parent"
@@ -63,6 +63,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:background="@color/white"
+        android:visibility="gone"
         android:clickable="true"
         android:orientation="vertical">
 

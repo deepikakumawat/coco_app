@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ryParent"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -26,35 +26,18 @@
                 android:orientation="vertical">
 
 
-                <LinearLayout
-                    android:id="@+id/lyCart"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvCart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8.3dp"
-                    android:layout_marginTop="13.3dp"
-                    android:layout_marginRight="8.9dp"
-                    android:background="@drawable/rect_recycler"
-                    android:elevation="3dp"
-                    android:orientation="vertical">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvCart"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        android:paddingBottom="20dp">
+                    android:clipToPadding="false"
+                    android:paddingBottom="20dp">
 
 
-                    </android.support.v7.widget.RecyclerView>
-
-
-                </LinearLayout>
+                </android.support.v7.widget.RecyclerView>
 
 
             </LinearLayout>
-
-
-            <include layout="@layout/blank_screen" />
 
 
         </RelativeLayout>
@@ -80,105 +63,71 @@
                 android:letterSpacing="0.03"
                 android:text="Empty Cart"
                 android:textColor="@color/white"
-                android:textSize="13.3sp" />
+                android:textSize="13.3sp"
+                android:visibility="gone" />
 
-            <LinearLayout
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/checkout_layout"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="@drawable/shadow">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15.7dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <customfonts.TextViewSFProDisplayRegular
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.03"
-                            android:text="Order Total"
-                            android:textColor="@color/black"
-                            android:textSize="17sp" />
-
-                        <customfonts.TextViewSFProDisplayMedium
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.02"
-                            android:text="Total is including tax and delivery charges"
-                            android:textColor="#99000000"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <customfonts.MyTextView_Roboto_Medium
-                        android:id="@+id/txtTotalPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="21dp"
-                        android:layout_marginRight="21dp"
-                        android:letterSpacing="0"
-                        android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="18.3sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13.3dp"
-                android:layout_marginRight="10dp"
-                android:gravity="right"
-
+                android:layout_height="55dp"
+                android:layout_alignParentBottom="true"
+                android:background="#FFFFFF"
                 android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"
+                    android:orientation="vertical">
 
-                <customfonts.MyTextView_Roboto_Medium
-                    android:id="@+id/txtCheckout"
-                    android:layout_width="158dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹ 418"
+                        android:textColor="#565656"
+                        android:id="@+id/txtTotalPrice"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VIEW DETAILS"
+                        android:textColor="#4769e2"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnCheckout"
+                    android:layout_width="140dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/button_rect"
-                    android:gravity="center"
-                    android:letterSpacing="0.03"
-                    android:text="Checkout"
-                    android:textColor="@color/white"
-                    android:textSize="13.3sp" />
-            </LinearLayout>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="#17c"
+                    android:text="Place Order"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+
         </LinearLayout>
 
-        <customfonts.Button_Roboto_Medium
-            android:id="@+id/txtContinueShopping"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/shopping_rect"
-            android:gravity="center"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/continue_shopping"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:visibility="gone" />
 
     </RelativeLayout>
+
+    <include
+        layout="@layout/empty_cart"
+        android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
@@ -186,9 +135,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        android:clickable="true"
         android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:visibility="gone"
         shimmer:duration="800">
 
         <!-- Adding 7 rows of placeholders -->
@@ -196,12 +146,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
+
             <include layout="@layout/shimmer_place_holder_list_item_cart" />
         </LinearLayout>
 

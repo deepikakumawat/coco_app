@@ -85,6 +85,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvMyAddress.setLayoutManager(layoutManager);
+        rvMyAddress.setNestedScrollingEnabled(false);
 
     }
 
