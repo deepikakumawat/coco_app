@@ -144,6 +144,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private View mView;
     private EditText etPincode;
     private TextView txtCheckPincode;
+    private TextView txtPincodeStatus;
+    private boolean isPincodeAPI = false;
 
 
     @Nullable
@@ -193,6 +195,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         lyColor = view.findViewById(R.id.lyColor);
         lyColorSize = view.findViewById(R.id.lyColorSize);
         etPincode = view.findViewById(R.id.etPincode);
+        txtPincodeStatus = view.findViewById(R.id.txtPincodeStatus);
         txtCheckPincode = view.findViewById(R.id.txtCheckPincode);
 
         rvProductAttr = view.findViewById(R.id.rvProductAttr);
@@ -456,7 +459,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     String pincode = etPincode.getText().toString();
                     if (isValid(pincode)) {
                         isShimmerShow = false;
+                        isPincodeAPI = true;
                         productDetailsPresenter.checkPincode(pincode);
+                        Util.hideKeyBoardMethod(getActivity(),etPincode);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -553,7 +558,16 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
+        if (isPincodeAPI) {
+            etPincode.setText("");
+            txtPincodeStatus.setVisibility(View.VISIBLE);
+            txtPincodeStatus.setText(appErrorMessage);
+            txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+        }else{
+            showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
+
+        }
+
     }
 
     @Override
@@ -1124,9 +1138,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (!TextUtils.isEmpty(checkPincodeResponse.getmStatus()) && ("1".equalsIgnoreCase(checkPincodeResponse.getmStatus()))) {
 
                 etPincode.setText("");
-                showCenteredToast(ryParent, getActivity(), checkPincodeResponse.getmMessage(), Constant.API_SUCCESS);
+                txtPincodeStatus.setVisibility(View.VISIBLE);
+                txtPincodeStatus.setText(checkPincodeResponse.getmMessage());
+                txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+
 
             } else {
+                txtPincodeStatus.setVisibility(View.GONE);
                 showCenteredToast(ryParent, getActivity(), checkPincodeResponse.getmMessage(), "");
             }
 

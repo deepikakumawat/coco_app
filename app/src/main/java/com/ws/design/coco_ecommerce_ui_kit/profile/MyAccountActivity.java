@@ -17,7 +17,6 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +33,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.ChangePasswordActivity;
-import com.ws.design.coco_ecommerce_ui_kit.FilePathUtil;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
@@ -46,11 +44,9 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
@@ -518,60 +514,6 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void captureImage() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = FilePathUtil.createImageFile(this);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
 
-            if (photoFile != null) {
-//                mCurrentPhotoPath = photoFile.getAbsolutePath();
-                imagePath = photoFile.getAbsolutePath();
-                try {
-                    Uri photoURI = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", photoFile);
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                    startActivityForResult(takePictureIntent, Constant.PICK_FROM_CAMERA);
-                } catch (Exception ex) {
-                    fallBackMechanism();
-                }
-            } else {
-                fallBackMechanism();
-            }
-        } else {
-            showCenteredToast(svParent,this,"Default camera app not found.","");
-        }
-    }
-
-    private void fallBackMechanism() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = FilePathUtil.createImageFileFromContext(this);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-            if (photoFile != null) {
-//                mCurrentPhotoPath = photoFile.getAbsolutePath();
-                imagePath = photoFile.getAbsolutePath();
-                try {
-                    Uri photoURI = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", photoFile);
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                    startActivityForResult(takePictureIntent, Constant.PICK_FROM_CAMERA);
-                } catch (Exception ex) {
-                    showCenteredToast(svParent,this, "Unable to create folder for saving the image.", "");
-                }
-            } else {
-                showCenteredToast(svParent,this, "Unable to create folder for saving the image.","");
-            }
-        } else {
-            showCenteredToast(svParent,this,  "Default camera app not found.","");
-        }
-    }
 
 }

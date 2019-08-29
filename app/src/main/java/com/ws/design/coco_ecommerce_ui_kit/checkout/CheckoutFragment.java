@@ -1,16 +1,21 @@
 package com.ws.design.coco_ecommerce_ui_kit.checkout;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.razorpay.Checkout;
-import com.razorpay.PaymentResultListener;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddUpdateAddressResponse;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
@@ -33,6 +37,7 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import fragment.FragmentManagerUtils;
 
@@ -76,6 +81,11 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private PaymentMethodAdapter paymentMethodAdapter;
     private LinearLayout lyParent;
     private View mView;
+    private Dialog enterCaptchaDialog;
+    private TextView txtConfirmCaptcha;
+    private TextView etxtEnterTheCharacters;
+    private ImageView imgReload;
+    private TextView txtCaptcha;
 
 
     @Nullable
@@ -161,7 +171,6 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         rvPaymentType.setAdapter(paymentMethodAdapter);
 
 
-
         button1 = mView.findViewById(R.id.button1);
         button2 = mView.findViewById(R.id.button2);
         radio1 = mView.findViewById(R.id.radio1);
@@ -207,7 +216,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                         startPayment();
 
                     } else {
-                        showCenteredToast(lyParent, getActivity(), "You haven't added address. Please add address first","");
+                        showCenteredToast(lyParent, getActivity(), "You haven't added address. Please add address first", "");
                     }
 
 
@@ -232,11 +241,29 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                                 paymentMethodData.setSelectedPayment(true);
                             }
                             paymentMethodAdapter.notifyDataSetChanged();
-
-                            callCheckoutPaymentApi("cashondelivery");
+                            enterCaptcha();
                         }
                     }
 
+                    break;
+                case R.id.imgReload:
+                    int randomNumber = getRandomNumber();
+                    txtCaptcha.setText(randomNumber + "");
+                    break;
+                case R.id.txtConfirmCaptcha:
+                    String randomCptcha = txtCaptcha.getText().toString();
+                    String enteredCaptcha = etxtEnterTheCharacters.getText().toString();
+                    if (!TextUtils.isEmpty(enteredCaptcha) && !TextUtils.isEmpty(randomCptcha)) {
+                        if (enteredCaptcha.equalsIgnoreCase(randomCptcha)) {
+                            enterCaptchaDialog.cancel();
+                            callCheckoutPaymentApi("cashondelivery");
+                        }else{
+                            showCenteredToast(lyParent, getActivity(), getString(R.string.entered_characters_not_match), "");
+                        }
+
+                    } else  {
+                        showCenteredToast(lyParent, getActivity(), getString(R.string.please_enter_characters), "");
+                    }
                     break;
                 default:
                     break;
@@ -245,6 +272,13 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
             e.printStackTrace();
         }
 
+    }
+
+    private int getRandomNumber() {
+        final int min = 100;
+        final int max = 999;
+        final int random = new Random().nextInt((max - min) + 1) + min;
+        return random;
     }
 
 
@@ -260,7 +294,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent, getActivity(), appErrorMessage,"");
+        showCenteredToast(lyParent, getActivity(), appErrorMessage, "");
         if (addressData == null) {
             txtAddAddress.setVisibility(View.VISIBLE);
 
@@ -279,7 +313,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         if (addressData != null && TextUtils.isEmpty(orderStatus)) {
 
 
-            goToSuccessScreen(Constant.ORDER_FAIL,"");
+            goToSuccessScreen(Constant.ORDER_FAIL, "");
         }
 
     }
@@ -459,7 +493,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                         CocoPreferences.getUserEmail(),
                         addressData.getmLandmark(),
                         CocoPreferences.getUserPhone(),
-                        addressData.getmAddress1() +" "+ addressData.getmAddress2(),
+                        addressData.getmAddress1() + " " + addressData.getmAddress2(),
                         addressData.getmZipcode(),
                         addressData.getmState(),
                         addressData.getmCity(),
@@ -468,7 +502,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                         CocoPreferences.getUserEmail(),
                         addressData.getmLandmark(),
                         CocoPreferences.getUserPhone(),
-                        addressData.getmAddress1() +" "+ addressData.getmAddress2(),
+                        addressData.getmAddress1() + " " + addressData.getmAddress2(),
                         addressData.getmZipcode(),
                         addressData.getmState(),
                         addressData.getmCity()
@@ -480,7 +514,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
         } else {
 //            showCenteredToast(lyParent, getActivity(), getString(R.string.network_connection),"");
-Util.showNoInternetDialog(getActivity());
+            Util.showNoInternetDialog(getActivity());
         }
     }
 
@@ -495,8 +529,7 @@ Util.showNoInternetDialog(getActivity());
         try {
 
 
-
-            goToSuccessScreen(Constant.ORDER_FAIL,"");
+            goToSuccessScreen(Constant.ORDER_FAIL, "");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -514,11 +547,11 @@ Util.showNoInternetDialog(getActivity());
 
                 orderStatus = Constant.ORDER_SUCCESS;
 
-               goToSuccessScreen(orderStatus, orderId);
+                goToSuccessScreen(orderStatus, orderId);
 
 
             } else {
-                showCenteredToast(lyParent, getActivity(), checkoutPaymentResponse.getMessage(),"");
+                showCenteredToast(lyParent, getActivity(), checkoutPaymentResponse.getMessage(), "");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -540,14 +573,14 @@ Util.showNoInternetDialog(getActivity());
         return false;
     }
 
-    private void goToSuccessScreen(String orderStatus, String orderId){
+    private void goToSuccessScreen(String orderStatus, String orderId) {
 
 
         Bundle bundle = new Bundle();
         bundle.putString("totalPrice", totalPrice);
         bundle.putString("orderStatus", orderStatus);
-        bundle.putSerializable("addressData",addressData);
-        bundle.putSerializable("orderId",orderId);
+        bundle.putSerializable("addressData", addressData);
+        bundle.putSerializable("orderId", orderId);
 
         SuccessFragment successFragment = new SuccessFragment();
         successFragment.setArguments(bundle);
@@ -556,4 +589,39 @@ Util.showNoInternetDialog(getActivity());
 
 
     }
+
+    private void enterCaptcha() {
+        try {
+            enterCaptchaDialog = new Dialog(getActivity());
+            enterCaptchaDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            enterCaptchaDialog.setContentView(R.layout.dialog_captcha);
+            txtCaptcha = enterCaptchaDialog.findViewById(R.id.txtCaptcha);
+            imgReload = enterCaptchaDialog.findViewById(R.id.imgReload);
+            etxtEnterTheCharacters = enterCaptchaDialog.findViewById(R.id.etxtEnterTheCharacters);
+            txtConfirmCaptcha = enterCaptchaDialog.findViewById(R.id.txtConfirmCaptcha);
+            TextView txtReturnToPaymentOption = enterCaptchaDialog.findViewById(R.id.txtReturnToPaymentOption);
+
+            imgReload.setOnClickListener(this);
+            txtConfirmCaptcha.setOnClickListener(this);
+
+            int randomNumber = getRandomNumber();
+            txtCaptcha.setText(randomNumber + "");
+
+            txtReturnToPaymentOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    enterCaptchaDialog.cancel();
+                }
+            });
+            Window window = enterCaptchaDialog.getWindow();
+            window.setGravity(Gravity.CENTER);
+            window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            enterCaptchaDialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

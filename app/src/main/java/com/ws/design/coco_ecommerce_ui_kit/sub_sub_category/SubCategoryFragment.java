@@ -72,7 +72,7 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
         ryParent = mView.findViewById(R.id.ryParent);
         rvMainCategory = mView.findViewById(R.id.rvMainCategory);
         mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
-        rvBanner =  mView.findViewById(R.id.rvBanner);
+        rvBanner = mView.findViewById(R.id.rvBanner);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvBanner.setLayoutManager(mLayoutManager);
@@ -87,8 +87,7 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
             subCateProductByCategoryPresenter.getSubCateProductByCat(catId, filterAttributes);
 
         } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
-Util.showNoInternetDialog(getActivity());
+            Util.showNoInternetDialog(getActivity());
         }
 
 
@@ -184,7 +183,6 @@ Util.showNoInternetDialog(getActivity());
             e.printStackTrace();
         }
     }
-
 
 
 }
