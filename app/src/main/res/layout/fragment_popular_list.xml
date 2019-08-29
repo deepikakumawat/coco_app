@@ -23,6 +23,7 @@
         android:layout_marginTop="25dp"
         android:gravity="center_horizontal"
         android:text="@string/no_data_found"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:textSize="15sp"
         tools:ignore="MissingConstraints" />

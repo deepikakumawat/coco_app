@@ -19,10 +19,18 @@
         android:layout_marginLeft="30dp"
         android:ellipsize="end"
         android:singleLine="true"
+        android:visibility="gone"
         android:letterSpacing="0.03"
         android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="16.7sp" />
+
+    <ImageView
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_richkart_logo" />
 
     <ImageView
         android:id="@+id/imgSearch"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/svParent"
     android:background="@color/contentBodyColor">
 
 
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileCircleImageView"
+                android:id="@+id/imgProfileImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="15dp"
@@ -36,14 +37,14 @@
                 android:id="@+id/txtUserName"
                 style="@style/viewParent.headerText"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/profileCircleImageView"
+                android:layout_toRightOf="@id/imgProfileImage"
                 android:text="[[CUSTOMER NAME]]"
                 android:textSize="18sp" />
 
             <TextView
                 style="@style/viewParent.headerText"
                 android:layout_below="@id/txtUserName"
-                android:layout_toRightOf="@id/profileCircleImageView"
+                android:layout_toRightOf="@id/imgProfileImage"
                 android:text="Edit personal details"
                 android:id="@+id/txtEditProfile"
                 android:textColor="#5D5C5C"
