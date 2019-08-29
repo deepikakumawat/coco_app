@@ -11,18 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dp">
+        android:gravity="center_horizontal"
+        >
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_margin="30dp"
             android:layout_marginTop="70dp"
             android:src="@drawable/ic_group_151" />
 
 
         <TextView
             style="@style/viewParent.headerText"
+            android:layout_marginTop="30dp"
             android:text="Seriously! You Are Not Login"
             android:textAlignment="center" />
 
@@ -36,7 +37,6 @@
             android:id="@+id/btnLogin"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="70dp"
             android:layout_marginTop="70dp"
             android:background="#ffc700"
             android:text="Login" />
@@ -44,7 +44,6 @@
         <TextView
             android:layout_width="200dp"
             android:layout_height="23dp"
-            android:layout_marginLeft="70dp"
             android:id="@+id/txtContinueShopping"
             android:layout_marginTop="40dp"
             android:text="Continue Shopping"
