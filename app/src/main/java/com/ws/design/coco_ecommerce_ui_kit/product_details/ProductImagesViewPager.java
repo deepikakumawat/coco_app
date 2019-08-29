@@ -12,32 +12,32 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import java.util.ArrayList;
 
-public class ProductDetailsViewPager extends PagerAdapter {
+public class ProductImagesViewPager extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
 
     private ArrayList<String> productDetailsImagesArrayList;
-    private ProductDetailFragment productDetailFragment;
+    private ProductImagesFragment productImagesFragment;
     
     
-    public ProductDetailsViewPager(Context context, ArrayList<String> productDetailsImagesArrayList, ProductDetailFragment productDetailFragment) {
+    public ProductImagesViewPager(Context context, ArrayList<String> productDetailsImagesArrayList, ProductImagesFragment productImagesFragment) {
 
         this.context = context;
         this.productDetailsImagesArrayList = productDetailsImagesArrayList;
-        this.productDetailFragment = productDetailFragment;
+        this.productImagesFragment = productImagesFragment;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.viewpager_product_details, container, false);
+        View view = layoutInflater.inflate(R.layout.viewpager_product_images, container, false);
         ImageView imgProduct = view.findViewById(R.id.imgProduct);
 
         String images = productDetailsImagesArrayList.get(position);
 
         Glide.with(context).load(images).placeholder(R.drawable.richkart).into(imgProduct);
 
-        imgProduct.setOnClickListener(productDetailFragment);
+        imgProduct.setOnClickListener(productImagesFragment);
 
 
         container.addView(view);

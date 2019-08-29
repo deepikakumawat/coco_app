@@ -462,6 +462,16 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     e.printStackTrace();
                 }
                 break;
+            case R.id.imgProduct:
+                bundle = new Bundle();
+                bundle.putSerializable("productImages", productDetailsImagesArrayList);
+
+                ProductImagesFragment productImagesFragment = new ProductImagesFragment();
+                productImagesFragment.setArguments(bundle);
+
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productImagesFragment, "ProductDetailFragment", true, false);
+
+                break;
             default:
                 break;
 
@@ -596,7 +606,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     }
 
-                    productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList);
+                    productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList, ProductDetailFragment.this);
                     viewPager.setAdapter(productDetailsViewPager);
 
                     setLyImages(productDetailsImagesArrayList);

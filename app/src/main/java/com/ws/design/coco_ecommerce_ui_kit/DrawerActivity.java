@@ -52,6 +52,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.profile.MyAccountActivity;
 import com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
@@ -93,7 +94,10 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     private LinearLayout lyLoginSignup;
     private NavigationModelClass beanClassForRecyclerView_contacts;
     private static final int MYACCOUNT_ACTION = 101;
-    String[] PERMISSIONS = {Manifest.permission.CALL_PHONE};
+    String[] PERMISSIONS = {Manifest.permission.CALL_PHONE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private final int PERMISSION_ALL = 11;
     private TextView txtTitle;
     private ImageView imgSearch;

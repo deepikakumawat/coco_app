@@ -9,4 +9,6 @@ public interface UpdateView {
         void onFailure(String appErrorMessage);
 
         void onUpdateProfileSuccess(UpdateProfileResponse updateProfileResponse);
+
+        void changeProfileImages(ChangeProfileImageResponse changeProfileImageResponse);
 }

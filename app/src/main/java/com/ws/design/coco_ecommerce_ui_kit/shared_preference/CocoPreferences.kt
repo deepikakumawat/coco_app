@@ -94,6 +94,20 @@ object CocoPreferences {
         return preferences!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
     }
 
+
+    @JvmStatic
+    fun getProfilePic(): String? {
+        return preferences!!.getString(LoginResponse().KEY_USER_PIC, "")
+    }
+
+    @JvmStatic
+    fun setProfilePic(profilePic: String) {
+        editor!!.putString(LoginResponse().KEY_USER_PIC, profilePic)
+    }
+
+
+
+
     @JvmStatic
     fun savePreferencese() {
         editor!!.commit()

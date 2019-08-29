@@ -4,10 +4,17 @@ package com.ws.design.coco_ecommerce_ui_kit.profile;
 import android.util.Log;
 
 
+import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
+
 import org.json.JSONObject;
+
+import java.io.File;
 
 import Network.APIService;
 import Network.ApiUtils;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,39 +35,12 @@ public class UpdateProfilePresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void doUpdateProfile(String userid,String fName, String lName, String phone, String password) {
+    public void doUpdateProfile(String userid, String fName, String lName, String phone, String password) {
         view.showWait();
-
-      /*  service.doUpdateProfile(fName,lName,password,confirmPassword).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<UpdateProfileResponse>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        view.removeWait();
-                        try {
-                            JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
-                            view.onFailure(jsonObject.getString("message"));
-                        } catch (Exception ee) {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onNext(UpdateProfileResponse updateProfileResponse) {
-                        view.removeWait();
-                        view.onUpdateProfileSuccess(updateProfileResponse);
-                    }
-                });*/
 
         try {
 
-            Call call = service.doUpdateProfile(userid, fName,lName,phone,password);
+            Call call = service.doUpdateProfile(userid, fName, lName, phone, password);
             call.enqueue(new Callback<UpdateProfileResponse>() {
                 @Override
                 public void onResponse(Call<UpdateProfileResponse> call, Response<UpdateProfileResponse> response) {
@@ -68,18 +48,18 @@ public class UpdateProfilePresenter {
                     view.removeWait();
 
 
-                    try{
+                    try {
                         if (response.isSuccessful()) {
                             Log.d(TAG, call.request().url().toString());
 
                             view.onUpdateProfileSuccess(response.body());
-                        }else{
+                        } else {
 
 
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             view.onFailure(jsonObject.getString("message"));
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -101,5 +81,58 @@ public class UpdateProfilePresenter {
             e.printStackTrace();
         }
     }
+
+    public void changeProfilePic(File file, String profileFileName) {
+        view.showWait();
+
+        try {
+
+            Call call = service.changeProfilePic(
+                    RequestBody.create(MediaType.parse("multipart/form-data"), CocoPreferences.getUserId()),
+                    MultipartBody.Part.createFormData("profilepic", profileFileName,
+                    RequestBody.create(MediaType.parse("image/*"), file)));
+
+            call.enqueue(new Callback<ChangeProfileImageResponse>() {
+                @Override
+                public void onResponse(Call<ChangeProfileImageResponse> call, Response<ChangeProfileImageResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            Log.d(TAG, call.request().url().toString());
+
+                            view.changeProfileImages(response.body());
+                        } else {
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        view.onFailure("Something Went Wrong. Please try again later");
+
+                        e.printStackTrace();                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ChangeProfileImageResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

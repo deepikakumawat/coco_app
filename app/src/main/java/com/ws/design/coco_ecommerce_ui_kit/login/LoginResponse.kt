@@ -10,6 +10,7 @@ data class LoginResponse(
         val KEY_USERPHONE: String = "UserPhone",
         val KEY_FIRST_NAME: String = "FirstName",
         val KEY_LAST_NAME: String = "LastName",
+        val KEY_USER_PIC: String = "UserPic",
 
 
         @SerializedName("message")

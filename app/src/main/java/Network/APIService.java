@@ -25,6 +25,7 @@ import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_respo
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.AddRatingResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_rating_list.product_rating_response.ProductRatingResponse;
+import com.ws.design.coco_ecommerce_ui_kit.profile.ChangeProfileImageResponse;
 import com.ws.design.coco_ecommerce_ui_kit.profile.UpdateProfileResponse;
 import com.ws.design.coco_ecommerce_ui_kit.search.SearchResponse;
 import com.ws.design.coco_ecommerce_ui_kit.seller.SellerResponse;
@@ -32,11 +33,15 @@ import com.ws.design.coco_ecommerce_ui_kit.signup.GetOTPResponse;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignUpResponse;
 import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubSubCategoriesResponse;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface APIService {
 
@@ -223,10 +228,10 @@ public interface APIService {
     @POST("get-products-by-category")
     @FormUrlEncoded
     Call<ProductByCategoryResponse> getProductByCategory(@Field("cat_id") String catId,
-                                                         @Field("fattributes") String[] fattributes );
+                                                         @Field("fattributes") String[] fattributes);
 
     @POST("get-products-by-category")
-    Call<ProductByCategoryResponse> getProductByCategory(@Body ProductByCategoryRequest jsonObject );
+    Call<ProductByCategoryResponse> getProductByCategory(@Body ProductByCategoryRequest jsonObject);
 
     @POST("cancel_order")
     @FormUrlEncoded
@@ -260,5 +265,10 @@ public interface APIService {
     @POST("checkpincode")
     @FormUrlEncoded
     Call<CheckPincodeResponse> checkPincode(@Field("pincode") String pincode);
+
+    @Multipart
+    @POST("change-user-pic")
+    Call<ChangeProfileImageResponse> changeProfilePic(@Part("user_id") RequestBody userId,
+                                                      @Part MultipartBody.Part imageFile);
 }
 

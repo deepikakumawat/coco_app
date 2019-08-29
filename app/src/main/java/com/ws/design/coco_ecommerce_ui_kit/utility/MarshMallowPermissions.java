@@ -110,48 +110,48 @@ public class MarshMallowPermissions {
 
         }
     }
-/*
-    public void requestPermissionForCalendar() {
+
+  /*  public void requestPermissionForCalendar() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission_group.CALENDAR)) {
             Util.showCenteredToast(activity, "Calendar permission needed to process. Please allow in App Settings for additional functionality.");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission_group.CALENDAR}, CALENDAR_PERMISSION_REQUEST_CODE);
         }
-    }
+    }*/
 
-    public void requestPermissionForCamera() {
+    public void requestPermissionForCamera(View view) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
-            Util.showCenteredToast(activity, "Camera permission needed. Please allow in App Settings for additional functionality.");
+            Util.showCenteredToast(view,activity, "Camera permission needed. Please allow in App Settings for additional functionality.","");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
 
-    public void requestPermissionForContacts() {
+   /* public void requestPermissionForContacts() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission_group.CONTACTS)) {
             Util.showCenteredToast(activity, "Contacts permission needed to access. Please allow in App Settings for additional functionality.");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission_group.CONTACTS}, CONTACTS_PERMISSION_REQUEST_CODE);
         }
-    }
+    }*/
 
-    public void requestPermissionForLocation() {
+ /*   public void requestPermissionForLocation() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_COARSE_LOCATION) || ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
             Util.showCenteredToast(activity, "Location permission needed. Please allow in App Settings for additional functionality.");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
 
         }
-    }
+    }*/
 
-    public void requestPermissionForRecord() {
+  /*  public void requestPermissionForRecord() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO)) {
             Util.showCenteredToast(activity, "Microphone permission needed for recording. Please allow in App Settings for additional functionality.");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.RECORD_AUDIO}, RECORD_PERMISSION_REQUEST_CODE);
         }
-    }
-*/
+    }*/
+
     public void requestPermissionForPhone(View view) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CALL_PHONE)) {
             Util.showCenteredToast(view,activity, "Camera permission needed. Please allow in App Settings for additional functionality.","");
@@ -175,12 +175,12 @@ public class MarshMallowPermissions {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST_CODE);
         }
     }
-
-    public void requestPermissionForExternalStorage() {
+*/
+    public void requestPermissionForExternalStorage(View view) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Util.showCenteredToast(activity, "External Storage permission needed. Please allow in App Settings for additional functionality.");
+            Util.showCenteredToast(view,activity, "External Storage permission needed. Please allow in App Settings for additional functionality.","");
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE);
         }
-    }*/
+    }
 }

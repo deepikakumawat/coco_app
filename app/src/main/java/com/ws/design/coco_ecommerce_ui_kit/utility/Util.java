@@ -7,9 +7,11 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+
+import java.io.File;
 
 public class Util {
     private ProgressBar mProgressBar = null;
@@ -167,4 +171,18 @@ public class Util {
         dialog1.show();
     }
 
+    public static File getPhotoDirectory(Context context) {
+        File directory = new File(Environment.getExternalStorageDirectory() + File.separator + context.getString(R.string.app_name) + File.separator + Constant.NAME_PHOTO);
+        return createDirectory(directory);
+    }
+
+    private static File createDirectory(File directory) {
+        if (!directory.exists()) {
+            directory.mkdirs();
+            Log.d("Directory : ", "[ " + directory + " ] is created");
+        } else {
+            Log.d("Directory : ", "[ " + directory + " ] is already exist");
+        }
+        return directory;
+    }
 }

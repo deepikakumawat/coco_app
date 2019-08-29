@@ -143,6 +143,11 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     }
 
+    @Override
+    public void changeProfileImages(ChangeProfileImageResponse changeProfileImageResponse) {
+        // do nothing
+    }
+
 
     @Override
     public void onClick(View view) {

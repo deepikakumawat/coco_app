@@ -46,7 +46,7 @@ import com.ws.design.coco_ecommerce_ui_kit.Cocoproductlistgrid9;
 import com.ws.design.coco_ecommerce_ui_kit.Cocoreviews2Activity;
 import com.ws.design.coco_ecommerce_ui_kit.KitchenActivity;
 import com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity;
-import com.ws.design.coco_ecommerce_ui_kit.MyAccountActivity;
+import com.ws.design.coco_ecommerce_ui_kit.profile.MyAccountActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
 import com.ws.design.coco_ecommerce_ui_kit.Navigation1;
 import com.ws.design.coco_ecommerce_ui_kit.NavigationActivity2;
