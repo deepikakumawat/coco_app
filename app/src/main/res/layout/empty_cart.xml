@@ -12,11 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dp">
+        android:gravity="center_horizontal"
+        >
         
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="392dp"
+            android:layout_height="285dp"
             android:src="@drawable/ic_cart_empty"
             android:layout_margin="30dp"
             android:layout_marginTop="70dp"/>
@@ -41,7 +42,6 @@
             android:text="Add Something"
             android:id="@+id/btnAddSomething"
             android:background="#ffc700"
-            android:layout_marginLeft="70dp"
             android:layout_marginTop="70dp"/>
 
     </LinearLayout>
