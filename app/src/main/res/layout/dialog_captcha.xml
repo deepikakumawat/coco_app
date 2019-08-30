@@ -54,7 +54,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="9dp"
-                android:src="@drawable/ic_richkart_logo" />
+                android:src="@mipmap/ic_reload" />
         </LinearLayout>
 
 
@@ -72,8 +72,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="top"
-                android:inputType="number"
                 android:hint="Enter the Number"
+                android:inputType="number"
                 android:padding="20dp"
                 android:textColor="@android:color/black"
                 android:textSize="13.5sp" />
