@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
+import com.ws.design.coco_ecommerce_ui_kit.VideoActivity;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
@@ -727,7 +728,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (!TextUtils.isEmpty(videoUrl)) {
                 boolean isAppInstalled = appInstalledOrNot(Constant.YOUTUBE_PACKAGES_NAME);
 
-                if (isAppInstalled) {
+               /* if (isAppInstalled) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(videoUrl));
                     intent.setPackage(Constant.YOUTUBE_PACKAGES_NAME);
@@ -735,6 +736,10 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 } else {
                     showCenteredToast(ryParent, getActivity(), getString(R.string.app_not_insalled), "");
                 }
+                */
+                Intent intent = new Intent(getActivity(), VideoActivity.class);
+                intent.putExtra("videoUrl",videoUrl);
+                startActivity(intent);
 
             }
 

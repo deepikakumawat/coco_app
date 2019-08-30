@@ -236,6 +236,7 @@
     <string name="profile_updated_succesfully">Profile Image Updated Successfully!</string>
     <string name="please_enter_characters">Please Enter Characters!</string>
     <string name="entered_characters_not_match">Entered Characters does not match!</string>
+    <string name="player_error">Player Error!</string>
 
 
 </resources>

@@ -24,6 +24,11 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name="com.ws.design.coco_ecommerce_ui_kit.VideoActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.StartActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.DrawerActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.ChangePasswordActivity" />
