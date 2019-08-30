@@ -290,7 +290,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                     }
                     break;
                 case R.id.btnAddSomething:
-                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new DepartmentFragment(), "DepartmentFragment", true, false);
                     break;
                 case R.id.btnCheckout:
 

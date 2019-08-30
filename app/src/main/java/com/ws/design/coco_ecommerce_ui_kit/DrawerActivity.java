@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 import com.razorpay.PaymentResultListener;
@@ -101,6 +102,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     private final int PERMISSION_ALL = 11;
     private TextView txtTitle;
     private ImageView imgSearch;
+    private ImageView imgProfileImage;
 
 
     @Override
@@ -138,6 +140,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         txtLogin = findViewById(R.id.txtLogin);
         txtSignup = findViewById(R.id.txtSignup);
         lyLoginSignup = findViewById(R.id.lyLoginSignup);
+        imgProfileImage = findViewById(R.id.imgProfileImage);
         txtLogin.setOnClickListener(this);
         txtSignup.setOnClickListener(this);
         setToolbar();
@@ -475,6 +478,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             txtUserEmail.setVisibility(View.GONE);
 
         }
+
+        Glide.with(this).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
 
 
         if (TextUtils.isEmpty(CocoPreferences.getUserId())) {

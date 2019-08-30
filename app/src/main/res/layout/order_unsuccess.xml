@@ -2,12 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/svOrderUnSuccess"
+    android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    android:background="@color/contentBodyColor"
-   >
+    android:background="@color/contentBodyColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatImageView
@@ -108,9 +108,8 @@
             android:id="@+id/btnGoToHome"
             android:layout_width="130dp"
             android:layout_height="23dp"
-            android:layout_marginLeft="120dp"
+            android:layout_gravity="center"
             android:layout_marginTop="23dp"
-            android:layout_marginRight="120dp"
             android:background="#ffc700"
             android:text="Go Home!"
             android:textStyle="" />
@@ -122,9 +121,9 @@
             android:layout_marginTop="13dp"
             android:layout_marginRight="140dp"
             android:text="View Details"
-            android:visibility="gone"
             android:textColor="#17c"
-            android:textSize="13dp" />
+            android:textSize="13dp"
+            android:visibility="gone" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"

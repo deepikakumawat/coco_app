@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/svNotFound"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/svNotFound"
-    android:background="@color/contentBodyColor">
+  >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
+        android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="392dp"
             android:layout_height="285dp"
             android:layout_margin="2dp"
-            android:src="@drawable/ic_2723662"/>
+            android:src="@drawable/ic_2723662" />
 
         <Button
+            android:id="@+id/btnGoToHome"
             android:layout_width="170dp"
             android:layout_height="47dp"
+            android:layout_marginTop="80dp"
             android:background="#16c"
-           android:layout_marginTop="80dp"
             android:text="Go Home!"
-            android:id="@+id/btnGoToHome"
             android:textColor="#FFF"
-            android:textSize="17dp"/>
+            android:textSize="17dp" />
     </LinearLayout>
 
 

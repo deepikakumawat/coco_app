@@ -40,7 +40,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 
     private AutoCompleteTextView autoTxtSearch;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierList = new ArrayList<>();
-//    private SearchAutoAdapter searchAutoAdapter;
+    //    private SearchAutoAdapter searchAutoAdapter;
     private SearchPresenter searchPresenter;
     private LinearLayout lyParent;
     private View mView;
@@ -144,18 +144,22 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
                 if (Util.isDeviceOnline(getActivity())) {
                     searchPresenter.getSearchItem(str);
 
-                }else{
+                } else {
                     Util.showNoInternetDialog(getActivity());
                 }
             }
 
             if (str.length() < 3) {
-                productDetailsSimilierList.clear();
-                if (mAdapter2 != null)
-                    mAdapter2.notifyDataSetChanged();
-                autoTxtSearch.dismissDropDown();
+              clearList();
             }
         }
+    }
+
+    private void clearList() {
+        productDetailsSimilierList.clear();
+        if (mAdapter2 != null)
+            mAdapter2.notifyDataSetChanged();
+        autoTxtSearch.dismissDropDown();
     }
 
     @Override
@@ -183,19 +187,29 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
                     openSearchList(autoTxtSearch.getText().toString());
                     break;
                 case R.id.imgGoogleSearch:
-                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
-                    try {
-                        startActivityForResult(intent, 1);
-                    } catch (ActivityNotFoundException a) {
-                        Toast.makeText(getActivity(), "Oops! Your device doesn't support Speech to Text", Toast.LENGTH_SHORT).show();
-                    }
+                    googleSearch();
                     break;
                 default:
                     break;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void googleSearch() {
+
+        autoTxtSearch.setText("");
+        clearList();
+
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+        try {
+            startActivityForResult(intent, 1);
+        } catch (ActivityNotFoundException a) {
+
+            Util.showCenteredToast(lyParent,getActivity(),"Oops! Your device doesn't support Speech to Text","");
         }
     }
 
@@ -247,7 +261,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
             case 1: {
                 if (resultCode == Activity.RESULT_OK && null != data) {
                     String yourResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
-                    Log.d("result",yourResult);
+                    Log.d("result", yourResult);
                     autoTxtSearch.setText(yourResult);
 
                 }

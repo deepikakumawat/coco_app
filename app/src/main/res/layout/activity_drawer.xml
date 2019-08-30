@@ -36,8 +36,9 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_marginBottom="10dp"
+                    android:id="@+id/imgProfileImage"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/men" />
+                    android:src="@drawable/user_dp" />
 
 
                 <customfonts.MyTextView_Roboto_Medium

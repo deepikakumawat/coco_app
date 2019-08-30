@@ -287,6 +287,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
         callAPI(productId);
+        selectClickedTab(txtProductShortDesc);
 
 
     }
@@ -387,7 +388,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.addToCart(CocoPreferences.getUserId(), productBroughtData.getmProductId(), "1", "");
 
                     } else {
-//                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
                         Util.showNoInternetDialog(getActivity());
 
                     }

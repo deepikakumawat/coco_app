@@ -32,10 +32,9 @@
 
         <TextView
             style="@style/viewParent.headerText"
-            android:layout_marginLeft="110dp"
             android:layout_marginTop="13dp"
-            android:layout_marginRight="53dp"
             android:text="Order Placed"
+            android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="#057f07"
             android:textSize="23dp" />
@@ -105,9 +104,8 @@
             android:id="@+id/btnGoToHome"
             android:layout_width="130dp"
             android:layout_height="23dp"
-            android:layout_marginLeft="120dp"
             android:layout_marginTop="23dp"
-            android:layout_marginRight="120dp"
+            android:layout_gravity="center"
             android:background="#ffc700"
             android:text="Go Home!"
             android:textStyle="" />
