@@ -64,7 +64,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private ImageView imgProfileImage;
     private Dialog addProfileImage;
     private MarshMallowPermissions marshMallowPermissions = new MarshMallowPermissions(this);
-    private ScrollView svParent;
+    private LinearLayout lyParent;
     private Uri fileUri = null;
     private String imagePath;
     private String fileName;
@@ -72,6 +72,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private TextView txtGallery;
     private TextView txtCancel;
     private UpdateProfilePresenter updateProfilePresenter;
+    private ImageView imgBack;
 //    private String mCurrentPhotoPath;
 
 //    private RelativeLayout ryParent;
@@ -83,7 +84,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         updateProfilePresenter = new UpdateProfilePresenter(this);
 
 
-        svParent = findViewById(R.id.svParent);
+        lyParent = findViewById(R.id.lyParent);
         imgProfileImage = findViewById(R.id.imgProfileImage);
         txtLogout = findViewById(R.id.txtLogout);
         txtChangePassword = findViewById(R.id.txtChangePassword);
@@ -92,6 +93,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         txtYourAddress = findViewById(R.id.txtYourAddress);
         txtEditProfile = findViewById(R.id.txtEditProfile);
         txtMyOrder = findViewById(R.id.txtMyOrder);
+        imgBack = findViewById(R.id.imgBack);
         txtLogout.setOnClickListener(this);
         txtMyOrder.setOnClickListener(this);
         txtChangePassword.setOnClickListener(this);
@@ -99,6 +101,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         txtYourAddress.setOnClickListener(this);
         txtEditProfile.setOnClickListener(this);
         imgProfileImage.setOnClickListener(this);
+        imgBack.setOnClickListener(this);
 
         txtUserName.setText(CocoPreferences.getFirstName() + " " + CocoPreferences.getLastName());
         String picUrl = CocoPreferences.getProfilePic();
@@ -245,7 +248,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         }
         if (galleryOrCamera == Constant.PICK_FROM_GALLERY) {
             if (!marshMallowPermissions.checkPermissionForExternalStorage()) {
-                marshMallowPermissions.requestPermissionForExternalStorage(svParent);
+                marshMallowPermissions.requestPermissionForExternalStorage(lyParent);
             } else {
                 Intent intent = new Intent();
                 intent.setType("image/*");
@@ -255,7 +258,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         } else if (galleryOrCamera == Constant.PICK_FROM_CAMERA) {
             Intent intent = new Intent();
             if (!marshMallowPermissions.checkPermissionForCamera()) {
-                marshMallowPermissions.requestPermissionForCamera(svParent);
+                marshMallowPermissions.requestPermissionForCamera(lyParent);
             } else {
                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                 File directory = Util.getPhotoDirectory(this);
@@ -400,7 +403,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                         out.close();
                         return path + File.separator + file_name;
                     } else {
-                        Util.showCenteredToast(svParent, MyAccountActivity.this, "Can't Attach file more than 10mb in size", "");
+                        Util.showCenteredToast(lyParent, MyAccountActivity.this, "Can't Attach file more than 10mb in size", "");
                     }
 
                 } else {
@@ -479,7 +482,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(svParent, this, appErrorMessage, "");
+        showCenteredToast(lyParent, this, appErrorMessage, "");
     }
 
 
@@ -494,14 +497,14 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
             if (!TextUtils.isEmpty(changeProfileImageResponse.getmStatus()) && ("1".equalsIgnoreCase(changeProfileImageResponse.getmStatus()))) {
 
                 if (changeProfileImageResponse.getmData() != null) {
-                    showCenteredToast(svParent, this, getString(R.string.profile_updated_succesfully), Constant.API_SUCCESS);
+                    showCenteredToast(lyParent, this, getString(R.string.profile_updated_succesfully), Constant.API_SUCCESS);
                     CocoPreferences.setProfilePic(changeProfileImageResponse.getmData().getmProfilePic());
                     CocoPreferences.savePreferencese();
                 }
 
 
             } else {
-//                showCenteredToast(svParent, this, changeProfileImageResponse.getmMessage(), "");
+//                showCenteredToast(lyParent, this, changeProfileImageResponse.getmMessage(), "");
             }
         } catch (Exception e) {
             e.printStackTrace();

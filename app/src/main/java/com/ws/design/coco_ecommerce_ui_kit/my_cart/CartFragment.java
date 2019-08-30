@@ -20,7 +20,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment;
-import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
+import com.ws.design.coco_ecommerce_ui_kit.departments.DepartmentFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToWishListResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;

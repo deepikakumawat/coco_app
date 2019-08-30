@@ -26,15 +26,24 @@
             android:elevation="3dp"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvSellerProduct"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/pullDownRefreshCall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="20dp">
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
 
 
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSellerProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="20dp">
+
+
+                </android.support.v7.widget.RecyclerView>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
 
         </LinearLayout>
@@ -44,18 +53,6 @@
 
     <include layout="@layout/not_found" />
 
-    <customfonts.MyTextView_Roboto_Regular
-        android:id="@+id/txtNoDataFound"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="11dp"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:text="@string/no_data_found"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"

@@ -18,8 +18,16 @@
         android:layout_height="wrap_content"
         android:textSize="16.7sp"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:text="Search : Mobile"
         android:layout_marginLeft="30dp"/>
+
+    <ImageView
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_richkart_logo" />
 
 
 </android.support.v7.widget.Toolbar>

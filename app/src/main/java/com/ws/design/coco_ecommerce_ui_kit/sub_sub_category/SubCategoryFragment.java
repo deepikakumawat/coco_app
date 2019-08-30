@@ -17,7 +17,6 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeBannerAdapter;
-import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.Banner;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
@@ -85,7 +84,6 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
 
         if (Util.isDeviceOnline(getActivity())) {
             subCateProductByCategoryPresenter.getSubCateProductByCat(catId, filterAttributes);
-
         } else {
             Util.showNoInternetDialog(getActivity());
         }

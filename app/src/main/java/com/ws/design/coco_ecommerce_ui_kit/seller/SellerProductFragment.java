@@ -3,6 +3,7 @@ package com.ws.design.coco_ecommerce_ui_kit.seller;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -33,7 +34,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
-public class SellerProductFragment extends BaseFragment implements SellerView, View.OnClickListener {
+public class SellerProductFragment extends BaseFragment implements SellerView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
 
     private SellerProductAdapter sellerProductAdapter;
@@ -50,6 +51,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     private boolean isShimmerShow = true;
     private String sellerName;
     private Button btnGoToHome;
+    private SwipeRefreshLayout pullDownRefreshCall;
 
 
     @Nullable
@@ -71,6 +73,8 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         sellerName = bundle.getString("sellerName");
 
         ryParent = view.findViewById(R.id.ryParent);
+        pullDownRefreshCall = (SwipeRefreshLayout) view.findViewById(R.id.pullDownRefreshCall);
+
         lySellerProduct = view.findViewById(R.id.lySellerProduct);
         svNotFound = view.findViewById(R.id.svNotFound);
         rvSellerProduct = view.findViewById(R.id.rvSellerProduct);
@@ -79,17 +83,24 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         btnGoToHome = view.findViewById(R.id.btnGoToHome);
         btnGoToHome.setOnClickListener(this);
 
-        if (Util.isDeviceOnline(getActivity())) {
-            sellerPresenter.getSellerProduct(sellerId);
-        } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-            Util.showNoInternetDialog(getActivity());
-        }
+        pullDownRefreshCall.setOnRefreshListener(this);
+        pullDownRefreshCall.setColorSchemeResources(R.color.red, R.color.red, R.color.red, R.color.red);
+
+
+        callAPI();
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvSellerProduct.setLayoutManager(layoutManager);
 
+    }
+
+    private void callAPI() {
+        if (Util.isDeviceOnline(getActivity())) {
+            sellerPresenter.getSellerProduct(sellerId);
+        } else {
+            Util.showNoInternetDialog(getActivity());
+        }
     }
 
     @Override
@@ -114,13 +125,22 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
         }
 
+        setPullToRefreshFalse();
+
     }
+
 
     @Override
     public void onFailure(String appErrorMessage) {
         svNotFound.setVisibility(View.GONE);
         lySellerProduct.setVisibility(View.VISIBLE);
         showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
+    }
+
+    private void setPullToRefreshFalse() {
+        if (pullDownRefreshCall.isRefreshing()) {
+            pullDownRefreshCall.setRefreshing(false);
+        }
     }
 
     @Override
@@ -178,7 +198,6 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
                             sellerPresenter.addToCart(CocoPreferences.getUserId(), sellerProductData.getmProductId(), "1");
 
                         } else {
-//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
                             Util.showNoInternetDialog(getActivity());
                         }
 
@@ -214,5 +233,14 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     @Override
     protected boolean isCartIconVisible() {
         return true;
+    }
+
+    @Override
+    public void onRefresh() {
+        sellerProductArrayList.clear();
+        if (sellerProductAdapter != null) {
+            sellerProductAdapter.notifyDataSetChanged();
+        }
+        callAPI();
     }
 }

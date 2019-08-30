@@ -9,9 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
-import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
-
 
 public final class FragmentManagerUtils {
 

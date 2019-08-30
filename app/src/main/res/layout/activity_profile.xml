@@ -1,136 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/svParent"
-    android:background="@color/contentBodyColor">
+    android:id="@+id/lyParent"
 
+    android:background="@color/contentBodyColor"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include
+        android:id="@+id/inTop"
+        layout="@layout/toolbar_address_list" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="30dp">
+        android:background="@color/contentBodyColor">
 
-
-        <TextView
-            style="@style/viewParent.headerText"
-            android:text="Your Profile" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfileImage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/user_dp"
-                app:civ_border_color="@color/imageBorderColor"
-                app:civ_border_width="2dp" />
-
-            <TextView
-                android:id="@+id/txtUserName"
-                style="@style/viewParent.headerText"
-                android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/imgProfileImage"
-                android:text="[[CUSTOMER NAME]]"
-                android:textSize="18sp" />
 
             <TextView
                 style="@style/viewParent.headerText"
-                android:layout_below="@id/txtUserName"
-                android:layout_toRightOf="@id/imgProfileImage"
-                android:text="Edit personal details"
-                android:id="@+id/txtEditProfile"
-                android:textColor="#5D5C5C"
-                android:textSize="16sp" />
+                android:text="Your Profile" />
 
-            <ImageView
-                style="@style/viewParent"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_more" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfileImage"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/user_dp"
+                    app:civ_border_color="@color/imageBorderColor"
+                    app:civ_border_width="2dp" />
 
-        <Switch
-            android:id="@+id/darkModeSwitch"
-            style="@style/settingsText"
-            android:drawableLeft="@drawable/ic_dark_mode"
-            android:text="Dark Mode" />
+                <TextView
+                    android:id="@+id/txtUserName"
+                    style="@style/viewParent.headerText"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/imgProfileImage"
+                    android:text="[[CUSTOMER NAME]]"
+                    android:textSize="18sp" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Profile" />
+                <TextView
+                    android:id="@+id/txtEditProfile"
+                    style="@style/viewParent.headerText"
+                    android:layout_below="@id/txtUserName"
+                    android:layout_toRightOf="@id/imgProfileImage"
+                    android:text="Edit personal details"
+                    android:textColor="#5D5C5C"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txtAddAddress"
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_address"
-            android:text="Add Address" />
+                <ImageView
+                    style="@style/viewParent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_more" />
 
-        <TextView
-            android:id="@+id/txtYourAddress"
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:drawableLeft="@drawable/ic_address"
-            android:text="Your Address" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txtChangePassword"
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_edit_password"
-            android:text="Change Password" />
+            <Switch
+                android:id="@+id/darkModeSwitch"
+                style="@style/settingsText"
+                android:drawableLeft="@drawable/ic_dark_mode"
+                android:text="Dark Mode" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Orders" />
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Profile" />
 
-        <TextView
-            android:id="@+id/txtMyOrder"
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/orders"
-            android:text="Your Orders" />
+            <TextView
+                android:id="@+id/txtAddAddress"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_address"
+                android:text="Add Address" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Notifications" />
+            <TextView
+                android:id="@+id/txtYourAddress"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:drawableLeft="@drawable/ic_address"
+                android:text="Your Address" />
 
-        <Switch
-            style="@style/settingsText"
-            android:checked="true"
-            android:drawableLeft="@drawable/ic_notification"
-            android:text="Notifications" />
+            <TextView
+                android:id="@+id/txtChangePassword"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_edit_password"
+                android:text="Change Password" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Regional" />
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Orders" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/ic_sell_online"
-            android:text="Sell On Richkart" />
+            <TextView
+                android:id="@+id/txtMyOrder"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/orders"
+                android:text="Your Orders" />
 
-        <TextView
-            android:id="@+id/txtLogout"
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/ic_logout"
-            android:text="Logout" />
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Notifications" />
+
+            <Switch
+                style="@style/settingsText"
+                android:checked="true"
+                android:drawableLeft="@drawable/ic_notification"
+                android:text="Notifications" />
+
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="Regional" />
+
+            <TextView
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_sell_online"
+                android:text="Sell On Richkart" />
+
+            <TextView
+                android:id="@+id/txtLogout"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:drawableLeft="@drawable/ic_logout"
+                android:text="Logout" />
 
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="©2017-2019, Richkart.com, Inc. or its affiliates"
-            android:textAlignment="center" />
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="©2017-2019, Richkart.com, Inc. or its affiliates"
+                android:textAlignment="center" />
 
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
