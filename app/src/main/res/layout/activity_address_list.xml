@@ -51,99 +51,6 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="11sp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="11sp"
-                    android:background="@drawable/black_rect"
-                    android:orientation="vertical"
-                    android:padding="13sp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Tap on card to see order details"
-                            android:textColor="@color/white"
-                            android:textSize="12.3sp" />
-
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_cancel"
-                            android:tint="@color/white" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="You can"
-                                android:textColor="@color/white"
-                                android:textSize="12.3sp" />
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="Track, Cancel"
-                                android:textColor="#f8c312"
-                                android:textSize="12.3sp" />
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="Or"
-                                android:textColor="@color/white"
-                                android:textSize="12.3sp" />
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="Return"
-                                android:textColor="#f8c312"
-                                android:textSize="12.3sp" />
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="your order "
-                                android:textColor="@color/white"
-                                android:textSize="12.3sp" />
-
-                        </LinearLayout>
-
-                        <customfonts.MyTextView_Roboto_Regular
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="from order detail."
-                            android:textColor="@color/white"
-                            android:textSize="12.3sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvMyOrder"
@@ -165,7 +72,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/inTop"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
         android:background="@color/white"
         android:clickable="true"
         android:orientation="vertical"

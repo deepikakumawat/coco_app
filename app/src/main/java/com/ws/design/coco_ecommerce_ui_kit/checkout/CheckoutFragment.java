@@ -86,6 +86,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private TextView etxtEnterTheCharacters;
     private ImageView imgReload;
     private TextView txtCaptcha;
+    private String paymentMethod = "Card";
 
 
     @Nullable
@@ -212,7 +213,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                 case R.id.txtConfirmPlaceOrder:
 
                     if (addressData != null) {
-
+                        paymentMethod = "Card";
                         startPayment();
 
                     } else {
@@ -256,6 +257,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                     if (!TextUtils.isEmpty(enteredCaptcha) && !TextUtils.isEmpty(randomCptcha)) {
                         if (enteredCaptcha.equalsIgnoreCase(randomCptcha)) {
                             enterCaptchaDialog.cancel();
+                            paymentMethod = "COD";
                             callCheckoutPaymentApi("cashondelivery");
                         }else{
                             showCenteredToast(lyParent, getActivity(), getString(R.string.entered_characters_not_match), "");
@@ -578,6 +580,8 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
         Bundle bundle = new Bundle();
         bundle.putString("totalPrice", totalPrice);
+        bundle.putString("quantity", productDataArrayList.size()+"");
+        bundle.putString("method", paymentMethod);
         bundle.putString("orderStatus", orderStatus);
         bundle.putSerializable("addressData", addressData);
         bundle.putSerializable("orderId", orderId);

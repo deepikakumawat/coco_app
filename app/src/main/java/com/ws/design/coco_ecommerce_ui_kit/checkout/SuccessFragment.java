@@ -34,6 +34,8 @@ public class SuccessFragment extends BaseFragment implements View.OnClickListene
     private Button btnGoToHome;
     private AddressListResponse.AddressData addressData = null;
     private String orderId;
+    private String paymentMethod;
+    private String quantity;
     private TextView txtOrderId;
     private ConstraintLayout clParent;
     private View mView;
@@ -66,6 +68,8 @@ public class SuccessFragment extends BaseFragment implements View.OnClickListene
             totalPrice = bundle.getString("totalPrice");
             orderStatus = bundle.getString("orderStatus");
             orderId = bundle.getString("orderId");
+            paymentMethod = bundle.getString("method");
+            quantity = bundle.getString("quantity");
             addressData = (AddressListResponse.AddressData) bundle.getSerializable("addressData");
 
         }
@@ -117,6 +121,8 @@ public class SuccessFragment extends BaseFragment implements View.OnClickListene
     private void setData() {
         txtOrderAmount.setText(!TextUtils.isEmpty(totalPrice) ? "Order Amount: " + getString(R.string.Rs) + totalPrice : "-");
         txtCustomerName.setText("Hello " + CocoPreferences.getFirstName());
+        txtQuantity.setText("Quantity: " + quantity);
+        txtOrderType.setText("Order Type: " + paymentMethod);
 
 
         Date currentTime = Calendar.getInstance().getTime();

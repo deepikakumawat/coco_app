@@ -186,7 +186,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/inTop"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
         android:background="@color/white"
         android:clickable="true"
         android:orientation="vertical"
