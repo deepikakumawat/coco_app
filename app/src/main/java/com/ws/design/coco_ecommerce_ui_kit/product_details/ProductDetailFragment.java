@@ -802,6 +802,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
 
+/*
     private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
 
         try {
@@ -819,7 +820,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
 
-    /*set attribute name*/
+    */
+/*set attribute name*//*
+
 
                 lyColorSizeAttrName.removeAllViews();
 
@@ -922,9 +925,10 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
     }
+*/
 
 
-/*
+
     private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
 
         try {
@@ -941,8 +945,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
                 txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
-                */
-/*set attribute name*//*
+
+/*set attribute name*/
 
                 lyColorSizeAttrName.removeAllViews();
 
@@ -1002,7 +1006,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
     }
-*/
+
 
 
     private void setProductSpecfication(ArrayList<ProductAttributeData> productAttributeDataArrayList) {

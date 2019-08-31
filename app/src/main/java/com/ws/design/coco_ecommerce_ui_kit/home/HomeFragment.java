@@ -4,6 +4,7 @@ package com.ws.design.coco_ecommerce_ui_kit.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +35,7 @@ import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener, HomeView {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, HomeView, SwipeRefreshLayout.OnRefreshListener {
 
 
     private ArrayList<HomeBannerModelClass> homeBannerModelClasses;
@@ -67,6 +68,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private RelativeLayout ryParent;
     private ShimmerFrameLayout mShimmerViewContainer;
 
+    private SwipeRefreshLayout pullDownRefreshCall;
 
     @Nullable
     @Override
@@ -85,21 +87,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         homePresenter = new HomePresenter(this);
 
-        ryParent=   mView.findViewById(R.id.ryParent);
+        ryParent = mView.findViewById(R.id.ryParent);
 
         mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
+        pullDownRefreshCall = view.findViewById(R.id.pullDownRefreshCall);
 
 
-        if (Util.isDeviceOnline(getActivity())) {
-            homePresenter.getHomeData();
-
-        } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
-Util.showNoInternetDialog(getActivity());
-        }
+       callAPI();
 
 
-        rvBanner =  mView.findViewById(R.id.rvBanner);
+        pullDownRefreshCall.setOnRefreshListener(this);
+        pullDownRefreshCall.setColorSchemeResources(R.color.red, R.color.red, R.color.red, R.color.red);
+
+
+        rvBanner = mView.findViewById(R.id.rvBanner);
 
         homeBannerModelClasses = new ArrayList<>();
 
@@ -112,12 +113,9 @@ Util.showNoInternetDialog(getActivity());
         rvBanner.setItemAnimator(new DefaultItemAnimator());
 
 
-
-        rvCategory =  mView.findViewById(R.id.rvCategory);
+        rvCategory = mView.findViewById(R.id.rvCategory);
 
         homeCategoryModelClasses = new ArrayList<>();
-
-
 
 
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -133,7 +131,6 @@ Util.showNoInternetDialog(getActivity());
         rvTopRatedProducts = (RecyclerView) mView.findViewById(R.id.rvTopRatedProducts);
 
         topTenModelClasses = new ArrayList<>();
-
 
 
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -170,6 +167,15 @@ Util.showNoInternetDialog(getActivity());
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
 
 
+    }
+
+    private void callAPI() {
+        if (Util.isDeviceOnline(getActivity())) {
+            homePresenter.getHomeData();
+
+        } else {
+            Util.showNoInternetDialog(getActivity());
+        }
     }
 
     @Override
@@ -241,23 +247,22 @@ Util.showNoInternetDialog(getActivity());
 
     @Override
     public void showWait() {
-//       showProDialog(getActivity());
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-//        dismissProDialog();
         mShimmerViewContainer.stopShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.GONE);
+        setPullToRefreshFalse();
 
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
 
-        showCenteredToast(ryParent,getActivity(), appErrorMessage,"");
+        showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
     }
 
     @Override
@@ -301,16 +306,48 @@ Util.showNoInternetDialog(getActivity());
 
     @Override
     protected boolean isCartIconVisible() {
-        return  true;
+        return true;
     }
 
     @Override
     protected boolean isSearchIconVisible() {
-        return  true;
+        return true;
     }
 
     @Override
     protected String getActionbarTitle() {
         return getString(R.string.home);
+    }
+
+    @Override
+    public void onRefresh() {
+        categoriesArrayList.clear();
+        if (homeCategoryAdapter != null) {
+            homeBannerAdapter.notifyDataSetChanged();
+        }
+
+        bannerArrayList.clear();
+        if (homeBannerAdapter != null) {
+            homeBannerAdapter.notifyDataSetChanged();
+        }
+
+        productDataArrayList.clear();
+        if (homeTopRatedProductsAdapter != null) {
+            homeTopRatedProductsAdapter.notifyDataSetChanged();
+        }
+
+        dealProductsArrayList.clear();
+        if (homeLikeProductsAdapter != null) {
+            homeLikeProductsAdapter.notifyDataSetChanged();
+        }
+
+
+        callAPI();
+    }
+
+    private void setPullToRefreshFalse() {
+        if (pullDownRefreshCall.isRefreshing()) {
+            pullDownRefreshCall.setRefreshing(false);
+        }
     }
 }
