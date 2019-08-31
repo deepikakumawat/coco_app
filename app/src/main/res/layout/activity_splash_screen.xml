@@ -18,7 +18,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="300dp"
             android:layout_height="500dp"
-            android:src="@drawable/ic_richkart_logo"
+            android:src="@drawable/ic_richkart_logo_login"
             />
     </LinearLayout>
 </ScrollView>
