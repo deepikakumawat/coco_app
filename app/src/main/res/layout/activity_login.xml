@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="62.7dp"
-            android:src="@drawable/ic_richkart_logo" />
+            android:src="@drawable/ic_richkart_logo_login" />
 
         <customfonts.TextViewSFProDisplaySemibold
             android:layout_width="match_parent"

@@ -128,7 +128,8 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
 
                             for(CategoriesResponse.SubCategoriesData subCategoriesData : mainCategoriesData.getmSubCategories()){
 
-                                if(subCategoriesData.getmProductCount()>0){
+                                if(subCategoriesData.getmProductCount()>0)
+                                {
 
                                     mainCategoriesDataArrayList.add(mainCategoriesData);
                                 }
