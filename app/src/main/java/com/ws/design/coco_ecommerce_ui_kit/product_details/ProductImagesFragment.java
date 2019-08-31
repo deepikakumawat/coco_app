@@ -15,7 +15,7 @@ import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import java.util.ArrayList;
 
 
-public class ProductImagesFragment extends BaseFragment {
+public class ProductImagesFragment extends BaseFragment implements View.OnClickListener{
 
 
     private ViewPager viewPager;

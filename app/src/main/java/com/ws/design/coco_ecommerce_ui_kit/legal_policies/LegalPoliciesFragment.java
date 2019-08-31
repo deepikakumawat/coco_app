@@ -117,9 +117,9 @@ public class LegalPoliciesFragment extends BaseFragment implements View.OnClickL
         Bundle bundle = new Bundle();
         bundle.putString("webUrl", webUrl);
         bundle.putString("screenTitle", screenTitle);
-        TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
-        termsConditionFragment.setArguments(bundle);
-        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), termsConditionFragment, null, true, false);
+        LegalPoliciesWebPages legalPoliciesWebPages = new LegalPoliciesWebPages();
+        legalPoliciesWebPages.setArguments(bundle);
+        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), legalPoliciesWebPages, null, true, false);
 
     }
 }

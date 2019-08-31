@@ -9,11 +9,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -27,9 +24,7 @@ import java.util.ArrayList;
 
 import fragment.FragmentManagerUtils;
 
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class MyWishlistFragment extends BaseFragment implements MyWishListView, View.OnClickListener {
 
