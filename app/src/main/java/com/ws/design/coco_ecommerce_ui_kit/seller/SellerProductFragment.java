@@ -20,7 +20,9 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
+import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -207,6 +209,27 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
                     FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
 
                     break;
+
+                case R.id.ly_root:
+
+                    ProductDetailsSimilier   productData = (ProductDetailsSimilier) view.getTag();
+//                    removeCorssPostion = (int) view.getTag(R.id.txtCross);
+                    if (productData != null) {
+
+                        Bundle  bundle = new Bundle();
+                        bundle.putString("productSlug", productData.getmProductSlug());
+                        bundle.putString("productId", productData.getmProductId());
+                        bundle.putString("productQty", productData.getmProductQty());
+
+                        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+                        productDetailFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
+
+                    }
+
+                    break;
+
                 default:
                     break;
             }

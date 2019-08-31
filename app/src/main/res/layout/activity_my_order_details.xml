@@ -73,6 +73,18 @@
                         android:textSize="15sp"
                         tools:ignore="MissingConstraints" />
 
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtOrderDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/orderid"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingConstraints" />
+
                     <customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtPrice"
                         android:layout_width="match_parent"
@@ -98,6 +110,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:text="@string/sender_data"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -113,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:padding="11dp">
 
                     <customfonts.MyTextView_Roboto_Regular
@@ -368,9 +382,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/inTop"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
         android:background="@color/white"
         android:clickable="true"
+        android:visibility="gone"
         android:orientation="vertical"
         shimmer:duration="800">
 

@@ -56,38 +56,30 @@
                             android:textSize="13.3sp" />
 
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12sp"
                             android:orientation="horizontal">
 
-                            <RatingBar
-                                android:id="@+id/rbProductRating"
-                                style="?android:attr/ratingBarStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:isIndicator="true"
-                                android:numStars="5"
-                                android:stepSize="1"
-                                android:theme="@style/RatingBar" />
 
-                            <customfonts.MyTextView_Roboto_Bold
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="12"
-                                android:textColor="@color/cut_price"
-                                android:textSize="11.3sp"
-                                android:visibility="invisible" />
 
                             <customfonts.MyTextView_Roboto_Black
-                                android:id="@+id/txtProductSalePrice"
+                                android:id="@+id/txtProductPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="12sp"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/cut_price"
+                                android:textSize="14.7sp" />
+
+                            <customfonts.MyTextView_Roboto_Black
+                                android:id="@+id/txtProductSalePrice"
+                                android:layout_toRightOf="@id/txtProductPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="12sp"
+                                android:layout_marginLeft="5dp"
                                 android:text="$ 343"
                                 android:textColor="@color/black"
                                 android:textSize="14.7sp" />
@@ -97,6 +89,7 @@
                                 android:id="@+id/lyAddToCart"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
                                 android:layout_gravity="center"
 
                                 android:gravity="center">
@@ -111,7 +104,17 @@
 
                             </LinearLayout>
 
-                        </LinearLayout>
+                        </RelativeLayout>
+
+                        <RatingBar
+                            android:id="@+id/rbProductRating"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:theme="@style/RatingBar" />
 
                         <View
                             android:layout_width="match_parent"

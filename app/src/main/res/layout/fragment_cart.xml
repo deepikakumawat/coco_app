@@ -92,13 +92,14 @@
                         android:text="₹ 418"
                         android:textColor="#565656"
                         android:id="@+id/txtTotalPrice"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VIEW DETAILS"
+                        android:visibility="gone"
                         android:textColor="#4769e2"
                         android:textSize="12sp" />
 

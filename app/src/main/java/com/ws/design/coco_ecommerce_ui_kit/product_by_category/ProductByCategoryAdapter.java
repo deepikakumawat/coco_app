@@ -1,6 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -60,6 +61,10 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             holder.txtProductName.setText(!TextUtils.isEmpty(productData.getmProductName()) ? productData.getmProductName() : "-");
             holder.txtProductSalePrice.setText(!TextUtils.isEmpty(productData.getmSalePrice()) ?context.getString(R.string.Rs)+ productData.getmSalePrice() : "-");
 
+
+            holder.txtProductPrice.setText(!TextUtils.isEmpty(productData.getmPrice()) ?context.getString(R.string.Rs)+ productData.getmPrice() : "-");
+            holder.txtProductPrice.setPaintFlags(holder.txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
@@ -89,7 +94,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView txtProductSalePrice, offer, txtProductName,txtProductDesc;
+        TextView txtProductSalePrice,txtProductPrice, offer, txtProductName,txtProductDesc;
         ImageView imgProduct;
         LinearLayout lyAddToCart;
         LinearLayout linear;
@@ -105,6 +110,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             txtProductName =  view.findViewById(R.id.txtProductName);
             txtProductDesc =  view.findViewById(R.id.txtProductDesc);
             txtProductSalePrice =  view.findViewById(R.id.txtProductSalePrice);
+            txtProductPrice =  view.findViewById(R.id.txtProductPrice);
             offer =  view.findViewById(R.id.offer);
             linear =  view.findViewById(R.id.linear);
             lyProduct =  view.findViewById(R.id.lyProduct);

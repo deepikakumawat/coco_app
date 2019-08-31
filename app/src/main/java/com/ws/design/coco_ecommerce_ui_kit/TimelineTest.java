@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -29,13 +31,27 @@ public class TimelineTest extends AppCompatActivity {
     //Create Timeline Rows List
     private ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
     ArrayAdapter<TimelineRow> myAdapter;
+    TextView title;
+    LinearLayout linearLayout;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline_test);
 
+        title = (TextView) findViewById(R.id.title);
+        linearLayout = (LinearLayout) findViewById(R.id.linear);
+        imgBack = findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
+        title.setText("Track Order");
+        linearLayout.setVisibility(View.GONE);
         // Add Random Rows to the List
         for (int i = 0; i < 4; i++) {
             //add the new row to the list

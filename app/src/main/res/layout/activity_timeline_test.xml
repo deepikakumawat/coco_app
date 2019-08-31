@@ -4,15 +4,35 @@
     android:id="@+id/activity_timeline_test2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.TimelineTest">
 
+    <include
+        android:id="@+id/inTop"
+        layout="@layout/toolbar_product_grid_detail" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/inTop"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+
+        android:id="@+id/img"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/track"
+        android:layout_height="wrap_content" />
+
     <ListView
+        android:layout_below="@id/img"
         android:id="@+id/timeline_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="0dp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -38,6 +38,7 @@ public class MyOrderDetailsActivity extends AppCompatActivity implements OrderDe
     private TextView txtDeliveryLandmark;
     private TextView txtDeliveryState;
     private TextView txtOrderId;
+    private TextView txtOrderDate;
     private TextView txtPrice;
     private TextView txtSenderName;
     private TextView txtSenderContact;
@@ -70,6 +71,7 @@ public class MyOrderDetailsActivity extends AppCompatActivity implements OrderDe
         lyProductDetails = findViewById(R.id.lyProductDetails);
 
         txtOrderId = findViewById(R.id.txtOrderId);
+        txtOrderDate = findViewById(R.id.txtOrderDate);
         txtPrice = findViewById(R.id.txtPrice);
 
         txtSenderName = findViewById(R.id.txtSenderName);
@@ -227,6 +229,7 @@ Util.showNoInternetDialog(this);
             txtSenderContact.setText(getString(R.string.contact) + orderDetailsReponse.getmOrderDetail().getmSenderContact());
             txtSenderAddress.setText(getString(R.string.address) + orderDetailsReponse.getmOrderDetail().getmSenderAddress());
             txtSenderEmail.setText(getString(R.string.email) + orderDetailsReponse.getmOrderDetail().getmSenderEmail());
+            txtOrderDate.setText("Date: " + orderDetailsReponse.getmOrderDetail().getmCreatedDate());
 
             txtReceiverName.setText(getString(R.string.name) + orderDetailsReponse.getmOrderDetail().getmRecieverName() + " " + orderDetailsReponse.getmOrderDetail().getmReciverLastName());
             txtReceiverEmail.setText(getString(R.string.email) + orderDetailsReponse.getmOrderDetail().getmReciverEmail());

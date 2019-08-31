@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -65,6 +66,10 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
 
             holder.imgAddToCart.setOnClickListener(sellerProductFragment);
 
+            holder.lyProduct.setTag(productData);
+            holder.lyProduct.setTag(R.id.ly_root,position);
+            holder.lyProduct.setOnClickListener(sellerProductFragment);
+
 
         }
 
@@ -90,6 +95,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
         private ImageView imgProduct;
         private ImageView imgAddToCart;
         private RatingBar rbProductRating;
+        private LinearLayout lyProduct;
 
 
         public ViewHolder(View view) {
@@ -100,6 +106,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             txtProductName = view.findViewById(R.id.txtProductName);
             rbProductRating = view.findViewById(R.id.rbProductRating);
             txtProductDesc = view.findViewById(R.id.txtProductDesc);
+            lyProduct = view.findViewById(R.id.ly_root);
 
             txtProductSalePrice = view.findViewById(R.id.txtProductSalePrice);
 
