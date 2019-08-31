@@ -48,7 +48,7 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
             holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
 
 
-            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProImgUrl();
+            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
 
             holder.lyProduct.setTag(productData);
