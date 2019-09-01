@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
 
 
     private EditText etEmail;
-    private TextView btnSignup;
+    private Button btnSignup;
     private EditText etLname;
     private EditText etFname;
     private EditText etConfirmPassword;
@@ -111,7 +112,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etPhone = (EditText) findViewById(R.id.etPhone);
-        btnSignup = (TextView) findViewById(R.id.btnSignup);
+        btnSignup =  findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(this);
 
 

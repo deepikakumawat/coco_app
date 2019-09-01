@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorAccent"
+        android:background="@color/navigation_bar_color"
         android:gravity="center"
         android:padding="10dp"
         android:text="I am not a robot"
@@ -88,22 +88,19 @@
             android:layout_margin="5dp"
             android:orientation="vertical">
 
-            <customfonts.TextViewSFProDisplayMedium
-                android:id="@+id/txtConfirmCaptcha"
+            <customfonts.Button_Roboto_Medium
+                android:id="@+id/btnConfirmCaptcha"
+                style="@style/buttonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="9dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:gravity="center"
-                android:paddingTop="16.5dp"
-                android:paddingBottom="16.5dp"
                 android:text="CONFIRM ORDER"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="13.7sp" />
+              />
 
 
             <customfonts.TextViewSFProDisplayMedium

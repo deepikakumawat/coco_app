@@ -84,7 +84,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         btnGoToHome.setOnClickListener(this);
 
         pullDownRefreshCall.setOnRefreshListener(this);
-        pullDownRefreshCall.setColorSchemeResources(R.color.red, R.color.red, R.color.red, R.color.red);
+        pullDownRefreshCall.setColorSchemeResources(R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color);
 
 
         callAPI();

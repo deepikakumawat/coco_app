@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -80,7 +81,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private LinearLayout lyParent;
     private View mView;
     private Dialog enterCaptchaDialog;
-    private TextView txtConfirmCaptcha;
+    private Button btnConfirmCaptcha;
     private TextView etxtEnterTheCharacters;
     private ImageView imgReload;
     private TextView txtCaptcha;
@@ -223,7 +224,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                     int randomNumber = getRandomNumber();
                     txtCaptcha.setText(randomNumber + "");
                     break;
-                case R.id.txtConfirmCaptcha:
+                case R.id.btnConfirmCaptcha:
                     String randomCptcha = txtCaptcha.getText().toString();
                     String enteredCaptcha = etxtEnterTheCharacters.getText().toString();
                     if (!TextUtils.isEmpty(enteredCaptcha) && !TextUtils.isEmpty(randomCptcha)) {
@@ -574,11 +575,11 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
             txtCaptcha = enterCaptchaDialog.findViewById(R.id.txtCaptcha);
             imgReload = enterCaptchaDialog.findViewById(R.id.imgReload);
             etxtEnterTheCharacters = enterCaptchaDialog.findViewById(R.id.etxtEnterTheCharacters);
-            txtConfirmCaptcha = enterCaptchaDialog.findViewById(R.id.txtConfirmCaptcha);
+            btnConfirmCaptcha = enterCaptchaDialog.findViewById(R.id.btnConfirmCaptcha);
             TextView txtReturnToPaymentOption = enterCaptchaDialog.findViewById(R.id.txtReturnToPaymentOption);
 
             imgReload.setOnClickListener(this);
-            txtConfirmCaptcha.setOnClickListener(this);
+            btnConfirmCaptcha.setOnClickListener(this);
 
             int randomNumber = getRandomNumber();
             txtCaptcha.setText(randomNumber + "");

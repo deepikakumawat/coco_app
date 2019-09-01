@@ -16,6 +16,7 @@
 
 
     <color name="white">#ffffff</color>
+    <color name="navigation_bar_color">#022A37</color>
     <color name="black">#000000</color>
     <color name="red">#d44334</color>
     <color name="dark_red">#b63418</color>
@@ -89,6 +90,6 @@
     <color name="whiteTextColor">#fff</color>
     <!--<color name="blackTextColor">#000</color>-->
 
-
+<color name="button_bg">#ffc700</color>
 
 </resources>

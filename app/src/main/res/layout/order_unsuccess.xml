@@ -16,7 +16,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+          >
 
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="400dp"
@@ -105,13 +106,12 @@
 
         <Button
             android:id="@+id/btnGoToHome"
-            android:layout_width="130dp"
-            android:layout_height="23dp"
+            style="@style/buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="23dp"
-            android:background="#ffc700"
-            android:text="Go Home!"
-            android:textStyle="" />
+            android:text="Go Home!" />
 
         <TextView
             style="@style/viewParent.headerText"

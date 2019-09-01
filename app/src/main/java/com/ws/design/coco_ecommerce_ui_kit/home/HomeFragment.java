@@ -97,7 +97,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
 
         pullDownRefreshCall.setOnRefreshListener(this);
-        pullDownRefreshCall.setColorSchemeResources(R.color.red, R.color.red, R.color.red, R.color.red);
+        pullDownRefreshCall.setColorSchemeResources(R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color);
 
 
         rvBanner = mView.findViewById(R.id.rvBanner);

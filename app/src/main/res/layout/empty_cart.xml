@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/svEmptyCartView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/svEmptyCartView"
     android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
-        
+        android:orientation="vertical">
+
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="392dp"
             android:layout_height="285dp"
-            android:src="@drawable/ic_cart_empty"
             android:layout_margin="30dp"
-            android:layout_marginTop="70dp"/>
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_cart_empty" />
 
 
         <TextView
             style="@style/viewParent.headerText"
             android:text="We Think! You Are Roll Empty Cart In Richkart"
             android:textAlignment="center"
-            android:textSize="17dp"/>
+            android:textSize="17dp" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
+            android:layout_marginTop="20dp"
             android:text="Nothing In Your Cart "
-            android:textAlignment="center"
-            android:layout_marginTop="20dp"/>
+            android:textAlignment="center" />
 
         <!--BUTTON FOR HOME PAGE REDIRECTION-->
         <Button
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:text="Add Something"
             android:id="@+id/btnAddSomething"
-            android:background="#ffc700"
-            android:layout_marginTop="70dp"/>
+            style="@style/buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Add Something" />
 
     </LinearLayout>
 </ScrollView>

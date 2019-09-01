@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     private UpdateProfilePresenter updateProfilePresenter;
     private EditText etEmail;
-    private TextView btnUpdate;
+    private Button btnUpdate;
     private EditText etLname;
     private EditText etFname;
     private EditText etConfirmPassword;
@@ -99,7 +100,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etPhone = (EditText) findViewById(R.id.etPhone);
-        btnUpdate = (TextView) findViewById(R.id.btnUpdate);
+        btnUpdate =  findViewById(R.id.btnUpdate);
 
         etEmail.setText(CocoPreferences.getUserEmail());
         etFname.setText(CocoPreferences.getFirstName());

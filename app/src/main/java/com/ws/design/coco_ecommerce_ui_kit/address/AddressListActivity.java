@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,7 +42,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
     private AddressPresenter addressPresenter;
     private int deletedPosition = -1;
     private ImageView imgBack;
-    private LinearLayout linear;
+    private Button btnAddAddress;
     private static final int ADD_ADDRESS_ACTION = 101;
     int selectedValue = 0;
     private String screen = "";
@@ -78,9 +79,9 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
         title = findViewById(R.id.title);
         rvMyAddress = findViewById(R.id.rvMyOrder);
         imgBack = findViewById(R.id.imgBack);
-        linear = findViewById(R.id.linear);
+        btnAddAddress = findViewById(R.id.btnAddAddress);
         imgBack.setOnClickListener(this);
-        linear.setOnClickListener(this);
+        btnAddAddress.setOnClickListener(this);
         title.setText("Address List");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -228,7 +229,7 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
                 case R.id.imgBack:
                     finish();
                     break;
-                case R.id.linear:
+                case R.id.btnAddAddress:
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         Intent intent = new Intent(AddressListActivity.this, AddAddressActivity.class);
                         startActivityForResult(intent, ADD_ADDRESS_ACTION);

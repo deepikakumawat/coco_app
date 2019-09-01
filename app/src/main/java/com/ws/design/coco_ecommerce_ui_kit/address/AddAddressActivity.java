@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +25,6 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class AddAddressActivity extends AppCompatActivity implements AddressListView, View.OnClickListener {
-    TextView txtTitle, txtSave;
     private AddressPresenter addressPresenter;
     private EditText txtPrimaryAddress;
     private EditText txtArea;
@@ -38,6 +38,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
     private LinearLayout lyParent;
     private AddressListResponse.AddressData addressData;
     private String id = "";
+    private Button btnSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,6 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
     private void init() {
         lyParent = findViewById(R.id.lyParent);
         imgBack = findViewById(R.id.imgBack);
-        txtTitle = findViewById(R.id.txtTitle);
         txtPrimaryAddress = findViewById(R.id.txtPrimaryAddress);
         txtArea = findViewById(R.id.txtArea);
         txtLandmark = findViewById(R.id.txtLandmark);
@@ -73,10 +73,9 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
         txtPhone = findViewById(R.id.txtPhone);
         txtCountry = findViewById(R.id.txtCountry);
         txtZipcode = findViewById(R.id.txtZipcode);
-        txtSave = findViewById(R.id.txtSave);
-        txtTitle.setText("Add New Address");
-        txtSave.setVisibility(View.VISIBLE);
-        txtSave.setOnClickListener(this);
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setVisibility(View.VISIBLE);
+        btnSave.setOnClickListener(this);
         imgBack.setOnClickListener(this);
     }
 
@@ -103,7 +102,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtSave:
+                case R.id.btnSave:
                     String primaryAddress = txtPrimaryAddress.getText().toString().trim();
                     String area = txtArea.getText().toString().trim();
                     String city = txtCity.getText().toString().trim();

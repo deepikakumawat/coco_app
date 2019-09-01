@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     private ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
     HashMap<String, String> filerHaspMap = new HashMap<String, String>();
 
-    private TextView txtFilter;
+    private Button btnFilter;
     private LinearLayout lyParent;
     private IFilterListener iFilterListener;
     private String minimumValue;
@@ -72,12 +73,12 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
 
             lyParent = mView.findViewById(R.id.lyParent);
-            txtFilter = mView.findViewById(R.id.txtFilter);
+            btnFilter = mView.findViewById(R.id.btnFilter);
             expandableListView = mView.findViewById(R.id.expandableListView);
             filterExpandableAdapter = new FilterExpandableAdapter(getActivity(), productAttribueDataArrayList, FilterFragment.this);
             expandableListView.setAdapter(filterExpandableAdapter);
 
-            txtFilter.setOnClickListener(this);
+            btnFilter.setOnClickListener(this);
 
             CrystalRangeSeekbar rangeSeekbar = mView.findViewById(R.id.rangeSeekbar1);
 
@@ -188,7 +189,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
                     }
                     break;
-                case R.id.txtFilter:
+                case R.id.btnFilter:
 
                     if (!filerHaspMap.isEmpty() || !TextUtils.isEmpty(minimumValue) || !TextUtils.isEmpty(maximumValue)) {
                         String[] result = filerHaspMap.values().toArray(new String[0]);
