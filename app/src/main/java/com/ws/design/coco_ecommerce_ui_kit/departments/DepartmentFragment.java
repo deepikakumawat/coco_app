@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
-import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
@@ -45,7 +44,7 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = inflater.inflate(R.layout.fragment_category, container, false);
+        mView = inflater.inflate(R.layout.fragment_departments, container, false);
         return mView;
     }
 

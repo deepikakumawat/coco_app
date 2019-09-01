@@ -94,7 +94,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView txtProductSalePrice,txtProductPrice, offer, txtProductName,txtProductDesc;
+        TextView txtProductSalePrice,txtProductPrice, txtProductName,txtProductDesc;
         ImageView imgProduct;
         LinearLayout lyAddToCart;
         LinearLayout linear;
@@ -111,7 +111,6 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             txtProductDesc =  view.findViewById(R.id.txtProductDesc);
             txtProductSalePrice =  view.findViewById(R.id.txtProductSalePrice);
             txtProductPrice =  view.findViewById(R.id.txtProductPrice);
-            offer =  view.findViewById(R.id.offer);
             linear =  view.findViewById(R.id.linear);
             lyProduct =  view.findViewById(R.id.lyProduct);
             lyAddToCart =  view.findViewById(R.id.lyAddToCart);

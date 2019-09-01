@@ -47,8 +47,6 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class CheckoutFragment extends BaseFragment implements CheckoutView, View.OnClickListener, IPaymentListener {
 
-    RadioButton button1, button2;
-    LinearLayout radio1, radio2;
 
     private CheckoutListAdapter checkoutListAdapter;
     private RecyclerView rvCart;
@@ -167,37 +165,11 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         rvPaymentType.setLayoutManager(layoutManagerPaymentMethod);
 
 
-        paymentMethodDataArrayList.add(new PaymentMethodData(false, getString(R.string.cash_on_delivery)));
+        paymentMethodDataArrayList.add(new PaymentMethodData(false, getString(R.string.pay_on_delivery)));
+        paymentMethodDataArrayList.add(new PaymentMethodData(false, getString(R.string.pay_online)));
         paymentMethodAdapter = new PaymentMethodAdapter(getActivity(), paymentMethodDataArrayList, CheckoutFragment.this);
         rvPaymentType.setAdapter(paymentMethodAdapter);
 
-
-        button1 = mView.findViewById(R.id.button1);
-        button2 = mView.findViewById(R.id.button2);
-        radio1 = mView.findViewById(R.id.radio1);
-        radio2 = mView.findViewById(R.id.radio2);
-
-        radio1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button1.isSelected();
-                button2.setChecked(false);
-                button1.setChecked(true);
-                button1.setEnabled(false);
-
-            }
-        });
-
-        radio2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button2.isSelected();
-                button1.setChecked(false);
-                button2.setChecked(true);
-                button2.setEnabled(false);
-
-            }
-        });
 
 
     }

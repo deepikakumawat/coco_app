@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/white"
     android:padding="20dp">
 
     <TextView
@@ -12,7 +13,7 @@
         android:background="@color/colorAccent"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Captcha"
+        android:text="I am not a robot"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 

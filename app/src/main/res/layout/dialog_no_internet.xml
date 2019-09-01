@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/df_dialog_layout"
+    android:background="@color/white"
     android:id="@+id/dialogParent">
 
     <android.support.v7.widget.CardView

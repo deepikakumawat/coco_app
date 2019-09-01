@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
     private EditText etPassword;
     private EditText etPhone;
 
-    TextView title,edit,test,edit_txt;
+    TextView title,test;
     private ImageView imgBack;
     private LinearLayout lyParent;
 
@@ -86,11 +86,8 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
         lyParent = findViewById(R.id.lyParent);
         title = (TextView)findViewById(R.id.title);
-        edit_txt = (TextView)findViewById(R.id.edit_txt);
-        edit_txt.setVisibility(View.GONE);
-        edit = (TextView)findViewById(R.id.edit);
+
         imgBack = (ImageView)findViewById(R.id.imgBack);
-        edit.setVisibility(View.GONE);
         title.setVisibility(View.VISIBLE);
         title.setText("Profile");
         imgBack.setOnClickListener(this);

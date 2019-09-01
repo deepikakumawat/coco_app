@@ -21,13 +21,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8.3dp"
-                android:layout_marginTop="13.3dp"
-                android:layout_marginRight="8.9dp"
-                android:background="@drawable/rect_recycler"
-                android:elevation="4dp">
+                android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
+
+            <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvCart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -260,150 +257,8 @@
                 </LinearLayout>
 
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.7dp"
-                    android:background="#4a707070" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8.3dp"
-                    android:layout_marginTop="13.3dp"
-                    android:layout_marginRight="8.9dp"
-                    android:layout_marginBottom="8dp"
-                    android:elevation="4dp"
-                    android:orientation="vertical">
 
 
-                    <LinearLayout
-                        android:id="@+id/radio1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="15.2dp">
-
-                        <RadioButton
-                            android:id="@+id/button1"
-                            style="@style/radionbutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:paddingLeft="6dp"
-                            android:textColor="#666666"
-                            android:textSize="12sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <customfonts.MyTextView_Roboto_Medium
-                                    android:id="@+id/deliveryType"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10.3dp"
-                                    android:layout_weight="1"
-                                    android:letterSpacing="0.03"
-                                    android:text="Express Delivery"
-                                    android:textColor="@color/black"
-                                    android:textSize="15sp" />
-
-                                <customfonts.MyTextView_Roboto_Regular
-                                    android:id="@+id/amount"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="20.3dp"
-                                    android:text="+$9"
-                                    android:textColor="@color/toolbarColor" />
-                            </LinearLayout>
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10.3dp"
-                                android:letterSpacing="0.03"
-                                android:text="1 day Delivery"
-                                android:textColor="@color/greyText"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/viewline"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.7dp"
-                        android:layout_marginLeft="36dp"
-                        android:background="@color/viewLineColor"
-                        android:orientation="vertical" />
-
-                    <LinearLayout
-                        android:id="@+id/radio2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:paddingBottom="15.2dp">
-
-                        <RadioButton
-                            android:id="@+id/button2"
-                            style="@style/radionbutton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:paddingLeft="6dp"
-                            android:textColor="#666666"
-                            android:textSize="12sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <customfonts.MyTextView_Roboto_Medium
-                                    android:id="@+id/deliveryType"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10.3dp"
-                                    android:layout_weight="1"
-                                    android:letterSpacing="0.03"
-                                    android:text="Normal Delivery"
-                                    android:textColor="@color/black"
-                                    android:textSize="15sp" />
-
-                            </LinearLayout>
-
-                            <customfonts.MyTextView_Roboto_Regular
-                                android:id="@+id/noOfDays"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10.3dp"
-                                android:letterSpacing="0.03"
-                                android:text="Upto 5 Business Days "
-                                android:textColor="@color/greyText"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                    <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:clipToPadding="false"-->
-                    <!--android:nestedScrollingEnabled="false"-->
-                    <!--android:id="@+id/recycler2">-->
-                    <!--</android.support.v7.widget.RecyclerView>-->
-                </LinearLayout>
             </LinearLayout>
 
             <customfonts.MyTextView_Roboto_Medium
@@ -441,29 +296,6 @@
                 android:textColor="@color/black"
                 android:textSize="13.3sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <customfonts.TextViewSFProDisplayRegular
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Get 50% Cashback on this order, upto 150Rs, TC apply"
-                    android:textColor="@color/black"
-                    android:textSize="10.7sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/info" />
-            </LinearLayout>
 
             <customfonts.Button_SF_Pro_Display_Semibold
                 android:id="@+id/txtConfirmPlaceOrder"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/lyParent"
 
-    android:background="@color/contentBodyColor"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include

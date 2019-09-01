@@ -8,6 +8,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     shimmer:duration="800"
+    android:background="@color/white"
     tools:ignore="MissingConstraints">
 
 

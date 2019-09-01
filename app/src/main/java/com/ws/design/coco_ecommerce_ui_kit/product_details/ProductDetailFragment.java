@@ -49,7 +49,6 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
-import Adapter.ViewpagerProductDetailsAdapter;
 import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
@@ -64,7 +63,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
     private ViewPager viewPager;
-    private ViewpagerProductDetailsAdapter viewpagerAdapter;
 
 
     private RecyclerView rvTopRatedProducts;

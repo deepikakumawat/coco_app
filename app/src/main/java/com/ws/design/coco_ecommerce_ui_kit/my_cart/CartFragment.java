@@ -58,7 +58,6 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     boolean isShimmerShow = true;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -371,6 +370,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     public void addToWishList(AddToWishListResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
             showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), Constant.API_SUCCESS);
+
         } else {
             showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), "");
         }

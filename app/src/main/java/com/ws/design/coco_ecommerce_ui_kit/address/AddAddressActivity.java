@@ -24,7 +24,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class AddAddressActivity extends AppCompatActivity implements AddressListView, View.OnClickListener {
-    TextView txtTitle, txt2;
+    TextView txtTitle, txtSave;
     private AddressPresenter addressPresenter;
     private EditText txtPrimaryAddress;
     private EditText txtArea;
@@ -73,10 +73,10 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
         txtPhone = findViewById(R.id.txtPhone);
         txtCountry = findViewById(R.id.txtCountry);
         txtZipcode = findViewById(R.id.txtZipcode);
-        txt2 = findViewById(R.id.txt2);
+        txtSave = findViewById(R.id.txtSave);
         txtTitle.setText("Add New Address");
-        txt2.setVisibility(View.VISIBLE);
-        txt2.setOnClickListener(this);
+        txtSave.setVisibility(View.VISIBLE);
+        txtSave.setOnClickListener(this);
         imgBack.setOnClickListener(this);
     }
 
@@ -103,7 +103,7 @@ public class AddAddressActivity extends AppCompatActivity implements AddressList
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txt2:
+                case R.id.txtSave:
                     String primaryAddress = txtPrimaryAddress.getText().toString().trim();
                     String area = txtArea.getText().toString().trim();
                     String city = txtCity.getText().toString().trim();

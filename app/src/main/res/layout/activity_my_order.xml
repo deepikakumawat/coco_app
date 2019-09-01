@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/ryParent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.MyOrderActivity">
 

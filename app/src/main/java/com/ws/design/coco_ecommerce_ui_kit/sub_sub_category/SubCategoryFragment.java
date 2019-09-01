@@ -52,7 +52,7 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = inflater.inflate(R.layout.fragment_category, container, false);
+        mView = inflater.inflate(R.layout.fragment_departments, container, false);
 
         Bundle bundle = getArguments();
         if (bundle != null) {

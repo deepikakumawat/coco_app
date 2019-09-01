@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ryParent"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.Cart1Activity">
+    >
 
 
     <LinearLayout

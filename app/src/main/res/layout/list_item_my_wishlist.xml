@@ -10,7 +10,7 @@
     android:layout_marginBottom="6dp"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
-    android:background="@color/Background">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
