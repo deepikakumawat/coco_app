@@ -28,16 +28,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:layout_marginLeft="29dp"
         android:layout_marginTop="15dp">
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="50dp"
-            android:src="@drawable/logo"/>
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_richkart_logo_login"/>
 
         <customfonts.TextViewSFProDisplaySemibold
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="WORLD’s Leading Ecommerce Platform"

@@ -153,7 +153,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
-                                android:textSize="14sp" />
+                                android:textSize="17sp" />
 
 
                             <customfonts.MyTextView_Roboto_Medium
@@ -161,8 +161,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:textColor="@color/blue"
-                                android:textSize="16.7sp"
+                                android:textColor="@color/appgray"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                             <LinearLayout
@@ -185,7 +185,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/black"
-                                    android:textSize="16.7sp" />
+                                    android:textSize="23sp" />
 
                                 <customfonts.MyTextView_Roboto_Medium
                                     android:id="@+id/txtProductPrice"
@@ -193,7 +193,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginLeft="15dp"
-                                    android:textColor="@color/cut_price"
+                                    android:textColor="@color/appgray"
                                     android:textSize="12.3sp" />
 
                             </LinearLayout>
