@@ -13,6 +13,7 @@ object CocoPreferences {
     private val PREFERENCES_NAME: String = "test_login_preference"
     private val FCM_REFRESH_TOKEN: String = "fcm_referesh_token"
     private val  IS_FIRST_TIME_LAUNCH : String = "IsFirstTimeLaunch"
+    private val  IS_NIGHT_MODE : String = "isNightMode"
 
 
     @SuppressLint("CommitPrefEdits")
@@ -105,7 +106,15 @@ object CocoPreferences {
         editor!!.putString(LoginResponse().KEY_USER_PIC, profilePic)
     }
 
+    @JvmStatic
+    fun setNightMode(isFirstTime: Boolean) {
+        editor!!.putBoolean(IS_NIGHT_MODE, isFirstTime)
+    }
 
+    @JvmStatic
+    fun isNightMode(): Boolean {
+        return preferences!!.getBoolean(IS_NIGHT_MODE, false)
+    }
 
 
     @JvmStatic

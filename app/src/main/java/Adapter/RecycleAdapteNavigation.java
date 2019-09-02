@@ -63,7 +63,7 @@ public class RecycleAdapteNavigation extends RecyclerView.Adapter<RecycleAdapteN
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_navigation_list, parent, false);
+                .inflate(R.layout.list_item_navigation_list, parent, false);
 
         final MyViewHolder myViewHolder= new MyViewHolder(itemView);
         itemView.setOnClickListener(v -> listener.onItemClick(v, myViewHolder.getAdapterPosition()));

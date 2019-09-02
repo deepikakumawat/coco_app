@@ -4,8 +4,8 @@
     android:id="@+id/lyParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity">
 
     <android.support.v4.widget.NestedScrollView
@@ -148,9 +148,6 @@
             </android.support.design.widget.TextInputLayout>
 
 
-
-
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,11 +210,13 @@
                 android:layout_marginTop="70dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center_horizontal"
-                android:text="Create Account"
-             />
+                android:text="Create Account" />
 
 
-
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:text="©2017-2019, Richkart.com, Inc. or its affiliates"
+                android:textAlignment="center" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

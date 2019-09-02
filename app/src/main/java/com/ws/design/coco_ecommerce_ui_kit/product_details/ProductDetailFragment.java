@@ -138,6 +138,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private TextView txtCheckPincode;
     private TextView txtPincodeStatus;
     private boolean isPincodeAPI = false;
+    private LinearLayout lyUsuallyDelivery;
 
 
     @Nullable
@@ -189,6 +190,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         etPincode = view.findViewById(R.id.etPincode);
         txtPincodeStatus = view.findViewById(R.id.txtPincodeStatus);
         txtCheckPincode = view.findViewById(R.id.txtCheckPincode);
+        lyUsuallyDelivery = view.findViewById(R.id.lyUsuallyDelivery);
 
         rvProductAttr = view.findViewById(R.id.rvProductAttr);
         txtProductDesc = view.findViewById(R.id.txtProductDesc);
@@ -555,6 +557,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             txtPincodeStatus.setVisibility(View.VISIBLE);
             txtPincodeStatus.setText(appErrorMessage);
             txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+            lyUsuallyDelivery.setVisibility(View.GONE);
         }else{
             showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
 
@@ -1145,6 +1148,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 txtPincodeStatus.setVisibility(View.VISIBLE);
                 txtPincodeStatus.setText(checkPincodeResponse.getmMessage());
                 txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                lyUsuallyDelivery.setVisibility(View.VISIBLE);
 
 
             } else {

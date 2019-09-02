@@ -21,13 +21,16 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -52,10 +55,8 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 
 public class MyAccountActivity extends AppCompatActivity implements View.OnClickListener, UpdateView {
 
-    //    private TextView title, edit, test, edit_txt;
     private TextView txtLogout;
     private TextView txtUserName;
-    //    private TextView txtUserEmail;
     private TextView txtMyOrder;
     private TextView txtChangePassword;
     private TextView txtAddAddress;
@@ -73,13 +74,17 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private TextView txtCancel;
     private UpdateProfilePresenter updateProfilePresenter;
     private ImageView imgBack;
-//    private String mCurrentPhotoPath;
-
-//    private RelativeLayout ryParent;
+    private Switch darkModeSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (CocoPreferences.isNightMode()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+
         setContentView(R.layout.activity_profile);
         updateProfilePresenter = new UpdateProfilePresenter(this);
 
@@ -93,6 +98,8 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         txtYourAddress = findViewById(R.id.txtYourAddress);
         txtEditProfile = findViewById(R.id.txtEditProfile);
         txtMyOrder = findViewById(R.id.txtMyOrder);
+        darkModeSwitch = findViewById(R.id.darkModeSwitch);
+
         imgBack = findViewById(R.id.imgBack);
         txtLogout.setOnClickListener(this);
         txtMyOrder.setOnClickListener(this);
@@ -107,6 +114,21 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         String picUrl = CocoPreferences.getProfilePic();
         Glide.with(this).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
 
+        setDarkModeSwitch();
+    }
+
+    private void setDarkModeSwitch() {
+        darkModeSwitch.setChecked(CocoPreferences.isNightMode());
+        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                CocoPreferences.setNightMode(!CocoPreferences.isNightMode());
+                CocoPreferences.savePreferencese();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                recreate();
+            }
+        });
     }
 
     @Override
@@ -185,22 +207,12 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
 
                             txtUserName.setText("");
-//                            txtUserEmail.setText("");
-
-//                            Util.showCenteredToast(ryParent,MyAccountActivity.this, "Logout Successfully!", Constant.API_SUCCESS);
-
 
                             Intent data = new Intent();
                             setResult(Activity.RESULT_OK, data);
                             finish();
 
 
-
-                         /*   android.app.Fragment f = getFragmentManager().findFragmentById(R.id.frame_container);
-                            if (f instanceof FragmentProfile) {
-                                getFragmentManager().popBackStack();
-                            }
-*/
                         }
                     })
                     .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -260,9 +272,8 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
             if (!marshMallowPermissions.checkPermissionForCamera()) {
                 marshMallowPermissions.requestPermissionForCamera(lyParent);
             } else {
-               intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                 File directory = Util.getPhotoDirectory(this);
-
 
 
                 fileUri = null;
@@ -516,7 +527,6 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         updateProfilePresenter.changeProfilePic(file, fileName);
 
     }
-
 
 
 }
