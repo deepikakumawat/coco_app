@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -42,13 +43,13 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
 
         CartListResponse.ProductData productData = productDataArrayList.get(position);
         if (productData != null) {
-            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" :productData.getmProductName());
+            holder.txtProductName.setText(TextUtils.isEmpty(productData.getmProductName()) ? "-" : productData.getmProductName());
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
 
-            holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" :"Quantity: "+ productData.getmQuantity());
+            holder.txtIncDec.setText(TextUtils.isEmpty(productData.getmQuantity()) ? "-" : "Quantity: " + productData.getmQuantity());
 
             holder.txtSalesProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
 
@@ -59,6 +60,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
                 holder.txtProductPrice.setText("-");
             }
 
+            setAttribute(productData.getmAttributes(), holder.lyColorView, holder.lyColorTop);
             setTxtDiscout(productData, holder);
 
         }
@@ -86,8 +88,8 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
         private TextView txtSalesProductPrice;
         private TextView txtProductPrice;
         private TextView txtDiscout;
-
-
+        private LinearLayout lyColorTop;
+        private LinearLayout lyColorView;
 
 
         public ViewHolder(View view) {
@@ -99,9 +101,54 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             txtSalesProductPrice = view.findViewById(R.id.txtSalesProductPrice);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
             txtDiscout = view.findViewById(R.id.txtDiscout);
-
+            lyColorView = view.findViewById(R.id.lyColorView);
+            lyColorTop = view.findViewById(R.id.lyColorTop);
 
         }
+    }
+
+    private void setAttribute(ArrayList<CartListResponse.AttributesData> attributesDataArrayList, LinearLayout lyColorView, LinearLayout lyColorTop) {
+
+        try {
+
+            if (!attributesDataArrayList.isEmpty()) {
+
+                lyColorTop.setVisibility(View.VISIBLE);
+                lyColorView.removeAllViews();
+
+
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+                View view;
+                for (int i = 0; i < attributesDataArrayList.size(); i++) {
+                    view = layoutInflater.inflate(R.layout.attribtue_cart_layout, lyColorView, false);
+
+                    TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
+                    TextView txtAttributeName = view.findViewById(R.id.txtAttributeName);
+
+                    txtAttributeType.setText(attributesDataArrayList.get(i).getmAttributeType());
+
+
+                    txtAttributeName.setVisibility(View.VISIBLE);
+
+                    txtAttributeName.setText(attributesDataArrayList.get(i).getmAttributeName());
+
+
+                    lyColorView.addView(view);
+
+                }
+            } else {
+                lyColorTop.setVisibility(View.GONE);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            lyColorTop.setVisibility(View.GONE);
+
+        }
+
     }
 
     private void setTxtDiscout(CartListResponse.ProductData productData, ViewHolder holder) {

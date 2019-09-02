@@ -94,7 +94,7 @@
                     android:text="$288"
                     android:textSize="13.3sp"
                     android:id="@+id/txtProductPrice"
-                    android:textColor="@color/red"
+                    android:textColor="@color/yellow"
                     android:layout_gravity="right"
                     android:gravity="right"/>
             </LinearLayout>

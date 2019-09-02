@@ -39,7 +39,7 @@
                     android:layout_marginRight="20dp"
                     android:text="View More"
                     android:visibility="gone"
-                    android:textColor="@color/red"
+                    android:textColor="@color/yellow"
                     android:textSize="13sp" />
             </LinearLayout>
 

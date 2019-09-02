@@ -45,8 +45,8 @@ public class MainDepartmentsAdapter extends RecyclerView.Adapter<MainDepartments
         if (mainCategoriesData != null) {
 
 
+            holder.txtCategories.setText(mainCategoriesData.getmCatName().substring(0, 1).toUpperCase() + mainCategoriesData.getmCatName().substring(1).toLowerCase());
 
-            holder.txtCategories.setText(mainCategoriesData.getmCatName());
 
             holder.rvSubCategory.setLayoutManager(new GridLayoutManager(context, 3));
             holder.rvSubCategory.setFocusableInTouchMode(false);
@@ -79,10 +79,9 @@ public class MainDepartmentsAdapter extends RecyclerView.Adapter<MainDepartments
             txtCategories = itemView.findViewById(R.id.txtCategories);
 
 
-             rvSubCategory = itemView.findViewById(R.id.rvSubCategory);
+            rvSubCategory = itemView.findViewById(R.id.rvSubCategory);
 
             lyTop = itemView.findViewById(R.id.lyTop);
-
 
 
         }

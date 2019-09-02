@@ -169,7 +169,7 @@
     <string name="order_cancel_reason_title">Order Cancel Reason</string>
     <string name="my_cart">My Cart</string>
     <string name="date_time"><![CDATA[Date & Time: ]]></string>
-    <string name="pay_on_delivery">Pay On Delivery</string>
+    <string name="pay_on_delivery">POD Pay On Delivery</string>
     <string name="frequently_bought_product">Frequently Brought Together</string>
     <string name="orderid">Order Id : #RKCS-077-2308-2017- </string>
     <string name="products">Products</string>

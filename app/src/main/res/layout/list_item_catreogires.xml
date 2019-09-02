@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lyTop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
-    android:id="@+id/lyTop">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,13 +13,14 @@
         android:orientation="vertical">
 
         <customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/txtCategories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FASHION"
+            android:layout_marginLeft="27dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/txtCategories"
-            android:textColor="@color/red"
-            android:layout_marginLeft="27dp"/>
+            android:text="FASHION"
+            android:textColor="@color/appgray"
+            android:textSize="18sp" />
 
 
         <android.support.v7.widget.RecyclerView
@@ -31,8 +32,6 @@
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

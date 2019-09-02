@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
@@ -98,7 +95,7 @@ public class Util {
                     snackBarView.setBackgroundColor(context.getResources().getColor(R.color.greencolor));
 
                 } else {
-                    snackBarView.setBackgroundColor(context.getResources().getColor(R.color.red));
+                    snackBarView.setBackgroundColor(context.getResources().getColor(R.color.yellow));
 
                 }
 

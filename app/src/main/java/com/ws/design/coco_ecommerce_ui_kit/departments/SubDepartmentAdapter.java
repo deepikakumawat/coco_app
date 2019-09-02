@@ -45,10 +45,10 @@ public class SubDepartmentAdapter extends RecyclerView.Adapter<SubDepartmentAdap
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         CategoriesResponse.SubCategoriesData subCategoriesData = subCategoriesResponseArrayList.get(position);
-        if (subCategoriesData != null ) {
+        if (subCategoriesData != null) {
 
 
-            holder.txtSubCategory.setText(subCategoriesData.getmCatName());
+            holder.txtSubCategory.setText(subCategoriesData.getmCatName().substring(0, 1).toUpperCase() + subCategoriesData.getmCatName().substring(1).toLowerCase());
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + subCategoriesData.getmCatIconImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgCategories);

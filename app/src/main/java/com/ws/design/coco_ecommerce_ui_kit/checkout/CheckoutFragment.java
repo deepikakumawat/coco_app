@@ -86,6 +86,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private ImageView imgReload;
     private TextView txtCaptcha;
     private String paymentMethod = "Card";
+    private PaymentMethodData paymentMethodData;
 
 
     @Nullable
@@ -186,8 +187,24 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                 case R.id.txtConfirmPlaceOrder:
 
                     if (addressData != null) {
-                        paymentMethod = "Card";
-                        startPayment();
+                        if (paymentMethodData != null) {
+                            String paymentmode = paymentMethodData.getPaymentMethod();
+                            if (!TextUtils.isEmpty(paymentmode)) {
+
+                                if (paymentmode.contains("POD")) {
+                                    enterCaptcha();
+                                }else{
+                                    paymentMethod = "Card";
+                                    startPayment();
+
+                                }
+                            }
+                        }else{
+                            showCenteredToast(lyParent, getActivity(), "Please select payment mode.", "");
+
+                        }
+
+
 
                     } else {
                         showCenteredToast(lyParent, getActivity(), "You haven't added address. Please add address first", "");
@@ -206,7 +223,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                     startActivityForResult(intent, ADD_ADDRESS_ACTION);
                     break;
                 case R.id.lyPaymentType:
-                    PaymentMethodData paymentMethodData = ((PaymentMethodData) view.getTag());
+                    paymentMethodData = ((PaymentMethodData) view.getTag());
                     if (paymentMethodData != null) {
                         if (paymentMethodAdapter != null) {
                             if (paymentMethodData.isSelectedPayment()) {
@@ -215,7 +232,6 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                                 paymentMethodData.setSelectedPayment(true);
                             }
                             paymentMethodAdapter.notifyDataSetChanged();
-                            enterCaptcha();
                         }
                     }
 

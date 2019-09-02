@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.ProductDetailActivity">
 
     <LinearLayout
@@ -100,8 +100,8 @@
                                     android:id="@+id/ryVideo"
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:layout_marginBottom="15dp"
                                     android:layout_marginRight="15dp"
+                                    android:layout_marginBottom="15dp"
                                     android:gravity="center"
                                     android:orientation="vertical"
                                     android:visibility="gone">
@@ -130,10 +130,7 @@
                             </LinearLayout>
 
 
-
-
                         </HorizontalScrollView>
-
 
 
                         <View
@@ -189,14 +186,13 @@
                                     android:textSize="23sp" />
 
 
-
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:orientation="horizontal">
 
                                 <customfonts.MyTextView_Roboto_Medium
                                     android:id="@+id/txtProductPrice"
@@ -207,15 +203,15 @@
                                     android:textColor="@color/appgray"
                                     android:textSize="12.3sp" />
 
-                            <customfonts.MyTextView_Roboto_Bold
-                                android:id="@+id/txtDiscout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                <customfonts.MyTextView_Roboto_Bold
+                                    android:id="@+id/txtDiscout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
 
-                                android:layout_marginLeft="15dp"
-                                android:textColor="@color/green"
-                                android:textStyle="italic"
-                                android:textSize="12sp" />
+                                    android:layout_marginLeft="15dp"
+                                    android:textColor="@color/green"
+                                    android:textSize="12sp"
+                                    android:textStyle="italic" />
 
                             </LinearLayout>
 
@@ -228,50 +224,39 @@
 
                                 <customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtAddToWishlist"
+                                    style="@style/buttonStyle"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="9dp"
                                     android:layout_marginRight="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/red_round_rect"
-                                    android:paddingTop="16.5dp"
-                                    android:paddingBottom="16.5dp"
                                     android:text="Add To Wishlist"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/white"
-                                    android:textSize="13.7sp" />
-
+                                    android:textAllCaps="false" />
 
 
                                 <customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtRemoveWishlist"
+                                    style="@style/buttonStyle"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="9dp"
                                     android:layout_marginRight="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/red_round_rect"
-                                    android:paddingTop="16.5dp"
-                                    android:paddingBottom="16.5dp"
+
                                     android:text="Remove From Wishlist"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/white"
-                                    android:textSize="13.7sp" />
+                                    android:textAllCaps="false" />
 
                                 <customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtBuyNow"
+                                    style="@style/buttonStyle"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="9dp"
                                     android:layout_marginRight="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/red_round_rect"
-                                    android:paddingTop="16.5dp"
-                                    android:paddingBottom="16.5dp"
                                     android:text="Buy Now"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/white"
-                                    android:textSize="13.7sp" />
+                                  />
 
                                 <customfonts.MyTextView_Roboto_Bold
                                     android:id="@+id/txtOutOfStock"
@@ -280,31 +265,28 @@
                                     android:layout_marginTop="9dp"
                                     android:layout_marginRight="5dp"
                                     android:layout_weight="1"
+                                    android:gravity="center"
                                     android:paddingTop="16.5dp"
                                     android:paddingBottom="16.5dp"
                                     android:text="@string/out_of_stock"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/red"
-                                    android:visibility="gone"
-                                    android:gravity="center"
-                                    android:textStyle="bold"
+                                    android:textColor="@color/yellow"
                                     android:textSize="16.7sp"
-                                    />
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
 
                                 <customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtAddToCart"
+                                    style="@style/buttonStyle"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginTop="9dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/red_round_rect"
-                                    android:paddingTop="16.5dp"
-                                    android:paddingBottom="16.5dp"
+
                                     android:text="Add To Cart"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/white"
-                                    android:textSize="13.7sp" />
+                                />
                             </LinearLayout>
 
 
@@ -381,17 +363,15 @@
                     android:background="#d7d4d4" />
 
 
-
-
                 <!--color and size layout-->
                 <HorizontalScrollView
                     android:id="@+id/hsvColorSize"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:background="@drawable/rect_gray"
                     android:fillViewport="true"
                     android:measureAllChildren="false"
-                    android:background="@drawable/rect_gray"
 
                     android:scrollbars="none">
 
@@ -407,13 +387,10 @@
                 </HorizontalScrollView>
 
 
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="#d7d4d4" />
-
-
 
 
                 <include layout="@layout/include_product_details_specification" />
@@ -448,7 +425,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:text="View More"
-                            android:textColor="@color/red"
+                            android:textColor="@color/yellow"
                             android:textSize="13sp"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -471,6 +448,7 @@
                     android:id="@+id/lyRecentViewsProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical">
 
 
@@ -478,6 +456,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="35dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <customfonts.MyTextView_Roboto_Medium
@@ -493,7 +472,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:text="View More"
-                            android:textColor="@color/red"
+                            android:textColor="@color/yellow"
                             android:textSize="13sp"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -527,8 +506,8 @@
         android:layout_gravity="center"
         android:background="@color/white"
         android:clickable="true"
-        android:visibility="gone"
         android:orientation="vertical"
+        android:visibility="gone"
         shimmer:duration="800">
 
         <!-- Adding 7 rows of placeholders -->

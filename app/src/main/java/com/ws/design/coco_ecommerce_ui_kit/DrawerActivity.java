@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -510,13 +511,11 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_FIRST_NAME);
                             CocoPreferences.removeValueForKey(LoginResponse.KEY_LAST_NAME);*/
 
-
                             CocoPreferences.removeValueForKey("UserID");
                             CocoPreferences.removeValueForKey("UserEmail");
                             CocoPreferences.removeValueForKey("UserPhone");
                             CocoPreferences.removeValueForKey("FirstName");
                             CocoPreferences.removeValueForKey("LastName");
-
 
                             txtUserName.setVisibility(View.GONE);
                             txtUserEmail.setVisibility(View.GONE);
@@ -529,20 +528,22 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
                             init();
 
-
-                         /*   android.app.Fragment f = getFragmentManager().findFragmentById(R.id.frame_container);
-                            if (f instanceof FragmentProfile) {
-                                getFragmentManager().popBackStack();
-                            }
-*/
                         }
                     })
                     .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .show();
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            Button nButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+            nButton.setTextColor(getColor(R.color.appgray));
+
+            Button pButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            pButton.setTextColor(getColor(R.color.yellow));
 
         } catch (Exception e) {
             e.printStackTrace();

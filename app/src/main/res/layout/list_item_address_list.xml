@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,9 +84,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Address Type"
-                                    android:visibility="gone"
                                     android:textColor="@color/black"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:visibility="gone" />
 
                                 <customfonts.MyTextView_Roboto_Medium
                                     android:layout_width="wrap_content"
@@ -133,25 +133,41 @@
                                 android:textColor="@color/black"
                                 android:textSize="11sp" />
 
-
-                            <customfonts.MyTextView_Roboto_Medium
-                                android:id="@+id/txtCity"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3.5dp"
-                                android:text="City"
-                                android:textColor="@color/black"
-                                android:textSize="11sp" />
 
+                                android:orientation="horizontal">
 
-                            <customfonts.MyTextView_Roboto_Medium
-                                android:id="@+id/txtState"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3.5dp"
-                                android:text="State"
-                                android:textColor="@color/black"
-                                android:textSize="11sp" />
+                                <customfonts.MyTextView_Roboto_Medium
+                                    android:id="@+id/txtCity"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="City"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp" />
+
+                                <customfonts.MyTextView_Roboto_Medium
+                                    android:id="@+id/txtState"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="State"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp" />
+
+                                <customfonts.MyTextView_Roboto_Medium
+                                    android:id="@+id/txtZipcode"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Zipcode"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp" />
+
+                            </LinearLayout>
 
 
                             <customfonts.MyTextView_Roboto_Medium
@@ -160,16 +176,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3.5dp"
                                 android:text="Courntry"
-                                android:textColor="@color/black"
-                                android:textSize="11sp" />
-
-
-                            <customfonts.MyTextView_Roboto_Medium
-                                android:id="@+id/txtZipcode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3.5dp"
-                                android:text="Zipcode"
                                 android:textColor="@color/black"
                                 android:textSize="11sp" />
 
@@ -216,10 +222,10 @@
                         android:textSize="12sp" />
 
                     <customfonts.Button_Roboto_Medium
+                        android:id="@+id/btnUpdate"
                         android:layout_width="0dp"
                         android:layout_height="33.3dp"
                         android:layout_marginLeft="8dp"
-                        android:id="@+id/btnUpdate"
 
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"

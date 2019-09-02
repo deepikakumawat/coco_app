@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:text="View More"
-                        android:textColor="@color/red"
+                        android:textColor="@color/yellow"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:text="View More"
-                        android:textColor="@color/red"
+                        android:textColor="@color/yellow"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -170,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:text="View All"
-                        android:textColor="@color/red"
+                        android:textColor="@color/yellow"
                         android:textSize="13sp" />
                 </LinearLayout>
 

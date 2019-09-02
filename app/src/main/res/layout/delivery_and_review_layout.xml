@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Check"
-                android:textColor="@color/red"
+                android:textColor="@color/yellow"
                 android:textSize="12.7sp" />
 
 
@@ -88,7 +88,7 @@
             android:layout_marginLeft="18dp"
             android:visibility="gone"
             android:layout_marginTop="20dp"
-            android:textColor="@color/red"
+            android:textColor="@color/yellow"
             android:textSize="12.7sp" />
 
         <LinearLayout
@@ -311,7 +311,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="15dp"
                     android:text="View All Reviews"
-                    android:textColor="@color/red"
+                    android:textColor="@color/yellow"
                     android:textSize="12.7sp" />
 
             </LinearLayout>

@@ -3,12 +3,16 @@ package com.ws.design.coco_ecommerce_ui_kit.product_details;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -556,7 +560,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             etPincode.setText("");
             txtPincodeStatus.setVisibility(View.VISIBLE);
             txtPincodeStatus.setText(appErrorMessage);
-            txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+            txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
             lyUsuallyDelivery.setVisibility(View.GONE);
         }else{
             showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
@@ -796,7 +800,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
 
-/*
+
     private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
 
         try {
@@ -814,8 +818,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
 
-    */
-/*set attribute name*//*
+
+/*set attribute name*/
 
 
                 lyColorSizeAttrName.removeAllViews();
@@ -861,7 +865,15 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                         Drawable unwrappedDrawable = AppCompatResources.getDrawable(getActivity(), R.drawable.black_circle);
                         Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-                        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#" + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData()));
+
+                        if (!TextUtils.isEmpty(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData())) {
+                            DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#" + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData()));
+
+                        }else{
+                            DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.yellow));
+
+                        }
+
 
                         final int sdk = android.os.Build.VERSION.SDK_INT;
                         if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
@@ -919,10 +931,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
     }
-*/
 
 
 
+
+/*
     private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
 
         try {
@@ -940,7 +953,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
 
-/*set attribute name*/
+*/
+/*set attribute name*//*
+
 
                 lyColorSizeAttrName.removeAllViews();
 
@@ -1000,6 +1015,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
     }
+*/
 
 
 

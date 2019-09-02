@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lyParent"
     android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment">
 
@@ -24,7 +24,7 @@
                 android:orientation="vertical">
 
 
-            <android.support.v7.widget.RecyclerView
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvCart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -198,31 +198,51 @@
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:id="@+id/txtCity"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginBottom="17dp"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
-                            android:text="City"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:orientation="horizontal">
 
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:id="@+id/txtState"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginBottom="17dp"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
-                            android:text="State"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtCity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="18dp"
+                                android:layout_marginBottom="17dp"
+                                android:layout_weight="1"
+                                android:letterSpacing="0.03"
+                                android:lineSpacingExtra="1dp"
+                                android:text="City"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtState"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="17dp"
+                                android:layout_weight="1"
+                                android:letterSpacing="0.03"
+                                android:lineSpacingExtra="1dp"
+                                android:text="State"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+
+                            <customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/txtZipcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="17dp"
+                                android:layout_weight="1"
+                                android:letterSpacing="0.03"
+                                android:lineSpacingExtra="1dp"
+                                android:text="Zipcode"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+
+
+                        </LinearLayout>
+
 
                         <customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtCountry"
@@ -237,26 +257,11 @@
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
-                        <customfonts.MyTextView_Roboto_Medium
-                            android:id="@+id/txtZipcode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginBottom="17dp"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
-                            android:text="Zipcode"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
-
 
 
             </LinearLayout>
@@ -297,20 +302,18 @@
                 android:textSize="13.3sp" />
 
 
-            <customfonts.Button_SF_Pro_Display_Semibold
+            <customfonts.Button_Roboto_Medium
                 android:id="@+id/txtConfirmPlaceOrder"
+                style="@style/buttonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="25dp"
-                android:background="@drawable/button_rect"
-                android:letterSpacing="0.03"
+
                 android:text="Confirm and place order"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="13.3sp" />
+                android:textAllCaps="false" />
 
 
         </LinearLayout>

@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -220,7 +221,16 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                             dialog.dismiss();
                         }
                     })
-                    .show();
+                    .show();;
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            Button nButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+            nButton.setTextColor(getColor(R.color.appgray));
+
+            Button pButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            pButton.setTextColor(getColor(R.color.yellow));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -67,9 +68,10 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
             Util.showNoInternetDialog(getActivity());
         }
 
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        rvMyWishList.setLayoutManager(mLayoutManager);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        rvMyWishList.setLayoutManager(gridLayoutManager);
+
 
 
     }
@@ -165,9 +167,9 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtProductName:
+                case R.id.imgRemoveWishlist:
                     MyWishListResponse.ProductData productData = ((MyWishListResponse.ProductData) view.getTag());
-                    removePosstion = (int) view.getTag(R.id.txtProductName);
+                    removePosstion = (int) view.getTag(R.id.imgRemoveWishlist);
 
                     if (productData != null) {
 
@@ -175,7 +177,6 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                             myWishListPresenter.removeWishList(productData.getmWishList());
 
                         } else {
-//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection),"");
                             Util.showNoInternetDialog(getActivity());
                         }
 

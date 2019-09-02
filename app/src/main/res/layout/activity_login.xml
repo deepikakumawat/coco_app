@@ -102,18 +102,17 @@
             android:layout_gravity="center"
             android:background="#31707070" />
 
-        <customfonts.MyTextView_Roboto_Medium
+        <customfonts.Button_Roboto_Medium
             android:id="@+id/btn_register"
+            style="@style/buttonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="14.5dp"
             android:layout_marginRight="14.5dp"
             android:layout_marginBottom="2dp"
-            android:letterSpacing="0.03"
-            android:text="Create Account"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+
+            android:text="Create Account" />
 
         <View
             android:layout_width="106dp"
