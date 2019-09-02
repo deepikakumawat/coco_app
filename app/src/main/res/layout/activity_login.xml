@@ -17,18 +17,11 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="62.7dp"
             android:src="@drawable/ic_richkart_logo_login" />
 
-        <customfonts.TextViewSFProDisplaySemibold
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:gravity="center_horizontal"
-            android:text="WORLD’s Leading Ecommerce Platform"
-            android:textColor="@color/black" />
 
         <customfonts.EditText_Roboto_Meidum
             android:id="@+id/etEmail"

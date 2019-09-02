@@ -94,14 +94,6 @@
                                 android:background="#48707070" />
 
                             <customfonts.MyTextView_Roboto_Medium
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10.5dp"
-                                android:text="Approx Delivery time : 3 days form today"
-                                android:textColor="@color/black"
-                                android:textSize="11sp" />
-
-                            <customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtStatus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
