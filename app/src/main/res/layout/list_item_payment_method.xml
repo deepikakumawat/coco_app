@@ -15,6 +15,9 @@
         android:paddingBottom="17dp">
 
 
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/rbPaymentType"
@@ -22,14 +25,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingLeft="10dp"
                 android:checked="false"
                 android:clickable="false"
+                android:paddingLeft="10dp"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 
-
-
+        </RadioGroup>
 
 
         <customfonts.MyTextView_Roboto_Medium

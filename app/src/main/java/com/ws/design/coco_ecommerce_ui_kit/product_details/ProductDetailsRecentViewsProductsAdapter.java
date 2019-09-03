@@ -1,6 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.product_details;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -44,9 +45,17 @@ public class ProductDetailsRecentViewsProductsAdapter extends RecyclerView.Adapt
 
             holder.txtProductName.setText(productData.getmProductName());
 
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmSalePrice());
             holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
 
+            holder.txtSalesProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
+
+
+            if (!TextUtils.isEmpty(productData.getmPrice())) {
+                holder.txtProductPrice.setText(context.getString(R.string.Rs) + productData.getmPrice());
+                holder.txtProductPrice.setPaintFlags(holder.txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                holder.txtProductPrice.setText("-");
+            }
 
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
@@ -56,6 +65,8 @@ public class ProductDetailsRecentViewsProductsAdapter extends RecyclerView.Adapt
             holder.lyProduct.setTag(productData);
             holder.lyProduct.setTag(R.id.lyProduct,position);
             holder.lyProduct.setOnClickListener(productDetailFragment);
+
+            setTxtDiscout(productData,holder);
 
         }
 
@@ -76,7 +87,8 @@ public class ProductDetailsRecentViewsProductsAdapter extends RecyclerView.Adapt
         private TextView txtRating;
         private LinearLayout lyProduct;
 
-
+        private TextView txtSalesProductPrice;
+        private TextView txtDiscout;
 
 
 
@@ -87,12 +99,48 @@ public class ProductDetailsRecentViewsProductsAdapter extends RecyclerView.Adapt
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductName = view.findViewById(R.id.txtProductName);
             txtProductType = view.findViewById(R.id.txtProductType);
-            txtProductPrice = view.findViewById(R.id.txtProductPrice);
             lyProduct = view.findViewById(R.id.lyProduct);
+            txtSalesProductPrice = view.findViewById(R.id.txtSalesProductPrice);
+            txtDiscout = view.findViewById(R.id.txtDiscout);
 
+            txtProductPrice = view.findViewById(R.id.txtProductPrice);
 
 
 
         }
     }
+
+    private void setTxtDiscout(ProductDetailsSimilier productData, ViewHolder holder) {
+
+        try {
+
+            if (!TextUtils.isEmpty(productData.getmPrice()) &&
+                    !TextUtils.isEmpty(productData.getmSalePrice())) {
+
+                double price = 0;
+                double salesPrice = 0;
+
+                price = Double.parseDouble(productData.getmPrice());
+                salesPrice = Double.parseDouble(productData.getmSalePrice());
+
+                double increases = price - salesPrice;
+                double divide = increases / price;
+                double dicount = divide * 100;
+
+                int dis = (int) dicount;
+
+                holder.txtDiscout.setText(dis + "% off");
+
+            } else {
+                holder.txtDiscout.setText("0%");
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

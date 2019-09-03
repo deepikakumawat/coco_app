@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -39,7 +38,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.ChangePasswordActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.MarshMallowPermissions;
@@ -161,7 +160,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                     logout();
                     break;
                 case R.id.txtMyOrder:
-                    startActivity(new Intent(MyAccountActivity.this, MyOrderActivity.class));
+                    startActivity(new Intent(MyAccountActivity.this, MyOrderFragment.class));
                     break;
                 case R.id.imgProfileImage:
                     setProfileImage();

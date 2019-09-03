@@ -1,33 +1,35 @@
 package com.ws.design.coco_ecommerce_ui_kit.my_order_details;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishListResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
-import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
+import fragment.FragmentManagerUtils;
 
-public class MyOrderDetailsActivity extends AppCompatActivity implements OrderDetailsView, View.OnClickListener {
+public class MyOrderDetailsFragment extends BaseFragment implements OrderDetailsView, View.OnClickListener {
 
-    TextView title;
-    LinearLayout linearLayout;
     private MyOrderDetailsAdapter myOrderAdapter;
     private RecyclerView rvMyOrder;
     private ArrayList<OrderProduct> myOrderDataArrayList = new ArrayList<OrderProduct>();
-    private ImageView imgBack;
+
 
     private OrderDetailsPresenter myOrderPresenter;
 
@@ -52,70 +54,74 @@ public class MyOrderDetailsActivity extends AppCompatActivity implements OrderDe
     private TextView txtDeliveryCity;
     private LinearLayout lyOrderDetails;
     private LinearLayout lyProductDetails;
+    private View mView;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mView = inflater.inflate(R.layout.fragment_my_order_details, container, false);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            orderId = bundle.getString("orderId");
+
+        }
+
+
+        return mView;
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_order_details);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            orderId = intent.getStringExtra("orderId");
-        }
 
         myOrderPresenter = new OrderDetailsPresenter(this);
 
 
-        lyOrderDetails = findViewById(R.id.lyOrderDetails);
-        lyProductDetails = findViewById(R.id.lyProductDetails);
+        lyOrderDetails = view.findViewById(R.id.lyOrderDetails);
+        lyProductDetails = view.findViewById(R.id.lyProductDetails);
 
-        txtOrderId = findViewById(R.id.txtOrderId);
-        txtOrderDate = findViewById(R.id.txtOrderDate);
-        txtPrice = findViewById(R.id.txtPrice);
+        txtOrderId = view.findViewById(R.id.txtOrderId);
+        txtOrderDate = view.findViewById(R.id.txtOrderDate);
+        txtPrice = view.findViewById(R.id.txtPrice);
 
-        txtSenderName = findViewById(R.id.txtSenderName);
-        txtSenderContact = findViewById(R.id.txtSenderContact);
-        txtSenderAddress = findViewById(R.id.txtSenderAddress);
-        txtSenderEmail = findViewById(R.id.txtSenderEmail);
+        txtSenderName = view.findViewById(R.id.txtSenderName);
+        txtSenderContact = view.findViewById(R.id.txtSenderContact);
+        txtSenderAddress = view.findViewById(R.id.txtSenderAddress);
+        txtSenderEmail = view.findViewById(R.id.txtSenderEmail);
 
-        txtReceiverName = findViewById(R.id.txtReceiverName);
+        txtReceiverName = view.findViewById(R.id.txtReceiverName);
 
-        txtReceiverEmail = findViewById(R.id.txtReceiverEmail);
+        txtReceiverEmail = view.findViewById(R.id.txtReceiverEmail);
 
-        txtDeliveryContact = findViewById(R.id.txtDeliveryContact);
-        txtDeliveryAddress = findViewById(R.id.txtDeliveryAddress);
-        txtDeliveryPincode = findViewById(R.id.txtDeliveryPincode);
-        txtDeliveryCity = findViewById(R.id.txtDeliveryCity);
-        txtDeliveryState = findViewById(R.id.txtDeliveryState);
-        txtDeliveryLandmark = findViewById(R.id.txtDeliveryLandmark);
-
-
-        ryParent = findViewById(R.id.ryParent);
-        title = (TextView) findViewById(R.id.title);
-        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-
-        linearLayout = (LinearLayout) findViewById(R.id.linear);
-        rvMyOrder = (RecyclerView) findViewById(R.id.rvMyOrder);
-        txtNoDataFound = findViewById(R.id.txtNoDataFound);
-
-        imgBack = findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(this);
-
-        title.setText(getString(R.string.order_details));
-        linearLayout.setVisibility(View.GONE);
+        txtDeliveryContact = view.findViewById(R.id.txtDeliveryContact);
+        txtDeliveryAddress = view.findViewById(R.id.txtDeliveryAddress);
+        txtDeliveryPincode = view.findViewById(R.id.txtDeliveryPincode);
+        txtDeliveryCity = view.findViewById(R.id.txtDeliveryCity);
+        txtDeliveryState = view.findViewById(R.id.txtDeliveryState);
+        txtDeliveryLandmark = view.findViewById(R.id.txtDeliveryLandmark);
 
 
-        if (Util.isDeviceOnline(this)) {
+        ryParent = view.findViewById(R.id.ryParent);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
+        rvMyOrder = (RecyclerView) view.findViewById(R.id.rvMyOrder);
+        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
+
+
+        if (Util.isDeviceOnline(getActivity())) {
 
             myOrderPresenter.getOrderDetails(orderId);
 
         } else {
-//            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
-Util.showNoInternetDialog(this);
+            Util.showNoInternetDialog(getActivity());
         }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvMyOrder.setLayoutManager(layoutManager);
 
 
@@ -157,7 +163,7 @@ Util.showNoInternetDialog(this);
                 setData(myOrderDetailsResponse.getmOrderDetailsData());
 
 
-                myOrderAdapter = new MyOrderDetailsAdapter(this, myOrderDataArrayList, MyOrderDetailsActivity.this);
+                myOrderAdapter = new MyOrderDetailsAdapter(getActivity(), myOrderDataArrayList, MyOrderDetailsFragment.this);
                 rvMyOrder.setAdapter(myOrderAdapter);
 
             } else if (myOrderDetailsResponse.getmOrderDetailsData() == null && !myOrderDetailsResponse.getmOrderDetailsData().getmProduct().isEmpty()) {
@@ -170,7 +176,7 @@ Util.showNoInternetDialog(this);
                 lyOrderDetails.setVisibility(View.GONE);
 
 
-                myOrderAdapter = new MyOrderDetailsAdapter(this, myOrderDataArrayList, MyOrderDetailsActivity.this);
+                myOrderAdapter = new MyOrderDetailsAdapter(getActivity(), myOrderDataArrayList, MyOrderDetailsFragment.this);
                 rvMyOrder.setAdapter(myOrderAdapter);
 
             } else if (myOrderDetailsResponse.getmOrderDetailsData() != null && myOrderDetailsResponse.getmOrderDetailsData().getmProduct().isEmpty()) {
@@ -205,10 +211,23 @@ Util.showNoInternetDialog(this);
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.imgBack:
-                    finish();
-                    break;
+                case R.id.lyOrderDetails:
+                    OrderProduct orderProduct = ((OrderProduct) view.getTag());
 
+                    if (orderProduct != null) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("productSlug", orderProduct.getmProductSlug());
+                        bundle.putString("productId", orderProduct.getmProductId());
+                        bundle.putString("productQty", orderProduct.getmProductQty());
+
+                        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+                        productDetailFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
+
+                    }
+                    break;
 
                 default:
                     break;

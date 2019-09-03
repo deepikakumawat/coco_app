@@ -37,14 +37,13 @@
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.LoginAlertOnAddressActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.LoginAlertOnCartActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.TimelineTest" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsFragment" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity" />
+        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderFragment" />
         <activity android:name="com.ws.design.coco_ecommerce_ui_kit.profile.MyAccountActivity" />
         <activity
             android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity"

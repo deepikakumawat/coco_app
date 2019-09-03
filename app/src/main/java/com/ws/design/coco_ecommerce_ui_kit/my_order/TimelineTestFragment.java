@@ -1,20 +1,18 @@
-package com.ws.design.coco_ecommerce_ui_kit;
+package com.ws.design.coco_ecommerce_ui_kit.my_order;
 
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 
 import org.qap.ctimelineview.TimelineRow;
 import org.qap.ctimelineview.TimelineViewAdapter;
@@ -23,35 +21,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class TimelineTest extends AppCompatActivity {
+public class TimelineTestFragment extends BaseFragment {
 
     //Create Timeline Rows List
     private ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
     ArrayAdapter<TimelineRow> myAdapter;
-    TextView title;
-    LinearLayout linearLayout;
-    private ImageView imgBack;
+
+    private View mView;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mView = inflater.inflate(R.layout.fragment_timeline_test, container, false);
+
+
+        return mView;
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline_test);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        title = (TextView) findViewById(R.id.title);
-        linearLayout = (LinearLayout) findViewById(R.id.linear);
-        imgBack = findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        title.setText("Track Order");
-        linearLayout.setVisibility(View.GONE);
         // Add Random Rows to the List
         for (int i = 0; i < 4; i++) {
             //add the new row to the list
@@ -59,13 +53,13 @@ public class TimelineTest extends AppCompatActivity {
         }
 
         //Create the Timeline Adapter
-        myAdapter = new TimelineViewAdapter(this, 0, timelineRowsList,
+        myAdapter = new TimelineViewAdapter(getActivity(), 0, timelineRowsList,
                 //if true, list will be sorted by date
                 true);
 
 
         //Get the ListView and Bind it with the Timeline Adapter
-        ListView myListView = (ListView) findViewById(R.id.timeline_listView);
+        ListView myListView = (ListView) view.findViewById(R.id.timeline_listView);
         myListView.setAdapter(myAdapter);
 
 
@@ -116,7 +110,7 @@ public class TimelineTest extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TimelineRow row = timelineRowsList.get(position);
-                Toast.makeText(TimelineTest.this, row.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), row.getTitle(), Toast.LENGTH_SHORT).show();
             }
         };
         myListView.setOnItemClickListener(adapterListener);

@@ -18,12 +18,12 @@ import java.util.ArrayList;
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHolder> {
     private Context context;
     ArrayList<MyOrderResponse.MyOrderData> myOrderDataArrayList;
-    private MyOrderActivity myOrderActivity;
+    private MyOrderFragment myOrderFragment;
 
-    public MyOrderAdapter(Context context, ArrayList<MyOrderResponse.MyOrderData> myOrderDataArrayList, MyOrderActivity myOrderActivity) {
+    public MyOrderAdapter(Context context, ArrayList<MyOrderResponse.MyOrderData> myOrderDataArrayList, MyOrderFragment myOrderFragment) {
         this.context = context;
         this.myOrderDataArrayList = myOrderDataArrayList;
-        this.myOrderActivity = myOrderActivity;
+        this.myOrderFragment = myOrderFragment;
     }
 
     @Override
@@ -44,19 +44,19 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
             holder.txtSupport.setTag(myOrderData);
             holder.txtSupport.setTag(R.id.txtSupport, position);
-            holder.txtSupport.setOnClickListener(myOrderActivity);
+            holder.txtSupport.setOnClickListener(myOrderFragment);
 
             holder.txtCancelOrder.setTag(myOrderData);
             holder.txtCancelOrder.setTag(R.id.txtCancelOrder, position);
-            holder.txtCancelOrder.setOnClickListener(myOrderActivity);
+            holder.txtCancelOrder.setOnClickListener(myOrderFragment);
 
             holder.lyOrder.setTag(myOrderData);
             holder.lyOrder.setTag(R.id.lyOrder, position);
-            holder.lyOrder.setOnClickListener(myOrderActivity);
+            holder.lyOrder.setOnClickListener(myOrderFragment);
 
             holder.txtTrack.setTag(myOrderData);
             holder.txtTrack.setTag(R.id.txtTrack, position);
-            holder.txtTrack.setOnClickListener(myOrderActivity);
+            holder.txtTrack.setOnClickListener(myOrderFragment);
         }
 
     }

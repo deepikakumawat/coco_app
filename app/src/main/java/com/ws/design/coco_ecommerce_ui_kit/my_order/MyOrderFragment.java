@@ -1,22 +1,22 @@
 package com.ws.design.coco_ecommerce_ui_kit.my_order;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,8 +29,8 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.ws.design.coco_ecommerce_ui_kit.TimelineTest;
-import com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsActivity;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.my_order_details.MyOrderDetailsFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 import com.ws.design.coco_ecommerce_ui_kit.utility.MarshMallowPermissions;
@@ -39,17 +39,16 @@ import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 import java.util.ArrayList;
 import java.util.List;
 
+import fragment.FragmentManagerUtils;
+
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class MyOrderActivity extends AppCompatActivity implements MyOrderView, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class MyOrderFragment extends BaseFragment implements MyOrderView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    TextView title;
-    LinearLayout linearLayout;
     MyOrderAdapter myOrderAdapter;
     private RecyclerView rvMyOrder;
     private ArrayList<MyOrderResponse.MyOrderData> myOrderDataArrayList = new ArrayList<>();
-    private ImageView imgBack;
-    private MarshMallowPermissions marshMallowPermissions = new MarshMallowPermissions(this);
+    private MarshMallowPermissions marshMallowPermissions = new MarshMallowPermissions(getActivity());
     private int cancelOrderPosition;
     private Dialog addContactDialog;
     private EditText etxtReason;
@@ -60,40 +59,46 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderView, V
     private ShimmerFrameLayout mShimmerViewContainer;
     private TextView txtNoDataFound;
     private RelativeLayout ryParent;
+    private View mView;
+    private LinearLayout lyTopStatement;
+    private ImageView imgClose;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mView = inflater.inflate(R.layout.fragment_my_order, container, false);
+
+
+        return mView;
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_order);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         myOrderPresenter = new MyOrderPresenter(this);
 
-        ryParent = findViewById(R.id.ryParent);
-        title = (TextView) findViewById(R.id.title);
-        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+        ryParent = view.findViewById(R.id.ryParent);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
-        linearLayout = (LinearLayout) findViewById(R.id.linear);
-        rvMyOrder = (RecyclerView) findViewById(R.id.rvMyOrder);
-        txtNoDataFound = findViewById(R.id.txtNoDataFound);
-
-        imgBack = findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(this);
-
-        title.setText("My Orders");
-        linearLayout.setVisibility(View.GONE);
+        imgClose = view.findViewById(R.id.imgClose);
+        lyTopStatement = view.findViewById(R.id.lyTopStatement);
+        rvMyOrder = (RecyclerView) view.findViewById(R.id.rvMyOrder);
+        txtNoDataFound = view.findViewById(R.id.txtNoDataFound);
+        imgClose.setOnClickListener(this);
 
 
-        if (Util.isDeviceOnline(this)) {
+        if (Util.isDeviceOnline(getActivity())) {
 
             myOrderPresenter.myOrder(CocoPreferences.getUserId());
 
         } else {
-//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
-Util.showNoInternetDialog(this);
+            Util.showNoInternetDialog(getActivity());
         }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvMyOrder.setLayoutManager(layoutManager);
 
 
@@ -103,19 +108,17 @@ Util.showNoInternetDialog(this);
     public void showWait() {
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         mShimmerViewContainer.startShimmerAnimation();
-//        showProDialog(this);
     }
 
     @Override
     public void removeWait() {
-//        dismissProDialog();
         mShimmerViewContainer.stopShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void onFailure(String appErrorMessage) {
-      nodataFound(appErrorMessage);
+        nodataFound(appErrorMessage);
 
 
     }
@@ -137,7 +140,7 @@ Util.showNoInternetDialog(this);
                 rvMyOrder.setVisibility(View.VISIBLE);
                 txtNoDataFound.setVisibility(View.GONE);
 
-                myOrderAdapter = new MyOrderAdapter(this, myOrderDataArrayList, MyOrderActivity.this);
+                myOrderAdapter = new MyOrderAdapter(getActivity(), myOrderDataArrayList, MyOrderFragment.this);
                 rvMyOrder.setAdapter(myOrderAdapter);
             }
         }
@@ -148,7 +151,7 @@ Util.showNoInternetDialog(this);
     @Override
     public void cancelOrder(CancelOrderResponse cancelOrderResponse) {
         if (!TextUtils.isEmpty(cancelOrderResponse.getmStatus()) && ("1".equalsIgnoreCase(cancelOrderResponse.getmStatus()))) {
-            showCenteredToast(ryParent,this, cancelOrderResponse.getmMessage(), Constant.API_SUCCESS);
+            showCenteredToast(ryParent, getActivity(), cancelOrderResponse.getmMessage(), Constant.API_SUCCESS);
             if (myOrderAdapter != null) {
                 myOrderDataArrayList.remove(cancelOrderPosition);
                 myOrderAdapter.notifyDataSetChanged();
@@ -158,7 +161,7 @@ Util.showNoInternetDialog(this);
                 }
             }
         } else {
-            showCenteredToast(ryParent,this, cancelOrderResponse.getmData(),"");
+            showCenteredToast(ryParent, getActivity(), cancelOrderResponse.getmData(), "");
         }
     }
 
@@ -168,9 +171,7 @@ Util.showNoInternetDialog(this);
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.imgBack:
-                    finish();
-                    break;
+
                 case R.id.txtSupport:
                     MyOrderResponse.MyOrderData myOrderData = ((MyOrderResponse.MyOrderData) view.getTag());
 //                    removePosstion = (int) view.getTag(R.id.txtProductName);
@@ -179,7 +180,7 @@ Util.showNoInternetDialog(this);
 
                         if (marshMallowPermissions.checkPermissionForPhone()) {
                             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "18005726067"));
-                            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                 // TODO: Consider calling
                                 //    ActivityCompat#requestPermissions
                                 // here to request the missing permissions, and then overriding
@@ -214,18 +215,17 @@ Util.showNoInternetDialog(this);
 
                     if (!TextUtils.isEmpty(cancelReason) && !cancelReason.equalsIgnoreCase("Choose Reason")) {
 
-                        if (Util.isDeviceOnline(this)) {
+                        if (Util.isDeviceOnline(getActivity())) {
                             myOrderPresenter.cancelOrder(myOrderData.getmOrderId(), cancelReason);
                             addContactDialog.dismiss();
-                            Util.hideKeyBoardMethod(this, view);
-                        }else{
-                            Util.showNoInternetDialog(this);
+                            Util.hideKeyBoardMethod(getActivity(), view);
+                        } else {
+                            Util.showNoInternetDialog(getActivity());
                         }
 
 
-
                     } else {
-                        showCenteredToast(ryParent,this, getString(R.string.order_cancel_reason),"");
+                        showCenteredToast(ryParent, getActivity(), getString(R.string.order_cancel_reason), "");
 
                     }
 
@@ -237,14 +237,23 @@ Util.showNoInternetDialog(this);
 
                     if (myOrderData != null) {
 
-                        Intent intent = new Intent(MyOrderActivity.this, MyOrderDetailsActivity.class);
-                        intent.putExtra("orderId",myOrderData.getmOrderId());
-                        startActivity(intent);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("orderId", myOrderData.getmOrderId());
+
+                        MyOrderDetailsFragment myOrderDetailsFragment = new MyOrderDetailsFragment();
+                        myOrderDetailsFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), myOrderDetailsFragment, "MyOrderDetailsFragment", true, false);
+
                     }
                     break;
                 case R.id.txtTrack:
-                    Intent intent = new Intent(MyOrderActivity.this, TimelineTest.class);
-                    startActivity(intent);
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new TimelineTestFragment(), "TimelineTestFragment", true, false);
+
+                    break;
+                case R.id.imgClose:
+                    lyTopStatement.setVisibility(View.GONE);
                     break;
 
                 default:
@@ -257,7 +266,7 @@ Util.showNoInternetDialog(this);
 
     private void cancelOrder(MyOrderResponse.MyOrderData myOrderData) {
         try {
-            addContactDialog = new Dialog(this);
+            addContactDialog = new Dialog(getActivity());
             addContactDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             addContactDialog.setContentView(R.layout.dialog_cancel_order);
             spReason = addContactDialog.findViewById(R.id.spReason);
@@ -299,7 +308,7 @@ Util.showNoInternetDialog(this);
         reasonList.add("Information Not Complete");
         reasonList.add("Other");
 
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, reasonList);
+        ArrayAdapter aa = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, reasonList);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spReason.setAdapter(aa);
 

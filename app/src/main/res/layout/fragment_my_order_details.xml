@@ -8,13 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.MyOrderActivity">
 
-
-    <include
-        android:id="@+id/inTop"
-        layout="@layout/toolbar_product_grid_detail" />
 
     <ScrollView
         android:id="@+id/svTop"

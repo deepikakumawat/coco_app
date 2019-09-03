@@ -50,7 +50,7 @@ import com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.CartFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_cart.LoginAlertOnCartActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.LoginAlertOnMyOrderActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
+import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
@@ -104,6 +104,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     private TextView txtTitle;
     private ImageView imgSearch;
     private ImageView imgProfileImage;
+    private ImageView imgRichkarLogo;
 
 
     @Override
@@ -133,6 +134,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
     private void init() {
+        imgRichkarLogo = findViewById(R.id.imgRichkarLogo);
         txtTitle = findViewById(R.id.txtTitle);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
@@ -144,6 +146,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         imgProfileImage = findViewById(R.id.imgProfileImage);
         txtLogin.setOnClickListener(this);
         txtSignup.setOnClickListener(this);
+        imgRichkarLogo.setOnClickListener(this);
         setToolbar();
 
         setEmailName();
@@ -185,7 +188,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                 } else if (position == 2) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        startActivity(new Intent(DrawerActivity.this, MyOrderActivity.class));
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyOrderFragment(), null, true, false);
 
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnMyOrderActivity.class));
@@ -398,6 +401,15 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
                     intent = new Intent(DrawerActivity.this, SignupActivity.class);
                     startActivity(intent);
+
+                    break;
+                case R.id.imgRichkarLogo:
+
+                    Fragment f = getCurrentFragmentInRootLayout();
+                    if (!(f instanceof HomeFragment)) {
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+
+                    }
 
                     break;
 

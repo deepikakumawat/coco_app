@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
-import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderActivity;
-import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderResponse;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.ArrayList;
@@ -21,9 +20,9 @@ import java.util.ArrayList;
 public class MyOrderDetailsAdapter extends RecyclerView.Adapter<MyOrderDetailsAdapter.ViewHolder> {
     private Context context;
     ArrayList<OrderProduct> orderProductArrayList;
-    private MyOrderDetailsActivity myOrderActivity;
+    private MyOrderDetailsFragment myOrderActivity;
 
-    public MyOrderDetailsAdapter(Context context, ArrayList<OrderProduct> orderProductArrayList, MyOrderDetailsActivity myOrderActivity) {
+    public MyOrderDetailsAdapter(Context context, ArrayList<OrderProduct> orderProductArrayList, MyOrderDetailsFragment myOrderActivity) {
         this.context = context;
         this.orderProductArrayList = orderProductArrayList;
         this.myOrderActivity = myOrderActivity;
@@ -45,6 +44,10 @@ public class MyOrderDetailsAdapter extends RecyclerView.Adapter<MyOrderDetailsAd
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + orderProduct.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
+
+            holder.lyOrderDetails.setTag(orderProduct);
+            holder.lyOrderDetails.setTag(R.id.lyOrderDetails, position);
+            holder.lyOrderDetails.setOnClickListener(myOrderActivity);
         }
 
     }
@@ -61,6 +64,7 @@ public class MyOrderDetailsAdapter extends RecyclerView.Adapter<MyOrderDetailsAd
         private TextView txtPrice;
         private TextView txtStatus;
         private ImageView imgProduct;
+        private LinearLayout lyOrderDetails;
 
 
 
@@ -70,6 +74,7 @@ public class MyOrderDetailsAdapter extends RecyclerView.Adapter<MyOrderDetailsAd
             txtPrice = view.findViewById(R.id.txtPrice);
             txtStatus = view.findViewById(R.id.txtStatus);
             imgProduct = view.findViewById(R.id.imgProduct);
+            lyOrderDetails = view.findViewById(R.id.lyOrderDetails);
 
         }
     }

@@ -93,7 +93,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.github.qapqap:TimelineView:v1.6'
     compile 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+
+
 }
 repositories {
     mavenCentral()

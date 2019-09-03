@@ -14,6 +14,8 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -73,7 +75,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierArrayList = new ArrayList<>();
     private ArrayList<ProductBroughtData> productBroughtDataArrayList = new ArrayList<>();
     private ArrayList<ProductDetailsSimilier> productRecentViewsDataArrayList = new ArrayList<>();
-    private ProductDetailsTopRatedProductsAdapter productDetailsTopRatedProductsAdapter;
+    private ProductDetailsSimiliarProductsAdapter productDetailsSimiliarProductsAdapter;
     private ProductDetailsBroughtDataAdapter productDetailsBroughtDataAdapter;
 
 
@@ -255,10 +257,20 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         });
 
 
-        RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+      /*  RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvTopRatedProducts.setLayoutManager(mLayoutManager2);
         rvTopRatedProducts.setLayoutManager(mLayoutManager2);
+        rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());*/
+
+        RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
+        rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
+        DividerItemDecoration Hdivider = new DividerItemDecoration(rvTopRatedProducts.getContext(), DividerItemDecoration.HORIZONTAL);
+        DividerItemDecoration Vdivider = new DividerItemDecoration(rvTopRatedProducts.getContext(), DividerItemDecoration.VERTICAL);
+        Hdivider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider));
+        Vdivider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider));
+        rvTopRatedProducts.addItemDecoration(Hdivider);
+        rvTopRatedProducts.addItemDecoration(Vdivider);
 
 
         RecyclerView.LayoutManager mLayoutManagerBroughtData = new LinearLayoutManager(getActivity());
@@ -459,7 +471,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         isShimmerShow = false;
                         isPincodeAPI = true;
                         productDetailsPresenter.checkPincode(pincode);
-                        Util.hideKeyBoardMethod(getActivity(),etPincode);
+                        Util.hideKeyBoardMethod(getActivity(), etPincode);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -562,7 +574,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             txtPincodeStatus.setText(appErrorMessage);
             txtPincodeStatus.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
             lyUsuallyDelivery.setVisibility(View.GONE);
-        }else{
+        } else {
             showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
 
         }
@@ -682,8 +694,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                         productDetailsSimilierArrayList.clear();
                         productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
-                        productDetailsTopRatedProductsAdapter = new ProductDetailsTopRatedProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailFragment.this);
-                        rvTopRatedProducts.setAdapter(productDetailsTopRatedProductsAdapter);
+                        productDetailsSimiliarProductsAdapter = new ProductDetailsSimiliarProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailFragment.this);
+                        rvTopRatedProducts.setAdapter(productDetailsSimiliarProductsAdapter);
                     } else {
                         lySimilarProduct.setVisibility(View.GONE);
                     }
@@ -736,7 +748,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 }
                 */
                 Intent intent = new Intent(getActivity(), VideoActivity.class);
-                intent.putExtra("videoUrl",videoUrl);
+                intent.putExtra("videoUrl", videoUrl);
                 startActivity(intent);
 
             }
@@ -799,8 +811,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
 
-
-
     private void setColorSize(ArrayList<ProductDetailsResponse.ProductAttrAraay> productAttrAraay) {
 
         try {
@@ -819,7 +829,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
 
-/*set attribute name*/
+                /*set attribute name*/
 
 
                 lyColorSizeAttrName.removeAllViews();
@@ -841,22 +851,29 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         lyTop.setVisibility(View.VISIBLE);
                         lyColor.setVisibility(View.GONE);
 
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+
                         txtAttributeName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName());
 
-                        final int sdk = android.os.Build.VERSION.SDK_INT;
 
                         if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
                             if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.gray));
+                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.selected_attribtue));
                             } else {
-                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.gray));
+                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.selected_attribtue));
                             }
+
+                            txtAttributeName.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
+
                         } else {
                             if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.color.background));
+                                lyTop.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.unselected_attribtue));
                             } else {
-                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.color.background));
+                                lyTop.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.unselected_attribtue));
                             }
+
+                            txtAttributeName.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+
                         }
                     } else {
                         lyTop.setVisibility(View.GONE);
@@ -869,7 +886,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         if (!TextUtils.isEmpty(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData())) {
                             DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#" + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData()));
 
-                        }else{
+                        } else {
                             DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.yellow));
 
                         }
@@ -954,7 +971,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
 */
-/*set attribute name*//*
+    /*set attribute name*//*
 
 
                 lyColorSizeAttrName.removeAllViews();
@@ -1016,7 +1033,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     }
 */
-
 
 
     private void setProductSpecfication(ArrayList<ProductAttributeData> productAttributeDataArrayList) {

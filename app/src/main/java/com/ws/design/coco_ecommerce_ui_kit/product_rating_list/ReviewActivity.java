@@ -32,7 +32,6 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 public class ReviewActivity extends AppCompatActivity implements ProductRatingView, View.OnClickListener {
 
-    TextView txt1;
     private ArrayList<Ratings> ratingsArrayList = new ArrayList<>();
     private ProductRatingPresenter productRatingPresenter;
     private RecyclerView rvRating;
@@ -82,8 +81,7 @@ public class ReviewActivity extends AppCompatActivity implements ProductRatingVi
         productRating = findViewById(R.id.productRating);
         btnSubmit = findViewById(R.id.btnSubmit);
         rvRating = findViewById(R.id.rvRating);
-        txt1 = findViewById(R.id.txt1);
-        txt1.setText("Reviews");
+
         btnSubmit.setOnClickListener(this);
         imgBack.setOnClickListener(this);
 
