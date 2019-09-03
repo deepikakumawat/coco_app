@@ -151,7 +151,7 @@
 
     <style name="viewParent.headerText">
         <item name="android:textColor">@color/contentTextColor</item>
-        <item name="android:textSize">@dimen/headerTextSize</item>
+        <item name="android:textSize">@dimen/txt_25sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -183,12 +183,12 @@
     </style>
 
     <style name="modifiedEditText" parent="parent">
-        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:textSize">@dimen/txt_16sp</item>
     </style>
 
     <!--onboarding designs-->
     <style name="onBoardingHeaderText" parent="viewParent">
-        <item name="android:textSize">@dimen/onboardingHeaderSize</item>
+        <item name="android:textSize">@dimen/dimen_30dp</item>
         <item name="android:textColor">@color/darkModeTextColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">10dp</item>
@@ -197,7 +197,7 @@
     </style>
 
     <style name="onBoardingContentText" parent="viewParent">
-        <item name="android:textSize">@dimen/onboardingContentSize</item>
+        <item name="android:textSize">@dimen/dimen_14dp</item>
         <item name="android:textColor">@color/darkModeTextColor</item>
         <item name="android:layout_marginBottom">15dp</item>
         <item name="android:layout_marginLeft">10dp</item>

@@ -36,7 +36,7 @@ public class ProductDetailsSimiliarProductsAdapter extends RecyclerView.Adapter<
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_similiar_products, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_home_top_rated_products, parent, false));
     }
 
     @Override

@@ -11,63 +11,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/dimen_5dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imgProduct"
-            android:layout_width="80dp"
-            android:layout_height="128dp"
+            android:layout_width="@dimen/dimen_80dp"
+            android:layout_height="@dimen/dimen_150dp"
             android:layout_gravity="center"
-            android:layout_marginTop="18dp"
             android:src="@drawable/richkart" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
+
             android:orientation="horizontal">
 
             <customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/txtProductName"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:maxLines="2"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:text="Vigo Atom Personal Air Condi...."
                 android:textColor="@color/black"
-                android:textSize="13.3sp" />
+                android:textSize="@dimen/txt_14sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/three_dots" />
 
         </LinearLayout>
 
-        <customfonts.MyTextView_Roboto_Medium
-            android:id="@+id/txtProductType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Kitchenid"
-            android:textColor="#8b8a8a"
-            android:textSize="12sp"
-            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
+
+            android:layout_marginTop="@dimen/dimen_2dp"
+
             android:orientation="horizontal">
 
             <LinearLayout
@@ -82,22 +65,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="1dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="1dp">
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:paddingTop="@dimen/dimen_2dp"
+                    android:paddingRight="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_2dp">
 
                     <customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/dimen_2dp"
                         android:textColor="@color/white"
-                        android:textSize="12.3dp" />
+                        android:textSize="@dimen/txt_14sp" />
 
                     <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="@dimen/dimen_10dp"
+                        android:layout_height="@dimen/dimen_10dp"
                         android:layout_gravity="center"
                         android:src="@drawable/star"
                         android:tint="@color/white" />
@@ -115,9 +98,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-
 
             android:orientation="horizontal">
 
@@ -129,7 +109,7 @@
                 android:layout_weight="1"
                 android:text="299"
                 android:textColor="#595959"
-                android:textSize="12sp" />
+                android:textSize="@dimen/txt_12sp" />
 
             <TextView
                 android:id="@+id/txtProductPrice"
@@ -138,7 +118,7 @@
                 android:layout_weight="1"
                 android:text="₹ 209"
                 android:textColor="#595959"
-                android:textSize="12sp"
+                android:textSize="@dimen/txt_12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -148,7 +128,7 @@
                 android:layout_weight="1"
                 android:text="30% OFF"
                 android:textColor="#f78c40"
-                android:textSize="12sp" />
+                android:textSize="@dimen/txt_12sp" />
         </LinearLayout>
 
 
