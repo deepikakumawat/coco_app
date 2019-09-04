@@ -21,6 +21,8 @@
     <dimen name="dimen_30dp">60dp</dimen>
     <dimen name="dimen_1dp">2dp</dimen>
     <dimen name="dimen_100dp">200dp</dimen>
+    <dimen name="dimen_60dp">120dp</dimen>
+    <dimen name="dimen_31dp">62dp</dimen>
     <dimen name="dimen_2dp">4dp</dimen>
     <dimen name="dimen_200dp">400dp</dimen>
     <dimen name="dimen_150dp">300dp</dimen>

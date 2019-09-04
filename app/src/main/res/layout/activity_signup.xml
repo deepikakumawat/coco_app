@@ -54,6 +54,8 @@
                     android:letterSpacing="0.03"
                     android:maxLines="1"
                     android:paddingTop="10dp"
+                    android:textCursorDrawable="@color/yellow"
+
                     android:paddingRight="10dp"
                     android:paddingBottom="18dp"
                     android:textColor="@color/black"
@@ -80,6 +82,8 @@
                     android:letterSpacing="0.03"
                     android:maxLines="1"
                     android:paddingTop="10dp"
+                    android:textCursorDrawable="@color/yellow"
+
                     android:paddingRight="10dp"
                     android:paddingBottom="18dp"
                     android:textColor="@color/black"
@@ -105,6 +109,8 @@
                     android:inputType="text"
                     android:letterSpacing="0.03"
                     android:maxLines="1"
+                    android:textCursorDrawable="@color/yellow"
+
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="18dp"
@@ -131,6 +137,8 @@
                     android:inputType="number"
                     android:letterSpacing="0.03"
                     android:maxLength="10"
+                    android:textCursorDrawable="@color/yellow"
+
                     android:maxLines="1"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
@@ -159,6 +167,8 @@
                     android:inputType="textPassword"
                     android:letterSpacing="0.03"
                     android:maxLines="1"
+                    android:textCursorDrawable="@color/yellow"
+
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="15dp"
@@ -185,6 +195,8 @@
                     android:inputType="textPassword"
                     android:letterSpacing="0.03"
                     android:maxLines="1"
+                    android:textCursorDrawable="@color/yellow"
+
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="15dp"

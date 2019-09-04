@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.utility;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 
 public class CustomProgressBar {
 
@@ -23,6 +26,7 @@ public class CustomProgressBar {
 
         mProgressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleLarge);
         mProgressBar.setIndeterminate(true);
+        mProgressBar.getIndeterminateDrawable().setColorFilter(context.getColor(R.color.yellow), android.graphics.PorterDuff.Mode.MULTIPLY);
 
 
 
