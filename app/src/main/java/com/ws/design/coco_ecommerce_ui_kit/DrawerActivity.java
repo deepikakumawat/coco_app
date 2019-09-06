@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -54,7 +55,7 @@ import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity;
 import com.ws.design.coco_ecommerce_ui_kit.my_wishlist.MyWishlistFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
-import com.ws.design.coco_ecommerce_ui_kit.profile.MyAccountActivity;
+import com.ws.design.coco_ecommerce_ui_kit.profile.MyAccountFragment;
 import com.ws.design.coco_ecommerce_ui_kit.search.SearchFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity;
@@ -211,8 +212,11 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        Intent intent = new Intent(DrawerActivity.this, MyAccountActivity.class);
-                        startActivityForResult(intent, MYACCOUNT_ACTION);
+                    /*    Intent intent = new Intent(DrawerActivity.this, MyAccountFragment.class);
+                        startActivityForResult(intent, MYACCOUNT_ACTION);*/
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyAccountFragment(), "MyAccountFragment", false, false);
+
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnMyAccountActivity.class));
                     }
@@ -510,7 +514,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
     }
 
-    private void logout() {
+    public void logout() {
         try {
             AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(this);
@@ -604,4 +608,15 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     }
 
 
+    public void darkMode(){
+
+        Fragment currentFragment = getCurrentFragmentInRootLayout();
+        if (currentFragment instanceof MyAccountFragment) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.detach(currentFragment);
+            fragmentTransaction.attach(currentFragment);
+            fragmentTransaction.commit();
+        }
+
+    }
 }

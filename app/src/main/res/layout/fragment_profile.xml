@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lyParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lyParent"
-
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/inTop"
-        layout="@layout/toolbar_address_list" />
 
     <ScrollView
         android:layout_width="match_parent"

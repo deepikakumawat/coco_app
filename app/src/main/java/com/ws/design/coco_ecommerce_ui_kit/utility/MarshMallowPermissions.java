@@ -2,6 +2,7 @@ package com.ws.design.coco_ecommerce_ui_kit.utility;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -35,8 +36,8 @@ public class MarshMallowPermissions {
         }
     }
 
-    public boolean checkPermissionForCamera() {
-        int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
+    public boolean checkPermissionForCamera(Context context) {
+        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
@@ -99,9 +100,9 @@ public class MarshMallowPermissions {
         }
     }
 
-    public boolean checkPermissionForExternalStorage() {
-        int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int result1 = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    public boolean checkPermissionForExternalStorage(Context context) {
+        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (result == PackageManager.PERMISSION_GRANTED || result1 == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {

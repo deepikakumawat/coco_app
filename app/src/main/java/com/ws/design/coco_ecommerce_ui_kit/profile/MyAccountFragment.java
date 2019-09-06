@@ -17,14 +17,17 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -36,8 +39,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.ChangePasswordActivity;
+import com.ws.design.coco_ecommerce_ui_kit.DrawerActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity;
 import com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity;
+import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.my_order.MyOrderFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -51,9 +57,11 @@ import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import fragment.FragmentManagerUtils;
+
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 
-public class MyAccountActivity extends AppCompatActivity implements View.OnClickListener, UpdateView {
+public class MyAccountFragment extends BaseFragment implements View.OnClickListener, UpdateView {
 
     private TextView txtLogout;
     private TextView txtUserName;
@@ -64,7 +72,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private TextView txtEditProfile;
     private ImageView imgProfileImage;
     private Dialog addProfileImage;
-    private MarshMallowPermissions marshMallowPermissions = new MarshMallowPermissions(this);
+    private MarshMallowPermissions marshMallowPermissions = new MarshMallowPermissions(getActivity());
     private LinearLayout lyParent;
     private Uri fileUri = null;
     private String imagePath;
@@ -73,34 +81,40 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private TextView txtGallery;
     private TextView txtCancel;
     private UpdateProfilePresenter updateProfilePresenter;
-    private ImageView imgBack;
     private Switch darkModeSwitch;
+    private View mView;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mView = inflater.inflate(R.layout.fragment_profile, container, false);
+        return mView;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        if (CocoPreferences.isNightMode()) {
+       /* if (CocoPreferences.isNightMode()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
+        }*/
 
 
-        setContentView(R.layout.activity_profile);
         updateProfilePresenter = new UpdateProfilePresenter(this);
 
 
-        lyParent = findViewById(R.id.lyParent);
-        imgProfileImage = findViewById(R.id.imgProfileImage);
-        txtLogout = findViewById(R.id.txtLogout);
-        txtChangePassword = findViewById(R.id.txtChangePassword);
-        txtAddAddress = findViewById(R.id.txtAddAddress);
-        txtUserName = findViewById(R.id.txtUserName);
-        txtYourAddress = findViewById(R.id.txtYourAddress);
-        txtEditProfile = findViewById(R.id.txtEditProfile);
-        txtMyOrder = findViewById(R.id.txtMyOrder);
-        darkModeSwitch = findViewById(R.id.darkModeSwitch);
+        lyParent = view.findViewById(R.id.lyParent);
+        imgProfileImage = view.findViewById(R.id.imgProfileImage);
+        txtLogout = view.findViewById(R.id.txtLogout);
+        txtChangePassword = view.findViewById(R.id.txtChangePassword);
+        txtAddAddress = view.findViewById(R.id.txtAddAddress);
+        txtUserName = view.findViewById(R.id.txtUserName);
+        txtYourAddress = view.findViewById(R.id.txtYourAddress);
+        txtEditProfile = view.findViewById(R.id.txtEditProfile);
+        txtMyOrder = view.findViewById(R.id.txtMyOrder);
+        darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
 
-        imgBack = findViewById(R.id.imgBack);
         txtLogout.setOnClickListener(this);
         txtMyOrder.setOnClickListener(this);
         txtChangePassword.setOnClickListener(this);
@@ -108,59 +122,65 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
         txtYourAddress.setOnClickListener(this);
         txtEditProfile.setOnClickListener(this);
         imgProfileImage.setOnClickListener(this);
-        imgBack.setOnClickListener(this);
 
         txtUserName.setText(CocoPreferences.getFirstName() + " " + CocoPreferences.getLastName());
         String picUrl = CocoPreferences.getProfilePic();
         Glide.with(this).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
 
-        setDarkModeSwitch();
+//        setDarkModeSwitch();
     }
 
-    private void setDarkModeSwitch() {
-        darkModeSwitch.setChecked(CocoPreferences.isNightMode());
-        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                CocoPreferences.setNightMode(!CocoPreferences.isNightMode());
-                CocoPreferences.savePreferencese();
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                recreate();
-            }
-        });
-    }
+//    private void setDarkModeSwitch() {
+//        darkModeSwitch.setChecked(CocoPreferences.isNightMode());
+//        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+//                try {
+//                    CocoPreferences.setNightMode(!CocoPreferences.isNightMode());
+//                    CocoPreferences.savePreferencese();
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+////                    getActivity().recreate();
+//
+//                    ((DrawerActivity) getActivity()).darkMode();
+//
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
+//    }
 
     @Override
     public void onClick(View view) {
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.imgBack:
-                    finish();
-                    break;
                 case R.id.txtEditProfile:
-                    startActivity(new Intent(MyAccountActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(getActivity(), ProfileActivity.class));
 
                     break;
                 case R.id.txtChangePassword:
-                    startActivity(new Intent(MyAccountActivity.this, ChangePasswordActivity.class));
+                    startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
 
                     break;
                 case R.id.txtAddAddress:
-                    startActivity(new Intent(MyAccountActivity.this, AddAddressActivity.class));
+                    startActivity(new Intent(getActivity(), AddAddressActivity.class));
 
                     break;
                 case R.id.txtYourAddress:
-                    startActivity(new Intent(MyAccountActivity.this, AddressListActivity.class));
+                    startActivity(new Intent(getActivity(), AddressListActivity.class));
 
                     break;
 
                 case R.id.txtLogout:
-                    logout();
+                    ((DrawerActivity) getActivity()).logout();
+//                    logout();
                     break;
                 case R.id.txtMyOrder:
-                    startActivity(new Intent(MyAccountActivity.this, MyOrderFragment.class));
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new MyOrderFragment(), null, true, false);
                     break;
                 case R.id.imgProfileImage:
                     setProfileImage();
@@ -188,7 +208,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private void logout() {
         try {
             AlertDialog.Builder builder;
-            builder = new AlertDialog.Builder(this);
+            builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(getString(R.string.do_you_want_to_logout))
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -208,9 +228,11 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
                             txtUserName.setText("");
 
-                            Intent data = new Intent();
+                           /* Intent data = new Intent();
                             setResult(Activity.RESULT_OK, data);
-                            finish();
+                            finish();*/
+
+                            FragmentManagerUtils.makeRootFragment(getActivity().getSupportFragmentManager(), new HomeFragment(), getActivity(), "HomeFragment");
 
 
                         }
@@ -220,16 +242,17 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                             dialog.dismiss();
                         }
                     })
-                    .show();;
+                    .show();
+            ;
 
             AlertDialog dialog = builder.create();
             dialog.show();
 
             Button nButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-            nButton.setTextColor(getColor(R.color.appgray));
+            nButton.setTextColor(getActivity().getColor(R.color.appgray));
 
             Button pButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            pButton.setTextColor(getColor(R.color.yellow));
+            pButton.setTextColor(getActivity().getColor(R.color.yellow));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -238,7 +261,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
     private void setProfileImage() {
         try {
-            addProfileImage = new Dialog(this);
+            addProfileImage = new Dialog(getActivity());
             addProfileImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
             addProfileImage.setContentView(R.layout.dialog_pic_profile_image);
 
@@ -264,43 +287,47 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void openCameraOrGallery(int galleryOrCamera) {
-        if (addProfileImage != null) {
-            addProfileImage.dismiss();
-        }
-        if (galleryOrCamera == Constant.PICK_FROM_GALLERY) {
-            if (!marshMallowPermissions.checkPermissionForExternalStorage()) {
-                marshMallowPermissions.requestPermissionForExternalStorage(lyParent);
-            } else {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_PICK);
-                this.startActivityForResult(intent, Constant.PICK_FROM_GALLERY);
+        try {
+            if (addProfileImage != null) {
+                addProfileImage.dismiss();
             }
-        } else if (galleryOrCamera == Constant.PICK_FROM_CAMERA) {
-            Intent intent = new Intent();
-            if (!marshMallowPermissions.checkPermissionForCamera()) {
-                marshMallowPermissions.requestPermissionForCamera(lyParent);
-            } else {
-                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                File directory = Util.getPhotoDirectory(this);
-
-
-                fileUri = null;
-                String imageName = "Image_";
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    fileUri = FileProvider.getUriForFile(MyAccountActivity.this, MyAccountActivity.this.getApplicationContext().getPackageName() + ".provider", new File(directory.getPath(), imageName + new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date()) + ".jpg"));
+            if (galleryOrCamera == Constant.PICK_FROM_GALLERY) {
+                if (!marshMallowPermissions.checkPermissionForExternalStorage(getActivity())) {
+                    marshMallowPermissions.requestPermissionForExternalStorage(lyParent);
                 } else {
-                    fileUri = Uri.fromFile(new File(directory.getPath(), imageName + new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date()) + ".jpg"));
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_PICK);
+                    this.startActivityForResult(intent, Constant.PICK_FROM_GALLERY);
                 }
+            } else if (galleryOrCamera == Constant.PICK_FROM_CAMERA) {
+                Intent intent = new Intent();
+                if (!marshMallowPermissions.checkPermissionForCamera(getActivity())) {
+                    marshMallowPermissions.requestPermissionForCamera(lyParent);
+                } else {
+                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File directory = Util.getPhotoDirectory(getActivity());
 
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                startActivityForResult(intent, Constant.PICK_FROM_CAMERA);
+
+                    fileUri = null;
+                    String imageName = "Image_";
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        fileUri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", new File(directory.getPath(), imageName + new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date()) + ".jpg"));
+                    } else {
+                        fileUri = Uri.fromFile(new File(directory.getPath(), imageName + new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date()) + ".jpg"));
+                    }
+
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(intent, Constant.PICK_FROM_CAMERA);
 
 
 //              captureImage();
 
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -330,7 +357,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                     Bitmap bitmap;
                     try {
                         String img_path = "";
-                        img_path = getPath(MyAccountActivity.this, extras);
+                        img_path = getPath(getActivity(), extras);
                         assert img_path != null;
                         fileName = img_path.substring(img_path.lastIndexOf("/") + 1, img_path.length());
                         File imgFile = new File(img_path);
@@ -354,7 +381,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                     Bundle bundle = data.getExtras();
                     Bitmap image = bundle.getParcelable("data");
                     String img_path = "";
-                    img_path = getPath(Uri.parse(MediaStore.Images.Media.insertImage(MyAccountActivity.this.getContentResolver(), image, "profile_image" + ".jpg", "Temp image for profile")), MyAccountActivity.this);
+                    img_path = getPath(Uri.parse(MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), image, "profile_image" + ".jpg", "Temp image for profile")), getActivity());
                     Uri fileUri = Uri.fromFile(new File(img_path));
                     imagePath = String.valueOf(fileUri);
                     fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1, imagePath.length());
@@ -423,7 +450,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
                         out.close();
                         return path + File.separator + file_name;
                     } else {
-                        Util.showCenteredToast(lyParent, MyAccountActivity.this, "Can't Attach file more than 10mb in size", "");
+                        Util.showCenteredToast(lyParent, getActivity(), "Can't Attach file more than 10mb in size", "");
                     }
 
                 } else {
@@ -492,7 +519,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void showWait() {
-        Util.showProDialog(this);
+        Util.showProDialog(getActivity());
     }
 
     @Override
@@ -502,7 +529,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent, this, appErrorMessage, "");
+        showCenteredToast(lyParent, getActivity(), appErrorMessage, "");
     }
 
 
@@ -517,7 +544,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
             if (!TextUtils.isEmpty(changeProfileImageResponse.getmStatus()) && ("1".equalsIgnoreCase(changeProfileImageResponse.getmStatus()))) {
 
                 if (changeProfileImageResponse.getmData() != null) {
-                    showCenteredToast(lyParent, this, getString(R.string.profile_updated_succesfully), Constant.API_SUCCESS);
+                    showCenteredToast(lyParent, getActivity(), getString(R.string.profile_updated_succesfully), Constant.API_SUCCESS);
                     CocoPreferences.setProfilePic(changeProfileImageResponse.getmData().getmProfilePic());
                     CocoPreferences.savePreferencese();
                 }
@@ -538,4 +565,13 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+    @Override
+    protected boolean isSearchIconVisible() {
+        return false;
+    }
+
+    @Override
+    protected boolean isCartIconVisible() {
+        return false;
+    }
 }

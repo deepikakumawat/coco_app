@@ -45,7 +45,7 @@ import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast
 
 public class MyOrderFragment extends BaseFragment implements MyOrderView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    MyOrderAdapter myOrderAdapter;
+    private MyOrderAdapter myOrderAdapter;
     private RecyclerView rvMyOrder;
     private ArrayList<MyOrderResponse.MyOrderData> myOrderDataArrayList = new ArrayList<>();
     private MarshMallowPermissions marshMallowPermissions = new MarshMallowPermissions(getActivity());
