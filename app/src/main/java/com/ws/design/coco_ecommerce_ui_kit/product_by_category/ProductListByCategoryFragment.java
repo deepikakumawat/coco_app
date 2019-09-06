@@ -101,7 +101,6 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
 
 
         wrapContentHeightViewPager = mView.findViewById(R.id.pager);
-//        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getActivity().getSupportFragmentManager(), 4, catId);
         setAdapter();
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
