@@ -95,7 +95,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="15dp"
                                 android:padding="5dp"
-                                android:src="@drawable/dark_cart" />
+                                android:src="@drawable/cart" />
 
                         </LinearLayout>
 

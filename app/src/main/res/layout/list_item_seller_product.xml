@@ -89,7 +89,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="15dp"
                             android:id="@+id/imgAddToCart"
-                            android:src="@drawable/dark_cart" />
+                            android:src="@drawable/cart" />
 
                     </LinearLayout>
 

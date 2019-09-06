@@ -94,85 +94,11 @@
         </LinearLayout>
 
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lyCustomerRating"
-            android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@color/white">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingTop="16.5dp"
-                android:paddingBottom="16.5dp"
-                android:visibility="gone">
-
-                <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-                    android:id="@+id/image"
-                    android:layout_width="73dp"
-                    android:layout_height="73dp"
-                    android:layout_marginRight="11.2dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/watch1"
-                    app:siShape="@drawable/rect1"
-                    app:siSquare="true" />
-
-                <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-                    android:layout_width="73dp"
-                    android:layout_height="73dp"
-                    android:layout_marginRight="11.2dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/watch1"
-                    app:siShape="@drawable/rect1"
-                    app:siSquare="true" />
-
-                <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
-                    android:layout_width="73dp"
-                    android:layout_height="73dp"
-                    android:layout_marginRight="11.2dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/watch1"
-                    app:siShape="@drawable/rect1"
-                    app:siSquare="true" />
-
-                <LinearLayout
-                    android:layout_width="73dp"
-                    android:layout_height="73dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/rect_recycler"
-                    android:gravity="center">
-
-                    <customfonts.MyTextView_Roboto_Regular
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="+13"
-                        android:textColor="@color/black"
-                        android:textSize="13.3sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-
         <View
             android:id="@+id/vView"
             android:layout_width="match_parent"
             android:layout_height="0.7dp"
-            android:layout_below="@+id/cardView"
+            android:layout_below="@+id/lyCustomerRating"
             android:layout_marginTop="5dp"
             android:background="#34707070" />
 
@@ -181,14 +107,12 @@
             android:id="@+id/rvRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/vView"
             android:clipToPadding="false"
-            android:visibility="gone"
             android:nestedScrollingEnabled="false"
             android:paddingLeft="15dp"
-            android:layout_below="@+id/vView"
             android:paddingRight="15dp"
-             />
-
+            android:visibility="gone" />
 
 
         <android.support.v7.widget.CardView
@@ -239,9 +163,9 @@
                             android:paddingLeft="28dp"
                             android:paddingTop="16.5dp"
                             android:paddingBottom="16.5dp"
-                            android:textCursorDrawable="@color/yellow"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
+                            android:textCursorDrawable="@color/yellow"
                             android:textSize="13sp" />
 
 
@@ -284,16 +208,13 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginRight="43dp"
                             android:gravity="center"
-                            android:text="Submit"
-                          />
+                            android:text="Submit" />
 
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
-
 
 
             </LinearLayout>
@@ -309,8 +230,8 @@
         android:layout_gravity="center"
         android:background="@color/white"
         android:clickable="true"
-        android:visibility="gone"
         android:orientation="vertical"
+        android:visibility="gone"
         shimmer:duration="800">
 
         <!-- Adding 7 rows of placeholders -->

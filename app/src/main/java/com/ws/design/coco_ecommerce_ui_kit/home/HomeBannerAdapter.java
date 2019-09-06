@@ -48,7 +48,7 @@ public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.Vi
         Banner banner = bannerArrayList.get(position);
         if (banner != null) {
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + banner.getmImageUrl();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.banner).dontAnimate().into(holder.imgBanner);
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.ic_richkart_logo).dontAnimate().into(holder.imgBanner);
 
 
 

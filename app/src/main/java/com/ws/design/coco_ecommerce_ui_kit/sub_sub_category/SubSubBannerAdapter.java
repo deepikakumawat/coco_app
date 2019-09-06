@@ -39,7 +39,7 @@ public class SubSubBannerAdapter extends RecyclerView.Adapter<SubSubBannerAdapte
         Banner banner = bannerArrayList.get(position);
         if (banner != null) {
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + banner.getmImageId();
-            Glide.with(context).load(thumbnail).placeholder(R.drawable.banner).dontAnimate().into(holder.imgBanner);
+            Glide.with(context).load(thumbnail).placeholder(R.drawable.ic_richkart_logo).dontAnimate().into(holder.imgBanner);
 
 
 

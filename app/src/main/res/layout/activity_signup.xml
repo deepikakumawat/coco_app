@@ -25,7 +25,7 @@
                 android:layout_marginLeft="@dimen/dimen_30dp"
                 android:layout_marginTop="@dimen/dimen_30dp"
                 android:layout_marginRight="@dimen/dimen_30dp"
-                android:src="@drawable/ic_richkart_logo_login" />
+                android:src="@drawable/register_page_logo" />
 
 
             <LinearLayout

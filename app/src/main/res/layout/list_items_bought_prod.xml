@@ -38,7 +38,7 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:src="@drawable/dark_cart" />
+                    android:src="@drawable/cart" />
             </LinearLayout>
 
 

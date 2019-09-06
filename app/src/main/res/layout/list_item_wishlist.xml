@@ -77,7 +77,7 @@
                                     android:id="@+id/imgRemoveWishlist"
                                     android:layout_width="@dimen/dimen_30dp"
                                     android:layout_height="@dimen/dimen_30dp"
-                                    android:src="@mipmap/ic_delete"
+                                    android:src="@drawable/delete"
 
                                     />
 

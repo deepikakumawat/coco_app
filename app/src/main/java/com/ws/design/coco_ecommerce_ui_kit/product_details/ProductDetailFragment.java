@@ -81,7 +81,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
     private ProductDetailsPresenter productDetailsPresenter;
-    private TextView txtAddToWishlist;
+    private ImageView imgAddToWishlist;
     private TextView txtAddToCart;
 
     private ArrayList<String> productDetailsImagesArrayList = new ArrayList<>();
@@ -94,7 +94,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private String productSlug = null;
     private String productId = null;
     private String productQty = null;
-    private TextView txtRemoveWishlist;
+    private ImageView imgRemoveWishlist;
     private String screen;
     private String wishListId;
     private TextView txtReview;
@@ -212,8 +212,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         lyImageView = view.findViewById(R.id.lyImageView);
         txtBuyNow = view.findViewById(R.id.txtBuyNow);
         txtOutOfStock = view.findViewById(R.id.txtOutOfStock);
-        txtAddToWishlist = view.findViewById(R.id.txtAddToWishlist);
-        txtRemoveWishlist = view.findViewById(R.id.txtRemoveWishlist);
+        imgAddToWishlist = view.findViewById(R.id.imgAddToWishlist);
+        imgRemoveWishlist = view.findViewById(R.id.imgRemoveWishlist);
         txtAddToCart = view.findViewById(R.id.txtAddToCart);
         txtProductName = view.findViewById(R.id.txtProductName);
         txtSellerName = view.findViewById(R.id.txtSellerName);
@@ -230,8 +230,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         txtReviewCount = view.findViewById(R.id.txtReviewCount);
         txtDiscout = view.findViewById(R.id.txtDiscout);
         txtRatingCount = view.findViewById(R.id.txtRatingCount);
-        txtAddToWishlist.setOnClickListener(this);
-        txtRemoveWishlist.setOnClickListener(this);
+        imgAddToWishlist.setOnClickListener(this);
+        imgRemoveWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
         txtBuyNow.setOnClickListener(this);
         txtViewAllReview.setOnClickListener(this);
@@ -289,11 +289,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
         if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("MyWishList")) {
-            txtRemoveWishlist.setVisibility(View.VISIBLE);
-            txtAddToWishlist.setVisibility(View.GONE);
+            imgRemoveWishlist.setVisibility(View.VISIBLE);
+            imgAddToWishlist.setVisibility(View.GONE);
         } else {
-            txtRemoveWishlist.setVisibility(View.GONE);
-            txtAddToWishlist.setVisibility(View.VISIBLE);
+            imgRemoveWishlist.setVisibility(View.GONE);
+            imgAddToWishlist.setVisibility(View.VISIBLE);
         }
 
         callAPI(productId);
@@ -318,7 +318,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
         switch (v.getId()) {
 
-            case R.id.txtAddToWishlist:
+            case R.id.imgAddToWishlist:
 
 
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
@@ -361,7 +361,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
                 break;
-            case R.id.txtRemoveWishlist:
+            case R.id.imgRemoveWishlist:
 
                 if (!TextUtils.isEmpty(wishListId)) {
 
@@ -586,7 +586,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public void addToWishList(AddToWishListResponse addToWishListResponse) {
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
             showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), Constant.API_SUCCESS);
-
+            imgAddToWishlist.setVisibility(View.GONE);
+            imgRemoveWishlist.setVisibility(View.VISIBLE);
 
         } else {
             showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), "");
@@ -1164,8 +1165,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public void removeWishList(RemoveWishListResponse removeWishListResponse) {
         if (!TextUtils.isEmpty(removeWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(removeWishListResponse.getmStatus()))) {
             showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(), Constant.API_SUCCESS);
-            txtAddToWishlist.setVisibility(View.VISIBLE);
-            txtRemoveWishlist.setVisibility(View.GONE);
+            imgAddToWishlist.setVisibility(View.VISIBLE);
+            imgRemoveWishlist.setVisibility(View.GONE);
         } else {
             showCenteredToast(ryParent, getActivity(), removeWishListResponse.getmMessage(), "");
         }

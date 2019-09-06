@@ -1,6 +1,7 @@
 package com.ws.design.coco_ecommerce_ui_kit.home;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -43,10 +44,18 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
         if (productData != null) {
 
             holder.txtProductName.setText(productData.getmProductName());
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productData.getmSalePrice());
 
             holder. txtRating .setText(!TextUtils.isEmpty(productData.getmAvgRating()) ? productData.getmAvgRating() : "0");
 
+            holder.txtSalesProductPrice.setText(TextUtils.isEmpty(productData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productData.getmSalePrice());
+
+
+            if (!TextUtils.isEmpty(productData.getmPrice())) {
+                holder.txtProductPrice.setText(context.getString(R.string.Rs) + productData.getmPrice());
+                holder.txtProductPrice.setPaintFlags(holder.txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                holder.txtProductPrice.setText("-");
+            }
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).dontAnimate().into(holder.imgProduct);
@@ -73,11 +82,13 @@ public class HomeTopRatedProductsAdapter extends RecyclerView.Adapter<HomeTopRat
         private TextView txtProductPrice;
         private TextView txtRating;
         private LinearLayout lyProduct;
+        private TextView txtSalesProductPrice;
 
 
         public ViewHolder(View view) {
             super(view);
 
+            txtSalesProductPrice = view.findViewById(R.id.txtSalesProductPrice);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductName = view.findViewById(R.id.txtProductName);
             txtProductType = view.findViewById(R.id.txtProductType);

@@ -39,7 +39,7 @@ android:background="@color/white"
                     android:layout_gravity="center"
                     android:background="@drawable/circle"
                     android:padding="10dp"
-                    android:src="@drawable/puma" />
+                    android:src="@drawable/richkart" />
             </LinearLayout>
 
         </LinearLayout>
