@@ -23,7 +23,6 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
 
     private EditText etEmail;
     private Button btnSend;
-    private TextView txtTitle;
     private ImageView imgBack;
     private LinearLayout lyConfirmationMail;
     private RelativeLayout ryParent;
@@ -35,10 +34,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements LoginVi
         setContentView(R.layout.activity_forgot_password);
 
         ryParent = findViewById(R.id.ryParent);
-        txtTitle = findViewById(R.id.txtTitle);
         imgBack = findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
-        txtTitle.setText("Forgot Password");
 
         LoginPresenter presenter = new LoginPresenter(this);
         findViewById(R.id.btnSend).setOnClickListener(view -> {

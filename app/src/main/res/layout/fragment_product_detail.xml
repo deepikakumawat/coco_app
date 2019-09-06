@@ -151,7 +151,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
-                                android:textSize="17sp" />
+                                android:textSize="@dimen/txt_18sp"
+                                android:textStyle="bold"/>
 
 
                             <customfonts.MyTextView_Roboto_Medium
@@ -183,7 +184,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/black"
-                                    android:textSize="23sp" />
+                                    android:textSize="@dimen/txt_20sp" />
 
 
                             </LinearLayout>
@@ -201,17 +202,16 @@
                                     android:layout_gravity="center"
 
                                     android:textColor="@color/appgray"
-                                    android:textSize="12.3sp" />
+                                    android:textSize="@dimen/txt_14sp" />
 
                                 <customfonts.MyTextView_Roboto_Bold
                                     android:id="@+id/txtDiscout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-
                                     android:layout_marginLeft="15dp"
                                     android:textColor="@color/green"
-                                    android:textSize="12sp"
-                                    android:textStyle="italic" />
+                                    android:textSize="@dimen/txt_14sp"
+                                  />
 
                             </LinearLayout>
 
@@ -255,8 +255,7 @@
                                     android:layout_marginRight="5dp"
                                     android:layout_weight="1"
                                     android:text="Buy Now"
-                                    android:textAllCaps="false"
-                                  />
+                                    android:textAllCaps="false" />
 
                                 <customfonts.MyTextView_Roboto_Bold
                                     android:id="@+id/txtOutOfStock"
@@ -283,10 +282,9 @@
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginTop="9dp"
                                     android:layout_weight="1"
-
+                                    android:background="@android:color/black"
                                     android:text="Add To Cart"
-                                    android:textAllCaps="false"
-                                />
+                                    android:textColor="@android:color/white" />
                             </LinearLayout>
 
 
@@ -436,8 +434,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:orientation="vertical"
                         android:background="@drawable/recycler_view_border"
+                        android:orientation="vertical"
 
                         >
 
@@ -446,13 +444,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:clipToPadding="false"
-                            android:padding="1dp"
                             android:nestedScrollingEnabled="false"
+                            android:padding="1dp"
 
                             />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>

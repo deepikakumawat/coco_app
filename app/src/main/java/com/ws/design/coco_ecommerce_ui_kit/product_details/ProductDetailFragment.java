@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -1127,7 +1128,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 txtDiscout.setText("0%");
 
             }
-
+            txtDiscout.setTypeface(txtDiscout.getTypeface(), Typeface.ITALIC);
 
         } catch (Exception e) {
             e.printStackTrace();

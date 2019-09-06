@@ -5,8 +5,8 @@
     android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity">
 
 
@@ -45,14 +45,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:gravity="right"
-                        android:text="@string/add_new_address"
-                       />
-
+                        android:drawableRight="@drawable/ic_more"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:drawableTint="@color/appgray"
+                        android:gravity="center"
+                        android:text="@string/add_new_address" />
 
 
                 </LinearLayout>
-
 
 
                 <android.support.v7.widget.RecyclerView

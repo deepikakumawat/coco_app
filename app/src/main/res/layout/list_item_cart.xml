@@ -12,10 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_message"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="@dimen/dimen_5dp"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="3dp"
@@ -25,8 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,34 +37,31 @@
 
                     <ImageView
                         android:id="@+id/imgProduct"
-                        android:layout_width="80dp"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="29dp"
-                        android:layout_marginTop="17.5dp"
+                        android:layout_width="@dimen/dimen_80dp"
+                        android:layout_height="@dimen/dimen_120dp"
+
                         android:src="@drawable/richkart" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="28.4dp"
+                        android:layout_marginLeft="@dimen/dimen_5dp"
+                        android:layout_marginRight="@dimen/dimen_5dp"
                         android:orientation="vertical">
 
                         <customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtProductName"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
-                            android:letterSpacing="0.03"
-                            android:text="Iphone X | 128 GB, Black | 6 GB ram |
-12000 mAh battry"
+                            android:text="Iphone X | 128 GB, Black | 6 GB ram |12000 mAh battry"
                             android:textColor="@color/black"
-                            android:textSize="13.3sp" />
+                            android:textSize="@dimen/txt_18sp"
+                            android:textStyle="bold"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10.3dp"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -96,11 +89,11 @@
                                     android:id="@+id/txtIncDec"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10.7dp"
-                                    android:layout_marginRight="10.7dp"
+                                    android:layout_marginLeft="@dimen/dimen_10dp"
+                                    android:layout_marginRight="@dimen/dimen_10dp"
                                     android:text="1"
                                     android:textColor="@color/black"
-                                    android:textSize="14.3sp" />
+                                    android:textSize="@dimen/txt_14sp" />
 
                                 <LinearLayout
                                     android:id="@+id/lyIncrement"
@@ -126,7 +119,6 @@
                             android:id="@+id/lyColorTop"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10.3dp"
                             android:background="@color/white"
                             android:orientation="vertical"
 
@@ -149,7 +141,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
-                            android:layout_marginTop="10.3dp"
 
                             android:orientation="horizontal">
 
@@ -178,7 +169,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:text="30% OFF"
-                                android:textColor="#f78c40"
+                                android:textColor="@color/green"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -193,24 +184,17 @@
 
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10.3dp"
-                android:layout_marginRight="10dp"
-                android:background="#dedede"></View>
+                android:background="@color/viewline"></View>
 
             //REMOVE WISHLIST START
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                android:background="#dedede"
+                android:layout_height="@dimen/dimen_30dp"
+                android:background="@color/viewline"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -218,10 +202,9 @@
                     android:id="@+id/lyRemove"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="1dp"
+                    android:layout_marginRight="@dimen/dimen_1dp"
                     android:layout_weight="1"
-
-                    android:background="#FFFFFF"
+                    android:background="@android:color/white"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -243,7 +226,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="REMOVE"
                                 android:textColor="#6e6d6d"
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/txt_14sp" />
                         </LinearLayout>
 
                         <FrameLayout
@@ -261,7 +244,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
+                    android:background="@android:color/white"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -280,10 +263,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="MOVE TO WISHLIST"
-                                android:textColor="#446ce4"
+                                android:textColor="@color/blue"
 
 
-                                android:textSize="12sp" />
+                                android:textSize="@dimen/txt_14sp" />
                         </LinearLayout>
 
                         <FrameLayout

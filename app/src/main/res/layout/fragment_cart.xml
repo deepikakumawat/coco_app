@@ -140,7 +140,6 @@
         android:background="@color/white"
         android:clickable="true"
         android:orientation="vertical"
-        android:visibility="gone"
         shimmer:duration="800">
 
         <!-- Adding 7 rows of placeholders -->

@@ -56,6 +56,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     private RelativeLayout ryParent;
     private Button btnAddSomething;
     boolean isShimmerShow = true;
+    private String moveWishListCatId;
 
 
     @Nullable
@@ -136,7 +137,13 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     @Override
     public void onFailure(String appErrorMessage) {
 
-        noDataFound(appErrorMessage);
+        if (!TextUtils.isEmpty(moveWishListCatId)) {
+            showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
+
+        } else {
+            noDataFound();
+        }
+
     }
 
     @Override
@@ -150,7 +157,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                 setAdapter(productDataArrayList, totalPrice);
 
             } else {
-                noDataFound(getString(R.string.your_cart_empty));
+                noDataFound();
             }
 
         }
@@ -164,7 +171,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
             productDataArrayList.clear();
             cartListAdapter.notifyDataSetChanged();
 
-            noDataFound(getString(R.string.your_cart_empty));
+            noDataFound();
 
 
         } else {
@@ -188,7 +195,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
 
 
             } else {
-                noDataFound(getString(R.string.your_cart_empty));
+                noDataFound();
             }
 
 
@@ -213,7 +220,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                     setAdapter(productDataArrayList, totalPrice);
 
                 } else {
-                    noDataFound(getString(R.string.your_cart_empty));
+                    noDataFound();
                 }
 
             } else {
@@ -221,7 +228,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                 totalPrice = removeCartByCrossResponse.getmData().getmTotalPrice();
                 setAdapter(productDataArrayList, totalPrice);
                 if (removeCartByCrossResponse.getmData().getmProductData().isEmpty()) {
-                    noDataFound(getString(R.string.your_cart_empty));
+                    noDataFound();
 
                 }
             }
@@ -265,6 +272,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
                     if (productData != null) {
                         if (Util.isDeviceOnline(getActivity())) {
                             isShimmerShow = false;
+                            moveWishListCatId = productData.getmCartId();
                             cartPresenter.addToWishList(CocoPreferences.getUserId(), productData.getmProductId());
                         } else {
                             Util.showNoInternetDialog(getActivity());
@@ -371,6 +379,12 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
         if (!TextUtils.isEmpty(addToWishListResponse.getmStatus()) && ("1".equalsIgnoreCase(addToWishListResponse.getmStatus()))) {
             showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), Constant.API_SUCCESS);
 
+            if (!TextUtils.isEmpty(moveWishListCatId)) {
+                cartPresenter.removeCartByCross(moveWishListCatId);
+
+            }
+
+
         } else {
             showCenteredToast(ryParent, getActivity(), addToWishListResponse.getmMessage(), "");
         }
@@ -415,7 +429,7 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
     }
 
 
-    private void noDataFound(String appErrorMessage) {
+    private void noDataFound() {
         svEmptyCartView.setVisibility(View.VISIBLE);
         rvCart.setVisibility(View.GONE);
         lyBottomView.setVisibility(View.GONE);

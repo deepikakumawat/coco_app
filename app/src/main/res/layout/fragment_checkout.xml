@@ -30,7 +30,8 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="20dp">
+                    android:paddingBottom="20dp"
+               >
 
                 </android.support.v7.widget.RecyclerView>
 
@@ -107,6 +108,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -119,84 +121,60 @@
                             android:id="@+id/txtAddress1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="17dp"
                             android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
                             android:text="Address1"
+                            android:layout_gravity="bottom"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/txt_14sp" />
 
                         <View
                             android:layout_width="0.7dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="15sp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
                             android:background="#4a707070" />
 
-                        <customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtChange"
+                        <customfonts.Button_Roboto_Medium
+                            android:id="@+id/btnChange"
+                            style="@style/buttonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:gravity="center"
-                            android:letterSpacing="0.03"
-                            android:text="Change"
-                            android:textColor="@color/black"
-                            android:textSize="12.7sp" />
+                            android:text="Change" />
 
-                        <customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtAddAddress"
+                        <customfonts.Button_Roboto_Medium
+                            android:id="@+id/btnAddAddress"
+                            style="@style/buttonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:gravity="center"
-                            android:letterSpacing="0.03"
+                            android:visibility="gone"
                             android:text="Add Address"
-                            android:textColor="@color/black"
-                            android:textSize="12.7sp"
-                            android:visibility="gone" />
+                          />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:orientation="vertical">
 
                         <customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtAddress2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginBottom="17dp"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
                             android:text="Address2"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/txt_14sp" />
 
                         <customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtLandmark"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginBottom="17dp"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
+
                             android:text="Landmark"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/txt_14sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -205,40 +183,30 @@
 
                             <customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtCity"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="18dp"
-                                android:layout_marginBottom="17dp"
                                 android:layout_weight="1"
-                                android:letterSpacing="0.03"
-                                android:lineSpacingExtra="1dp"
                                 android:text="City"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/txt_14sp" />
 
                             <customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtState"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="17dp"
                                 android:layout_weight="1"
-                                android:letterSpacing="0.03"
-                                android:lineSpacingExtra="1dp"
                                 android:text="State"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/txt_14sp" />
 
                             <customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtZipcode"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="17dp"
                                 android:layout_weight="1"
-                                android:letterSpacing="0.03"
-                                android:lineSpacingExtra="1dp"
                                 android:text="Zipcode"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/txt_14sp" />
 
 
                         </LinearLayout>
@@ -246,16 +214,11 @@
 
                         <customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtCountry"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginBottom="17dp"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.03"
-                            android:lineSpacingExtra="1dp"
                             android:text="Country"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/txt_14sp" />
 
 
                     </LinearLayout>
@@ -282,14 +245,41 @@
                 android:layout_marginLeft="8.3dp"
                 android:layout_marginRight="8.9dp"
                 android:background="@drawable/rect_recycler"
-                android:elevation="2dp">
+                android:elevation="2dp"
+                android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvPaymentType"
+                <RadioGroup
+                    android:id="@+id/rgPayment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
+                    android:padding="@dimen/dimen_5dp">
+
+                    <RadioButton
+                        android:id="@+id/rbPOD"
+                        style="@style/radionbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:paddingLeft="10dp"
+                        android:text="@string/pay_on_delivery"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/txt_14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbPayOnline"
+                        style="@style/radionbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:checked="false"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="@string/pay_online"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/txt_14sp" />
+
+                </RadioGroup>
+
             </LinearLayout>
 
             <customfonts.TextViewSFProDisplaySemibold
@@ -311,9 +301,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="25dp"
-
-                android:text="Confirm and place order"
-                android:textAllCaps="false" />
+                android:text="Confirm and place order" />
 
 
         </LinearLayout>

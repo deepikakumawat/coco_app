@@ -72,7 +72,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Edit Mobile number"
-            android:textColor="@color/toolbarColor"
+            android:textColor="@color/yellow"
             android:textSize="13sp" />
     </LinearLayout>
 

@@ -17,14 +17,9 @@
 
         <customfonts.Button_Roboto_Medium
             android:id="@+id/btnFilter"
-            style="@style/buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            android:gravity="right"
+            style="@style/smallbuttonStyle"
+            android:layout_margin="@dimen/dimen_5dp"
+            android:gravity="center"
             android:text="@string/filer" />
 
 

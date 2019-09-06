@@ -32,7 +32,7 @@
                 <ImageView
                     android:id="@+id/imgProduct"
                     android:layout_width="@dimen/dimen_80dp"
-                    android:layout_height="@dimen/dimen_150dp"
+                    android:layout_height="@dimen/dimen_120dp"
                     android:src="@drawable/richkart" />
 
                 <LinearLayout

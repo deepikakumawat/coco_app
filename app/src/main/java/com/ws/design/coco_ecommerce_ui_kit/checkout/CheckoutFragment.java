@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +53,6 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private CheckoutListAdapter checkoutListAdapter;
     private RecyclerView rvCart;
     private ArrayList<CartListResponse.ProductData> productDataArrayList = new ArrayList<>();
-    private ArrayList<PaymentMethodData> paymentMethodDataArrayList = new ArrayList<>();
     private TextView txtConfirmPlaceOrder;
     private TextView txtTitle;
     private TextView txtAddress1;
@@ -62,8 +62,8 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private TextView txtState;
     private TextView txtCountry;
     private TextView txtZipcode;
-    private TextView txtChange;
-    private TextView txtAddAddress;
+    private Button btnChange;
+    private Button btnAddAddress;
     private static final int ADDRESSLIST_ACTION = 101;
     private static final int ADD_ADDRESS_ACTION = 104;
 
@@ -76,8 +76,6 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private String totalRazorPrice;
     private String orderStatus = "";
     private int selectedValue;
-    private RecyclerView rvPaymentType;
-    private PaymentMethodAdapter paymentMethodAdapter;
     private LinearLayout lyParent;
     private View mView;
     private Dialog enterCaptchaDialog;
@@ -86,7 +84,10 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private ImageView imgReload;
     private TextView txtCaptcha;
     private String paymentMethod = "Card";
-    private PaymentMethodData paymentMethodData;
+    private RadioGroup rgPayment;
+    private RadioButton rbPOD;
+    private RadioButton rbPayOnline;
+    private String paymentOption = "";
 
 
     @Nullable
@@ -140,16 +141,18 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
     private void init() {
         lyParent = mView.findViewById(R.id.lyParent);
-        rvPaymentType = mView.findViewById(R.id.rvPaymentType);
+        rgPayment = mView.findViewById(R.id.rgPayment);
+        rbPayOnline = mView.findViewById(R.id.rbPayOnline);
+        rbPOD = mView.findViewById(R.id.rbPOD);
         txtTotalPrice = mView.findViewById(R.id.txtTotalPrice);
         rvCart = mView.findViewById(R.id.rvCart);
         txtConfirmPlaceOrder = mView.findViewById(R.id.txtConfirmPlaceOrder);
         txtTitle = mView.findViewById(R.id.txtTitle);
-        txtChange = mView.findViewById(R.id.txtChange);
-        txtAddAddress = mView.findViewById(R.id.txtAddAddress);
+        btnChange = mView.findViewById(R.id.btnChange);
+        btnAddAddress = mView.findViewById(R.id.btnAddAddress);
         txtConfirmPlaceOrder.setOnClickListener(this);
-        txtAddAddress.setOnClickListener(this);
-        txtChange.setOnClickListener(this);
+        btnAddAddress.setOnClickListener(this);
+        btnChange.setOnClickListener(this);
 
         txtAddress1 = mView.findViewById(R.id.txtAddress1);
         txtAddress2 = mView.findViewById(R.id.txtAddress2);
@@ -163,16 +166,26 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvCart.setLayoutManager(layoutManager);
 
-        LinearLayoutManager layoutManagerPaymentMethod = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rvPaymentType.setLayoutManager(layoutManagerPaymentMethod);
 
+        rgPayment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-        paymentMethodDataArrayList.add(new PaymentMethodData(false, getString(R.string.pay_on_delivery)));
-        paymentMethodDataArrayList.add(new PaymentMethodData(false, getString(R.string.pay_online)));
-        paymentMethodAdapter = new PaymentMethodAdapter(getActivity(), paymentMethodDataArrayList, CheckoutFragment.this);
-        rvPaymentType.setAdapter(paymentMethodAdapter);
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                if (checkedId == R.id.rbPOD) {
 
+                    paymentOption = rbPOD.getText().toString();
+                    rbPOD.setChecked(true);
+
+                } else {
+                    paymentOption = rbPayOnline.getText().toString();
+                    rbPayOnline.setChecked(true);
+
+                }
+
+            }
+
+        });
 
     }
 
@@ -187,24 +200,18 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                 case R.id.txtConfirmPlaceOrder:
 
                     if (addressData != null) {
-                        if (paymentMethodData != null) {
-                            String paymentmode = paymentMethodData.getPaymentMethod();
-                            if (!TextUtils.isEmpty(paymentmode)) {
+                        if (!TextUtils.isEmpty(paymentOption)) {
+                            if (paymentOption.equalsIgnoreCase(getString(R.string.pay_on_delivery))) {
+                                enterCaptcha();
+                            } else if (rbPayOnline.isChecked()) {
+                                paymentMethod = "Card";
+                                startPayment();
 
-                                if (paymentmode.contains("POD")) {
-                                    enterCaptcha();
-                                }else{
-                                    paymentMethod = "Card";
-                                    startPayment();
-
-                                }
                             }
-                        }else{
+                        } else {
                             showCenteredToast(lyParent, getActivity(), "Please select payment mode.", "");
 
                         }
-
-
 
                     } else {
                         showCenteredToast(lyParent, getActivity(), "You haven't added address. Please add address first", "");
@@ -212,30 +219,17 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
 
                     break;
-                case R.id.txtChange:
+                case R.id.btnChange:
                     intent = new Intent(getActivity(), AddressListActivity.class);
                     intent.putExtra("selectedValue", selectedValue);
                     intent.putExtra("screen", "Checkout");
                     startActivityForResult(intent, ADDRESSLIST_ACTION);
                     break;
-                case R.id.txtAddAddress:
+                case R.id.btnAddAddress:
                     intent = new Intent(getActivity(), AddAddressActivity.class);
                     startActivityForResult(intent, ADD_ADDRESS_ACTION);
                     break;
-                case R.id.lyPaymentType:
-                    paymentMethodData = ((PaymentMethodData) view.getTag());
-                    if (paymentMethodData != null) {
-                        if (paymentMethodAdapter != null) {
-                            if (paymentMethodData.isSelectedPayment()) {
-                                paymentMethodData.setSelectedPayment(false);
-                            } else {
-                                paymentMethodData.setSelectedPayment(true);
-                            }
-                            paymentMethodAdapter.notifyDataSetChanged();
-                        }
-                    }
 
-                    break;
                 case R.id.imgReload:
                     int randomNumber = getRandomNumber();
                     txtCaptcha.setText(randomNumber + "");
@@ -248,11 +242,11 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                             enterCaptchaDialog.cancel();
                             paymentMethod = "COD";
                             callCheckoutPaymentApi("cashondelivery");
-                        }else{
+                        } else {
                             showCenteredToast(lyParent, getActivity(), getString(R.string.entered_characters_not_match), "");
                         }
 
-                    } else  {
+                    } else {
                         showCenteredToast(lyParent, getActivity(), getString(R.string.please_enter_characters), "");
                     }
                     break;
@@ -287,9 +281,9 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     public void onFailure(String appErrorMessage) {
         showCenteredToast(lyParent, getActivity(), appErrorMessage, "");
         if (addressData == null) {
-            txtAddAddress.setVisibility(View.VISIBLE);
+            btnAddAddress.setVisibility(View.VISIBLE);
 
-            txtChange.setVisibility(View.GONE);
+            btnChange.setVisibility(View.GONE);
             txtAddress2.setVisibility(View.GONE);
             txtLandmark.setVisibility(View.GONE);
             txtCity.setVisibility(View.GONE);
@@ -318,9 +312,9 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
                     setAddress(addressData);
                 }
             } else {
-                txtAddAddress.setVisibility(View.VISIBLE);
+                btnAddAddress.setVisibility(View.VISIBLE);
 
-                txtChange.setVisibility(View.GONE);
+                btnChange.setVisibility(View.GONE);
                 txtAddress2.setVisibility(View.GONE);
                 txtLandmark.setVisibility(View.GONE);
                 txtCity.setVisibility(View.GONE);
@@ -371,9 +365,9 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     }
 
     private void setAddress(AddressListResponse.AddressData addressData) {
-        txtAddAddress.setVisibility(View.GONE);
+        btnAddAddress.setVisibility(View.GONE);
 
-        txtChange.setVisibility(View.VISIBLE);
+        btnChange.setVisibility(View.VISIBLE);
         txtAddress1.setVisibility(View.VISIBLE);
         txtAddress2.setVisibility(View.VISIBLE);
         txtLandmark.setVisibility(View.VISIBLE);
@@ -383,13 +377,13 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         txtZipcode.setVisibility(View.VISIBLE);
 
 
-        txtAddress1.setText(TextUtils.isEmpty(addressData.getmAddress1()) ? "-" : addressData.getmAddress1());
-        txtAddress2.setText(TextUtils.isEmpty(addressData.getmAddress2()) ? "-" : addressData.getmAddress2());
-        txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : addressData.getmLandmark());
-        txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : addressData.getmCity());
-        txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" : addressData.getmState());
-        txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" : addressData.getmCountry());
-        txtZipcode.setText(TextUtils.isEmpty(addressData.getmZipcode()) ? "-" : addressData.getmZipcode());
+        txtAddress1.setText(TextUtils.isEmpty(addressData.getmAddress1()) ? "-" : getString(R.string.lebel_address1)+ addressData.getmAddress1());
+        txtAddress2.setText(TextUtils.isEmpty(addressData.getmAddress2()) ? "-" :getString(R.string.lebel_address2)+ addressData.getmAddress2());
+        txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : getString(R.string.landmark)+addressData.getmLandmark());
+        txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : getString(R.string.city)+addressData.getmCity());
+        txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" :getString(R.string.state)+ addressData.getmState());
+        txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" : getString(R.string.country)+addressData.getmCountry());
+        txtZipcode.setText(TextUtils.isEmpty(addressData.getmZipcode()) ? "-" :getString(R.string.pincode)+ addressData.getmZipcode());
     }
 
 
@@ -569,7 +563,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
         Bundle bundle = new Bundle();
         bundle.putString("totalPrice", totalPrice);
-        bundle.putString("quantity", productDataArrayList.size()+"");
+        bundle.putString("quantity", productDataArrayList.size() + "");
         bundle.putString("method", paymentMethod);
         bundle.putString("orderStatus", orderStatus);
         bundle.putSerializable("addressData", addressData);

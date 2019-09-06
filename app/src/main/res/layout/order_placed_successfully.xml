@@ -9,11 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dp">
+        android:padding="@dimen/dimen_10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.AppCompatImageView
@@ -26,10 +25,10 @@
         </RelativeLayout>
 
         <View
-            android:layout_width="340dp"
-            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
             android:background="#777"
-            android:paddingHorizontal="23dp" />
+           />
 
         <TextView
             style="@style/viewParent.headerText"

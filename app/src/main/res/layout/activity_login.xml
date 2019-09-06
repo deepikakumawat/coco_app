@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ryParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity">
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -17,75 +14,62 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="62.7dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_30dp"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:layout_marginRight="@dimen/dimen_30dp"
             android:src="@drawable/ic_richkart_logo_login" />
 
 
-        <customfonts.EditText_Roboto_Meidum
-            android:id="@+id/etEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="43dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="43dp"
-            android:background="@drawable/round_rect"
-            android:hint="Email ID"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="28dp"
-            android:paddingTop="16.5dp"
-            android:paddingBottom="16.5dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textCursorDrawable="@color/yellow"
-            android:textSize="13sp" />
+            android:layout_marginLeft="@dimen/dimen_30dp"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:layout_marginRight="@dimen/dimen_30dp"
+            android:orientation="vertical">
 
-        <customfonts.EditText_Roboto_Meidum
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="43dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="43dp"
-            android:background="@drawable/round_rect"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="28dp"
-            android:paddingTop="16.5dp"
-            android:paddingBottom="16.5dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textCursorDrawable="@color/yellow"
-            android:textSize="13sp" />
+            <customfonts.EditText_Roboto_Meidum
+                android:id="@+id/etEmail"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email ID"
+                android:inputType="textEmailAddress" />
 
-        <customfonts.TextViewSFProDisplayMedium
-            android:id="@+id/txtFwdPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="43dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="43dp"
-            android:gravity="right"
-            android:paddingLeft="28dp"
-            android:paddingTop="16.5dp"
-            android:paddingBottom="16.5dp"
-            android:text="Forgot Password?"
-            android:textColor="#89000000"
-            android:textSize="12.7sp" />
+            <customfonts.EditText_Roboto_Meidum
+                android:id="@+id/etPassword"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
 
-        <customfonts.Button_Roboto_Medium
-            android:id="@+id/btn_login"
-            style="@style/buttonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="43dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="43dp"
-            android:gravity="center_horizontal"
-            android:text="Login"
-            android:textAllCaps="false" />
+                android:hint="Password"
+                android:inputType="textPassword" />
 
+            <customfonts.TextViewSFProDisplayMedium
+                android:id="@+id/txtFwdPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="right"
+                android:padding="@dimen/dimen_10dp"
+                android:text="Forgot Password?"
+                android:textColor="#89000000"
+                android:textSize="12.7sp" />
+
+            <customfonts.Button_Roboto_Medium
+                android:id="@+id/btn_login"
+                style="@style/buttonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="center"
+                android:text="Login"
+                android:textSize="@dimen/txt_20sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -113,7 +97,6 @@
             android:layout_marginLeft="14.5dp"
             android:layout_marginRight="14.5dp"
             android:layout_marginBottom="2dp"
-
             android:text="Create Account" />
 
         <View

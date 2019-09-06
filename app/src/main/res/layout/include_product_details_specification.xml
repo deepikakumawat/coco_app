@@ -9,66 +9,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
         android:background="@drawable/rect_gray"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <customfonts.MyTextView_Roboto_Bold
                 android:id="@+id/txtProductShortDesc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="17dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/tab_selector_product_details"
+                android:gravity="center"
                 android:text="Short Description"
                 android:textColor="@color/black"
-                android:textSize="12.7sp" />
+                android:textSize="@dimen/txt_14sp" />
 
             <customfonts.MyTextView_Roboto_Bold
                 android:id="@+id/txtProductDesc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="17dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/tab_selector_product_details"
+                android:gravity="center"
                 android:text="Product Description"
                 android:textColor="@color/black"
-                android:textSize="12.7sp" />
+                android:textSize="@dimen/txt_14sp" />
 
             <customfonts.MyTextView_Roboto_Bold
                 android:id="@+id/txtSpecification"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="17dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/tab_selector_product_details"
+                android:gravity="center"
                 android:text="Specification"
                 android:textColor="@color/black"
-                android:textSize="12.7sp" />
+                android:textSize="@dimen/txt_14sp" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="@dimen/dimen_1dp"
             android:background="@color/viewline" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="18dp"
+
             android:orientation="horizontal">
 
 
@@ -76,25 +73,22 @@
                 android:id="@+id/txtProductShortDesValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="13sp"
                 android:layout_weight="1"
+                android:padding="@dimen/dimen_5dp"
                 android:text="Enter pincode for exact delivery dates/charges"
                 android:textColor="@color/cut_price"
-                android:textSize="11sp" />
-
+                android:textSize="@dimen/txt_12sp" />
 
 
             <customfonts.MyTextView_Roboto_Regular
                 android:id="@+id/txtProductDesSpecValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="13sp"
+                android:padding="@dimen/dimen_5dp"
                 android:layout_weight="1"
                 android:text="Enter pincode for exact delivery dates/charges"
                 android:textColor="@color/cut_price"
-                android:textSize="11sp" />
-
-
+                android:textSize="@dimen/txt_12sp" />
 
 
             <android.support.v7.widget.RecyclerView
@@ -103,9 +97,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingLeft="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="20dp" />
+              />
 
         </LinearLayout>
 
