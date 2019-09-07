@@ -5,7 +5,7 @@
     android:id="@+id/lyParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.CocoSearch1">
 
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textSize="16.7sp"
                 android:visibility="gone" />
 

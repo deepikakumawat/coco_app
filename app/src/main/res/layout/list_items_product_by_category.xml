@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
 
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_5dp"
-        app:cardBackgroundColor="@color/white">
+        app:cardBackgroundColor="@android:color/white">
 
 
         <LinearLayout
@@ -50,12 +50,13 @@
                         android:maxLines="2"
                         android:text="I Phone X, 128GB (Black and Silver Color)"
                         android:textColor="@color/black"
-                        android:textSize="13.3sp" />
+                        android:textSize="@dimen/txt_14sp" />
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -64,9 +65,9 @@
                             android:id="@+id/txtProductPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="12sp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
                             android:textColor="@color/cut_price"
-                            android:textSize="14.7sp" />
+                            android:textSize="@dimen/txt_12sp" />
 
                         <customfonts.MyTextView_Roboto_Black
                             android:id="@+id/txtProductSalePrice"
@@ -77,7 +78,7 @@
                             android:layout_toRightOf="@id/txtProductPrice"
                             android:text="$ 343"
                             android:textColor="@color/black"
-                            android:textSize="14.7sp" />
+                            android:textSize="@dimen/txt_12sp" />
 
 
                         <LinearLayout
@@ -90,11 +91,10 @@
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="@dimen/dimen_20dp"
+                                android:layout_height="@dimen/dimen_20dp"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="15dp"
-                                android:padding="5dp"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:src="@drawable/cart" />
 
                         </LinearLayout>
@@ -106,6 +106,8 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:layout_marginBottom="@dimen/dimen_2dp"
                         android:isIndicator="true"
                         android:numStars="5"
                         android:stepSize="1"
@@ -113,8 +115,8 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="0.7dp"
-                        android:background="#ebeced" />
+                        android:layout_height="@dimen/dimen_1dp"
+                        android:background="@color/viewline" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -126,10 +128,11 @@
                             android:id="@+id/txtProductDesc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_2dp"
                             android:ellipsize="end"
                             android:maxLines="4"
-                            android:textColor="#666666"
-                            android:textSize="11.7sp" />
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/txt_12sp" />
 
 
                     </LinearLayout>

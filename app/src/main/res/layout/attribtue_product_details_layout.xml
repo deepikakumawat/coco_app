@@ -3,7 +3,7 @@
     android:id="@+id/lyTopSize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <customfonts.MyTextView_Roboto_Bold
@@ -14,8 +14,8 @@
 
         android:layout_marginTop="20dp"
         android:text="1"
-        android:textColor="@color/storage"
-        android:textSize="12.3sp" />
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_12sp" />
 
     <HorizontalScrollView
         android:id="@+id/hsv"

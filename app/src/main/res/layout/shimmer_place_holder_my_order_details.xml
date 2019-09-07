@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-android:background="@color/white"
+android:background="@android:color/white"
     tools:context="com.example.wolfsoft2.coco_ecommerce_ui_kit.com.ws.wolfsoft2.coco_ecommerce_ui_kit.MyOrderActivity">
 
 
@@ -49,7 +49,7 @@ android:background="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_margin="11sp"
 
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="@android:color/white"
                     app:cardElevation="3dp">
 
 
@@ -112,7 +112,7 @@ android:background="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_margin="11sp"
 
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="@android:color/white"
                     app:cardElevation="3dp">
 
 
@@ -173,7 +173,7 @@ android:background="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_margin="11sp"
 
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="@android:color/white"
                     app:cardElevation="3dp">
 
 

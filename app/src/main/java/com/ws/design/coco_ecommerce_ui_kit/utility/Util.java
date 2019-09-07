@@ -92,7 +92,7 @@ public class Util {
                 View snackBarView = snackbar.getView();
 
                 if (!TextUtils.isEmpty(result)) {
-                    snackBarView.setBackgroundColor(context.getResources().getColor(R.color.greencolor));
+                    snackBarView.setBackgroundColor(context.getResources().getColor(R.color.green));
 
                 } else {
                     snackBarView.setBackgroundColor(context.getResources().getColor(R.color.yellow));

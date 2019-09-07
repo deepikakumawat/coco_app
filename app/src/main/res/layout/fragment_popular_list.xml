@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/ryParent"
-    android:background="@color/white"
+    android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.RecyclerView
@@ -37,7 +37,7 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         android:layout_gravity="center"
-        android:background="@color/white"
+        android:background="@android:color/white"
         android:clickable="true"
         android:orientation="vertical"
         shimmer:duration="800">
