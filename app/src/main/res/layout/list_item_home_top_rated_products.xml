@@ -76,11 +76,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dimen_2dp"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/txt_14sp" />
+                        android:textSize="@dimen/txt_12sp" />
 
                     <ImageView
-                        android:layout_width="@dimen/dimen_10dp"
-                        android:layout_height="@dimen/dimen_10dp"
+                        android:layout_width="@dimen/dimen_8dp"
+                        android:layout_height="@dimen/dimen_8dp"
                         android:layout_gravity="center"
                         android:src="@drawable/star"
                         android:tint="@color/white" />

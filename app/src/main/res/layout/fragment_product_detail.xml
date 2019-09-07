@@ -379,12 +379,13 @@
                     android:id="@+id/lySimilarProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="35dp"
+                        android:layout_marginLeft="25dp"
                         android:orientation="horizontal">
 
                         <customfonts.MyTextView_Roboto_Medium
@@ -411,7 +412,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:background="@drawable/recycler_view_border"
+
                         android:orientation="vertical"
 
                         >
@@ -434,6 +435,7 @@
                 <LinearLayout
                     android:id="@+id/lyRecentViewsProduct"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="50dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical">
@@ -442,7 +444,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="35dp"
+                        android:layout_marginLeft="25dp"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
