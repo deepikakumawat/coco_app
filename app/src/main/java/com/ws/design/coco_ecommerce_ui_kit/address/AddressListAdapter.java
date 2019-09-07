@@ -43,10 +43,10 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 //            holder.txtAddressType.setText(TextUtils.isEmpty(addressData.getmName()) ? "-" : addressData.getmAddressType());
             holder.txtAddress1.setText(TextUtils.isEmpty(addressData.getmAddress1()) ? "-" : context.getString(R.string.lebel_address1)+addressData.getmAddress1());
             holder.txtAddress2.setText(TextUtils.isEmpty(addressData.getmAddress2()) ? "-" : context.getString(R.string.lebel_address2)+ addressData.getmAddress2());
-            holder.txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : context.getString(R.string.landmark)+ addressData.getmLandmark());
-            holder.txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : context.getString(R.string.city)+addressData.getmCity());
-            holder.txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" :context.getString(R.string.state)+ addressData.getmState());
-            holder.txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" :context.getString(R.string.country)+ addressData.getmCountry());
+            holder.txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : context.getString(R.string.delivery_landmark)+ addressData.getmLandmark());
+            holder.txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : context.getString(R.string.deliver_city)+addressData.getmCity());
+            holder.txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" :context.getString(R.string.delivery_state)+ addressData.getmState());
+            holder.txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" :context.getString(R.string.label_country)+ addressData.getmCountry());
             holder.txtZipcode.setText(TextUtils.isEmpty(addressData.getmZipcode()) ? "-" : context.getString(R.string.pincode)+addressData.getmZipcode());
             holder.txtPhone.setText(TextUtils.isEmpty(addressData.getmPhone()) ? "-" : context.getString(R.string.label_phone)+addressData.getmPhone());
 

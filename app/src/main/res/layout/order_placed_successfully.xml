@@ -18,8 +18,7 @@
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="400dp"
                 android:layout_height="250dp"
-                android:layout_margin="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_margin="@dimen/dimen_30dp"
                 android:src="@drawable/ic_placed" />
 
         </RelativeLayout>

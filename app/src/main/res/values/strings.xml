@@ -238,6 +238,7 @@
     <string name="lebel_address1">Address1: </string>
     <string name="lebel_address2">Address2: </string>
     <string name="label_phone">Phone: </string>
+    <string name="label_country">Country: </string>
 
 
 </resources>

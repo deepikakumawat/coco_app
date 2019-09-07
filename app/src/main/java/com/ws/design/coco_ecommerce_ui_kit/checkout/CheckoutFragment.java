@@ -379,10 +379,10 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
 
         txtAddress1.setText(TextUtils.isEmpty(addressData.getmAddress1()) ? "-" : getString(R.string.lebel_address1)+ addressData.getmAddress1());
         txtAddress2.setText(TextUtils.isEmpty(addressData.getmAddress2()) ? "-" :getString(R.string.lebel_address2)+ addressData.getmAddress2());
-        txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : getString(R.string.landmark)+addressData.getmLandmark());
-        txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : getString(R.string.city)+addressData.getmCity());
-        txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" :getString(R.string.state)+ addressData.getmState());
-        txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" : getString(R.string.country)+addressData.getmCountry());
+        txtLandmark.setText(TextUtils.isEmpty(addressData.getmLandmark()) ? "-" : getString(R.string.delivery_landmark)+addressData.getmLandmark());
+        txtCity.setText(TextUtils.isEmpty(addressData.getmCity()) ? "-" : getString(R.string.deliver_city)+addressData.getmCity());
+        txtState.setText(TextUtils.isEmpty(addressData.getmState()) ? "-" :getString(R.string.delivery_state)+ addressData.getmState());
+        txtCountry.setText(TextUtils.isEmpty(addressData.getmCountry()) ? "-" : getString(R.string.label_country)+addressData.getmCountry());
         txtZipcode.setText(TextUtils.isEmpty(addressData.getmZipcode()) ? "-" :getString(R.string.pincode)+ addressData.getmZipcode());
     }
 
