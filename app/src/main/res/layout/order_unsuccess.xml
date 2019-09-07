@@ -68,7 +68,7 @@
         <TextView
             android:id="@+id/txtOrderId"
             style="@style/viewParent.headerText.information"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_order_id"
             android:text="Order ID: [[RKSC-077-2308-2017-SERIES]]"
             android:textSize="13dp" />
@@ -76,7 +76,7 @@
         <TextView
             android:id="@+id/txtOrderAmount"
             style="@style/viewParent.headerText.information"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_amount"
             android:text="Order Amount: [[ORDER AMOUNT]]"
             android:textSize="13dp" />
@@ -84,7 +84,7 @@
         <TextView
             android:id="@+id/txtOrderType"
             style="@style/viewParent.headerText.information"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_order_type"
             android:text="Order Type: [[COD/PRE-PAYMENT]]"
             android:textSize="13dp" />
@@ -92,7 +92,7 @@
         <TextView
             android:id="@+id/txtQuantity"
             style="@style/viewParent.headerText.information"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_order_quantity"
             android:text="Quantity: [[PRODUCT QUANTITY]]"
             android:textSize="13dp" />
@@ -100,7 +100,7 @@
         <View
             android:layout_width="340dp"
             android:layout_height="1dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="15dp"
             android:background="#777"
             android:paddingHorizontal="23dp" />
 
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="15dp"
             android:text="Go Home!" />
 
         <TextView
