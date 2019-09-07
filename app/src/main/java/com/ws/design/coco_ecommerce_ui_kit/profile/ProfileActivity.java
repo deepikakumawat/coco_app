@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -31,13 +32,13 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     TextView test;
     private ImageView imgBack;
-    private LinearLayout lyParent;
+    private RelativeLayout ryParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateProfilePresenter = new UpdateProfilePresenter(this);
         setContentView(R.layout.activity_update_profile);
+        updateProfilePresenter = new UpdateProfilePresenter(this);
 
         init();
 
@@ -64,19 +65,19 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(fName)) {
-                showCenteredToast(lyParent,this, getString(R.string.first_name_validation_message),"");
+                showCenteredToast(ryParent,this, getString(R.string.first_name_validation_message),"");
                 etFname.requestFocus();
             } else if (TextUtils.isEmpty(lName)) {
-                showCenteredToast(lyParent,this, getString(R.string.last_name_validation_message),"");
+                showCenteredToast(ryParent,this, getString(R.string.last_name_validation_message),"");
                 etLname.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(lyParent,this, getString(R.string.invalid_mobile_number),"");
+                showCenteredToast(ryParent,this, getString(R.string.invalid_mobile_number),"");
                 etPhone.requestFocus();
             }  else {
                 validation_detials_flag = true;
             }
         } else {
-//            showCenteredToast(lyParent,this, getString(R.string.network_connection),"");
+//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
             Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;
@@ -85,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     private void init() {
 
-        lyParent = findViewById(R.id.lyParent);
+        ryParent = findViewById(R.id.ryParent);
 
         imgBack = (ImageView)findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
@@ -117,7 +118,7 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(lyParent,this, appErrorMessage,"");
+        showCenteredToast(ryParent,this, appErrorMessage,"");
     }
 
     @Override
@@ -131,9 +132,9 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
             CocoPreferences.setLastName(updateProfileResponse.getmLoginData().getmLastName());
             CocoPreferences.savePreferencese();
 
-            showCenteredToast(lyParent,this,updateProfileResponse.getMessage(), Constant.API_SUCCESS);
+            showCenteredToast(ryParent,this,updateProfileResponse.getMessage(), Constant.API_SUCCESS);
         }else {
-            showCenteredToast(lyParent,this,updateProfileResponse.getMessage(),"");
+            showCenteredToast(ryParent,this,updateProfileResponse.getMessage(),"");
         }
 
     }

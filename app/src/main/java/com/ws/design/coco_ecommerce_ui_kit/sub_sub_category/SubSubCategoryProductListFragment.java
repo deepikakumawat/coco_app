@@ -1,6 +1,5 @@
-package fragment;
+package com.ws.design.coco_ecommerce_ui_kit.sub_sub_category;
 
-import android.app.MediaRouteButton;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,18 +14,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.home.HomeFragment;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryPresenter;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryRequest;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryView;
 import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductListByCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.AddToCartResponse;
-import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryRequest;
 import com.ws.design.coco_ecommerce_ui_kit.product_details.ProductDetailFragment;
 import com.ws.design.coco_ecommerce_ui_kit.shared_preference.CocoPreferences;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
@@ -36,14 +35,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryAdapter;
+import fragment.FragmentManagerUtils;
 
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.dismissProDialog;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showCenteredToast;
 import static com.ws.design.coco_ecommerce_ui_kit.utility.Util.showProDialog;
 
 
-public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
+public class SubSubCategoryProductListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
 
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
@@ -59,8 +58,8 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private Button btnGoToHome;
 
 
-    public static PopularListFragment newInstance(String catId, int tabPostion) {
-        PopularListFragment fragment = new PopularListFragment();
+    public static SubSubCategoryProductListFragment newInstance(String catId, int tabPostion) {
+        SubSubCategoryProductListFragment fragment = new SubSubCategoryProductListFragment();
         Bundle bundle = new Bundle();
         bundle.putString("catId", catId);
         bundle.putInt("tabPostion", tabPostion);
@@ -175,7 +174,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
 
 
-                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
+                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, SubSubCategoryProductListFragment.this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerview.setLayoutManager(mLayoutManager);
                     recyclerview.setItemAnimator(new DefaultItemAnimator());

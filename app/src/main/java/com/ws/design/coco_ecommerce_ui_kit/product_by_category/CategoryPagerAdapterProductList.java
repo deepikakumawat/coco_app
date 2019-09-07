@@ -1,13 +1,8 @@
-package Adapter;
+package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-
-import fragment.PopularListFragment;
-
-
 
 
 public class CategoryPagerAdapterProductList extends FragmentPagerAdapter {

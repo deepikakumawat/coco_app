@@ -20,13 +20,14 @@
             android:background="@color/white"
             android:elevation="2dp"
             android:tag="sticky"
-            app:tabGravity="center"
+            app:tabGravity="fill"
             app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="0dp"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/yellow"
             app:tabTextAppearance="@style/MyMenuTextAppearance3"
-            app:tabTextColor="#8b8a8a" />
+            app:tabTextColor="#8b8a8a"
+            android:overScrollMode="never"/>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -71,5 +72,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_filter" />
+        android:src="@drawable/ic_filter"
+        android:visibility="gone"/>
 </RelativeLayout>

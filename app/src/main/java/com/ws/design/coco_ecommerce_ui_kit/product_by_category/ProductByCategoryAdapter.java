@@ -18,17 +18,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.home.home_response.ProductData;
+import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubSubCategoryProductListFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Constant;
 
 import java.util.List;
-
-import fragment.PopularListFragment;
 
 
 public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCategoryAdapter.MyViewHolder> {
     private Context context;
     private List<ProductData> productDataByCategoryList;
     private PopularListFragment mpopularListFragment;
+    private SubSubCategoryProductListFragment subSubCategoryProductListFragment;
 
     int myPos = 0;
 
@@ -38,6 +38,11 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         this.context = context;
     }
 
+    public ProductByCategoryAdapter(Context context, List<ProductData> productDataByCategoryList, SubSubCategoryProductListFragment subSubCategoryProductListFragment) {
+        this.productDataByCategoryList = productDataByCategoryList;
+        this.subSubCategoryProductListFragment = subSubCategoryProductListFragment;
+        this.context = context;
+    }
 
 
     @Override
@@ -73,13 +78,15 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             holder.txtProductDesc.setText(!TextUtils.isEmpty(productData.getmProductShortDetails()) ? Html.fromHtml(productData.getmProductShortDetails()) : "-");
 
 
-            holder.lyProduct.setTag(productData);
-            holder.lyProduct.setTag(R.id.lyProduct, position);
-            holder.lyProduct.setOnClickListener(mpopularListFragment);
+            if (mpopularListFragment != null) {
+                holder.lyProduct.setTag(productData);
+                holder.lyProduct.setTag(R.id.lyProduct, position);
+                holder.lyProduct.setOnClickListener(mpopularListFragment);
 
-            holder.lyAddToCart.setTag(productData);
-            holder.lyAddToCart.setTag(R.id.lyAddToCart, position);
-            holder.lyAddToCart.setOnClickListener(mpopularListFragment);
+                holder.lyAddToCart.setTag(productData);
+                holder.lyAddToCart.setTag(R.id.lyAddToCart, position);
+                holder.lyAddToCart.setOnClickListener(mpopularListFragment);
+            }
         }
 
 

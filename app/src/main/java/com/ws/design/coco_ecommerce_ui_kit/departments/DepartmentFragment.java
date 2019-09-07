@@ -15,6 +15,7 @@ import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
 import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubCategoryFragment;
+import com.ws.design.coco_ecommerce_ui_kit.sub_sub_category.SubSubProductCategoryFragment;
 import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
@@ -174,10 +175,16 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
                         bundle.putString("catName", subCategoriesData.getmCatName());
 
 
-                        SubCategoryFragment subCategoryFragment = new SubCategoryFragment();
+                     /*   SubCategoryFragment subCategoryFragment = new SubCategoryFragment();
                         subCategoryFragment.setArguments(bundle);
 
                         FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), subCategoryFragment, "ProductListByCategoryFragment", true, false);
+*/
+
+                        SubSubProductCategoryFragment subSubProductCategoryFragment = new SubSubProductCategoryFragment();
+                        subSubProductCategoryFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), subSubProductCategoryFragment, "ProductListByCategoryFragment", true, false);
 
 
                     }

@@ -1,10 +1,10 @@
-package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
+package com.ws.design.coco_ecommerce_ui_kit.sub_sub_category;
 
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +12,23 @@ import android.widget.TextView;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
 import com.ws.design.coco_ecommerce_ui_kit.base_fragment.BaseFragment;
+import com.ws.design.coco_ecommerce_ui_kit.home.HomeBannerAdapter;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFilterListener;
 import com.ws.design.coco_ecommerce_ui_kit.interfaces.IFragmentListener;
+
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.FilterFragment;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryRequest;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.ProductByCategoryResponse;
+import com.ws.design.coco_ecommerce_ui_kit.product_by_category.WrapContentHeightViewPager;
+import com.ws.design.coco_ecommerce_ui_kit.product_details.project_details_response.ProductDetailsSimilier;
+import com.ws.design.coco_ecommerce_ui_kit.utility.Util;
 
 import java.util.ArrayList;
 
 import fragment.FragmentManagerUtils;
 
 
-public class ProductListByCategoryFragment extends BaseFragment implements IFilterListener {
+public class SubSubProductCategoryFragment extends BaseFragment implements SubCatProductByCategoryView {
 
     private TabLayout tabLayout;
     private Typeface mTypeface;
@@ -34,6 +42,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     private String[] filterAttribues;
     private String maximumValue;
     private String minimumValue;
+    private String catName;
+    private SubCateProductByCategoryPresenter subCateProductByCategoryPresenter;
+    private ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList = new ArrayList<>();
 
 
     @Nullable
@@ -41,11 +52,12 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = inflater.inflate(R.layout.fragment_product_by_category, container, false);
+        mView = inflater.inflate(R.layout.fragment_sub_sub_product_by_category, container, false);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             catId = bundle.getString("catId");
+            catName = bundle.getString("catName");
         }
 
         return mView;
@@ -54,13 +66,11 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        subCateProductByCategoryPresenter = new SubCateProductByCategoryPresenter(this);
+
         tabLayout = mView.findViewById(R.id.tab_layout);
 
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.addTab(tabLayout.newTab().setText("Popular"));
-        tabLayout.addTab(tabLayout.newTab().setText("Low Price"));
-        tabLayout.addTab(tabLayout.newTab().setText("High Price"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sale"));
+
 
         Typeface mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
 
@@ -87,20 +97,19 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
             public void onClick(View view) {
 
 
-                Bundle bundle = new Bundle();
+              /*  Bundle bundle = new Bundle();
                 bundle.putSerializable("productAttribueDataArrayList", productAttribueDataArrayList);
                 FilterFragment filterFragment = new FilterFragment();
-                filterFragment.setmIFilterListener(ProductListByCategoryFragment.this);
+                filterFragment.setmIFilterListener(SubSubProductCategoryFragment.this);
                 filterFragment.setArguments(bundle);
 
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), filterFragment, null, true, false);
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), filterFragment, null, true, false);*/
             }
         });
 
 
         wrapContentHeightViewPager = mView.findViewById(R.id.pager);
-        setAdapter();
-        wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+//        setAdapter();
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -117,12 +126,25 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
             }
         });
 
+        callAPI();
     }
 
-    private void setAdapter() {
-        CategoryPagerAdapterProductList adapter = new CategoryPagerAdapterProductList(getChildFragmentManager(), 4, catId);
+    private void callAPI(){
+
+        if (Util.isDeviceOnline(getActivity())) {
+            subCateProductByCategoryPresenter.getSubCateProductByCat(catId);
+        } else {
+            Util.showNoInternetDialog(getActivity());
+        }
+
+    }
+
+    private void setAdapter(int size, ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList) {
+        SubSubCategoryPagerAdapterProductList adapter = new SubSubCategoryPagerAdapterProductList(getChildFragmentManager(), size,mainSubCategoriesDataArrayList);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(1);
+        wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
     }
 
 
@@ -153,22 +175,6 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
         this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
     }
 
-    @Override
-    public void setSearchFilter(String[] filterAttribues, String minimumValue, String maximumValue) {
-        this.filterAttribues = filterAttribues;
-        this.minimumValue = minimumValue;
-        this.maximumValue = maximumValue;
-
-    }
-
-    public ProductByCategoryRequest getSearchFilter() {
-        ProductByCategoryRequest productByCategoryRequest = new ProductByCategoryRequest();
-        productByCategoryRequest.setmFAttributes(filterAttribues);
-        productByCategoryRequest.setMinValue(minimumValue);
-        productByCategoryRequest.setMaxValue(maximumValue);
-        return productByCategoryRequest;
-
-    }
 
     @Override
     protected String getActionbarTitle() {
@@ -184,4 +190,37 @@ public class ProductListByCategoryFragment extends BaseFragment implements IFilt
     protected boolean isCartIconVisible() {
         return true;
     }
+
+    @Override
+    public void showWait() {
+
+    }
+
+    @Override
+    public void removeWait() {
+
+    }
+
+    @Override
+    public void onFailure(String appErrorMessage) {
+
+    }
+
+    @Override
+    public void getSubCatProductByCategory(SubSubCategoriesResponse subSubCategoriesResponse) {
+        if (subSubCategoriesResponse != null) {
+
+            mainSubCategoriesDataArrayList.clear();
+            mainSubCategoriesDataArrayList.addAll(subSubCategoriesResponse.getmData().getmMainSubCategories());
+
+            for( SubSubCategoriesResponse.MainSubCategoriesData mainSubCategoriesData : mainSubCategoriesDataArrayList){
+                tabLayout.addTab(tabLayout.newTab().setText(mainSubCategoriesData.getmCatName()));
+            }
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+            setAdapter(mainSubCategoriesDataArrayList.size(),mainSubCategoriesDataArrayList);
+
+        }
+
+    }
+
 }

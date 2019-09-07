@@ -1,4 +1,4 @@
-package Adapter;
+package com.ws.design.coco_ecommerce_ui_kit.product_by_category;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

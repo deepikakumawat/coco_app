@@ -40,7 +40,6 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
     private RecyclerView rvMainCategory;
     private ShimmerFrameLayout mShimmerViewContainer;
     private String catId;
-    private String filterAttributes;
     private String catName;
     private ArrayList<Banner> bannerArrayList = new ArrayList<>();
     private HomeBannerAdapter homeBannerAdapter;
@@ -83,7 +82,7 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
         rvMainCategory.setNestedScrollingEnabled(false);
 
         if (Util.isDeviceOnline(getActivity())) {
-            subCateProductByCategoryPresenter.getSubCateProductByCat(catId, filterAttributes);
+            subCateProductByCategoryPresenter.getSubCateProductByCat(catId);
         } else {
             Util.showNoInternetDialog(getActivity());
         }

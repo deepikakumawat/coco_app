@@ -285,8 +285,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         invalidateOptionsMenu();
 
         setScreenTitle(getString(R.string.home));
-//        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
-        FragmentManagerUtils.addFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+//        FragmentManagerUtils.addFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
     }
 

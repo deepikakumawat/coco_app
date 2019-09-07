@@ -29,7 +29,7 @@ public class SubCateProductByCategoryPresenter {
     }
 
 
-    public void getSubCateProductByCat(String catId, String filterAttribues) {
+    public void getSubCateProductByCat(String catId) {
         view.showWait();
         try {
 

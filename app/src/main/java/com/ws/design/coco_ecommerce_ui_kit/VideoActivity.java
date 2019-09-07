@@ -1,8 +1,10 @@
 package com.ws.design.coco_ecommerce_ui_kit;
 
 import android.annotation.SuppressLint;
+import android.app.PictureInPictureParams;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Rational;
 import android.widget.Toast;
 
 import com.example.wolfsoft2.coco_ecommerce_ui_kit.R;
@@ -42,9 +44,17 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
         playerStateChangeListener = new MyPlayerStateChangeListener();
         playbackEventListener = new MyPlaybackEventListener();
 
-        enterPictureInPictureMode();
+      /*  PictureInPictureParams params = new PictureInPictureParams.Builder().setAspectRatio(getPipRatio()).build();
+        enterPictureInPictureMode(params);*/
+//        enterPictureInPictureMode();
 
     }
+
+  /*  private Rational getPipRatio() {
+        int width = youTubeView.getWidth();
+        int height = youTubeView.getHeight();
+        return new Rational(width, height);
+    }*/
 
     @Override
     public void onInitializationSuccess(Provider provider, YouTubePlayer player, boolean wasRestored) {
@@ -53,8 +63,8 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
         player.setPlaybackEventListener(playbackEventListener);
 
         if (!wasRestored) {
-//            player.cueVideo("fhWaJi1Hsfo"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
-            player.cueVideo(videoUrl); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+//            player.cueVideo(videoUrl); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            player.loadVideo(videoUrl); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
     }
 
