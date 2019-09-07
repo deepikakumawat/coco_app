@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.ws.design.coco_ecommerce_ui_kit"
+        applicationId "com.nav.richkart"
         minSdkVersion 24
         targetSdkVersion 27
         versionCode 1

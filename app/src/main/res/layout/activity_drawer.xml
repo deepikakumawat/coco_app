@@ -41,7 +41,7 @@
                     android:src="@drawable/user_dp" />
 
 
-                <customfonts.MyTextView_Roboto_Medium
+                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                     android:id="@+id/txtUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                     android:textSize="14.5sp"
                />
 
-                <customfonts.MyTextView_Roboto_Regular
+                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtUserEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                     android:orientation="horizontal"
                     android:id="@+id/lyLoginSignup">
 
-                    <customfonts.MyTextView_Roboto_Regular
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtLogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -76,14 +76,14 @@
                         android:textColor="@android:color/white"
                         android:textSize="14.5sp" />
 
-                    <customfonts.MyTextView_Roboto_Regular
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" | "
                         android:textColor="@android:color/white"
                         android:textSize="14.5sp" />
 
-                    <customfonts.MyTextView_Roboto_Regular
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtSignup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

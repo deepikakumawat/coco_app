@@ -81,7 +81,7 @@
                                 android:layout_margin="5dp"
                                 android:orientation="horizontal">
 
-                                <customfonts.Button_Roboto_Medium
+                                <com.nav.richkart.customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtAddToWishlist"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                                     android:textColor="@color/white"
                                     android:textSize="13.7sp" />
 
-                                <customfonts.Button_Roboto_Medium
+                                <com.nav.richkart.customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtRemoveWishlist"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                                     android:textColor="@color/white"
                                     android:textSize="13.7sp" />
 
-                                <customfonts.Button_Roboto_Medium
+                                <com.nav.richkart.customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtBuyNow"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
 
 
 
-                                <customfonts.Button_Roboto_Medium
+                                <com.nav.richkart.customfonts.Button_Roboto_Medium
                                     android:id="@+id/txtAddToCart"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
 
 
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtReviewCount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

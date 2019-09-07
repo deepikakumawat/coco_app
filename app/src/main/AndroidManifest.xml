@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.wolfsoft2.coco_ecommerce_ui_kit">
+    package="com.nav.richkart">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,13 +10,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name="com.ws.design.coco_ecommerce_ui_kit.CocoApp"
+        android:name="com.nav.richkart.CocoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.SplashActivity">
+        <activity android:name="com.nav.richkart.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,28 +25,28 @@
 
         </activity>
         <activity
-            android:name="com.ws.design.coco_ecommerce_ui_kit.VideoActivity"
+            android:name="com.nav.richkart.VideoActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.StartActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.DrawerActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.ChangePasswordActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_order.LoginAlertOnMyOrderActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.LoginAlertOnMyAccountActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.LoginAlertOnAddressActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_wishlist.LoginAlertOnWishlistActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.my_cart.LoginAlertOnCartActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.ForgotPasswordActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.profile.ProfileActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.login.LoginActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddressListActivity" />
+        <activity android:name="com.nav.richkart.StartActivity" />
+        <activity android:name="com.nav.richkart.DrawerActivity" />
+        <activity android:name="com.nav.richkart.ChangePasswordActivity" />
+        <activity android:name="com.nav.richkart.my_order.LoginAlertOnMyOrderActivity" />
+        <activity android:name="com.nav.richkart.LoginAlertOnMyAccountActivity" />
+        <activity android:name="com.nav.richkart.address.LoginAlertOnAddressActivity" />
+        <activity android:name="com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity" />
+        <activity android:name="com.nav.richkart.my_cart.LoginAlertOnCartActivity" />
+        <activity android:name="com.nav.richkart.login.ForgotPasswordActivity" />
+        <activity android:name="com.nav.richkart.profile.ProfileActivity" />
+        <activity android:name="com.nav.richkart.login.LoginActivity" />
+        <activity android:name="com.nav.richkart.address.AddressListActivity" />
         <activity
-            android:name="com.ws.design.coco_ecommerce_ui_kit.address.AddAddressActivity"
+            android:name="com.nav.richkart.address.AddAddressActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.signup.SignupActivity" />
-        <activity android:name="com.ws.design.coco_ecommerce_ui_kit.product_rating_list.ReviewActivity" />
+        <activity android:name="com.nav.richkart.MobileVerificationActivity" />
+        <activity android:name="com.nav.richkart.signup.SignupActivity" />
+        <activity android:name="com.nav.richkart.product_rating_list.ReviewActivity" />
 
         <!-- vaibhav start -->
 
@@ -64,7 +64,7 @@
 
         <!--FCM -->
         <service
-            android:name="com.ws.design.coco_ecommerce_ui_kit.fcm.MyFirebaseMessagingService"
+            android:name="com.nav.richkart.fcm.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -82,7 +82,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <service android:name="com.ws.design.coco_ecommerce_ui_kit.fcm.MyFirebaseId">
+        <service android:name="com.nav.richkart.fcm.MyFirebaseId">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

@@ -12,7 +12,7 @@
         android:id="@+id/imgBack"
         android:src="@drawable/ic_back_arrow" />
 
-    <customfonts.MyTextView_Roboto_Medium
+    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

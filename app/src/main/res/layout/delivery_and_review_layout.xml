@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
 
-        <customfonts.MyTextView_Roboto_Bold
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
@@ -49,7 +49,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/map_marker" />
 
-                    <customfonts.EditText_Roboto_Regular
+                    <com.nav.richkart.customfonts.EditText_Roboto_Regular
                         android:id="@+id/etPincode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                     android:background="@color/viewline_ver" />
             </LinearLayout>
 
-            <customfonts.MyTextView_Roboto_Bold
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
                 android:id="@+id/txtCheckPincode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
 
         </LinearLayout>
 
-        <customfonts.MyTextView_Roboto_Bold
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
             android:id="@+id/txtPincodeStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,14 +100,14 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <customfonts.MyTextView_Roboto_Medium
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usually delivered in 3-4 days"
                 android:textColor="#777b7e"
                 android:textSize="13sp" />
 
-            <customfonts.MyTextView_Roboto_Regular
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="13sp"
@@ -148,14 +148,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <customfonts.MyTextView_Roboto_Bold
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Customer Review And "
                         android:textColor="@color/black"
                         android:textSize="12.7sp" />
 
-                    <customfonts.MyTextView_Roboto_Bold
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qa"
@@ -185,7 +185,7 @@
                             android:paddingRight="15dp"
                             android:paddingBottom="5dp">
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtReview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
 
                     </LinearLayout>
 
-                    <customfonts.MyTextView_Roboto_Medium
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtRatingCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -242,14 +242,14 @@
                 android:orientation="vertical">
 
 
-                <customfonts.MyTextView_Roboto_Medium
+                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Top Review"
                     android:textColor="#241f1f" />
 
 
-                <customfonts.MyTextView_Roboto_Medium
+                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                     android:id="@+id/txtUserNameDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                     android:textSize="10.3sp" />
 
 
-                <customfonts.MyTextView_Roboto_Regular
+                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtUserComment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
                     android:textSize="11.3sp" />
 
 
-                <customfonts.MyTextView_Roboto_Regular
+                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtViewAllReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

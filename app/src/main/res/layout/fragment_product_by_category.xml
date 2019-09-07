@@ -46,13 +46,13 @@
 
 
                     <!--Viewpager used-->
-                    <com.ws.design.coco_ecommerce_ui_kit.product_by_category.WrapContentHeightViewPager
+                    <com.nav.richkart.product_by_category.WrapContentHeightViewPager
                         android:id="@+id/pager"
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:nestedScrollingEnabled="false">
 
-                    </com.ws.design.coco_ecommerce_ui_kit.product_by_category.WrapContentHeightViewPager>
+                    </com.nav.richkart.product_by_category.WrapContentHeightViewPager>
 
                 </LinearLayout>
 

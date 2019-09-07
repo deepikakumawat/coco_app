@@ -30,7 +30,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <customfonts.TextViewSFProDisplaySemibold
+            <com.nav.richkart.customfonts.TextViewSFProDisplaySemibold
                 android:id="@+id/txtCaptcha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:orientation="horizontal">
 
 
-            <customfonts.EditText_Roboto_Meidum
+            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etxtEnterTheCharacters"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <customfonts.Button_Roboto_Medium
+            <com.nav.richkart.customfonts.Button_Roboto_Medium
                 android:id="@+id/btnConfirmCaptcha"
                 style="@style/buttonStyle"
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                 android:textAllCaps="false" />
 
 
-            <customfonts.TextViewSFProDisplayMedium
+            <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
                 android:id="@+id/txtReturnToPaymentOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

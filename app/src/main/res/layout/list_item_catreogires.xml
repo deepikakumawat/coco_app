@@ -12,7 +12,7 @@
         android:layout_marginBottom="25dp"
         android:orientation="vertical">
 
-        <customfonts.MyTextView_Roboto_Medium
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
             android:id="@+id/txtCategories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -30,7 +30,7 @@
             android:layout_marginRight="@dimen/dimen_30dp"
             android:orientation="vertical">
 
-            <customfonts.EditText_Roboto_Meidum
+            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etEmail"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:hint="Email ID"
                 android:inputType="textEmailAddress" />
 
-            <customfonts.EditText_Roboto_Meidum
+            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etPassword"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:hint="Password"
                 android:inputType="textPassword" />
 
-            <customfonts.TextViewSFProDisplayMedium
+            <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
                 android:id="@+id/txtFwdPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:textColor="#89000000"
                 android:textSize="12.7sp" />
 
-            <customfonts.Button_Roboto_Medium
+            <com.nav.richkart.customfonts.Button_Roboto_Medium
                 android:id="@+id/btn_login"
                 style="@style/buttonStyle"
                 android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             android:layout_gravity="center"
             android:background="#31707070" />
 
-        <customfonts.Button_Roboto_Medium
+        <com.nav.richkart.customfonts.Button_Roboto_Medium
             android:id="@+id/btn_register"
             style="@style/buttonStyle"
             android:layout_width="wrap_content"

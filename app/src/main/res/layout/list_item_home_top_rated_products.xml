@@ -28,7 +28,7 @@
 
             android:orientation="horizontal">
 
-            <customfonts.MyTextView_Roboto_Medium
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/txtProductName"
                 android:layout_width="@dimen/dimen_150dp"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:paddingRight="@dimen/dimen_5dp"
                     android:paddingBottom="@dimen/dimen_2dp">
 
-                    <customfonts.MyTextView_Roboto_Medium
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

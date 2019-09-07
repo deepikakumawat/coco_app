@@ -25,7 +25,7 @@
             android:orientation="vertical"
             android:paddingBottom="10dp">
 
-            <customfonts.MyTextView_Roboto_Medium
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search"
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <customfonts.MyTextView_Roboto_Medium
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11sp"

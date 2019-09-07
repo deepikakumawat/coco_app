@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.checkout.CheckoutFragment">
+    tools:context="com.nav.richkart.checkout.CheckoutFragment">
 
 
     <android.support.v4.widget.NestedScrollView
@@ -55,7 +55,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <customfonts.TextViewSFProDisplayRegular
+                        <com.nav.richkart.customfonts.TextViewSFProDisplayRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.03"
@@ -63,7 +63,7 @@
                             android:textColor="@color/black"
                             android:textSize="17sp" />
 
-                        <customfonts.TextViewSFProDisplayMedium
+                        <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.02"
@@ -72,7 +72,7 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
-                    <customfonts.MyTextView_Roboto_Medium
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtTotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             </LinearLayout>
 
 
-            <customfonts.MyTextView_Roboto_Medium
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="11dp"
@@ -117,7 +117,7 @@
 
                         android:orientation="horizontal">
 
-                        <customfonts.MyTextView_Roboto_Medium
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtAddress1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                             android:layout_height="match_parent"
                             android:background="#4a707070" />
 
-                        <customfonts.Button_Roboto_Medium
+                        <com.nav.richkart.customfonts.Button_Roboto_Medium
                             android:id="@+id/btnChange"
                             style="@style/buttonStyle"
                             android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                             android:gravity="center"
                             android:text="Change" />
 
-                        <customfonts.Button_Roboto_Medium
+                        <com.nav.richkart.customfonts.Button_Roboto_Medium
                             android:id="@+id/btnAddAddress"
                             style="@style/buttonStyle"
                             android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <customfonts.MyTextView_Roboto_Medium
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtAddress2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/txt_14sp" />
 
-                        <customfonts.MyTextView_Roboto_Medium
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtLandmark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtCity"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_14sp" />
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtState"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -199,7 +199,7 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_14sp" />
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtZipcode"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                         </LinearLayout>
 
 
-                        <customfonts.MyTextView_Roboto_Medium
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtCountry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
 
             </LinearLayout>
 
-            <customfonts.MyTextView_Roboto_Medium
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="11dp"
@@ -282,7 +282,7 @@
 
             </LinearLayout>
 
-            <customfonts.TextViewSFProDisplaySemibold
+            <com.nav.richkart.customfonts.TextViewSFProDisplaySemibold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -292,7 +292,7 @@
                 android:textSize="13.3sp" />
 
 
-            <customfonts.Button_Roboto_Medium
+            <com.nav.richkart.customfonts.Button_Roboto_Medium
                 android:id="@+id/txtConfirmPlaceOrder"
                 style="@style/buttonStyle"
                 android:layout_width="match_parent"

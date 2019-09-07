@@ -58,7 +58,7 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtProductName"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                             android:orientation="horizontal">
 
 
-                            <customfonts.MyTextView_Roboto_Medium
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtIncDec"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

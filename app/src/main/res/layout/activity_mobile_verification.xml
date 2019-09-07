@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context="com.ws.design.coco_ecommerce_ui_kit.MobileVerificationActivity">
+    tools:context="com.nav.richkart.MobileVerificationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
 
-            <customfonts.EditText_Roboto_Regular
+            <com.nav.richkart.customfonts.EditText_Roboto_Regular
                 android:id="@+id/etOTP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,14 +46,14 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <customfonts.MyTextView_Roboto_Regular
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="We are verifying your mobile number "
                 android:textColor="#545559"
                 android:textSize="13sp" />
 
-            <customfonts.MyTextView_Roboto_Bold
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
                 android:id="@+id/txtPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 
         </LinearLayout>
 
-        <customfonts.MyTextView_Roboto_Regular
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
             android:id="@+id/txtEditPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             android:textSize="13sp" />
     </LinearLayout>
 
-    <customfonts.MyTextView_Roboto_Medium
+    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
         android:id="@+id/txtVerify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         android:textColor="@color/black"
         android:textSize="13sp" />
 
-    <customfonts.MyTextView_Roboto_Medium
+    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
         android:id="@+id/txtResend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

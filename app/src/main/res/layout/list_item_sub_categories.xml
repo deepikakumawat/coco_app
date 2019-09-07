@@ -44,7 +44,7 @@ android:background="@android:color/white"
 
         </LinearLayout>
 
-        <customfonts.MyTextView_Roboto_Regular
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
             android:id="@+id/txtSubCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

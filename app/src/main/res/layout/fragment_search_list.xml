@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <customfonts.MyTextView_Roboto_Medium
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11sp"
@@ -33,7 +33,7 @@
     </LinearLayout>
 
 
-    <customfonts.MyTextView_Roboto_Regular
+    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
         android:id="@+id/txtNoDataFound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
