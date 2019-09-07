@@ -643,7 +643,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     sellerId = productDetailsResponse.getmData().getmProduct().getmSellerId();
                     sellerName = productDetailsResponse.getmData().getmProduct().getmSellerName();
                     txtSellerName.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSellerName()) ? "Sold by: " + productDetailsResponse.getmData().getmProduct().getmSellerName() : "-");
-                    txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
+                    txtProductSalePrice.setText(!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmSalePrice()) ? getString(R.string.Rs) + productDetailsResponse.getmData().getmProduct().getmSalePrice() : "-");
 
 
                     videoUrl = productDetailsResponse.getmData().getmProduct().getmProductVideo();
@@ -651,7 +651,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
-                        txtProductPrice.setText(productDetailsResponse.getmData().getmProduct().getmPrice());
+                        txtProductPrice.setText(getString(R.string.Rs) + productDetailsResponse.getmData().getmProduct().getmPrice());
                         txtProductPrice.setPaintFlags(txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     } else {
                         txtProductPrice.setText("-");
