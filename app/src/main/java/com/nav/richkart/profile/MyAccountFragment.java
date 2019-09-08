@@ -36,7 +36,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nav.richkart.R;
-import com.nav.richkart.ChangePasswordActivity;
 import com.nav.richkart.DrawerActivity;
 import com.nav.richkart.address.AddAddressActivity;
 import com.nav.richkart.address.AddressListActivity;

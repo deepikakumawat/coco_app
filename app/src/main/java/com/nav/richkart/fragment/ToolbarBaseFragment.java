@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.nav.richkart.R;
+import com.nav.richkart.utility.Util;
 
 public class ToolbarBaseFragment extends Fragment {
 
@@ -31,7 +32,7 @@ public class ToolbarBaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        KeyboardUtils.hideKeyboard(getActivity());
+        Util.hideKeyboard(getActivity());
     }
 
     @Override

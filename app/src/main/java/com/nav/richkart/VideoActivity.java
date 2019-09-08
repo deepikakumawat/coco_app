@@ -36,7 +36,7 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
         String[] parts = videoUrl.split("\\=");
         videoUrl = parts[1];
 
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView =  findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
         playerStateChangeListener = new MyPlayerStateChangeListener();

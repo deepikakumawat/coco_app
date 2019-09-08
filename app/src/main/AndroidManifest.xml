@@ -31,12 +31,9 @@
             android:supportsPictureInPicture="true" />
         <activity android:name="com.nav.richkart.StartActivity" />
         <activity android:name="com.nav.richkart.DrawerActivity" />
-        <activity android:name="com.nav.richkart.ChangePasswordActivity" />
+        <activity android:name="com.nav.richkart.profile.ChangePasswordActivity" />
         <activity android:name="com.nav.richkart.my_order.LoginAlertOnMyOrderActivity" />
-        <activity android:name="com.nav.richkart.LoginAlertOnMyAccountActivity" />
         <activity android:name="com.nav.richkart.address.LoginAlertOnAddressActivity" />
-        <activity android:name="com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity" />
-        <activity android:name="com.nav.richkart.my_cart.LoginAlertOnCartActivity" />
         <activity android:name="com.nav.richkart.login.ForgotPasswordActivity" />
         <activity android:name="com.nav.richkart.profile.ProfileActivity" />
         <activity android:name="com.nav.richkart.login.LoginActivity" />

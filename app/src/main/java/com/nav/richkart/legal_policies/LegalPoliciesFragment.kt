@@ -75,12 +75,10 @@ class LegalPoliciesFragment : BaseFragment(), View.OnClickListener {
     }
 
     fun openWebView(webUrl: String) {
-
         var bundle = Bundle()
         bundle.putString("webUrl", webUrl)
         var legalPoliciesWebPages = LegalPoliciesWebPages()
         legalPoliciesWebPages.arguments = bundle
         FragmentManagerUtils.replaceFragmentInRoot(activity?.supportFragmentManager, legalPoliciesWebPages, null, true, false)
-
     }
 }

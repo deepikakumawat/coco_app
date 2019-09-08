@@ -491,7 +491,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:paddingBottom="20dp">
+        >
 
         <com.nav.richkart.customfonts.Button_Roboto_Medium
             android:id="@+id/txtBuyNow"

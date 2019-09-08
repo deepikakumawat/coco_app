@@ -126,6 +126,17 @@ public class Util {
         }
     }
 
+    public static void hideKeyboard(Activity activity) {
+        View currentFocus = activity.getWindow().getCurrentFocus();
+        if (currentFocus == null) {
+            currentFocus = activity.findViewById(android.R.id.content);
+        }
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+        }
+    }
+
     public void ProgressBarHandler(Context context) {
 
         ViewGroup layout = (ViewGroup) ((Activity) context).findViewById(android.R.id.content).getRootView();

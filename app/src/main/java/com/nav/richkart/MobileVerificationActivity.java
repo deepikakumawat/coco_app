@@ -190,7 +190,6 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
                 validation_detials_flag = true;
             }
         } else {
-//            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
             Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;

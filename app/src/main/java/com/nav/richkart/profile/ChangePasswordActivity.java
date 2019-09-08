@@ -1,4 +1,4 @@
-package com.nav.richkart;
+package com.nav.richkart.profile;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
