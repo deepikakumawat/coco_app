@@ -39,7 +39,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             holder.txtProductName.setText(TextUtils.isEmpty(myOrderData.getmProductName()) ? " - " : myOrderData.getmProductName());
             holder.txtPrice.setText(TextUtils.isEmpty(myOrderData.getmAmount()) ? " - " : myOrderData.getmAmount());
             holder.txtStatus.setText(TextUtils.isEmpty(myOrderData.getmStatus()) ? " - " : myOrderData.getmStatus());
-            holder.txtDate.setText(TextUtils.isEmpty(myOrderData.getmCreatedDate()) ? " - " : myOrderData.getmCreatedDate());
+            holder.txtDate.setText("Order Date "+(TextUtils.isEmpty(myOrderData.getmCreatedDate()) ? " - " : myOrderData.getmCreatedDate()));
 
 
             holder.txtSupport.setTag(myOrderData);

@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/txtOrderDate"
             style="@style/viewParent.headerText.information"
-            android:layout_width="352dp"
+
             android:layout_alignParentStart="true"
             android:drawableLeft="@drawable/ic_date_order"
             android:text="Order Date: [[ORDER DATE]]"
