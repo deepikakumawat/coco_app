@@ -28,13 +28,12 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
                     app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -154,213 +153,164 @@
 
                         </HorizontalScrollView>
 
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:layout_marginTop="15dp"
-                            android:background="@color/viewline" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="22dp"
-                            android:layout_marginTop="20dp"
-                            android:orientation="vertical">
-
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                android:id="@+id/txtProductName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/txt_18sp"
-                                android:textStyle="bold" />
-
-
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                android:id="@+id/txtSellerName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:textColor="@color/appgray"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:orientation="horizontal">
-
-
-                                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/black"
-                                    android:textSize="16.7sp" />
-
-                                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                    android:id="@+id/txtProductSalePrice"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/txt_20sp" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:orientation="horizontal">
-
-                                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                    android:id="@+id/txtProductPrice"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-
-                                    android:textColor="@color/appgray"
-                                    android:textSize="@dimen/txt_14sp" />
-
-                                <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
-                                    android:id="@+id/txtDiscout"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:textColor="@color/green"
-                                    android:textSize="@dimen/txt_14sp" />
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal">
-
-
-                                <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
-                                    android:id="@+id/txtOutOfStock"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="9dp"
-                                    android:layout_marginRight="5dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:paddingTop="16.5dp"
-                                    android:paddingBottom="16.5dp"
-                                    android:text="@string/out_of_stock"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/yellow"
-                                    android:textSize="16.7sp"
-                                    android:textStyle="bold"
-                                    android:visibility="gone" />
-
-
-                            </LinearLayout>
-
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginRight="21.5dp"
-                                android:background="@color/viewline" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
-                                android:orientation="horizontal">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/green_rect"
-                                    android:orientation="horizontal">
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:paddingLeft="10dp"
-                                        android:paddingTop="1dp"
-                                        android:paddingRight="10dp"
-                                        android:paddingBottom="1dp">
-
-                                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                            android:id="@+id/txtRating"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginRight="5dp"
-                                            android:textColor="@color/white"
-                                            android:textSize="12.3dp" />
-
-                                        <ImageView
-                                            android:layout_width="12dp"
-                                            android:layout_height="12dp"
-                                            android:layout_gravity="center"
-                                            android:src="@drawable/star"
-                                            android:tint="@color/white" />
-
-
-                                    </LinearLayout>
-
-
-                                </LinearLayout>
-
-                                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
-                                    android:id="@+id/txtReviewCount"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="15dp"
-                                    android:gravity="center"
-                                    android:textColor="@color/cut_price"
-                                    android:textSize="12.3sp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#d7d4d4" />
-
-
-                <!--color and size layout-->
-                <HorizontalScrollView
-                    android:id="@+id/hsvColorSize"
-                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/rect_gray"
-                    android:fillViewport="true"
-                    android:measureAllChildren="false"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="21dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="18dp">
 
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:id="@+id/lyColorSize"
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                        android:id="@+id/txtProductName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10.9dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/apple"
+                        android:textSize="15.74sp"
+                        android:textStyle="bold" />
 
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:orientation="vertical" />
 
-                </HorizontalScrollView>
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                        android:id="@+id/txtSellerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/appgray"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:background="#40707070" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7.9dp"
+                    android:background="@color/white"
+                    android:elevation="1dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="21dp"
+                    android:paddingBottom="18dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="14.7dp">
+
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                            android:id="@+id/txtProductSalePrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/rs_16_1499"
+                            android:textSize="18.75dp" />
+
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                            android:id="@+id/txtProductPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="9.31dp"
+                            android:layout_marginRight="7dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/_1_70_999"
+                            android:textSize="12.3sp" />
+
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                            android:id="@+id/txtDiscout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/txt_14sp" />
+
+                    </LinearLayout>
+
+
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3.3dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/additional_tax_may_apply_charged_at_checkout"
+                        android:textSize="9.3sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                        android:id="@+id/txtOutOfStock"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingTop="16.5dp"
+                        android:paddingBottom="16.5dp"
+                        android:text="@string/out_of_stock"
+                        android:textAllCaps="false"
+                        android:textColor="@color/yellow"
+                        android:textSize="16.7sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="16.31dp">
+
+                        <!--color and size layout-->
+                        <HorizontalScrollView
+                            android:id="@+id/hsvColorSize"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:fillViewport="true"
+                            android:measureAllChildren="false"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:id="@+id/lyColorSize"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" />
+
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
                 <View
                     android:layout_width="match_parent"
@@ -371,6 +321,136 @@
                 <include layout="@layout/include_product_details_specification" />
 
                 <include layout="@layout/include_bought_products" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0.2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rect_gray"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Delivery"
+                            android:textSize="12.7sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/map_marker" />
+
+                                    <com.nav.richkart.customfonts.EditText_Roboto_Regular
+                                        android:id="@+id/etPincode"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="5dp"
+                                        android:background="#00000000"
+                                        android:fontFamily="@font/roboto_regular"
+                                        android:hint="Enter Delivery Pincode"
+                                        android:inputType="number"
+                                        android:maxLength="6"
+                                        android:textSize="13sp" />
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="3dp"
+                                    android:background="#acadae" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txtCheckPincode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Check"
+                                android:textSize="12.7sp" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="25.7dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_delivery_route" />
+
+
+                        </LinearLayout>
+
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                            android:id="@+id/txtPincodeStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="20dp"
+                            android:textColor="@color/yellow"
+                            android:textSize="12.7sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/lyUsuallyDelivery"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="vertical">
+
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Usually delivered in 3-4 days"
+                                android:textColor="#777b7e"
+                                android:textSize="13sp" />
+
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="13sp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Enter pincode for exact delivery dates/charges"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
 
                 <include layout="@layout/delivery_and_review_layout" />
 
@@ -435,8 +515,8 @@
                 <LinearLayout
                     android:id="@+id/lyRecentViewsProduct"
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="@dimen/dimen_30dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_30dp"
                     android:background="@color/white"
                     android:orientation="vertical">
 
@@ -490,8 +570,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <com.nav.richkart.customfonts.Button_Roboto_Medium
             android:id="@+id/txtBuyNow"

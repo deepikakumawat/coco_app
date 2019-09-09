@@ -34,7 +34,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items_bought_prod, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cocoproductlistgrid7, parent, false));
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
             holder.txtProductName.setText(productBroughtData.getmProductName());
 
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmSalePrice());
-            holder. txtRating .setText(!TextUtils.isEmpty(productBroughtData.getmAvgRating()) ? productBroughtData.getmAvgRating() : "0");
+            holder. txtSalesProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmSalePrice());
+            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmPrice());
 
 
 
@@ -81,7 +81,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
         private TextView txtProductName;
         private TextView txtProductType;
         private TextView txtProductPrice;
-        private TextView txtRating;
+        private TextView txtSalesProductPrice;
         private ImageView imgAddToCart;
         private LinearLayout lyBroughtProduct;
 
@@ -92,7 +92,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
         public ViewHolder(View view) {
             super(view);
 
-            txtRating = view.findViewById(R.id.txtRating);
+            txtSalesProductPrice = view.findViewById(R.id.txtSalesProductPrice);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductName = view.findViewById(R.id.txtProductName);
             txtProductType = view.findViewById(R.id.txtProductType);
