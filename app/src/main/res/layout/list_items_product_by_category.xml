@@ -130,6 +130,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_2dp"
                             android:ellipsize="end"
+                            android:lineSpacingExtra="@dimen/dimen_5dp"
                             android:maxLines="4"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/txt_12sp" />

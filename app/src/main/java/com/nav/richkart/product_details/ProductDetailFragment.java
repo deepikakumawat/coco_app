@@ -39,6 +39,7 @@ import com.nav.richkart.base_fragment.BaseFragment;
 import com.nav.richkart.checkout.CheckoutFragment;
 import com.nav.richkart.interfaces.IFragmentListener;
 import com.nav.richkart.login.LoginActivity;
+import com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity;
 import com.nav.richkart.my_wishlist.RemoveWishListResponse;
 import com.nav.richkart.product_details.project_details_response.CheckPincodeResponse;
 import com.nav.richkart.product_details.project_details_response.ProductAttributeData;

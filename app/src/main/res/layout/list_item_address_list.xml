@@ -41,9 +41,9 @@
                         android:src="@drawable/ic_check_mark" />
 
                     <LinearLayout
-                        android:layout_margin="@dimen/dimen_10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10dp"
                         android:orientation="horizontal">
 
 
@@ -66,6 +66,7 @@
                                 android:id="@+id/txtAddress1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2dp"
                                 android:text="Address1"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_12sp" />
@@ -74,6 +75,8 @@
                                 android:id="@+id/txtAddress2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2dp"
+
                                 android:text="Address2"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_12sp" />
@@ -83,7 +86,9 @@
                                 android:id="@+id/txtLandmark"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2dp"
                                 android:text="LandMark"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_12sp" />
 
@@ -91,13 +96,17 @@
                                 android:id="@+id/txtPhone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2dp"
                                 android:text="Phone"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_12sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2dp"
+
                                 android:orientation="horizontal">
 
                                 <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
@@ -134,8 +143,10 @@
                                 android:id="@+id/txtCountry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_2dp"
                                 android:text="Courntry"
                                 android:textColor="@color/black"
+
                                 android:textSize="@dimen/txt_12sp" />
 
 
@@ -143,6 +154,7 @@
 
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
