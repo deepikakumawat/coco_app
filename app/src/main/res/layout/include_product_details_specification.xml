@@ -25,6 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:paddingBottom="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/tab_selector_product_details"
                 android:gravity="center"
@@ -37,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:paddingBottom="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/tab_selector_product_details"
                 android:gravity="center"
@@ -49,6 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:paddingBottom="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/tab_selector_product_details"
                 android:gravity="center"
@@ -58,10 +61,6 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/viewline" />
 
 
         <LinearLayout

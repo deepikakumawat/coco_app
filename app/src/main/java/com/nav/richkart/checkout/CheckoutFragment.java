@@ -73,6 +73,8 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
     private ArrayList<AddUpdateAddressResponse.AddUpdateAddressData> addUpdateAddressData = null;
     private String totalPrice;
     private TextView txtTotalPrice;
+    private TextView txtSubTotalPrice;
+
     private String totalRazorPrice;
     private String orderStatus = "";
     private int selectedValue;
@@ -135,6 +137,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         }
 
         txtTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
+        txtSubTotalPrice.setText(!TextUtils.isEmpty(totalPrice) ? totalPrice : "-");
 
 
     }
@@ -145,6 +148,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         rbPayOnline = mView.findViewById(R.id.rbPayOnline);
         rbPOD = mView.findViewById(R.id.rbPOD);
         txtTotalPrice = mView.findViewById(R.id.txtTotalPrice);
+        txtSubTotalPrice = mView.findViewById(R.id.txtSubTotalPrice);
         rvCart = mView.findViewById(R.id.rvCart);
         txtConfirmPlaceOrder = mView.findViewById(R.id.txtConfirmPlaceOrder);
         txtTitle = mView.findViewById(R.id.txtTitle);

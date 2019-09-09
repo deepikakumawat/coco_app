@@ -397,6 +397,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/green"
                                 android:fontFamily="@font/roboto_bold"
                                 android:text="Check"
                                 android:textSize="12.7sp" />
@@ -419,6 +420,7 @@
                             android:layout_marginTop="20dp"
                             android:textColor="@color/yellow"
                             android:textSize="12.7sp"
+                            android:layout_marginBottom="10dp"
                             android:visibility="gone" />
 
                         <LinearLayout
@@ -427,6 +429,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="18dp"
                             android:layout_marginBottom="5dp"
+                            android:visibility="gone"
                             android:orientation="vertical">
 
                             <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
