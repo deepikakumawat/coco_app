@@ -575,7 +575,7 @@
         <com.nav.richkart.customfonts.Button_Roboto_Medium
             android:id="@+id/txtBuyNow"
             style="@style/buttonStyle"
-            android:layout_width="@dimen/dimen_150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
             android:layout_weight="1"
@@ -586,9 +586,8 @@
         <com.nav.richkart.customfonts.Button_Roboto_Medium
             android:id="@+id/txtAddToCart"
             style="@style/buttonStyle"
-            android:layout_width="@dimen/dimen_150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="9dp"
             android:layout_weight="1"
             android:background="@drawable/floating_button"

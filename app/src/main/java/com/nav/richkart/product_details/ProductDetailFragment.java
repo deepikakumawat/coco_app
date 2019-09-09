@@ -258,12 +258,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         });
 
 
-      /*  RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        rvTopRatedProducts.setLayoutManager(mLayoutManager2);
-        rvTopRatedProducts.setLayoutManager(mLayoutManager2);
-        rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());*/
-
         RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
+        rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
+        //rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
+        rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
+
+        /*RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
         rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
         DividerItemDecoration Hdivider = new DividerItemDecoration(rvTopRatedProducts.getContext(), DividerItemDecoration.HORIZONTAL);
@@ -271,7 +271,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         Hdivider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider));
         Vdivider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider));
         rvTopRatedProducts.addItemDecoration(Hdivider);
-        rvTopRatedProducts.addItemDecoration(Vdivider);
+        rvTopRatedProducts.addItemDecoration(Vdivider);*/
 
 
         RecyclerView.LayoutManager mLayoutManagerBroughtData = new LinearLayoutManager(getActivity());
