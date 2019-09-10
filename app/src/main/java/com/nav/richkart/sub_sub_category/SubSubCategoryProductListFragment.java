@@ -109,7 +109,6 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
 
 
         } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
             Util.showNoInternetDialog(getActivity());
         }
 
@@ -155,7 +154,7 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
                     recyclerview.setVisibility(View.VISIBLE);
                     svNotFound.setVisibility(View.GONE);
 
-                    if (tabPostion == 0) {
+                   /* if (tabPostion == 0) {
                         sortByRating(productGridModellClasses);
 
                     } else if (tabPostion == 1) {
@@ -163,7 +162,7 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
                     } else if (tabPostion == 2) {
                         sortByHighPrice(productGridModellClasses);
                     }
-
+*/
                    // ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
 
 

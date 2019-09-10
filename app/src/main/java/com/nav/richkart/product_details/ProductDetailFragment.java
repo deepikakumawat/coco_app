@@ -650,14 +650,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
                     videoUrl = productDetailsResponse.getmData().getmProduct().getmProductVideo();
-                    if(!TextUtils.isEmpty(videoUrl)) {
-                        ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? (View.VISIBLE) : View.GONE);
-                        setThumbVideo(videoUrl);
-                    } else
-                    {
-                        ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? (View.VISIBLE) : View.GONE);
-                    }
 
+                    ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? (View.VISIBLE) : View.GONE);
+                    if (!TextUtils.isEmpty(videoUrl)) {
+                        setThumbVideo(videoUrl);
+                    }
 
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
@@ -1234,21 +1231,18 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     private void setThumbVideo(String url) {
-        try
-        {
-           String videoId=extractYoutubeId(url);
+        try {
+            String videoId = extractYoutubeId(url);
 
-            Log.e("VideoId is->","" + videoId);
+            Log.e("VideoId is->", "" + videoId);
 
-            String img_url="http://img.youtube.com/vi/"+videoId+"/0.jpg"; // this is link which will give u thumnail image of that video
+            String img_url = "http://img.youtube.com/vi/" + videoId + "/0.jpg"; // this is link which will give u thumnail image of that video
 
             // picasso jar file download image for u and set image in imagview
 
             Glide.with(getContext()).load(img_url).placeholder(R.drawable.richkart).into(imgVideo);
 
-        }
-        catch (MalformedURLException e)
-        {
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
