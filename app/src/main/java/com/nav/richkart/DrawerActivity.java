@@ -36,12 +36,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.nav.richkart.address.LoginAlertOnAddressActivity;
 import com.nav.richkart.my_cart.LoginAlertOnCartActivity;
 import com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity;
 import com.nav.richkart.profile.LoginAlertOnMyAccountActivity;
 import com.razorpay.PaymentResultListener;
 import com.nav.richkart.address.AddressListActivity;
-import com.nav.richkart.address.LoginAlertOnAddressActivity;
 import com.nav.richkart.departments.DepartmentFragment;
 import com.nav.richkart.checkout.CheckoutFragment;
 import com.nav.richkart.checkout.SuccessFragment;
@@ -227,7 +227,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         startActivity(new Intent(DrawerActivity.this, AddressListActivity.class));
                     } else {
-//                        startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnAddressActivity.class));
                     }
 
