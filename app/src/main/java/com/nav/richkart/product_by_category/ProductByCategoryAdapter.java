@@ -87,6 +87,16 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
                 holder.lyAddToCart.setTag(R.id.lyAddToCart, position);
                 holder.lyAddToCart.setOnClickListener(mpopularListFragment);
             }
+
+            if (subSubCategoryProductListFragment != null) {
+                holder.lyProduct.setTag(productData);
+                holder.lyProduct.setTag(R.id.lyProduct, position);
+                holder.lyProduct.setOnClickListener(subSubCategoryProductListFragment);
+
+                holder.lyAddToCart.setTag(productData);
+                holder.lyAddToCart.setTag(R.id.lyAddToCart, position);
+                holder.lyAddToCart.setOnClickListener(subSubCategoryProductListFragment);
+            }
         }
 
 
