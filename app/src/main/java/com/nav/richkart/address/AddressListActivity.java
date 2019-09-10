@@ -99,7 +99,6 @@ public class AddressListActivity extends AppCompatActivity implements AddressLis
 
 
             } else {
-//                showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
                 Util.showNoInternetDialog(this);
 
             }

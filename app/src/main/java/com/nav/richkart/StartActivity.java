@@ -32,7 +32,6 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (!CocoPreferences.isFirstTimeLaunch()) {
-            //TODO:- Uncomment below 2 lines
             launchHomeScreen();
         }
 
