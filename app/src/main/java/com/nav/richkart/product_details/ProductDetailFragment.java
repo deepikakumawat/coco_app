@@ -21,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,8 @@ import com.nav.richkart.shared_preference.CocoPreferences;
 import com.nav.richkart.utility.Constant;
 import com.nav.richkart.utility.Util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import com.nav.richkart.fragment.FragmentManagerUtils;
@@ -647,7 +650,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
                     videoUrl = productDetailsResponse.getmData().getmProduct().getmProductVideo();
-                    ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? View.VISIBLE : View.GONE);
+                    if(!TextUtils.isEmpty(videoUrl)) {
+                        ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? (View.VISIBLE) : View.GONE);
+                        setThumbVideo(videoUrl);
+                    } else
+                    {
+                        ryVideo.setVisibility(!TextUtils.isEmpty(videoUrl) ? (View.VISIBLE) : View.GONE);
+                    }
+
 
 
                     if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmPrice())) {
@@ -1221,6 +1231,39 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
             }
         }
+    }
+
+    private void setThumbVideo(String url) {
+        try
+        {
+           String videoId=extractYoutubeId(url);
+
+            Log.e("VideoId is->","" + videoId);
+
+            String img_url="http://img.youtube.com/vi/"+videoId+"/0.jpg"; // this is link which will give u thumnail image of that video
+
+            // picasso jar file download image for u and set image in imagview
+
+            Glide.with(getContext()).load(img_url).placeholder(R.drawable.richkart).into(imgVideo);
+
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String extractYoutubeId(String url) throws MalformedURLException {
+        String query = new URL(url).getQuery();
+        String[] param = query.split("&");
+        String id = null;
+        for (String row : param) {
+            String[] param1 = row.split("=");
+            if (param1[0].equals("v")) {
+                id = param1[1];
+            }
+        }
+        return id;
     }
 
 

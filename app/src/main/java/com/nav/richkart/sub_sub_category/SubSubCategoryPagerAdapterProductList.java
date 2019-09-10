@@ -1,5 +1,6 @@
 package com.nav.richkart.sub_sub_category;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,7 +22,12 @@ public class SubSubCategoryPagerAdapterProductList extends FragmentPagerAdapter 
 
     @Override
     public Fragment getItem(int position) {
-        return SubSubCategoryProductListFragment.newInstance(mainSubCategoriesDataArrayList.get(position).getmCatId(),position);
+        SubSubCategoryProductListFragment subSubCategoryProductListFragment = new SubSubCategoryProductListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("catId", mainSubCategoriesDataArrayList.get(position).getmCatId());
+        bundle.putInt("tabPostion", position);
+        subSubCategoryProductListFragment.setArguments(bundle);
+        return subSubCategoryProductListFragment;
 
     }
 

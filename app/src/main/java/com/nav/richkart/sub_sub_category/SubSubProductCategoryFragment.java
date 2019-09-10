@@ -135,7 +135,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
     private void setAdapter(int size, ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList) {
         SubSubCategoryPagerAdapterProductList adapter = new SubSubCategoryPagerAdapterProductList(getChildFragmentManager(), size,mainSubCategoriesDataArrayList);
         wrapContentHeightViewPager.setAdapter(adapter);
-        wrapContentHeightViewPager.setOffscreenPageLimit(1);
+        wrapContentHeightViewPager.setOffscreenPageLimit(0);
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
     }

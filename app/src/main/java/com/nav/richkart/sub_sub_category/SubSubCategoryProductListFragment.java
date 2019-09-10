@@ -57,16 +57,9 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
     private ScrollView svNotFound;
     private Button btnGoToHome;
 
-
-    public static SubSubCategoryProductListFragment newInstance(String catId, int tabPostion) {
-        SubSubCategoryProductListFragment fragment = new SubSubCategoryProductListFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("catId", catId);
-        bundle.putInt("tabPostion", tabPostion);
-        fragment.setArguments(bundle);
-        return fragment;
+    public SubSubCategoryProductListFragment() {
+        // Required empty public constructor
     }
-
 
     @Nullable
     @Override
@@ -90,7 +83,7 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
         }
 
 
-        productByCategoryRequest = ((ProductListByCategoryFragment) getParentFragment()).getSearchFilter();
+        productByCategoryRequest = new ProductByCategoryRequest();
         productByCategoryRequest.setCateId(catId);
 
 
@@ -171,7 +164,7 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
                         sortByHighPrice(productGridModellClasses);
                     }
 
-                    ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+                   // ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
 
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, SubSubCategoryProductListFragment.this);
