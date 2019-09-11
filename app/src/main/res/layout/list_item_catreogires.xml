@@ -9,26 +9,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:orientation="vertical">
 
         <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
             android:id="@+id/txtCategories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
-            android:layout_marginTop="20dp"
             android:text="FASHION"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
             android:textColor="@color/appgray"
-            android:textSize="18sp" />
+            android:textSize="@dimen/txt_18sp" />
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSubCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="5dp" />
+            android:layout_marginTop="@dimen/dimen_5dp"
+           />
 
 
     </LinearLayout>

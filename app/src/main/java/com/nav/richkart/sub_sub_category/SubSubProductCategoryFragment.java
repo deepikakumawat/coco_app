@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nav.richkart.R;
 import com.nav.richkart.base_fragment.BaseFragment;
 import com.nav.richkart.interfaces.IFragmentListener;
@@ -38,6 +39,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
     private String catName;
     private SubCateProductByCategoryPresenter subCateProductByCategoryPresenter;
     private ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList = new ArrayList<>();
+    private ShimmerFrameLayout mShimmerViewContainer;
 
 
     @Nullable
@@ -62,7 +64,6 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
         subCateProductByCategoryPresenter = new SubCateProductByCategoryPresenter(this);
 
         tabLayout = mView.findViewById(R.id.tab_layout);
-
 
 
         Typeface mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
@@ -100,6 +101,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
             }
         });
 
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         wrapContentHeightViewPager = mView.findViewById(R.id.pager);
 //        setAdapter();
@@ -122,7 +124,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
         callAPI();
     }
 
-    private void callAPI(){
+    private void callAPI() {
 
         if (Util.isDeviceOnline(getActivity())) {
             subCateProductByCategoryPresenter.getSubCateProductByCat(catId);
@@ -133,7 +135,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
     }
 
     private void setAdapter(int size, ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList) {
-        SubSubCategoryPagerAdapterProductList adapter = new SubSubCategoryPagerAdapterProductList(getChildFragmentManager(), size,mainSubCategoriesDataArrayList);
+        SubSubCategoryPagerAdapterProductList adapter = new SubSubCategoryPagerAdapterProductList(getChildFragmentManager(), size, mainSubCategoriesDataArrayList);
         wrapContentHeightViewPager.setAdapter(adapter);
         wrapContentHeightViewPager.setOffscreenPageLimit(0);
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -186,12 +188,14 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
 
     @Override
     public void showWait() {
-
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
     }
 
     @Override
     public void removeWait() {
-
+        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -206,11 +210,11 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
             mainSubCategoriesDataArrayList.clear();
             mainSubCategoriesDataArrayList.addAll(subSubCategoriesResponse.getmData().getmMainSubCategories());
 
-            for( SubSubCategoriesResponse.MainSubCategoriesData mainSubCategoriesData : mainSubCategoriesDataArrayList){
+            for (SubSubCategoriesResponse.MainSubCategoriesData mainSubCategoriesData : mainSubCategoriesDataArrayList) {
                 tabLayout.addTab(tabLayout.newTab().setText(mainSubCategoriesData.getmCatName()));
             }
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-            setAdapter(mainSubCategoriesDataArrayList.size(),mainSubCategoriesDataArrayList);
+            setAdapter(mainSubCategoriesDataArrayList.size(), mainSubCategoriesDataArrayList);
 
         }
 

@@ -703,6 +703,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                         productDetailsSimilierArrayList.clear();
                         productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
+
+                        int smiliarProductsCount = productDetailsSimilierArrayList.size();
+                        if((smiliarProductsCount % 2) != 0 ){
+                            productDetailsSimilierArrayList.remove(0);
+                        }
+
                         productDetailsSimiliarProductsAdapter = new ProductDetailsSimiliarProductsAdapter(getActivity(), productDetailsSimilierArrayList, ProductDetailFragment.this);
                         rvTopRatedProducts.setAdapter(productDetailsSimiliarProductsAdapter);
                     } else {
@@ -834,8 +840,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                 LinearLayout lyColorSizeAttrName = view.findViewById(R.id.lyColorSizeAttrName);
                 TextView txtAttributeType = view.findViewById(R.id.txtAttributeType);
-                txtAttributeType.setText(productAttrAraay.get(i).getmType());
 
+
+                txtAttributeType.setText(productAttrAraay.get(i).getmType().substring(0, 1).toUpperCase() + productAttrAraay.get(i).getmType().substring(1).toLowerCase());
 
 
                 /*set attribute name*/
