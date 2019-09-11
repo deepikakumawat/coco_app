@@ -23,11 +23,11 @@
         android:layout_marginLeft="30dp"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="163dp"
+        android:layout_height="53dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/ic_richkart_logo" />
+        android:src="@drawable/header_logo" />
 
 
 </android.support.v7.widget.Toolbar>

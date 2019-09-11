@@ -192,20 +192,24 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="19.3dp"
+                           android:layout_marginLeft="35dp"
                             android:layout_marginTop="9dp"
                             android:isIndicator="false"
+                            android:scaleX="1.5"
+                            android:scaleY="2.0"
                             android:numStars="5"
                             android:stepSize="1"
                             android:theme="@style/RatingBar" />
 
                         <com.nav.richkart.customfonts.Button_Roboto_Medium
                             android:id="@+id/btnSubmit"
-                            style="@style/buttonStyle"
                             android:layout_width="wrap_content"
-                            android:layout_height="45dp"
+                            android:layout_height="@dimen/dimen_30dp"
+                            android:background="@drawable/button_bg"
+                            android:textColor="@color/appgray"
+                            android:textStyle="bold"
                             android:layout_marginLeft="19.3dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="@dimen/dimen_25dp"
                             android:layout_marginRight="43dp"
                             android:gravity="center"
                             android:text="Submit" />
