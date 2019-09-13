@@ -2,6 +2,7 @@ package com.nav.richkart.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,7 +29,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
     private EditText etConfirmPassword;
     private EditText etPassword;
     private EditText etPhone;
-    private RelativeLayout ryParent;
+    private ConstraintLayout clParent;
     private SignUpPresenter signUpPresenter;
     private String email;
     private String fName;
@@ -59,38 +60,38 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(ryParent, this, getString(R.string.email_validation_message), "");
+                showCenteredToast(clParent, this, getString(R.string.email_validation_message), "");
                 etEmail.requestFocus();
             } else if (TextUtils.isEmpty(fName)) {
-                showCenteredToast(ryParent, this, getString(R.string.first_name_validation_message), "");
+                showCenteredToast(clParent, this, getString(R.string.first_name_validation_message), "");
                 etFname.requestFocus();
             } else if (TextUtils.isEmpty(lName)) {
-                showCenteredToast(ryParent, this, getString(R.string.last_name_validation_message), "");
+                showCenteredToast(clParent, this, getString(R.string.last_name_validation_message), "");
                 etLname.requestFocus();
             } else if (TextUtils.isEmpty(phone)) {
-                showCenteredToast(ryParent, this, getString(R.string.invalid_mobile_number), "");
+                showCenteredToast(clParent, this, getString(R.string.invalid_mobile_number), "");
                 etPhone.requestFocus();
             }  else if (TextUtils.isEmpty(password)) {
-                showCenteredToast(ryParent, this, getString(R.string.invalid_password), "");
+                showCenteredToast(clParent, this, getString(R.string.invalid_password), "");
                 etPassword.requestFocus();
             } else if (TextUtils.isEmpty(confirmPassword)) {
-                showCenteredToast(ryParent, this, getString(R.string.invalid_password), "");
+                showCenteredToast(clParent, this, getString(R.string.invalid_password), "");
                 etConfirmPassword.requestFocus();
             } else if (!isEmailValid(email)) {
-                showCenteredToast(ryParent, this, getString(R.string.invalid_email), "");
+                showCenteredToast(clParent, this, getString(R.string.invalid_email), "");
                 etEmail.requestFocus();
             } else if (!isValidMobile(phone)) {
-                showCenteredToast(ryParent, this, getString(R.string.mobile_number), "");
+                showCenteredToast(clParent, this, getString(R.string.mobile_number), "");
                 etPhone.requestFocus();
             } else if (!confirmPassword.equalsIgnoreCase(password)) {
-                showCenteredToast(ryParent, this, getString(R.string.password_confirm_password), "");
+                showCenteredToast(clParent, this, getString(R.string.password_confirm_password), "");
                 etConfirmPassword.requestFocus();
 
             } else {
                 validation_detials_flag = true;
             }
         } else {
-//            showCenteredToast(ryParent, this, getString(R.string.network_connection), "");
+//            showCenteredToast(clParent, this, getString(R.string.network_connection), "");
             Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;
@@ -99,7 +100,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
 
 
     private void init() {
-        ryParent = findViewById(R.id.ryParent);
+        clParent = findViewById(R.id.clParent);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
@@ -169,7 +170,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
 
     @Override
     public void onFailure(String appErrorMessage) {
-        showCenteredToast(ryParent, this, appErrorMessage, "");
+        showCenteredToast(clParent, this, appErrorMessage, "");
     }
 
     @Override
@@ -182,7 +183,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
     @Override
     public void getOTP(GetOTPResponse getOTPResponse) {
         try {
-            showCenteredToast(ryParent, this, getOTPResponse.getMessage(), "");
+            showCenteredToast(clParent, this, getOTPResponse.getMessage(), "");
 
             if (getOTPResponse.getmOTPData() != null) {
                 if (!TextUtils.isEmpty(getOTPResponse.getmOTPData().getmVcToken())) {
@@ -204,7 +205,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
                     startActivity(intent);
 
                 } else {
-                    showCenteredToast(ryParent, this, getString(R.string.no_vc_token_found), "");
+                    showCenteredToast(clParent, this, getString(R.string.no_vc_token_found), "");
 
                 }
 

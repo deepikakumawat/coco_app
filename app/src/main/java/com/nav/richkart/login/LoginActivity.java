@@ -2,12 +2,12 @@ package com.nav.richkart.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nav.richkart.R;
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     private EditText etEmail, etPassword;
     private Button btn_login;
     private TextView txtFwdPassword;
-    private RelativeLayout ryParent;
+    private ConstraintLayout clParent;
 
 
     @Override
@@ -68,14 +68,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         boolean validation_detials_flag = false;
         if (Util.isDeviceOnline(this)) {
             if (TextUtils.isEmpty(email)) {
-                showCenteredToast(ryParent,this, getString(R.string.email_validation_message),"");
+                showCenteredToast(clParent,this, getString(R.string.email_validation_message),"");
                 etEmail.requestFocus();
             } else if (TextUtils.isEmpty(password)) {
-                showCenteredToast(ryParent,this, getString(R.string.invalid_password),"");
+                showCenteredToast(clParent,this, getString(R.string.invalid_password),"");
                 etPassword.requestFocus();
             } else {
                 if (!Util.isEmailValid(email)) {
-                    showCenteredToast(ryParent,this, getString(R.string.invalid_email),"");
+                    showCenteredToast(clParent,this, getString(R.string.invalid_email),"");
                     etEmail.requestFocus();
                 } else {
                     validation_detials_flag = true;
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
             }
         } else {
-//            showCenteredToast(ryParent,this, getString(R.string.network_connection),"");
+//            showCenteredToast(clParent,this, getString(R.string.network_connection),"");
             Util.showNoInternetDialog(this);
         }
         return validation_detials_flag;
@@ -106,12 +106,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
     @Override
     public void onFailure(String appErrorMessage) {
-        Util.showCenteredToast(ryParent,this, appErrorMessage,"");
+        Util.showCenteredToast(clParent,this, appErrorMessage,"");
     }
 
 
     private void init() {
-        ryParent =  findViewById(R.id.ryParent);
+        clParent =  findViewById(R.id.clParent);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btn_login = (Button) findViewById(R.id.btn_login);
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                     startActivity(intent);
                     finish();
                 } else {
-                    showCenteredToast(ryParent,this, loginResponse.getMessage(),"");
+                    showCenteredToast(clParent,this, loginResponse.getMessage(),"");
                 }
 
             }

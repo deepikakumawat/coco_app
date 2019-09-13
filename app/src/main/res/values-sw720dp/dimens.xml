@@ -31,7 +31,7 @@
     <dimen name="dimen_240dp">480dp</dimen>
     <dimen name="dimen_15dp">30dp</dimen>
     <dimen name="dimen_80dp">160dp</dimen>
-
+    <dimen name="dimen_40dp">80dp</dimen>
 
 
 </resources>
