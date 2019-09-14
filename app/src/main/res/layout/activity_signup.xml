@@ -34,6 +34,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@+id/imgApplogo"
+                android:maxLines="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:singleLine="true"
+                android:text="Richkart The Version of Revolution"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+
+
 
             <com.nav.richkart.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etEmail"
@@ -43,7 +59,7 @@
                 android:layout_marginTop="@dimen/dimen_30dp"
                 android:hint="@string/email_id"
                 android:inputType="textEmailAddress"
-                app:layout_constraintTop_toBottomOf="@+id/imgApplogo" />
+                app:layout_constraintTop_toBottomOf="@+id/txtProductName" />
 
 
             <com.nav.richkart.customfonts.EditText_Roboto_Meidum
