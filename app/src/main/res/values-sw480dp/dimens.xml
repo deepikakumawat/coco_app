@@ -30,6 +30,8 @@
     <dimen name="dimen_15dp">22.5dp</dimen>
     <dimen name="dimen_80dp">120dp</dimen>
     <dimen name="dimen_40dp">60dp</dimen>
+    <dimen name="dimen_12dp">18dp</dimen>
+    <dimen name="dimen_11dp">16.5dp</dimen>
 
 
 </resources>

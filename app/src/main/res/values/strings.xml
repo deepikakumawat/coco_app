@@ -182,7 +182,7 @@
     <string name="hundrad">100</string>
     <string name="one_lac">100000</string>
     <string name="select_filter">Select filter.</string>
-    <string name="order_details">Order Details</string>
+    <string name="order_details">View Order Details</string>
     <string name="sender_data">Sender Details</string>
     <string name="receiver_details">Receiver Details</string>
     <string name="delivery_details">Delivery Details</string>

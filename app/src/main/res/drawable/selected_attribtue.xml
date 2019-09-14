@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/listview_background_shape">
-    <stroke android:width="2dp" android:color="@color/yellow" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listview_background_shape"
+    android:shape="rectangle">
+
+    <corners android:radius="@dimen/dimen_5dp" />
+
+    <stroke
+        android:width="@dimen/dimen_1dp"
+        android:color="@color/yellow" />
+
+
+
 
 </shape>

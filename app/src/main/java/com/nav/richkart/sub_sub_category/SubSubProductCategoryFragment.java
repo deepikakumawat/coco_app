@@ -13,8 +13,11 @@ import android.widget.TextView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nav.richkart.R;
 import com.nav.richkart.base_fragment.BaseFragment;
+import com.nav.richkart.fragment.FragmentManagerUtils;
+import com.nav.richkart.interfaces.IFilterListener;
 import com.nav.richkart.interfaces.IFragmentListener;
 
+import com.nav.richkart.product_by_category.FilterFragment;
 import com.nav.richkart.product_by_category.ProductByCategoryResponse;
 import com.nav.richkart.product_by_category.WrapContentHeightViewPager;
 import com.nav.richkart.utility.Util;
@@ -22,7 +25,7 @@ import com.nav.richkart.utility.Util;
 import java.util.ArrayList;
 
 
-public class SubSubProductCategoryFragment extends BaseFragment implements SubCatProductByCategoryView {
+public class SubSubProductCategoryFragment extends BaseFragment implements SubCatProductByCategoryView, IFilterListener {
 
     private TabLayout tabLayout;
     private Typeface mTypeface;
@@ -91,13 +94,13 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
             public void onClick(View view) {
 
 
-              /*  Bundle bundle = new Bundle();
+              Bundle bundle = new Bundle();
                 bundle.putSerializable("productAttribueDataArrayList", productAttribueDataArrayList);
                 FilterFragment filterFragment = new FilterFragment();
                 filterFragment.setmIFilterListener(SubSubProductCategoryFragment.this);
                 filterFragment.setArguments(bundle);
 
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), filterFragment, null, true, false);*/
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), filterFragment, null, true, false);
             }
         });
 
@@ -141,6 +144,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
         wrapContentHeightViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
     }
+
 
 
     private void setCustomFontAndStyle(TabLayout tabLayout, Integer position) {
@@ -220,4 +224,8 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
 
     }
 
+    @Override
+    public void setSearchFilter(String[] filterAttribues, String minimumValue, String maximumValue) {
+
+    }
 }

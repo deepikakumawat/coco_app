@@ -34,60 +34,53 @@
                 <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
                     android:text="@string/order_details"
-                    android:layout_margin="@dimen/dimen_5dp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/txt_20sp"
                     android:textStyle="bold" />
 
-                <android.support.v7.widget.CardView
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardElevation="@dimen/dimen_3dp">
+                    android:background="@drawable/rect_gray"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_5dp">
 
-
-                    <LinearLayout
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtOrderId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-
-                        android:orientation="vertical">
-
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtOrderId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/orderid"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
+                        android:text="@string/orderid"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
 
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtOrderDate"
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/dimen_2dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/orderid"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtOrderDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="@string/orderid"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtPrice"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Price"
-                            android:layout_marginTop="@dimen/dimen_2dp"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
-                    </LinearLayout>
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="Price"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
 
-                </android.support.v7.widget.CardView>
 
                 <!--Sender Data-->
 
@@ -176,42 +169,37 @@
                     android:textSize="@dimen/txt_20sp"
                     android:textStyle="bold" />
 
-                <android.support.v7.widget.CardView
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardElevation="@dimen/dimen_3dp">
+                    android:background="@drawable/rect_gray"
+                    android:orientation="vertical"
 
-                    <LinearLayout
+                    android:padding="@dimen/dimen_5dp">
+
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtReceiverName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-
-                        android:orientation="vertical">
-
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtReceiverName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="receiver name"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
+                        android:text="receiver name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
 
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtReceiverEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="reciver email"
-                            android:layout_marginTop="@dimen/dimen_2dp"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
-                    </LinearLayout>
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtReceiverEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="reciver email"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
 
-                </android.support.v7.widget.CardView>
 
                 <!--Delivery Data-->
 
@@ -225,91 +213,106 @@
                     android:textSize="@dimen/txt_20sp"
                     android:textStyle="bold" />
 
-                <android.support.v7.widget.CardView
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_3dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardElevation="@dimen/dimen_3dp">
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:background="@drawable/rect_gray"
+                    android:orientation="vertical"
+
+                    android:padding="@dimen/dimen_5dp">
+
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="delivery contact"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="delivery address"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-
-                        android:orientation="vertical">
-
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtDeliveryContact"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="delivery contact"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:orientation="horizontal">
 
                         <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtDeliveryAddress"
-                            android:layout_width="match_parent"
+                            android:id="@+id/txtDeliveryCity"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="delivery address"
-                            android:layout_marginTop="@dimen/dimen_2dp"
+                            android:layout_weight="1"
+                            android:text="City"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_2dp"
-                            android:orientation="horizontal">
-
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                                android:id="@+id/txtDeliveryCity"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="City"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/txt_14sp" />
-
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                                android:id="@+id/txtDeliveryState"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="State"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/txt_14sp" />
-
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                                android:id="@+id/txtDeliveryPincode"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Zipcode"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/txt_14sp" />
-
-                        </LinearLayout>
-
+                            android:textSize="@dimen/txt_14sp" />
 
                         <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                            android:id="@+id/txtDeliveryLandmark"
-                            android:layout_width="match_parent"
+                            android:id="@+id/txtDeliveryState"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="delivery landmark"
-                            android:layout_marginTop="@dimen/dimen_2dp"
+                            android:layout_weight="1"
+                            android:text="State"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/txt_14sp"
-                            tools:ignore="MissingConstraints" />
+                            android:textSize="@dimen/txt_14sp" />
+
+                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                            android:id="@+id/txtDeliveryPincode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Zipcode"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/txt_14sp" />
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+
+                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtDeliveryLandmark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="delivery landmark"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
+
+            <!--track shipment-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#d7d4d4" />
+
+            <TextView
+                android:id="@+id/txtTrackShipment"
+                style="@style/viewParent.headerText.settingsTextIcon"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/dimen_5dp"
+                android:layout_margin="@dimen/dimen_5dp"
+                android:text="Track Shipment" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#d7d4d4" />
 
             <!--product list-->
             <LinearLayout

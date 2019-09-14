@@ -163,7 +163,7 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
                         sortByHighPrice(productGridModellClasses);
                     }
 */
-                   // ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+                    ((SubSubProductCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
 
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, SubSubCategoryProductListFragment.this);

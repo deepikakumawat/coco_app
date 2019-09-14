@@ -306,6 +306,8 @@ public class MyOrderFragment extends BaseFragment implements MyOrderView, View.O
         reasonList.add("Buying From Other Places");
         reasonList.add("Order by Mistake");
         reasonList.add("Information Not Complete");
+        reasonList.add("Delay in Shipping");
+        reasonList.add("Support Not Perfect");
         reasonList.add("Other");
 
         ArrayAdapter aa = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, reasonList);

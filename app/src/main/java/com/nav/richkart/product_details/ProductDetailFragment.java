@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DefaultItemAnimator;
+
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -261,12 +262,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         });
 
 
-        RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
+    /*    RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
         rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
         //rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
-        rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
+        rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());*/
 
-        /*RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
+       RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
         rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
         rvTopRatedProducts.setItemAnimator(new DefaultItemAnimator());
         DividerItemDecoration Hdivider = new DividerItemDecoration(rvTopRatedProducts.getContext(), DividerItemDecoration.HORIZONTAL);
@@ -274,8 +275,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         Hdivider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider));
         Vdivider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider));
         rvTopRatedProducts.addItemDecoration(Hdivider);
-        rvTopRatedProducts.addItemDecoration(Vdivider);*/
+        rvTopRatedProducts.addItemDecoration(Vdivider);
 
+
+      /*  RecyclerView.LayoutManager mLayoutManagerSimmiliar = new GridLayoutManager(getActivity(), 2);
+        rvTopRatedProducts.setLayoutManager(mLayoutManagerSimmiliar);
+        rvTopRatedProducts.addItemDecoration(new DividerItemDecoration(getActivity().getDrawable(R.drawable.horizontal_divider), false, true));
+*/
 
         RecyclerView.LayoutManager mLayoutManagerBroughtData = new LinearLayoutManager(getActivity());
         rvBroughtProducts.setLayoutManager(mLayoutManagerBroughtData);
@@ -705,7 +711,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsSimilierArrayList.addAll(productDetailsResponse.getmData().getmProductDetailsSimilier());
 
                         int smiliarProductsCount = productDetailsSimilierArrayList.size();
-                        if((smiliarProductsCount % 2) != 0 ){
+                        if ((smiliarProductsCount % 2) != 0) {
                             productDetailsSimilierArrayList.remove(0);
                         }
 

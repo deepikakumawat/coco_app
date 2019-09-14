@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.nav.richkart.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nav.richkart.base_fragment.BaseFragment;
+import com.nav.richkart.my_order.TimelineTestFragment;
 import com.nav.richkart.product_details.ProductDetailFragment;
 import com.nav.richkart.utility.Util;
 
@@ -54,6 +55,7 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
     private LinearLayout lyOrderDetails;
     private LinearLayout lyProductDetails;
     private View mView;
+    private TextView txtTrackShipment;
 
 
     @Nullable
@@ -103,6 +105,9 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
         txtDeliveryCity = view.findViewById(R.id.txtDeliveryCity);
         txtDeliveryState = view.findViewById(R.id.txtDeliveryState);
         txtDeliveryLandmark = view.findViewById(R.id.txtDeliveryLandmark);
+
+        txtTrackShipment = view.findViewById(R.id.txtTrackShipment);
+        txtTrackShipment.setOnClickListener(this);
 
 
         ryParent = view.findViewById(R.id.ryParent);
@@ -226,6 +231,10 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
                         FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
 
                     }
+                    break;
+                case R.id.txtTrackShipment:
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new TimelineTestFragment(), "TimelineTestFragment", true, false);
+
                     break;
 
                 default:
