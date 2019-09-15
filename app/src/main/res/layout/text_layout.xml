@@ -48,8 +48,8 @@
 
             <ImageView
                 android:id="@+id/imgSelectColor"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
                 />
         </LinearLayout>
 

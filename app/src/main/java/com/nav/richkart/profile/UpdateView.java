@@ -11,4 +11,6 @@ public interface UpdateView {
         void onUpdateProfileSuccess(UpdateProfileResponse updateProfileResponse);
 
         void changeProfileImages(ChangeProfileImageResponse changeProfileImageResponse);
+
+        void changePassword(ChanePasswordResponse chanePasswordResponse);
 }

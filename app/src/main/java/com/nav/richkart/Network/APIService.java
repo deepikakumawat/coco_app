@@ -25,6 +25,7 @@ import com.nav.richkart.product_details.project_details_response.CheckPincodeRes
 import com.nav.richkart.product_details.project_details_response.ProductDetailsResponse;
 import com.nav.richkart.product_rating_list.AddRatingResponse;
 import com.nav.richkart.product_rating_list.product_rating_response.ProductRatingResponse;
+import com.nav.richkart.profile.ChanePasswordResponse;
 import com.nav.richkart.profile.ChangeProfileImageResponse;
 import com.nav.richkart.profile.UpdateProfileResponse;
 import com.nav.richkart.search.SearchResponse;
@@ -270,5 +271,13 @@ public interface APIService {
     @POST("change-user-pic")
     Call<ChangeProfileImageResponse> changeProfilePic(@Part("user_id") RequestBody userId,
                                                       @Part MultipartBody.Part imageFile);
+
+
+    @POST("update-password")
+    @FormUrlEncoded
+    Call<ChanePasswordResponse> changePassword(@Field("user_id") String userId,
+                                                @Field("old_pass") String oldPass,
+                                                @Field("new_pass") String NewPass);
+
 }
 

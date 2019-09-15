@@ -134,5 +134,52 @@ public class UpdateProfilePresenter {
         }
     }
 
+    public void changePassword(String userid, String oldPass,  String newPass) {
+        view.showWait();
+
+        try {
+
+            Call call = service.changePassword(userid, oldPass, newPass);
+            call.enqueue(new Callback<ChanePasswordResponse>() {
+                @Override
+                public void onResponse(Call<ChanePasswordResponse> call, Response<ChanePasswordResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            Log.d(TAG, call.request().url().toString());
+
+                            view.changePassword(response.body());
+                        } else {
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ChanePasswordResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

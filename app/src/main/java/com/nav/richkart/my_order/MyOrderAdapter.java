@@ -38,8 +38,26 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         if (myOrderData != null) {
             holder.txtProductName.setText(TextUtils.isEmpty(myOrderData.getmProductName()) ? " - " : myOrderData.getmProductName());
             holder.txtPrice.setText(TextUtils.isEmpty(myOrderData.getmAmount()) ? " - " : myOrderData.getmAmount());
-            holder.txtStatus.setText(TextUtils.isEmpty(myOrderData.getmStatus()) ? " - " : myOrderData.getmStatus());
-            holder.txtDate.setText("Order Date "+(TextUtils.isEmpty(myOrderData.getmCreatedDate()) ? " - " : myOrderData.getmCreatedDate()));
+            holder.txtDate.setText("Order Date " + (TextUtils.isEmpty(myOrderData.getmCreatedDate()) ? " - " : myOrderData.getmCreatedDate()));
+
+
+            if (!TextUtils.isEmpty(myOrderData.getmStatus())) {
+
+                if (myOrderData.getmStatus().equalsIgnoreCase("1")) {
+                    holder.txtStatus.setText(context.getString(R.string.order_status) + ": Processed");
+                } else if (myOrderData.getmStatus().equalsIgnoreCase("2")) {
+                    holder.txtStatus.setText(context.getString(R.string.order_status) + ": Pending");
+
+                } else if (myOrderData.getmStatus().equalsIgnoreCase("3")) {
+                    holder.txtStatus.setText(context.getString(R.string.order_status) + ": Cancelled");
+
+                } else {
+                    holder.txtStatus.setText(context.getString(R.string.order_status) + ": - ");
+                }
+
+            } else {
+                holder.txtStatus.setText(context.getString(R.string.order_status) + ": - ");
+            }
 
 
             holder.txtSupport.setTag(myOrderData);

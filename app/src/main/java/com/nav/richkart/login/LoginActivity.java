@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                     CocoPreferences.setUserPhone(TextUtils.isEmpty(loginResponse.getLoginData().getMMobileNo())? "" : loginResponse.getLoginData().getMMobileNo());
                     CocoPreferences.setFirstName(TextUtils.isEmpty(loginResponse.getLoginData().getMName())? "" :loginResponse.getLoginData().getMName());
                     CocoPreferences.setLastName(TextUtils.isEmpty(loginResponse.getLoginData().getMLastName()) ? "" : loginResponse.getLoginData().getMLastName());
+                    CocoPreferences.setProfilePic(TextUtils.isEmpty(loginResponse.getLoginData().getMProfilePic()) ? "" : loginResponse.getLoginData().getMProfilePic());
                     CocoPreferences.savePreferencese();
 
 

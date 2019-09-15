@@ -143,6 +143,11 @@ public class ProfileActivity extends AppCompatActivity implements UpdateView , V
         // do nothing
     }
 
+    @Override
+    public void changePassword(ChanePasswordResponse chanePasswordResponse) {
+        // do nothing
+    }
+
 
     @Override
     public void onClick(View view) {

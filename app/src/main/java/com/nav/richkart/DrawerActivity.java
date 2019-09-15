@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nav.richkart.address.LoginAlertOnAddressActivity;
+import com.nav.richkart.legal_policies.LegalPoliciesWebPages;
 import com.nav.richkart.my_cart.LoginAlertOnCartActivity;
 import com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity;
 import com.nav.richkart.profile.LoginAlertOnMyAccountActivity;
@@ -82,11 +83,14 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     long back_pressed = 0;
 
 
-    private String title[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trendings",
-            "Address", "Help", "Legal Policies"};
+    private String title[] = {"Home", "Department", "Today's Deal", "Cart", "My Order", "My Wishlist", "My Account",
+            "Address", "Help", "Sell On Richkart" ,"Legal Policies"};
 
-    private String titleWithLogout[] = {"Home", "Cart", "My Orders", "Departments", "My Wishlist", "My Account", "Trendings",
-            "Address", "Help", "Legal Policies", "Logout"};
+
+    private String titleWithLogout[] = {"Home", "Department", "Today's Deal", "Cart", "My Order", "My Wishlist", "My Account",
+            "Address", "Help", "Sell On Richkart" ,"Legal Policies","Logout"};
+
+
 
     private TextView txtUserEmail;
     private TextView txtUserName;
@@ -174,17 +178,25 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             @Override
             public void onItemClick(View v, int position) {
                 if (position == 0) {
-                    setScreenTitle(getString(R.string.home));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
                 } else if (position == 1) {
+
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new DepartmentFragment(), null, true, false);
+
+                } else if (position == 2) {
+
+
+
+                } else if (position == 3) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         setScreenTitle(getString(R.string.my_cart));
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnCartActivity.class));
                     }
-                } else if (position == 2) {
+
+                } else if (position == 4) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyOrderFragment(), null, true, false);
@@ -193,10 +205,12 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnMyOrderActivity.class));
                     }
 
-                } else if (position == 3) {
-                    setScreenTitle(getString(R.string.departments));
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new DepartmentFragment(), null, true, false);
-                } else if (position == 4) {
+
+
+
+
+                } else if (position == 5) {
+
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         setScreenTitle(getString(R.string.my_wishlist));
@@ -206,12 +220,11 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     }
 
 
-                } else if (position == 5) {
 
+
+                } else if (position == 6) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                    /*    Intent intent = new Intent(DrawerActivity.this, MyAccountFragment.class);
-                        startActivityForResult(intent, MYACCOUNT_ACTION);*/
 
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyAccountFragment(), "MyAccountFragment", false, false);
 
@@ -220,8 +233,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     }
 
 
-                } else if (position == 6) {
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), "ProductByCategoryFragment", false, false);
+//                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ProductListByCategoryFragment(), "ProductByCategoryFragment", false, false);
 
                 } else if (position == 7) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
@@ -232,18 +244,22 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
                 } else if (position == 8) {
 
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.richkart.com"));
-                    startActivity(browserIntent);
+                   /* Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.richkart.com"));
+                    startActivity(browserIntent);*/
+
+                    openWebView("https://support.richkart.com");
 
                 } else if (position == 9) {
-                    setScreenTitle(getString(R.string.legal_policies));
-                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new LegalPoliciesFragment(), "LegalPoliciesFragment", true, false);
+                    openWebView("https://sellercecenter.richkart.com/");
 
 
                 } else if (position == 10) {
 
-                    logout();
+                    setScreenTitle(getString(R.string.legal_policies));
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new LegalPoliciesFragment(), "LegalPoliciesFragment", true, false);
 
+                }else if(position ==11){
+                    logout();
                 }
 
                 drawer.closeDrawer(GravityCompat.START);
@@ -286,6 +302,16 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 //        FragmentManagerUtils.addFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
     }
+
+
+    private void openWebView(String webUrl) {
+        Bundle bundle = new Bundle();
+        bundle.putString("webUrl", webUrl);
+        LegalPoliciesWebPages legalPoliciesWebPages = new LegalPoliciesWebPages();
+        legalPoliciesWebPages.setArguments(bundle);
+        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), legalPoliciesWebPages, "LegalPoliciesWebPages", true, false);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -493,7 +519,10 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
         }
 
-        Glide.with(this).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
+
+
+        String thumbnail = CocoPreferences.getProfilePic();
+        Glide.with(getApplicationContext()).load(thumbnail).placeholder(R.drawable.user_dp).into(imgProfileImage);
 
 
         if (TextUtils.isEmpty(CocoPreferences.getUserId())) {
@@ -534,7 +563,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             txtUserEmail.setVisibility(View.GONE);
                             lyLoginSignup.setVisibility(View.VISIBLE);
 
-                            navigationModelClasses.remove(10);
+                            navigationModelClasses.remove(11);
                             mAdapter.notifyDataSetChanged();
 
                             Util.showCenteredToast(drawer, DrawerActivity.this, "Logout Successfully!", Constant.API_SUCCESS);
@@ -569,7 +598,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         if (requestCode == MYACCOUNT_ACTION) {
             if (resultCode == Activity.RESULT_OK) {
                 setEmailName();
-                navigationModelClasses.remove(10);
+                navigationModelClasses.remove(11);
                 mAdapter.notifyDataSetChanged();
             }
         }

@@ -122,7 +122,7 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
 
         txtUserName.setText(CocoPreferences.getFirstName() + " " + CocoPreferences.getLastName());
         String picUrl = CocoPreferences.getProfilePic();
-        Glide.with(this).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
+        Glide.with(getActivity()).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
 
 //        setDarkModeSwitch();
     }
@@ -554,6 +554,11 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void changePassword(ChanePasswordResponse chanePasswordResponse) {
+        // do nothing
     }
 
     private void callAPI(File file, String fileName) {

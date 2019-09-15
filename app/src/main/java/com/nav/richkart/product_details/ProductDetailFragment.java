@@ -630,8 +630,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     setColorSize(productDetailsResponse.getmData().getmProAttrArray());
 
 
-                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmProductQty())
-                            && Integer.parseInt(productDetailsResponse.getmData().getmProduct().getmProductQty()) == 0) {
+                    if (!TextUtils.isEmpty(productDetailsResponse.getmData().getmProduct().getmStockStatus())
+                            && Integer.parseInt(productDetailsResponse.getmData().getmProduct().getmStockStatus()) == 2) {
                         txtBuyNow.setVisibility(View.GONE);
                         txtAddToCart.setVisibility(View.GONE);
                         txtOutOfStock.setVisibility(View.VISIBLE);
@@ -905,7 +905,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                         Glide.with(this).load(Constant.MEDIA_THUMBNAIL_BASE_URL + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductImg()).placeholder(R.drawable.richkart).into(imgSelectColor);
 
-                        txtName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName());
+
+                        txtName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName().substring(0, 1).toUpperCase()
+                                + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName().substring(1).toLowerCase());
+
+
                         final int sdk = android.os.Build.VERSION.SDK_INT;
                         if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
                             if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {

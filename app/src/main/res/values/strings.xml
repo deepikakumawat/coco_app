@@ -128,12 +128,16 @@
     <string name="comment_validation_message">Comment can\'t be blank!</string>
     <string name="rating_validation_message">Rating can\'t be blank!</string>
     <string name="invalid_password">Password can\'t be blank!</string>
+    <string name="invalid_new_password">New password can\'t be blank!</string>
+    <string name="invalid_confirm_password">Confirm password can\'t be blank!</string>
     <string name="invalid_email">Invalid Email.</string>
     <string name="network_connection">Please check internet connection</string>
     <string name="first_name_validation_message">First name can\'t be blank!</string>
     <string name="last_name_validation_message">Last name can\'t be blank!</string>
     <string name="password_confirm_password">Confirm password should be same as password.</string>
+    <string name="password_confirm_new_password">Confirm password should be same as new password.</string>
     <string name="invalid_mobile_number">Mobile number can\'t be blank!</string>
+    <string name="invalid_old_password">Old password can\'t be blank!</string>
     <string name="invalid_otp">OTP can\'t be blank!</string>
     <string name="mobile_number">Incorrect mobile number.</string>
     <string name="do_you_want_to_logout">Do you want to Log Out ?</string>
@@ -208,15 +212,11 @@
     <string name="add_new_address">Add New Address</string>
 
 
-    <string-array name="legal_policies_array">
-        <item>PRIVACY POLICY</item>
-        <item>TERMS &amp; CONDITIONS</item>
-        <item>RETURN &amp; REFUND POLICY</item>
-        <item>PAYMENT &amp; SECURITY’S</item>
-        <item>SHIPPING</item>
-        <item>ABOUT US</item>
-        <item>PAYMENTS</item>
-    </string-array>
+
+
+
+
+
 
 
     <!--onboarding designs-->
