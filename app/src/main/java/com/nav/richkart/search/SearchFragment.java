@@ -37,6 +37,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 
     private AutoCompleteTextView autoTxtSearch;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierList = new ArrayList<>();
+    private ArrayList<ProductDetailsSimilier> topFiveProductSearchList = new ArrayList<>();
     //    private SearchAutoAdapter searchAutoAdapter;
     private SearchPresenter searchPresenter;
     private LinearLayout lyParent;

@@ -9,12 +9,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.nav.richkart.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nav.richkart.base_fragment.BaseFragment;
+import com.nav.richkart.home.HomeFragment;
 import com.nav.richkart.product_details.ProductDetailFragment;
 import com.nav.richkart.shared_preference.CocoPreferences;
 import com.nav.richkart.utility.Constant;
@@ -37,6 +39,7 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     private View mView;
     private RelativeLayout ryParent;
     private ShimmerFrameLayout mShimmerViewContainer;
+    private Button btnGoToHome;
 
 
     @Nullable
@@ -59,6 +62,8 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
         ryParent = view.findViewById(R.id.ryParent);
         svEmptyWishlistView = view.findViewById(R.id.svEmptyWishlistView);
         rvMyWishList = view.findViewById(R.id.rvMyWishList);
+        btnGoToHome = view.findViewById(R.id.btnGoToHome);
+        btnGoToHome.setOnClickListener(this);
 
         if (Util.isDeviceOnline(getActivity())) {
             myWishListPresenter.getMyWishList(CocoPreferences.getUserId());
@@ -200,6 +205,10 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
                         FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
 
                     }
+                    break;
+                case R.id.btnGoToHome:
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
+
                     break;
 
 
