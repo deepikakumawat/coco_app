@@ -34,17 +34,31 @@
 
     <LinearLayout
         android:id="@+id/lyColor"
-        android:layout_width="@dimen/dimen_30dp"
-        android:layout_height="@dimen/dimen_30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/imgSelectColor"
+        <LinearLayout
+            android:id="@+id/ly_img"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/right_tick" />
+            android:padding="@dimen/dimen_10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgSelectColor"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                />
+        </LinearLayout>
+
+
+        <com.nav.richkart.customfonts.TextViewSFProDisplayRegular
+            android:layout_width="wrap_content"
+            android:id="@+id/name"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

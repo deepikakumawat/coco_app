@@ -862,9 +862,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
                     view2 = layoutInflater2.inflate(R.layout.text_layout, lyColorSizeAttrName, false);
+                    TextView txtName = view2.findViewById(R.id.name);
                     TextView txtAttributeName = view2.findViewById(R.id.txtAttributeName);
                     LinearLayout lyTop = view2.findViewById(R.id.lyTop);
                     LinearLayout lyColor = view2.findViewById(R.id.lyColor);
+                    LinearLayout ly_img = view2.findViewById(R.id.ly_img);
                     ImageView imgSelectColor = view2.findViewById(R.id.imgSelectColor);
 
 
@@ -901,8 +903,31 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         lyTop.setVisibility(View.GONE);
                         lyColor.setVisibility(View.VISIBLE);
 
+                        Glide.with(this).load(Constant.MEDIA_THUMBNAIL_BASE_URL + productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmProductImg()).placeholder(R.drawable.richkart).into(imgSelectColor);
 
-                        Drawable unwrappedDrawable = AppCompatResources.getDrawable(getActivity(), R.drawable.black_circle);
+                        txtName.setText(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeName());
+                        final int sdk = android.os.Build.VERSION.SDK_INT;
+                        if (productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmSelected()) {
+                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                ly_img.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.selected_attribtue));
+                            } else {
+                                ly_img.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.selected_attribtue));
+                            }
+
+                            txtAttributeName.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
+
+                        } else {
+                            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                ly_img.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.unselected_attribtue));
+                            } else {
+                                ly_img.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.unselected_attribtue));
+                            }
+
+                            txtAttributeName.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+
+                        }
+
+                       /* Drawable unwrappedDrawable = AppCompatResources.getDrawable(getActivity(), R.drawable.black_circle);
                         Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
 
                         if (!TextUtils.isEmpty(productAttrAraay.get(i).getmProductAttrAraayData().get(j).getmAttributeRelatedData())) {
@@ -927,7 +952,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         } else {
                             imgSelectColor.setVisibility(View.GONE);
 
-                        }
+                        }*/
                     }
 
 

@@ -45,6 +45,14 @@ public class ProductAttributeData {
     @Expose
     private String mAttrType;
 
+    @SerializedName("productimg")
+    @Expose
+    private String mProductImg;
+
+    public String getmProductImg() {
+        return mProductImg;
+    }
+
 
     public String getmAttributeId() {
         return mAttributeId;
