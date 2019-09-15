@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nav.richkart.R;
 import com.nav.richkart.product_details.project_details_response.ProductBroughtData;
+import com.nav.richkart.product_details.project_details_response.ProductDetailsSimilier;
 import com.nav.richkart.utility.Constant;
 
 
@@ -45,8 +46,8 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
 
             holder.txtProductName.setText(productBroughtData.getmProductName());
 
-            holder. txtSalesProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmSalePrice());
-            holder. txtProductPrice .setText(context.getString(R.string.rs1)+productBroughtData.getmPrice());
+            holder.txtSalesProductPrice.setText(TextUtils.isEmpty(productBroughtData.getmSalePrice()) ? "-" : context.getString(R.string.Rs) + productBroughtData.getmSalePrice());
+            holder.txtProductPrice.setText(TextUtils.isEmpty(productBroughtData.getmPrice()) ? "-" : context.getString(R.string.Rs) + productBroughtData.getmPrice());
 
 
 
@@ -63,6 +64,8 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
             holder.lyBroughtProduct.setTag(R.id.lyBroughtProduct,position);
             holder.lyBroughtProduct.setOnClickListener(productDetailFragment);
 
+
+            setTxtDiscout(productBroughtData,holder);
 
 
         }
@@ -82,6 +85,7 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
         private TextView txtProductType;
         private TextView txtProductPrice;
         private TextView txtSalesProductPrice;
+        private TextView txtDiscout;
         private ImageView imgAddToCart;
         private LinearLayout lyBroughtProduct;
 
@@ -98,10 +102,45 @@ public class ProductDetailsBroughtDataAdapter extends RecyclerView.Adapter<Produ
             txtProductType = view.findViewById(R.id.txtProductType);
             txtProductPrice = view.findViewById(R.id.txtProductPrice);
             imgAddToCart = view.findViewById(R.id.imgAddToCart);
+            txtDiscout = view.findViewById(R.id.txtDiscout);
             lyBroughtProduct = view.findViewById(R.id.lyBroughtProduct);
 
 
 
         }
     }
+
+    private void setTxtDiscout(ProductBroughtData productData, ViewHolder holder) {
+
+        try {
+
+            if (!TextUtils.isEmpty(productData.getmPrice()) &&
+                    !TextUtils.isEmpty(productData.getmSalePrice())) {
+
+                double price = 0;
+                double salesPrice = 0;
+
+                price = Double.parseDouble(productData.getmPrice());
+                salesPrice = Double.parseDouble(productData.getmSalePrice());
+
+                double increases = price - salesPrice;
+                double divide = increases / price;
+                double dicount = divide * 100;
+
+                int dis = (int) dicount;
+
+                holder.txtDiscout.setText(dis + "% off");
+
+            } else {
+                holder.txtDiscout.setText("0%");
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

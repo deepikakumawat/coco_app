@@ -370,7 +370,7 @@ android:layout_marginTop="@dimen/dimen_2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="36dp"
-                android:text="Conform your details above"
+                android:text="Confirm your details above"
                 android:textColor="@color/black"
                 android:textSize="13.3sp" />
 

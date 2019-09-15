@@ -611,13 +611,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             if (productDetailsResponse.getmData() != null) {
                 if (productDetailsResponse.getmData().getmProduct() != null) {
                     productDetailsImagesArrayList.clear();
-                    productDetailsImagesArrayList.add(Constant.MEDIA_THUMBNAIL_BASE_URL + productDetailsResponse.getmData().getmProduct().getmProductImg());
 
                     if (!productDetailsResponse.getmData().getmProductGallery().isEmpty()) {
                         for (ProductGalleryData productGalleryData : productDetailsResponse.getmData().getmProductGallery()) {
-
                             productDetailsImagesArrayList.add(Constant.MEDIA_THUMBNAIL_BASE_URL + productGalleryData.getmProImgUrl());
                         }
+                    }else{
+                        productDetailsImagesArrayList.add(Constant.MEDIA_THUMBNAIL_BASE_URL + productDetailsResponse.getmData().getmProduct().getmProductImg());
                     }
 
                     if (!productDetailsResponse.getmData().getmProductAttributes().isEmpty()) {
