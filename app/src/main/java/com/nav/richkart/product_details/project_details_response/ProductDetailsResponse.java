@@ -37,6 +37,10 @@ public class ProductDetailsResponse {
         @Expose
         private String mTitle;
 
+        @SerializedName("in_wishlist")
+        @Expose
+        private int mInWishlist;
+
         @SerializedName("ratings_count")
         @Expose
         private String mRatingCount;
@@ -101,6 +105,14 @@ public class ProductDetailsResponse {
 
         public void setmUserRecentViews(ArrayList<ProductDetailsSimilier> mUserRecentViews) {
             this.mUserRecentViews = mUserRecentViews;
+        }
+
+        public int getmInWishlist() {
+            return mInWishlist;
+        }
+
+        public void setmInWishlist(int mInWishlist) {
+            this.mInWishlist = mInWishlist;
         }
 
         public String getmTitle() {

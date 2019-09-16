@@ -642,6 +642,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
                     }
 
+                    if(productDetailsResponse.getmData().getmInWishlist()==0){
+                        imgAddToWishlist.setVisibility(View.VISIBLE);
+                        imgRemoveWishlist.setVisibility(View.GONE);
+                    }else{
+                        imgAddToWishlist.setVisibility(View.GONE);
+                        imgRemoveWishlist.setVisibility(View.VISIBLE);
+                    }
+
                     productDetailsViewPager = new ProductDetailsViewPager(getActivity(), productDetailsImagesArrayList, ProductDetailFragment.this);
                     viewPager.setAdapter(productDetailsViewPager);
 
