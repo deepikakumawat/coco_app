@@ -14,6 +14,7 @@ object CocoPreferences {
     private val FCM_REFRESH_TOKEN: String = "fcm_referesh_token"
     private val  IS_FIRST_TIME_LAUNCH : String = "IsFirstTimeLaunch"
     private val  IS_NIGHT_MODE : String = "isNightMode"
+    private val  TOP_FIVE_SEARCH : String = "TOP_FIVE_SEARCH"
 
 
     @SuppressLint("CommitPrefEdits")
@@ -114,6 +115,16 @@ object CocoPreferences {
     @JvmStatic
     fun isNightMode(): Boolean {
         return preferences!!.getBoolean(IS_NIGHT_MODE, false)
+    }
+
+    @JvmStatic
+    fun getTopFiveSearch(): MutableSet<String>? {
+        return preferences!!.getStringSet(TOP_FIVE_SEARCH, null)
+    }
+
+    @JvmStatic
+    fun setTopFiveSearch(topFiveSearch: MutableSet<String>) {
+        editor!!.putStringSet(TOP_FIVE_SEARCH, topFiveSearch)
     }
 
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lyPaymentType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="17dp">
+
+
+        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/txtSearchName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:letterSpacing="0.03"
+            android:paddingLeft="16.7dp"
+            android:textSize="12.3sp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:rotation="270"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_down_arrow"
+            android:visibility="gone"
+            android:tint="@color/cut_price" />
+    </LinearLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:background="#29000000"/>
+
+</LinearLayout>

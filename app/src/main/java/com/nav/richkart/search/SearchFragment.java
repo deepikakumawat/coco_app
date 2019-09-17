@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,9 +28,13 @@ import com.nav.richkart.R;
 import com.nav.richkart.base_fragment.BaseFragment;
 import com.nav.richkart.product_details.ProductDetailFragment;
 import com.nav.richkart.product_details.project_details_response.ProductDetailsSimilier;
+import com.nav.richkart.shared_preference.CocoPreferences;
 import com.nav.richkart.utility.Util;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.nav.richkart.fragment.FragmentManagerUtils;
 
@@ -37,7 +42,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 
     private AutoCompleteTextView autoTxtSearch;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierList = new ArrayList<>();
-    private ArrayList<ProductDetailsSimilier> topFiveProductSearchList = new ArrayList<>();
+    private ArrayList<TrendingResponse.TrendingData> trendingDataArrayList = new ArrayList<>();
     //    private SearchAutoAdapter searchAutoAdapter;
     private SearchPresenter searchPresenter;
     private LinearLayout lyParent;
@@ -45,8 +50,13 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
     private ImageView imgSearch;
     private RecyclerView rvProducts;
     private SearchAutoProductAdapter mAdapter2;
+    private TopFiveSearchAdapter topFiveSearchAdapter;
+    private TrendingAdapter trendingAdapter;
     private ImageView imgGoogleSearch;
-
+    private RecyclerView rvTopFiveSearch;
+    private RecyclerView rvTredings;
+    Set<String> mTopFiveSearch = new HashSet<>();
+    private LinearLayout lyTrendings;
 
     @Nullable
     @Override
@@ -76,12 +86,49 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
         autoTxtSearch = view.findViewById(R.id.autoTxtSearch);
         imgGoogleSearch = view.findViewById(R.id.imgGoogleSearch);
         rvProducts = view.findViewById(R.id.rvProducts);
+        lyTrendings = view.findViewById(R.id.lyTrendings);
+        rvTopFiveSearch = view.findViewById(R.id.rvTopFiveSearch);
+        rvTredings = view.findViewById(R.id.rvTredings);
         autoTxtSearch.addTextChangedListener(this);
         autoTxtSearch.setOnEditorActionListener(this);
         imgSearch.setOnClickListener(this);
         imgGoogleSearch.setOnClickListener(this);
+
+        callApi();
+        setAdapterTopFive();
+
     }
 
+    private void callApi() {
+        if (Util.isDeviceOnline(getActivity())) {
+            searchPresenter.getTrendings();
+        } else {
+            Util.showNoInternetDialog(getActivity());
+        }
+    }
+
+    private void setAdapterTopFive() {
+
+        //Retrieve the values
+        Set<String> set = new HashSet<String>();
+        set = CocoPreferences.getTopFiveSearch();
+
+        if (set != null) {
+
+            rvProducts.setVisibility(View.GONE);
+            rvTopFiveSearch.setVisibility(View.VISIBLE);
+
+
+            List<String> list = new ArrayList<String>(set);
+            topFiveSearchAdapter = new TopFiveSearchAdapter(getActivity(), list, SearchFragment.this);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            rvTopFiveSearch.setLayoutManager(mLayoutManager);
+            rvTopFiveSearch.setItemAnimator(new DefaultItemAnimator());
+            rvTopFiveSearch.setAdapter(topFiveSearchAdapter);
+        }
+
+
+    }
 
     @Override
     public void showWait() {
@@ -111,6 +158,10 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 //                searchAutoAdapter = new SearchAutoAdapter(getActivity(), R.layout.list_item_search_auto_product, productDetailsSimilierList, SearchFragment.this);
                 /*autoTxtSearch.setAdapter(searchAutoAdapter);*/
 
+                rvProducts.setVisibility(View.VISIBLE);
+                rvTopFiveSearch.setVisibility(View.GONE);
+                lyTrendings.setVisibility(View.GONE);
+
                 mAdapter2 = new SearchAutoProductAdapter(getActivity(), productDetailsSimilierList, SearchFragment.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 rvProducts.setLayoutManager(mLayoutManager);
@@ -121,6 +172,30 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
             }
         }
 
+    }
+
+    @Override
+    public void getTrendings(TrendingResponse trendingResponse) {
+        if (trendingResponse != null) {
+            if (!trendingResponse.getmTrendingData().isEmpty()) {
+                trendingDataArrayList.clear();
+
+
+                trendingDataArrayList.addAll(trendingResponse.getmTrendingData());
+
+
+                rvProducts.setVisibility(View.GONE);
+                lyTrendings.setVisibility(View.VISIBLE);
+
+                trendingAdapter = new TrendingAdapter(getActivity(), trendingDataArrayList, SearchFragment.this);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                rvTredings.setLayoutManager(mLayoutManager);
+                rvTredings.setItemAnimator(new DefaultItemAnimator());
+                rvTredings.setAdapter(trendingAdapter);
+
+
+            }
+        }
     }
 
     @Override
@@ -140,6 +215,8 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
             String str = s.toString().trim();
             if (str.length() >= 3) {
                 if (Util.isDeviceOnline(getActivity())) {
+
+
                     searchPresenter.getSearchItem(str);
 
                 } else {
@@ -148,7 +225,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
             }
 
             if (str.length() < 3) {
-              clearList();
+                clearList();
             }
         }
     }
@@ -181,6 +258,21 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 
                     }
                     break;
+                case R.id.txtSearchName:
+                    String searchItem = ((String) view.getTag());
+                    if (!TextUtils.isEmpty(searchItem)) {
+
+                        autoTxtSearch.setText(searchItem);
+
+                    }
+                    break;
+                case R.id.lyTop:
+                    TrendingResponse.TrendingData trendingData = ((TrendingResponse.TrendingData) view.getTag());
+                    if (trendingData != null) {
+                        autoTxtSearch.setText(trendingData.getmName());
+                    }
+
+                    break;
                 case R.id.imgSearch:
                     openSearchList(autoTxtSearch.getText().toString());
                     break;
@@ -207,7 +299,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
             startActivityForResult(intent, 1);
         } catch (ActivityNotFoundException a) {
 
-            Util.showCenteredToast(lyParent,getActivity(),"Oops! Your device doesn't support Speech to Text","");
+            Util.showCenteredToast(lyParent, getActivity(), "Oops! Your device doesn't support Speech to Text", "");
         }
     }
 
@@ -240,13 +332,18 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
     }
 
     private void openSearchList(String searchTerm) {
+
+        if (mTopFiveSearch.size() <= 4) {
+            mTopFiveSearch.add(searchTerm);
+        }
+        CocoPreferences.setTopFiveSearch(mTopFiveSearch);
+        CocoPreferences.savePreferencese();
+
+
         Bundle bundle = new Bundle();
         bundle.putString("searchTerm", searchTerm);
-
-
         SearchListFragment searchListFragment = new SearchListFragment();
         searchListFragment.setArguments(bundle);
-
         FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), searchListFragment, "SearchListFragment", true, false);
 
     }

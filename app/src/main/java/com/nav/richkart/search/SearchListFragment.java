@@ -125,6 +125,11 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
 
     }
 
+    @Override
+    public void getTrendings(TrendingResponse trendingResponse) {
+        // do nothing
+    }
+
     private void nodataFound(String appErrorMessage) {
         svNotFound.setVisibility(View.VISIBLE);
         rvProducts.setVisibility(View.GONE);

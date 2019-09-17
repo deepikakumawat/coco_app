@@ -78,5 +78,52 @@ public class SearchPresenter {
     }
 
 
+    public void getTrendings() {
+        view.showWait();
+        try {
+
+            Call call = service.getTrendings();
+            call.enqueue(new Callback<TrendingResponse>() {
+                @Override
+                public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try {
+                        if (response.isSuccessful()) {
+
+                            view.getTrendings(response.body());
+                        } else {
+
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TrendingResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }

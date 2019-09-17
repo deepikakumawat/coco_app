@@ -29,6 +29,7 @@ import com.nav.richkart.profile.ChanePasswordResponse;
 import com.nav.richkart.profile.ChangeProfileImageResponse;
 import com.nav.richkart.profile.UpdateProfileResponse;
 import com.nav.richkart.search.SearchResponse;
+import com.nav.richkart.search.TrendingResponse;
 import com.nav.richkart.seller.SellerResponse;
 import com.nav.richkart.signup.GetOTPResponse;
 import com.nav.richkart.signup.SignUpResponse;
@@ -278,6 +279,9 @@ public interface APIService {
     Call<ChanePasswordResponse> changePassword(@Field("user_id") String userId,
                                                 @Field("old_pass") String oldPass,
                                                 @Field("new_pass") String NewPass);
+
+    @POST("get_all_trending")
+    Call<TrendingResponse> getTrendings();
 
 }
 

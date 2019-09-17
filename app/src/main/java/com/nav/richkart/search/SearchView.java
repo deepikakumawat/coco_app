@@ -11,4 +11,6 @@ public interface SearchView {
 
     void getSearchProduct(SearchResponse searchResponse);
 
+    void getTrendings(TrendingResponse trendingResponse);
+
 }
