@@ -250,7 +250,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     openWebView("https://support.richkart.com");
 
                 } else if (position == 9) {
-                    openWebView("https://sellercecenter.richkart.com/");
+                    openWebView("https://sellercenter.richkart.com");
 
 
                 } else if (position == 10) {

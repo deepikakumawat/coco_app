@@ -283,7 +283,7 @@
                         android:paddingBottom="16.31dp">
 
                         <!--color and size layout-->
-                        <HorizontalScrollView
+                     <!--   <HorizontalScrollView
                             android:id="@+id/hsvColorSize"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
@@ -298,7 +298,14 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical" />
 
-                        </HorizontalScrollView>
+                        </HorizontalScrollView>-->
+
+                        <LinearLayout
+                            android:id="@+id/lyColorSize"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 

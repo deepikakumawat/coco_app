@@ -379,7 +379,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         productDetailsPresenter.removeWishList(wishListId);
 
                     } else {
-//                        showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
                         Util.showNoInternetDialog(getActivity());
 
                     }

@@ -29,9 +29,8 @@
             android:id="@+id/lyColorSizeAttrName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
             android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
             android:orientation="horizontal" />
 
     </HorizontalScrollView>
