@@ -388,7 +388,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     setScreenTitle(getString(R.string.my_cart));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                 } else {
-//                    startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
                     startActivity(new Intent(DrawerActivity.this, LoginAlertOnCartActivity.class));
 
                 }
@@ -522,7 +521,8 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
         String thumbnail = CocoPreferences.getProfilePic();
-        Glide.with(getApplicationContext()).load(thumbnail).placeholder(R.drawable.user_dp).into(imgProfileImage);
+//        Glide.with(this).load(thumbnail).placeholder(R.drawable.user_dp).into(imgProfileImage);
+        Glide.with(imgProfileImage.getContext()).load(thumbnail).placeholder(R.drawable.user_dp).dontAnimate().into(imgProfileImage);
 
 
         if (TextUtils.isEmpty(CocoPreferences.getUserId())) {

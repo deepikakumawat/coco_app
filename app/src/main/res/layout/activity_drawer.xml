@@ -33,10 +33,10 @@
                 android:paddingTop="20dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfileImage"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_marginBottom="10dp"
-                    android:id="@+id/imgProfileImage"
                     android:scaleType="centerCrop"
                     android:src="@drawable/user_dp" />
 
@@ -47,8 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="Sam Billings"
                     android:textColor="@android:color/white"
-                    android:textSize="14.5sp"
-               />
+                    android:textSize="14.5sp" />
 
                 <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtUserEmail"
@@ -57,15 +56,14 @@
                     android:layout_marginTop="3dp"
                     android:text="sam.billings@gmail.com"
                     android:textColor="@android:color/white"
-                    android:textSize="13.2dp"
-                   />
+                    android:textSize="13.2dp" />
 
                 <LinearLayout
+                    android:id="@+id/lyLoginSignup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:orientation="horizontal"
-                    android:id="@+id/lyLoginSignup">
+                    android:orientation="horizontal">
 
                     <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtLogin"
@@ -92,7 +90,6 @@
                         android:textSize="14.5sp" />
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
