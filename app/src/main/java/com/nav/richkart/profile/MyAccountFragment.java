@@ -22,6 +22,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -42,6 +44,7 @@ import com.nav.richkart.address.AddressListActivity;
 import com.nav.richkart.base_fragment.BaseFragment;
 import com.nav.richkart.home.HomeFragment;
 import com.nav.richkart.my_order.MyOrderFragment;
+import com.nav.richkart.product_by_category.ProductListByCategoryFragment;
 import com.nav.richkart.shared_preference.CocoPreferences;
 import com.nav.richkart.utility.Constant;
 import com.nav.richkart.utility.MarshMallowPermissions;
@@ -124,31 +127,29 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
         String picUrl = CocoPreferences.getProfilePic();
         Glide.with(getActivity()).load(CocoPreferences.getProfilePic()).placeholder(R.drawable.user_dp).into(imgProfileImage);
 
-//        setDarkModeSwitch();
+        setDarkModeSwitch();
     }
 
-//    private void setDarkModeSwitch() {
-//        darkModeSwitch.setChecked(CocoPreferences.isNightMode());
-//        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//
-//                try {
-//                    CocoPreferences.setNightMode(!CocoPreferences.isNightMode());
-//                    CocoPreferences.savePreferencese();
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-////                    getActivity().recreate();
-//
-//                    ((DrawerActivity) getActivity()).darkMode();
-//
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-//    }
+    private void setDarkModeSwitch() {
+        darkModeSwitch.setChecked(CocoPreferences.isNightMode());
+        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                try {
+                    CocoPreferences.setNightMode(!CocoPreferences.isNightMode());
+                    CocoPreferences.savePreferencese();
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    getActivity().recreate();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View view) {

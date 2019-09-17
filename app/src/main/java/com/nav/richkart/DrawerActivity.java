@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -84,12 +85,11 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
     private String title[] = {"Home", "Department", "Today's Deal", "Cart", "My Order", "My Wishlist", "My Account",
-            "Address", "Help", "Sell On Richkart" ,"Legal Policies"};
+            "Address", "Help", "Sell On Richkart", "Legal Policies"};
 
 
     private String titleWithLogout[] = {"Home", "Department", "Today's Deal", "Cart", "My Order", "My Wishlist", "My Account",
-            "Address", "Help", "Sell On Richkart" ,"Legal Policies","Logout"};
-
+            "Address", "Help", "Sell On Richkart", "Legal Policies", "Logout"};
 
 
     private TextView txtUserEmail;
@@ -119,7 +119,25 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
 
+
         init();
+        setMyAccountTheme();
+
+
+    }
+
+    public void setMyAccountTheme() {
+        if (CocoPreferences.isNightMode()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+
+        Fragment fragment = getCurrentFragmentInRootLayout();
+        if (fragment instanceof MyAccountFragment) {
+//            darkMode();
+            FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyAccountFragment(), "MyAccountFragment", false, false);
+
+        }
 
 
     }
@@ -187,7 +205,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                 } else if (position == 2) {
 
 
-
                 } else if (position == 3) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
                         setScreenTitle(getString(R.string.my_cart));
@@ -206,9 +223,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     }
 
 
-
-
-
                 } else if (position == 5) {
 
 
@@ -220,13 +234,11 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     }
 
 
-
-
                 } else if (position == 6) {
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
 
-                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyAccountFragment(), "MyAccountFragment", false, false);
+                        FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyAccountFragment(), "MyAccountFragment", true, false);
 
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnMyAccountActivity.class));
@@ -258,7 +270,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     setScreenTitle(getString(R.string.legal_policies));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new LegalPoliciesFragment(), "LegalPoliciesFragment", true, false);
 
-                }else if(position ==11){
+                } else if (position == 11) {
                     logout();
                 }
 
@@ -519,7 +531,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         }
 
 
-
         String thumbnail = CocoPreferences.getProfilePic();
 //        Glide.with(this).load(thumbnail).placeholder(R.drawable.user_dp).into(imgProfileImage);
         Glide.with(imgProfileImage.getContext()).load(thumbnail).placeholder(R.drawable.user_dp).dontAnimate().into(imgProfileImage);
@@ -634,7 +645,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     }
 
 
-    public void darkMode(){
+    public void darkMode() {
 
         Fragment currentFragment = getCurrentFragmentInRootLayout();
         if (currentFragment instanceof MyAccountFragment) {
