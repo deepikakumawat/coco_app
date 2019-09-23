@@ -1,9 +1,11 @@
-package com.nav.richkart.seller;
+package com.nav.richkart.deals.seller;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,9 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.nav.richkart.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.nav.richkart.R;
 import com.nav.richkart.base_fragment.BaseFragment;
+import com.nav.richkart.fragment.FragmentManagerUtils;
 import com.nav.richkart.home.HomeFragment;
 import com.nav.richkart.product_details.AddToCartResponse;
 import com.nav.richkart.product_details.ProductDetailFragment;
@@ -28,30 +31,23 @@ import com.nav.richkart.utility.Util;
 
 import java.util.ArrayList;
 
-import com.nav.richkart.fragment.FragmentManagerUtils;
-
 import static com.nav.richkart.utility.Util.dismissProDialog;
 import static com.nav.richkart.utility.Util.showCenteredToast;
 import static com.nav.richkart.utility.Util.showProDialog;
 
-public class SellerProductFragment extends BaseFragment implements SellerView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class DealsProductFragment extends BaseFragment implements DealsView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
 
-    private SellerProductAdapter sellerProductAdapter;
+    private DealsProductAdapter dealsProductAdapter;
     private RecyclerView rvSellerProduct;
     private ArrayList<ProductDetailsSimilier> sellerProductArrayList = new ArrayList<>();
-    private SellerPresenter sellerPresenter;
+    private DealsPresenter sellerPresenter;
 
     private View mView;
-    private String sellerId;
-    private ScrollView svNotFound;
-    private LinearLayout lySellerProduct;
     private ShimmerFrameLayout mShimmerViewContainer;
     private RelativeLayout ryParent;
     private boolean isShimmerShow = true;
     private String sellerName;
-    private Button btnGoToHome;
-    private SwipeRefreshLayout pullDownRefreshCall;
 
 
     @Nullable
@@ -59,7 +55,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mView = inflater.inflate(R.layout.fragment_seller, container, false);
+        mView = inflater.inflate(R.layout.deals, container, false);
 
         return mView;
     }
@@ -67,37 +63,30 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        sellerPresenter = new SellerPresenter(this);
-        Bundle bundle = getArguments();
-        sellerId = bundle.getString("sellerId");
-        sellerName = bundle.getString("sellerName");
+        sellerPresenter = new DealsPresenter(this);
+
 
         ryParent = view.findViewById(R.id.ryParent);
-        pullDownRefreshCall = (SwipeRefreshLayout) view.findViewById(R.id.pullDownRefreshCall);
 
-        lySellerProduct = view.findViewById(R.id.lySellerProduct);
-        svNotFound = view.findViewById(R.id.svNotFound);
         rvSellerProduct = view.findViewById(R.id.rvSellerProduct);
         mShimmerViewContainer = mView.findViewById(R.id.shimmer_view_container);
-
-        btnGoToHome = view.findViewById(R.id.btnGoToHome);
-        btnGoToHome.setOnClickListener(this);
-
-        pullDownRefreshCall.setOnRefreshListener(this);
-        pullDownRefreshCall.setColorSchemeResources(R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color);
 
 
         callAPI();
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         rvSellerProduct.setLayoutManager(layoutManager);
+        rvSellerProduct.setItemAnimator(new DefaultItemAnimator());
+        rvSellerProduct.setNestedScrollingEnabled(false);
+        rvSellerProduct.setFocusableInTouchMode(false);
+
 
     }
 
     private void callAPI() {
         if (Util.isDeviceOnline(getActivity())) {
-            sellerPresenter.getSellerProduct(sellerId);
+            sellerPresenter.getSellerProduct();
         } else {
             Util.showNoInternetDialog(getActivity());
         }
@@ -125,47 +114,34 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
 
         }
 
-        setPullToRefreshFalse();
-
     }
 
 
     @Override
     public void onFailure(String appErrorMessage) {
-        svNotFound.setVisibility(View.GONE);
-        lySellerProduct.setVisibility(View.VISIBLE);
         showCenteredToast(ryParent, getActivity(), appErrorMessage, "");
     }
 
-    private void setPullToRefreshFalse() {
-        if (pullDownRefreshCall.isRefreshing()) {
-            pullDownRefreshCall.setRefreshing(false);
-        }
-    }
+
 
     @Override
-    public void getSellerProduct(SellerResponse sellerResponse) {
-        if (sellerResponse != null) {
+    public void getSellerProduct(DealsResponse dealsResponse) {
+        if (dealsResponse != null) {
 
-            if (sellerResponse.getmData() != null) {
 
-                if (!sellerResponse.getmData().getmSellerProducts().isEmpty()) {
-
-                    svNotFound.setVisibility(View.GONE);
-                    lySellerProduct.setVisibility(View.VISIBLE);
+                if (!dealsResponse.getmSellerProducts().isEmpty()) {
 
                     sellerProductArrayList.clear();
-                    sellerProductArrayList.addAll(sellerResponse.getmData().getmSellerProducts());
+                    sellerProductArrayList.addAll(dealsResponse.getmSellerProducts());
 
-                    sellerProductAdapter = new SellerProductAdapter(getActivity(), sellerProductArrayList, SellerProductFragment.this);
-                    rvSellerProduct.setAdapter(sellerProductAdapter);
+                    dealsProductAdapter = new DealsProductAdapter(getActivity(), sellerProductArrayList, DealsProductFragment.this);
+                    rvSellerProduct.setAdapter(dealsProductAdapter);
 
 
                 } else {
-                    lySellerProduct.setVisibility(View.GONE);
-                    svNotFound.setVisibility(View.VISIBLE);
+
                 }
-            }
+
 
 
         }
@@ -259,8 +235,8 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
     @Override
     public void onRefresh() {
         sellerProductArrayList.clear();
-        if (sellerProductAdapter != null) {
-            sellerProductAdapter.notifyDataSetChanged();
+        if (dealsProductAdapter != null) {
+            dealsProductAdapter.notifyDataSetChanged();
         }
         callAPI();
     }

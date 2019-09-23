@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -111,6 +112,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private TextView txtViewAllReview;
     private TextView txtReviewCount;
     private TextView txtRatingCount;
+    private ImageView img_review;
+    private LinearLayout ly_review;
     private TextView txtDiscout;
     private LinearLayout lyTopReview;
     private LinearLayout lyBroughtProduct;
@@ -234,6 +237,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         txtReviewCount = view.findViewById(R.id.txtReviewCount);
         txtDiscout = view.findViewById(R.id.txtDiscout);
         txtRatingCount = view.findViewById(R.id.txtRatingCount);
+        img_review = view.findViewById(R.id.img_review);
+        ly_review = view.findViewById(R.id.ly_review);
         imgAddToWishlist.setOnClickListener(this);
         imgRemoveWishlist.setOnClickListener(this);
         txtAddToCart.setOnClickListener(this);
@@ -241,6 +246,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         txtViewAllReview.setOnClickListener(this);
         txtReviewCount.setOnClickListener(this);
         txtRatingCount.setOnClickListener(this);
+        img_review.setOnClickListener(this);
+        ly_review.setOnClickListener(this);
         txtProductDesc.setOnClickListener(this);
         txtSpecification.setOnClickListener(this);
         txtProductShortDesc.setOnClickListener(this);
@@ -387,6 +394,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 break;
             case R.id.txtViewAllReview:
             case R.id.txtRatingCount:
+            case R.id.img_review:
+            case R.id.ly_review:
             case R.id.txtReviewCount:
                 Intent intent = (new Intent(getActivity(), ReviewActivity.class));
                 intent.putExtra("productId", productId);
@@ -465,7 +474,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 bundle.putString("sellerId", sellerId);
                 bundle.putString("sellerName", sellerName);
                 sellerProductFragment.setArguments(bundle);
-                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), sellerProductFragment, "SellerProductFragment", true, false);
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), sellerProductFragment, "DealsProductFragment", true, false);
 
                 break;
 

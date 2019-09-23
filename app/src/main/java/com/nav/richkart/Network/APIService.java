@@ -3,6 +3,7 @@ package com.nav.richkart.Network;
 import com.nav.richkart.address.AddUpdateAddressResponse;
 import com.nav.richkart.address.AddressListResponse;
 import com.nav.richkart.address.DeleteAddressResponse;
+import com.nav.richkart.deals.seller.DealsResponse;
 import com.nav.richkart.departments.CategoriesResponse;
 import com.nav.richkart.checkout.CheckoutPaymentResponse;
 import com.nav.richkart.home.home_response.HomeResponse;
@@ -243,6 +244,9 @@ public interface APIService {
     @POST("vendordata")
     @FormUrlEncoded
     Call<SellerResponse> getSellerProduct(@Field("vendor_id") String venderId);
+
+    @POST("deals_of_the_day")
+    Call<DealsResponse> getDealsProduct();
 
     @POST("vieworder")
     @FormUrlEncoded

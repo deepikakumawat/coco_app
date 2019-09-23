@@ -58,6 +58,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/ly_review"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -100,6 +101,7 @@
                         android:textSize="12.3sp" />
 
                     <ImageView
+                        android:id="@+id/img_review"
                         android:layout_width="17dp"
                         android:layout_height="17dp"
                         android:layout_gravity="center"

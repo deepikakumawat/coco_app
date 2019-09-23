@@ -43,7 +43,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
     private AutoCompleteTextView autoTxtSearch;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierList = new ArrayList<>();
     private ArrayList<TrendingResponse.TrendingData> trendingDataArrayList = new ArrayList<>();
-    //    private SearchAutoAdapter searchAutoAdapter;
+    //private SearchAutoAdapter searchAutoAdapter;
     private SearchPresenter searchPresenter;
     private LinearLayout lyParent;
     private View mView;
@@ -269,7 +269,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
                 case R.id.lyTop:
                     TrendingResponse.TrendingData trendingData = ((TrendingResponse.TrendingData) view.getTag());
                     if (trendingData != null) {
-                        autoTxtSearch.setText(trendingData.getmName());
+                        openSearchList(trendingData.getmName());
                     }
 
                     break;

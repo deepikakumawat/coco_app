@@ -65,8 +65,17 @@ public class ProductDetailsSimilier {
     @Expose
     private String mUpSell;
 
+    @SerializedName("dealend")
+    @Expose
+    private String mDealend;
 
+    public String getmDealend() {
+        return mDealend;
+    }
 
+    public void setmDealend(String mDealend) {
+        this.mDealend = mDealend;
+    }
 
     @SerializedName("stockstatus")
     @Expose

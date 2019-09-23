@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nav.richkart.address.LoginAlertOnAddressActivity;
+import com.nav.richkart.deals.seller.DealsProductFragment;
 import com.nav.richkart.legal_policies.LegalPoliciesWebPages;
 import com.nav.richkart.my_cart.LoginAlertOnCartActivity;
 import com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity;
@@ -203,6 +204,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new DepartmentFragment(), null, true, false);
 
                 } else if (position == 2) {
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new DealsProductFragment(), null, true, false);
 
 
                 } else if (position == 3) {

@@ -1,4 +1,4 @@
-package com.nav.richkart.seller;
+package com.nav.richkart.deals.seller;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -15,20 +15,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nav.richkart.R;
-
 import com.nav.richkart.product_details.project_details_response.ProductDetailsSimilier;
 import com.nav.richkart.utility.Constant;
 
 import java.util.ArrayList;
 
 
-public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdapter.ViewHolder> implements View.OnClickListener {
+public class DealsProductAdapter extends RecyclerView.Adapter<DealsProductAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
     private ArrayList<ProductDetailsSimilier> productDataArrayList;
-    private SellerProductFragment sellerProductFragment;
+    private DealsProductFragment sellerProductFragment;
 
 
-    public SellerProductAdapter(Context context, ArrayList<ProductDetailsSimilier> productDataArrayList, SellerProductFragment sellerProductFragment) {
+    public DealsProductAdapter(Context context, ArrayList<ProductDetailsSimilier> productDataArrayList, DealsProductFragment sellerProductFragment) {
         this.context = context;
         this.productDataArrayList = productDataArrayList;
         this.sellerProductFragment = sellerProductFragment;
@@ -39,7 +38,7 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items_product_by_category, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tabgrid, parent, false));
     }
 
     @Override
@@ -48,18 +47,14 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
         ProductDetailsSimilier productData = productDataArrayList.get(position);
         if (productData != null) {
             holder.txtProductName.setText(!TextUtils.isEmpty(productData.getmProductName()) ? productData.getmProductName() : "-");
+            holder.txtProductTime.setText(!TextUtils.isEmpty(productData.getmDealend()) ? productData.getmDealend() : "-");
             holder.txtProductSalePrice.setText(!TextUtils.isEmpty(productData.getmSalePrice()) ?context.getString(R.string.Rs)+ productData.getmSalePrice() : "-");
 
-
-            holder.txtProductPrice.setText(!TextUtils.isEmpty(productData.getmPrice()) ?context.getString(R.string.Rs)+ productData.getmPrice() : "-");
-            holder.txtProductPrice.setPaintFlags(holder.txtProductPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-            String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
+           String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + productData.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);
 
             holder.rbProductRating.setRating(!TextUtils.isEmpty(productData.getmAvgRating()) ? Float.parseFloat(productData.getmAvgRating()) : 0);
 
-            holder.txtProductDesc.setText(!TextUtils.isEmpty(productData.getmProductShortDetails()) ? Html.fromHtml(productData.getmProductShortDetails()) : "-");
 
 
             holder.lyAddToCart.setTag(productData);
@@ -89,10 +84,9 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtProductSalePrice,txtProductPrice, txtProductName,txtProductDesc;
+        TextView txtProductSalePrice, txtProductName,txtProductTime;
         ImageView imgProduct;
         LinearLayout lyAddToCart;
-        LinearLayout linear;
         private LinearLayout lyProduct;
         private RatingBar rbProductRating;
 
@@ -103,10 +97,8 @@ public class SellerProductAdapter extends RecyclerView.Adapter<SellerProductAdap
             rbProductRating =  view.findViewById(R.id.rbProductRating);
             imgProduct =  view.findViewById(R.id.imgProduct);
             txtProductName =  view.findViewById(R.id.txtProductName);
-            txtProductDesc =  view.findViewById(R.id.txtProductDesc);
+            txtProductTime =  view.findViewById(R.id.txtProductTime);
             txtProductSalePrice =  view.findViewById(R.id.txtProductSalePrice);
-            txtProductPrice =  view.findViewById(R.id.txtProductPrice);
-            linear =  view.findViewById(R.id.linear);
             lyProduct =  view.findViewById(R.id.lyProduct);
             lyAddToCart =  view.findViewById(R.id.lyAddToCart);
 
