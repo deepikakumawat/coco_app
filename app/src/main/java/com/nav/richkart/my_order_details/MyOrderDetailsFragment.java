@@ -46,8 +46,6 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
     private TextView txtSenderContact;
     private TextView txtSenderAddress;
     private TextView txtSenderEmail;
-    private TextView txtReceiverEmail;
-    private TextView txtReceiverName;
     private TextView txtDeliveryContact;
     private TextView txtDeliveryAddress;
     private TextView txtDeliveryPincode;
@@ -94,10 +92,6 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
         txtSenderContact = view.findViewById(R.id.txtSenderContact);
         txtSenderAddress = view.findViewById(R.id.txtSenderAddress);
         txtSenderEmail = view.findViewById(R.id.txtSenderEmail);
-
-        txtReceiverName = view.findViewById(R.id.txtReceiverName);
-
-        txtReceiverEmail = view.findViewById(R.id.txtReceiverEmail);
 
         txtDeliveryContact = view.findViewById(R.id.txtDeliveryContact);
         txtDeliveryAddress = view.findViewById(R.id.txtDeliveryAddress);
@@ -257,9 +251,6 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
             txtSenderAddress.setText(getString(R.string.address) + orderDetailsReponse.getmOrderDetail().getmSenderAddress());
             txtSenderEmail.setText(getString(R.string.email) + orderDetailsReponse.getmOrderDetail().getmSenderEmail());
             txtOrderDate.setText("Date: " + orderDetailsReponse.getmOrderDetail().getmCreatedDate());
-
-            txtReceiverName.setText(getString(R.string.name) + orderDetailsReponse.getmOrderDetail().getmRecieverName() + " " + orderDetailsReponse.getmOrderDetail().getmReciverLastName());
-            txtReceiverEmail.setText(getString(R.string.email) + orderDetailsReponse.getmOrderDetail().getmReciverEmail());
 
             txtDeliveryContact.setText(getString(R.string.contact) + orderDetailsReponse.getmOrderDetail().getmDeliveryContact());
             txtDeliveryAddress.setText(getString(R.string.address) + orderDetailsReponse.getmOrderDetail().getmDeliveryAddress());

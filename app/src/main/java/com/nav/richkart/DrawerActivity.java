@@ -261,7 +261,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                    /* Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.richkart.com"));
                     startActivity(browserIntent);*/
 
-                    openWebView("https://support.richkart.com");
+                    openWebView("https://support.richkart.com/portal/home");
 
                 } else if (position == 9) {
                     openWebView("https://sellercenter.richkart.com");

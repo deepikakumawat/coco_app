@@ -56,7 +56,7 @@
     <string name="_233_ratings_amp_54_reviews"><![CDATA[233 Ratings & 54 Reviews]]></string>
     <string name="top_review">Top Review</string>
     <string name="view_all_54_reviews">View All 54 Reviews</string>
-    <string name="product_details">Product Details</string>
+    <string name="product_details">Shipment Details</string>
     <string name="a_pair_of_multicoloured_woven_mid_rise_printed_shorts_has_a_waistband_with_belt_loops_zip_fly_and_button_closure_pleat_detailing_below_the_waistband_on_the_front_two_slants_pockets_on_the_front_sides">A pair of multicoloured woven mid-rise printed shorts, has a waistband with belt loops, zip fly and button closure, pleat detailing below the waistband on the front, two slants pockets on the front sides</string>
     <string name="material_care">Material Care</string>
     <string name="select_size">SELECT SIZE</string>
@@ -189,7 +189,7 @@
     <string name="order_details">View Order Details</string>
     <string name="sender_data">Sender Details</string>
     <string name="receiver_details">Receiver Details</string>
-    <string name="delivery_details">Delivery Details</string>
+    <string name="delivery_details">Shipping Address</string>
     <string name="amount">Amount: </string>
     <string name="name">Name: </string>
     <string name="contact">Contact: </string>
