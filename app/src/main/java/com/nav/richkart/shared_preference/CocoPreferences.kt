@@ -77,6 +77,16 @@ object CocoPreferences {
     }
 
     @JvmStatic
+    fun getGender(): String {
+        return preferences!!.getString(LoginResponse().KEY_GENDER, "")
+    }
+
+    @JvmStatic
+    fun setGender(lname: String) {
+        editor!!.putString(LoginResponse().KEY_GENDER, lname)
+    }
+
+    @JvmStatic
     fun getFCMRefreshToken(): String? {
         return preferences!!.getString(FCM_REFRESH_TOKEN, "")
     }

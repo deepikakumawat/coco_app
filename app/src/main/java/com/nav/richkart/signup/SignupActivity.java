@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.nav.richkart.R;
@@ -37,6 +39,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
     private String phone;
     private String password;
     private String confirmPassword;
+    private RadioGroup rgPayment;
 
 
     @Override
@@ -107,6 +110,7 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
         etFname = (EditText) findViewById(R.id.etFname);
         etLname = (EditText) findViewById(R.id.etLname);
         etPhone = (EditText) findViewById(R.id.etPhone);
+        rgPayment = findViewById(R.id.rgPayment);
         btnSignup =  findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(this);
 
@@ -190,13 +194,17 @@ public class SignupActivity extends AppCompatActivity implements  View.OnClickLi
                     String VCToken = getOTPResponse.getmOTPData().getmVcToken();
 
                     Intent intent = new Intent(SignupActivity.this, MobileVerificationActivity.class);
+                    int selectedId = rgPayment.getCheckedRadioButtonId();
 
+                    // find the radiobutton by returned id
+                   RadioButton radioButton = (RadioButton) findViewById(selectedId);
                     Bundle bundle = new Bundle();
                     bundle.putString("email",email);
                     bundle.putString("fName",fName);
                     bundle.putString("lName",lName);
                     bundle.putString("phone",phone);
                     bundle.putString("password",password);
+                    bundle.putString("gender",radioButton.getText().toString());
                     bundle.putString("confirmPassword",confirmPassword);
                     bundle.putString("VCToken",VCToken);
 

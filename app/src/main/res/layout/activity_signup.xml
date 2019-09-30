@@ -82,6 +82,41 @@
                 android:inputType="text"
                 app:layout_constraintTop_toBottomOf="@+id/etFname" />
 
+            <RadioGroup
+                app:layout_constraintTop_toBottomOf="@+id/etLname"
+                android:id="@+id/rgPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_10dp">
+
+                <RadioButton
+                    android:id="@+id/rbPOD"
+                    style="@style/radionbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:paddingLeft="10dp"
+                    android:text="Male"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/txt_14sp" />
+
+                <RadioButton
+                    android:id="@+id/rbPayOnline"
+                    style="@style/radionbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:text="FEMALE"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/txt_14sp" />
+
+            </RadioGroup>
+
             <com.nav.richkart.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etPhone"
                 style="@style/edittextStyle"
@@ -91,7 +126,7 @@
                 android:hint="Phone"
                 android:inputType="number"
                 android:maxLength="10"
-                app:layout_constraintTop_toBottomOf="@id/etLname" />
+                app:layout_constraintTop_toBottomOf="@id/rgPayment" />
 
 
             <com.nav.richkart.customfonts.EditText_Roboto_Meidum

@@ -32,6 +32,7 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
     private String lName;
     private String phone;
     private String password;
+    private String gender;
     private String confirmPassword;
     private String VCToken;
     private SignUpPresenter signUpPresenter;
@@ -54,6 +55,7 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
                 fName = bundle.getString("fName");
                 lName = bundle.getString("lName");
                 phone = bundle.getString("phone");
+                gender = bundle.getString("gender");
                 password = bundle.getString("password");
                 confirmPassword = bundle.getString("confirmPassword");
                 VCToken = bundle.getString("VCToken");
@@ -66,8 +68,6 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
 
     private void init() {
 
-        txtTitle = findViewById(R.id.txtTitle);
-        txtTitle.setText("Mobile Verification");
 
 
         ryParent = findViewById(R.id.ryParent);
@@ -94,7 +94,7 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
                     String otp = etOTP.getText().toString();
 
                     if (isValid(otp)) {
-                        signUpPresenter.doSignUp(email, fName, lName, phone, otp, VCToken, password, confirmPassword);
+                        signUpPresenter.doSignUp(email, fName, lName, phone, otp, VCToken, password,gender, confirmPassword);
 
                     }
 
@@ -145,6 +145,7 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
             CocoPreferences.setUserEmail(TextUtils.isEmpty(signUpResponse.getmLoginData().getmEmail()) ? "" : signUpResponse.getmLoginData().getmEmail());
             CocoPreferences.setUserPhone(TextUtils.isEmpty(signUpResponse.getmLoginData().getmMobileNo()) ? "" : signUpResponse.getmLoginData().getmMobileNo());
             CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmName()) ? "" : signUpResponse.getmLoginData().getmName());
+            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmGender()) ? "" : signUpResponse.getmLoginData().getmGender());
             CocoPreferences.setLastName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmLastName()) ? "" : signUpResponse.getmLoginData().getmLastName());
             CocoPreferences.savePreferencese();
 

@@ -1,6 +1,7 @@
 package com.nav.richkart.my_order_details;
 
 
+import com.nav.richkart.product_details.AddToCartResponse;
 
 public interface OrderDetailsView {
 
@@ -9,6 +10,8 @@ public interface OrderDetailsView {
     void removeWait();
 
     void onFailure(String appErrorMessage);
+
+    void addToCart(AddToCartResponse addToWishListResponse);
 
     void getOrderDetails(MyOrderDetailsResponse myOrderDetailsResponse);
 

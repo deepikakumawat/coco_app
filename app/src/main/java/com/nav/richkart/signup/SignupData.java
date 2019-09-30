@@ -13,6 +13,10 @@ public class SignupData {
     @Expose
     private String mName;
 
+    @SerializedName("gender")
+    @Expose
+    private String mGender;
+
     @SerializedName("lastname")
     @Expose
     private String mLastName;
@@ -65,6 +69,9 @@ public class SignupData {
     @Expose
     private String mModifiedBy;
 
+    public String getmGender() {
+        return mGender;
+    }
 
     public String getmId() {
         return mId;

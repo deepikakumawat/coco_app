@@ -26,13 +26,13 @@ public class SignUpPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void doSignUp(String email, String fName, String lName, String phone,String otp, String VCToken ,String password, String confirmPassword) {
+    public void doSignUp(String email, String fName, String lName, String phone,String otp, String VCToken ,String password,String gender, String confirmPassword) {
         view.showWait();
 
 
         try {
 
-            Call call = service.doSignUp(email, fName, lName, phone,otp,VCToken, password, confirmPassword);
+            Call call = service.doSignUp(email, fName, lName, phone,otp,VCToken, password,gender, confirmPassword);
             call.enqueue(new Callback<SignUpResponse>() {
                 @Override
                 public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {

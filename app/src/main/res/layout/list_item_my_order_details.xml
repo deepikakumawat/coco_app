@@ -75,6 +75,37 @@
                                     android:textSize="@dimen/txt_12sp" />
                             </LinearLayout>
 
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$ 288"
+                                android:id="@+id/txtQuntity"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/txt_14sp" />
+
+                            <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$ 288"
+                                android:id="@+id/txVendor"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/txt_14sp" />
+
+
+
+                                <Button
+                                    android:id="@+id/btnCheckout"
+                                    android:layout_width="120dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="10dp"
+                                    android:background="#247EEA"
+                                    android:text="But It Again "
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp" />
+
 
 
 

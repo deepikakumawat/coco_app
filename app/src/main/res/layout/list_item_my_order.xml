@@ -91,11 +91,11 @@
                                 android:id="@+id/txtStatus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="#00FF00"
+                                android:background="#FFC700"
                                 android:textStyle="bold"
-                                android:padding="3dp"
+                                android:padding="5dp"
                                 android:text="Status : Processed from Seller"
-                                android:textColor="@color/white"
+                                android:textColor="#777"
                                 android:textSize="@dimen/txt_14sp" />
 
 

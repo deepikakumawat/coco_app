@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,19 @@ import android.widget.TextView;
 import com.nav.richkart.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nav.richkart.base_fragment.BaseFragment;
+import com.nav.richkart.checkout.CheckoutFragment;
 import com.nav.richkart.my_order.TimelineTestFragment;
+import com.nav.richkart.product_details.AddToCartResponse;
 import com.nav.richkart.product_details.ProductDetailFragment;
+import com.nav.richkart.shared_preference.CocoPreferences;
+import com.nav.richkart.utility.Constant;
 import com.nav.richkart.utility.Util;
 
 import java.util.ArrayList;
 
 import com.nav.richkart.fragment.FragmentManagerUtils;
+
+import static com.nav.richkart.utility.Util.showCenteredToast;
 
 public class MyOrderDetailsFragment extends BaseFragment implements OrderDetailsView, View.OnClickListener {
 
@@ -39,9 +46,14 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
     private String orderId;
     private TextView txtDeliveryLandmark;
     private TextView txtDeliveryState;
+    private TextView txtDeliveryLandmarkB;
+    private TextView txtDeliveryStateB;
     private TextView txtOrderId;
+    private TextView txtPAYMENTId;
     private TextView txtOrderDate;
     private TextView txtPrice;
+    private TextView txtPriceTotal;
+    private TextView txtPriceTotalB;
     private TextView txtSenderName;
     private TextView txtSenderContact;
     private TextView txtSenderAddress;
@@ -49,6 +61,10 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
     private TextView txtDeliveryContact;
     private TextView txtDeliveryAddress;
     private TextView txtDeliveryPincode;
+    private TextView txtDeliveryContactB;
+    private TextView txtDeliveryAddressB;
+    private TextView txtDeliveryPincodeB;
+    private TextView txtDeliveryCityB;
     private TextView txtDeliveryCity;
     private LinearLayout lyOrderDetails;
     private LinearLayout lyProductDetails;
@@ -85,8 +101,11 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
         lyProductDetails = view.findViewById(R.id.lyProductDetails);
 
         txtOrderId = view.findViewById(R.id.txtOrderId);
+        txtPAYMENTId = view.findViewById(R.id.txtPAYMENTId);
         txtOrderDate = view.findViewById(R.id.txtOrderDate);
         txtPrice = view.findViewById(R.id.txtPrice);
+        txtPriceTotal = view.findViewById(R.id.txtPriceTotal);
+        txtPriceTotalB = view.findViewById(R.id.txtPriceTotalB);
 
         txtSenderName = view.findViewById(R.id.txtSenderName);
         txtSenderContact = view.findViewById(R.id.txtSenderContact);
@@ -99,6 +118,13 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
         txtDeliveryCity = view.findViewById(R.id.txtDeliveryCity);
         txtDeliveryState = view.findViewById(R.id.txtDeliveryState);
         txtDeliveryLandmark = view.findViewById(R.id.txtDeliveryLandmark);
+
+        txtDeliveryContactB = view.findViewById(R.id.txtDeliveryContactB);
+        txtDeliveryAddressB = view.findViewById(R.id.txtDeliveryAddressB);
+        txtDeliveryPincodeB = view.findViewById(R.id.txtDeliveryPincodeB);
+        txtDeliveryCityB = view.findViewById(R.id.txtDeliveryCityB);
+        txtDeliveryStateB = view.findViewById(R.id.txtDeliveryStateB);
+        txtDeliveryLandmarkB = view.findViewById(R.id.txtDeliveryLandmarkB);
 
         txtTrackShipment = view.findViewById(R.id.txtTrackShipment);
         txtTrackShipment.setOnClickListener(this);
@@ -231,6 +257,11 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
 
                     break;
 
+                case R.id.btnCheckout:
+                    OrderProduct orderProduct1 = ((OrderProduct) view.getTag());
+                    onClickViewButNow(orderProduct1.getmProductId());
+                    break;
+
                 default:
                     break;
             }
@@ -239,12 +270,48 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
         }
     }
 
+    @Override
+    public void addToCart(AddToCartResponse addToCartResponse) {
+        if (!TextUtils.isEmpty(addToCartResponse.getmStatus()) && ("1".equalsIgnoreCase(addToCartResponse.getmStatus()))) {
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), Constant.API_SUCCESS);
+
+          {
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cartList", addToCartResponse.getmData().getmProductData());
+                bundle.putString("totalPrice", addToCartResponse.getmData().getmTotalPrice());
+
+                CheckoutFragment checkoutFragment = new CheckoutFragment();
+                checkoutFragment.setArguments(bundle);
+
+                FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), checkoutFragment, "CheckoutFragment", true, false);
+
+
+            }
+
+        } else {
+            showCenteredToast(ryParent, getActivity(), addToCartResponse.getmMessage(), "");
+        }
+    }
+    private void onClickViewButNow(String productId) {
+        if (Util.isDeviceOnline(getActivity())) {
+            myOrderPresenter.addToCart(CocoPreferences.getUserId(), productId, "1", "");
+
+        } else {
+//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
+            Util.showNoInternetDialog(getActivity());
+
+        }
+    }
 
     private void setData(MyOrderDetailsResponse.OrderDetailsReponse orderDetailsReponse) {
 
         try {
             txtOrderId.setText(getString(R.string.orderid) + orderDetailsReponse.getmOrderDetail().getmOrderId());
             txtPrice.setText(getString(R.string.Rs) + getString(R.string.amount) + orderDetailsReponse.getmOrderDetail().getmAmount());
+            txtPriceTotal.setText(getString(R.string.Rs) + orderDetailsReponse.getmOrderDetail().getmAmount());
+            txtPriceTotalB.setText(getString(R.string.Rs) + orderDetailsReponse.getmOrderDetail().getmAmount());
+            txtPAYMENTId.setText("PAYMENT ID :" + orderDetailsReponse.getmOrderDetail().getmInvoiceNo());
 
             txtSenderName.setText(getString(R.string.name) + orderDetailsReponse.getmOrderDetail().getmSenderName() + " " + orderDetailsReponse.getmOrderDetail().getmSenderLastName());
             txtSenderContact.setText(getString(R.string.contact) + orderDetailsReponse.getmOrderDetail().getmSenderContact());
@@ -258,6 +325,13 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
             txtDeliveryCity.setText(getString(R.string.deliver_city) + orderDetailsReponse.getmOrderDetail().getmDeliveryCity());
             txtDeliveryState.setText(getString(R.string.delivery_state) + orderDetailsReponse.getmOrderDetail().getmDeliveryState());
             txtDeliveryLandmark.setText(getString(R.string.delivery_landmark) + orderDetailsReponse.getmOrderDetail().getmDeliveryLandmark());
+
+            txtDeliveryContactB.setText(getString(R.string.contact) + orderDetailsReponse.getmOrderDetail().getmDeliveryContact());
+            txtDeliveryAddressB.setText(getString(R.string.address) + orderDetailsReponse.getmOrderDetail().getmDeliveryAddress());
+            txtDeliveryPincodeB.setText(getString(R.string.pincode) + orderDetailsReponse.getmOrderDetail().getmDeliveryPincode());
+            txtDeliveryCityB.setText(getString(R.string.deliver_city) + orderDetailsReponse.getmOrderDetail().getmDeliveryCity());
+            txtDeliveryStateB.setText(getString(R.string.delivery_state) + orderDetailsReponse.getmOrderDetail().getmDeliveryState());
+            txtDeliveryLandmarkB.setText(getString(R.string.delivery_landmark) + orderDetailsReponse.getmOrderDetail().getmDeliveryLandmark());
         } catch (Exception e) {
             e.printStackTrace();
         }

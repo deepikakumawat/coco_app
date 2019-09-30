@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 import com.nav.richkart.Network.APIService;
 import com.nav.richkart.Network.ApiUtils;
+import com.nav.richkart.product_details.AddToCartResponse;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +31,50 @@ public class OrderDetailsPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
+    public void addToCart(String userid, String productId, String quantity, String attributes) {
+        view.showWait();
+        try {
 
+            Call call = service.addToCart(userid, productId, quantity, attributes);
+            call.enqueue(new Callback<AddToCartResponse>() {
+                @Override
+                public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                    Log.d(TAG, call.request().url().toString());
+                    view.removeWait();
+                    try {
+                        if (response.isSuccessful()) {
+                            view.addToCart(response.body());
+                        } else {
+
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            view.onFailure(jsonObject.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AddToCartResponse> call, Throwable e) {
+                    view.removeWait();
+                    try {
+                        JSONObject jsonObject = new JSONObject(((HttpException) e).response().errorBody().string());
+                        view.onFailure(jsonObject.getString("message"));
+                    } catch (Exception ee) {
+                        e.printStackTrace();
+                        view.onFailure("Something Went Wrong. Please try again later");
+
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void getOrderDetails(String orderId) {
         view.showWait();

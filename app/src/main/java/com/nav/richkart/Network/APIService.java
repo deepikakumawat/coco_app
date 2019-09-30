@@ -77,6 +77,7 @@ public interface APIService {
                                   @Field("otp") String otp,
                                   @Field("vctoken") String VCToken,
                                   @Field("password") String password,
+                                  @Field("gender") String gender,
                                   @Field("cn_password") String confirmPassword);
 
 

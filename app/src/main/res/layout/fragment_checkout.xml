@@ -335,7 +335,7 @@ android:layout_marginTop="@dimen/dimen_2dp"
                     android:id="@+id/rgPayment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_5dp">
+                    android:padding="@dimen/dimen_10dp">
 
                     <RadioButton
                         android:id="@+id/rbPOD"
@@ -353,7 +353,7 @@ android:layout_marginTop="@dimen/dimen_2dp"
                         style="@style/radionbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_15dp"
                         android:checked="false"
                         android:gravity="center"
                         android:paddingLeft="10dp"
