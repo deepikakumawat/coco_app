@@ -41,6 +41,10 @@ public class OrderProduct {
     @Expose
     private String mVendor;
 
+    @SerializedName("companytitle")
+    @Expose
+    private String mcompanytitle;
+
     @SerializedName("status")
     @Expose
     private String mStatus;
@@ -192,6 +196,10 @@ public class OrderProduct {
     @SerializedName("productdatemodify")
     @Expose
     private String mProductDateModify;
+
+    public String getMcompanytitle() {
+        return mcompanytitle;
+    }
 
 
     public String getmItemOrderId() {

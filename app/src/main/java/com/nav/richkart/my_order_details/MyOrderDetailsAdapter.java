@@ -42,7 +42,7 @@ public class MyOrderDetailsAdapter extends RecyclerView.Adapter<MyOrderDetailsAd
             holder.txtProductName.setText(TextUtils.isEmpty(orderProduct.getmProdcutName()) ? " - " : orderProduct.getmProdcutName());
             holder.txtPrice.setText(TextUtils.isEmpty(orderProduct.getmAmount()) ? " - " : orderProduct.getmAmount());
             holder.txtQuntity.setText("QTY :"+orderProduct.getmQty());
-            holder.txVendor.setText("SOLD BY:"+orderProduct.getmVendor());
+            holder.txVendor.setText("SOLD BY:"+orderProduct.getMcompanytitle());
 
             String thumbnail = Constant.MEDIA_THUMBNAIL_BASE_URL + orderProduct.getmProductImg();
             Glide.with(context).load(thumbnail).placeholder(R.drawable.richkart).into(holder.imgProduct);

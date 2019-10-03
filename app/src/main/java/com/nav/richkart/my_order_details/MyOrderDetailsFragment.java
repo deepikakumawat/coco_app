@@ -311,7 +311,7 @@ public class MyOrderDetailsFragment extends BaseFragment implements OrderDetails
             txtPrice.setText(getString(R.string.Rs) + getString(R.string.amount) + orderDetailsReponse.getmOrderDetail().getmAmount());
             txtPriceTotal.setText(getString(R.string.Rs) + orderDetailsReponse.getmOrderDetail().getmAmount());
             txtPriceTotalB.setText(getString(R.string.Rs) + orderDetailsReponse.getmOrderDetail().getmAmount());
-            txtPAYMENTId.setText("PAYMENT ID :" + orderDetailsReponse.getmOrderDetail().getmInvoiceNo());
+            txtPAYMENTId.setText("PAYMENT ID :" + orderDetailsReponse.getmOrderDetail().getmPaymentId());
 
             txtSenderName.setText(getString(R.string.name) + orderDetailsReponse.getmOrderDetail().getmSenderName() + " " + orderDetailsReponse.getmOrderDetail().getmSenderLastName());
             txtSenderContact.setText(getString(R.string.contact) + orderDetailsReponse.getmOrderDetail().getmSenderContact());
