@@ -27,14 +27,14 @@ import java.util.List;
 public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCategoryAdapter.MyViewHolder> {
     private Context context;
     private List<ProductData> productDataByCategoryList;
-    private PopularListFragment mpopularListFragment;
+    private ProductListByCategoryFragment productListByCategoryFragment;
     private SubSubCategoryProductListFragment subSubCategoryProductListFragment;
 
-    int myPos = 0;
 
-    public ProductByCategoryAdapter(Context context, List<ProductData> productDataByCategoryList, PopularListFragment popularListFragment) {
+
+    public ProductByCategoryAdapter(Context context, List<ProductData> productDataByCategoryList, ProductListByCategoryFragment productListByCategoryFragment) {
         this.productDataByCategoryList = productDataByCategoryList;
-        mpopularListFragment = popularListFragment;
+       this. productListByCategoryFragment = productListByCategoryFragment;
         this.context = context;
     }
 
@@ -78,14 +78,14 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             holder.txtProductDesc.setText(!TextUtils.isEmpty(productData.getmProductShortDetails()) ? Html.fromHtml(productData.getmProductShortDetails()) : "-");
 
 
-            if (mpopularListFragment != null) {
+            if (productListByCategoryFragment != null) {
                 holder.lyProduct.setTag(productData);
                 holder.lyProduct.setTag(R.id.lyProduct, position);
-                holder.lyProduct.setOnClickListener(mpopularListFragment);
+                holder.lyProduct.setOnClickListener(productListByCategoryFragment);
 
                 holder.lyAddToCart.setTag(productData);
                 holder.lyAddToCart.setTag(R.id.lyAddToCart, position);
-                holder.lyAddToCart.setOnClickListener(mpopularListFragment);
+                holder.lyAddToCart.setOnClickListener(productListByCategoryFragment);
             }
 
             if (subSubCategoryProductListFragment != null) {

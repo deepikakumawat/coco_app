@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,7 @@ import static com.nav.richkart.utility.Util.showCenteredToast;
 import static com.nav.richkart.utility.Util.showProDialog;
 
 
-public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView {
+public class PopularListFragment extends Fragment implements View.OnClickListener, ProductByCategoryView, SwipeRefreshLayout.OnRefreshListener {
 
     private ArrayList<ProductData> productGridModellClasses;
     private RecyclerView recyclerview;
@@ -50,6 +51,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     private ProductByCategoryRequest productByCategoryRequest;
     private ScrollView svNotFound;
     private Button btnGoToHome;
+    private SwipeRefreshLayout pullDownRefreshCall;
 
 
     public static PopularListFragment newInstance(String catId, int tabPostion) {
@@ -93,6 +95,10 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
         svNotFound = view.findViewById(R.id.svNotFound);
         btnGoToHome = view.findViewById(R.id.btnGoToHome);
         btnGoToHome.setOnClickListener(this);
+        pullDownRefreshCall = (SwipeRefreshLayout) view.findViewById(R.id.pullDownRefreshCall);
+        pullDownRefreshCall.setOnRefreshListener(this);
+        pullDownRefreshCall.setColorSchemeResources(R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color);
+
 
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
@@ -101,6 +107,12 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
 
         callProductByCategoryAPI();
 
+    }
+
+    private void setPullToRefreshFalse() {
+        if (pullDownRefreshCall.isRefreshing()) {
+            pullDownRefreshCall.setRefreshing(false);
+        }
     }
 
     private void callProductByCategoryAPI() {
@@ -137,6 +149,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
             dismissProDialog();
         }
 
+        setPullToRefreshFalse();
     }
 
     @Override
@@ -168,7 +181,7 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
                     ((ProductListByCategoryFragment) getParentFragment()).getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
 
 
-                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
+                  //  mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, PopularListFragment.this);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerview.setLayoutManager(mLayoutManager);
                     recyclerview.setItemAnimator(new DefaultItemAnimator());
@@ -300,4 +313,12 @@ public class PopularListFragment extends Fragment implements View.OnClickListene
     }
 
 
+    @Override
+    public void onRefresh() {
+        productGridModellClasses.clear();
+        if (mAdapter2 != null) {
+            mAdapter2.notifyDataSetChanged();
+        }
+        callProductByCategoryAPI();
+    }
 }
