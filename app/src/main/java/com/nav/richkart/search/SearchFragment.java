@@ -43,14 +43,14 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
     private AutoCompleteTextView autoTxtSearch;
     private ArrayList<ProductDetailsSimilier> productDetailsSimilierList = new ArrayList<>();
     private ArrayList<TrendingResponse.TrendingData> trendingDataArrayList = new ArrayList<>();
-    //private SearchAutoAdapter searchAutoAdapter;
+    private SearchAutoAdapter searchAutoAdapter;
     private SearchPresenter searchPresenter;
     private LinearLayout lyParent;
     private View mView;
     private ImageView imgSearch;
     private RecyclerView rvProducts;
     private SearchAutoProductAdapter mAdapter2;
-    //private TopFiveSearchAdapter topFiveSearchAdapter;
+    private TopFiveSearchAdapter topFiveSearchAdapter;
     private TrendingAdapter trendingAdapter;
     private ImageView imgGoogleSearch;
     private RecyclerView rvTopFiveSearch;
@@ -120,11 +120,11 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
 
 
             List<String> list = new ArrayList<String>(set);
-          //  topFiveSearchAdapter = new TopFiveSearchAdapter(getActivity(), list, SearchFragment.this);
+            topFiveSearchAdapter = new TopFiveSearchAdapter(getActivity(), list, SearchFragment.this);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
             rvTopFiveSearch.setLayoutManager(mLayoutManager);
             rvTopFiveSearch.setItemAnimator(new DefaultItemAnimator());
-          //  rvTopFiveSearch.setAdapter(topFiveSearchAdapter);
+            rvTopFiveSearch.setAdapter(topFiveSearchAdapter);
         }
 
 

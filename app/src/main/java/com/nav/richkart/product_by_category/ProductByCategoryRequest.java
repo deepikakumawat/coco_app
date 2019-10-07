@@ -17,9 +17,17 @@ public class ProductByCategoryRequest {
     @Expose
     private String minValue;
 
+    @SerializedName("offset")
+    @Expose
+    private int offset;
+
     @SerializedName("max_price")
     @Expose
     private String maxValue;
+
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
 
     public String getMinValue() {
         return minValue;

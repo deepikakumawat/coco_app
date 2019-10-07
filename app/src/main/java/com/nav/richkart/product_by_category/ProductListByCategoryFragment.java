@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,8 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private ProductByCategoryRequest productByCategoryRequest;
     private ScrollView svNotFound;
     private Button btnGoToHome;
+    private int offset = 0;
+    private boolean loading = false;
     private SwipeRefreshLayout pullDownRefreshCall;
 
 
@@ -141,7 +144,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
             public void onTabSelected(TabLayout.Tab tab) {
                 setCustomFontAndStyle(tabLayout, tab.getPosition());
                 tabPostion = tab.getPosition();
-
+                offset = 0;
                 callProductByCategoryAPI();
             }
 
@@ -156,7 +159,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
 
         productByCategoryRequest = getSearchFilter();
-        productByCategoryRequest.setCateId(catId);
+
 
 
         ryParent = view.findViewById(R.id.ryParent);
@@ -168,13 +171,42 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         pullDownRefreshCall.setOnRefreshListener(this);
         pullDownRefreshCall.setColorSchemeResources(R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color, R.color.navigation_bar_color);
 
-
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerview.setLayoutManager(mLayoutManager);
+        recyclerview.setItemAnimator(new DefaultItemAnimator());
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         productGridModellClasses = new ArrayList<>();
 
         callProductByCategoryAPI();
+
+
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if(dy > 0) //check for scroll down
+                {
+                   int visibleItemCount = mLayoutManager.getChildCount();
+                  int  totalItemCount = mLayoutManager.getItemCount();
+                  int  pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if (!loading)
+                    {
+                        if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount)
+                        {
+                            loading = true;
+                            offset = offset + 20;
+                            callProductByCategoryAPI();
+                            Log.v("...", "Last Item Wow !");
+
+                        }
+                    }
+                }
+            }
+        });
 
 
 
@@ -249,7 +281,8 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
     private void callProductByCategoryAPI() {
         if (Util.isDeviceOnline(getActivity())) {
-
+            productByCategoryRequest.setCateId(catId);
+            productByCategoryRequest.setOffset(offset);
             productByCategoryPresenter.getProductByCat(productByCategoryRequest);
 
 
@@ -292,10 +325,11 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
     @Override
     public void getProductByCategory(ProductByCategoryResponse productByCategoryResponse) {
+        loading = false;
         if (productByCategoryResponse != null) {
             if (productByCategoryResponse.getmData() != null) {
                 if (!productByCategoryResponse.getmData().getmProduct().isEmpty()) {
-                    productGridModellClasses.clear();
+                    //productGridModellClasses.clear();
                     productGridModellClasses.addAll(productByCategoryResponse.getmData().getmProduct());
 
                     recyclerview.setVisibility(View.VISIBLE);
@@ -314,9 +348,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-                    recyclerview.setLayoutManager(mLayoutManager);
-                    recyclerview.setItemAnimator(new DefaultItemAnimator());
+
                     recyclerview.setAdapter(mAdapter2);
                 }
             }
@@ -451,6 +483,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         if (mAdapter2 != null) {
             mAdapter2.notifyDataSetChanged();
         }
+        offset = 0;
         callProductByCategoryAPI();
     }
 }
