@@ -322,6 +322,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
     @Override
     public void onFailure(String appErrorMessage) {
+        if(productGridModellClasses.size() == 0)
         nodataFound(appErrorMessage);
     }
 
