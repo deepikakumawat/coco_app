@@ -283,6 +283,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         if (Util.isDeviceOnline(getActivity())) {
             productByCategoryRequest.setCateId(catId);
             productByCategoryRequest.setOffset(offset);
+            if(offset > 1) {
+                isShimmerShow = false;
+            }
             productByCategoryPresenter.getProductByCat(productByCategoryRequest);
 
 
