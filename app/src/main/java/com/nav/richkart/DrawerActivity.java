@@ -86,11 +86,11 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
     private String title[] = {"Home", "Department", "Today's Deal", "Cart", "My Order", "My Wishlist", "My Account",
-            "Address", "Help", "Sell On Richkart", "Legal Policies"};
+            "Address", "Help", "Sell On Richkart", "Legal Policies", "Change Country"};
 
 
     private String titleWithLogout[] = {"Home", "Department", "Today's Deal", "Cart", "My Order", "My Wishlist", "My Account",
-            "Address", "Help", "Sell On Richkart", "Legal Policies", "Logout"};
+            "Address", "Help", "Sell On Richkart", "Legal Policies","Change Country", "Logout"};
 
 
     private TextView txtUserEmail;
@@ -267,12 +267,18 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                     openWebView("https://sellercenter.richkart.com");
 
 
-                } else if (position == 10) {
-
-                    setScreenTitle(getString(R.string.legal_policies));
+                }else if (position == 10) {
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new LegalPoliciesFragment(), "LegalPoliciesFragment", true, false);
 
+
                 } else if (position == 11) {
+
+
+
+                    FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new ChangeCountryFragment(), "ChangeCountryFragment", true, false);
+
+
+                } else if (position == 12) {
                     logout();
                 }
 
@@ -576,7 +582,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             txtUserEmail.setVisibility(View.GONE);
                             lyLoginSignup.setVisibility(View.VISIBLE);
 
-                            navigationModelClasses.remove(11);
+                            navigationModelClasses.remove(12);
                             mAdapter.notifyDataSetChanged();
 
                             Util.showCenteredToast(drawer, DrawerActivity.this, "Logout Successfully!", Constant.API_SUCCESS);
@@ -611,7 +617,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
         if (requestCode == MYACCOUNT_ACTION) {
             if (resultCode == Activity.RESULT_OK) {
                 setEmailName();
-                navigationModelClasses.remove(11);
+                navigationModelClasses.remove(12);
                 mAdapter.notifyDataSetChanged();
             }
         }
