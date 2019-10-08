@@ -7,19 +7,78 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp">
+        android:orientation="vertical">
 
         <TextView
-            style="@style/viewParent.headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_10dp"
+            android:text="@string/richkart_provide_the_ability"
+            android:textColor="@color/appgray"
+            android:textSize="@dimen/txt_14sp" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:text="Select a country below" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:text="Select a Country Here"
+            android:textColor="@color/appgray"
+            android:textSize="@dimen/txt_18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:background="#B7B7B7" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
             android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/ic_uk" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:text="United Kingdom (English)"
+                android:textColor="@color/appgray"
+                android:textSize="@dimen/txt_12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" -Richkart.co.uk"
+                android:textColor="@color/appgray"
+                android:textSize="@dimen/txt_12sp" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:background="#B7B7B7" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -28,38 +87,30 @@
                 android:src="@drawable/ic_india" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dimen_10dp"
-                android:text="India - Richkart.com"
-                android:textColor="#5D5C5C"
-                android:textSize="@dimen/txt_20sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
-            android:gravity="center"
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/dimen_50dp"
-                android:layout_height="@dimen/dimen_50dp"
-                android:src="@drawable/ic_uk" />
+                android:text="India (English)"
+                android:textColor="@color/appgray"
+                android:textSize="@dimen/txt_12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dimen_10dp"
-                android:text="UK - Richkart.uk.co"
-                android:textColor="#5D5C5C"
-                android:textSize="@dimen/txt_20sp" />
+                android:text=" -Richkart.com"
+                android:textColor="@color/appgray"
+                android:textSize="@dimen/txt_12sp" />
 
         </LinearLayout>
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:background="#B7B7B7" />
 
     </LinearLayout>
 </ScrollView>
