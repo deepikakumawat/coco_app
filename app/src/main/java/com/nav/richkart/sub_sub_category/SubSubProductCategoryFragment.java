@@ -225,7 +225,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
     }
 
     @Override
-    public void setSearchFilter(String[] filterAttribues, String minimumValue, String maximumValue) {
+    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList,String[] filterAttribues, String minimumValue, String maximumValue) {
 
     }
 }

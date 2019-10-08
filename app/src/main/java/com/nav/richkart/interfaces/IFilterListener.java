@@ -1,7 +1,11 @@
 package com.nav.richkart.interfaces;
 
+import com.nav.richkart.product_by_category.ProductByCategoryResponse;
+
+import java.util.ArrayList;
+
 public interface IFilterListener {
 
-    void setSearchFilter(String[] filterAttribues, String minimumValue, String maximumValue);
+    void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String[] filterAttribues, String minimumValue, String maximumValue);
 
 }

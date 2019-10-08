@@ -190,7 +190,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
                     if (!filerHaspMap.isEmpty() || !TextUtils.isEmpty(minimumValue) || !TextUtils.isEmpty(maximumValue)) {
                         String[] result = filerHaspMap.values().toArray(new String[0]);
-                        iFilterListener.setSearchFilter(result, minimumValue, maximumValue);
+                        iFilterListener.setSearchFilter(productAttribueDataArrayList, result, minimumValue, maximumValue);
                         FragmentManagerUtils.popFragment(getFragmentManager());
                     } else {
                         Util.showCenteredToast(lyParent, getActivity(), getString(R.string.select_filter), "");

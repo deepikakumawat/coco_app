@@ -73,6 +73,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private Button btnGoToHome;
     private int offset = 0;
     private boolean loading = false;
+    private boolean isFliter = false;
     private SwipeRefreshLayout pullDownRefreshCall;
 
 
@@ -145,6 +146,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                 setCustomFontAndStyle(tabLayout, tab.getPosition());
                 tabPostion = tab.getPosition();
                 offset = 0;
+                productGridModellClasses.clear();
                 callProductByCategoryAPI();
             }
 
@@ -178,6 +180,10 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         productGridModellClasses = new ArrayList<>();
+
+        offset = 0;
+        if(productGridModellClasses != null)
+        productGridModellClasses.clear();
 
         callProductByCategoryAPI();
 
@@ -242,10 +248,12 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     }
 
     @Override
-    public void setSearchFilter(String[] filterAttribues, String minimumValue, String maximumValue) {
+    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String[] filterAttribues, String minimumValue, String maximumValue) {
+        this.productAttribueDataArrayList = mproductAttribueDataArrayList;
         this.filterAttribues = filterAttribues;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
+        isFliter =  true;
 
     }
 
@@ -348,7 +356,12 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                         sortByHighPrice(productGridModellClasses);
                     }
 
-                  getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+                    if(!isFliter) {
+
+                        getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+                    } else {
+                        isFliter =  false;
+                    }
 
 
                     mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
