@@ -293,12 +293,13 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
             productByCategoryRequest.setOffset(offset);
             if(offset > 1) {
                 isShimmerShow = false;
+            }else{
+                isShimmerShow = true;
             }
             productByCategoryPresenter.getProductByCat(productByCategoryRequest);
 
 
         } else {
-//            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
             Util.showNoInternetDialog(getActivity());
         }
 
@@ -364,9 +365,14 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                     }
 
 
-                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
+                    if (mAdapter2 == null) {
+                        mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
+                        recyclerview.setAdapter(mAdapter2);
+                    }else{
+                        mAdapter2.notifyDataSetChanged();
+                    }
 
-                    recyclerview.setAdapter(mAdapter2);
+
                 }
             }
         }

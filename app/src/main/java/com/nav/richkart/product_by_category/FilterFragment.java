@@ -66,6 +66,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
             if (bundle != null) {
                 productAttribueDataArrayList = (ArrayList<ProductByCategoryResponse.ProductAttribueData>) bundle.getSerializable("productAttribueDataArrayList");
 
+                setFilterHaspMap(productAttribueDataArrayList);
             }
 
 
@@ -109,6 +110,16 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
+    private void setFilterHaspMap(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
+        for (ProductByCategoryResponse.ProductAttribueData productAttribueData : productAttribueDataArrayList) {
+            for (ProductByCategoryResponse.Attribtues productAttributes : productAttribueData.getmAttributes()) {
+                if (productAttributes != null) {
+                    addFilterDataInHashmap(productAttributes);
+                }
+            }
+        }
+    }
+
     @Override
     public void onClick(View view) {
         try {
@@ -130,58 +141,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
                         //  add filter data in hashmap
 
-                        if (filerHaspMap.isEmpty()) {
-                            if (productAttributes.isSelected()) {
-                                filerHaspMap.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeId());
-                            }
-
-                        } else {
-
-                            if (productAttributes.isSelected()) {
-                                if (filerHaspMap.containsKey(productAttributes.getmAttributeType())) {
-                                    String value = filerHaspMap.get(productAttributes.getmAttributeType());
-                                    value = value + "," + productAttributes.getmAttributeId();
-
-                                    filerHaspMap.put(productAttributes.getmAttributeType(), value);
-                                } else {
-                                    filerHaspMap.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeId());
-
-                                }
-                            } else {
-
-                                if (filerHaspMap.containsKey(productAttributes.getmAttributeType())) {
-                                    String value = filerHaspMap.get(productAttributes.getmAttributeType());
-                                    String removeValue = productAttributes.getmAttributeId();
-
-                                    List<String> items = Arrays.asList(value.split("\\s*,\\s*"));
-                                    List<String> newItems = new ArrayList<>();
-                                    for (String item : items) {
-                                        if (!removeValue.equalsIgnoreCase(item)) {
-                                            newItems.add(item);
-                                        }
-                                    }
-
-                                    String newValue = android.text.TextUtils.join(",", newItems);
-                                    if (TextUtils.isEmpty(newValue)) {
-                                        filerHaspMap.remove(productAttributes.getmAttributeType());
-                                    } else {
-                                        filerHaspMap.put(productAttributes.getmAttributeType(), newValue);
-                                    }
-
-
-                                } else {
-                                    filerHaspMap.remove(productAttributes.getmAttributeType());
-
-                                }
-
-                            }
-
-
-                        }
-
-
-                        int size = filerHaspMap.size();
-                        Log.d("size", size + "");
+                        addFilterDataInHashmap(productAttributes);
 
 
                     }
@@ -220,5 +180,60 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     @Override
     protected boolean isCartIconVisible() {
         return false;
+    }
+
+    private void addFilterDataInHashmap(ProductByCategoryResponse.Attribtues productAttributes) {
+        if (filerHaspMap.isEmpty()) {
+            if (productAttributes.isSelected()) {
+                filerHaspMap.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeId());
+            }
+
+        } else {
+
+            if (productAttributes.isSelected()) {
+                if (filerHaspMap.containsKey(productAttributes.getmAttributeType())) {
+                    String value = filerHaspMap.get(productAttributes.getmAttributeType());
+                    value = value + "," + productAttributes.getmAttributeId();
+
+                    filerHaspMap.put(productAttributes.getmAttributeType(), value);
+                } else {
+                    filerHaspMap.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeId());
+
+                }
+            } else {
+
+                if (filerHaspMap.containsKey(productAttributes.getmAttributeType())) {
+                    String value = filerHaspMap.get(productAttributes.getmAttributeType());
+                    String removeValue = productAttributes.getmAttributeId();
+
+                    List<String> items = Arrays.asList(value.split("\\s*,\\s*"));
+                    List<String> newItems = new ArrayList<>();
+                    for (String item : items) {
+                        if (!removeValue.equalsIgnoreCase(item)) {
+                            newItems.add(item);
+                        }
+                    }
+
+                    String newValue = android.text.TextUtils.join(",", newItems);
+                    if (TextUtils.isEmpty(newValue)) {
+                        filerHaspMap.remove(productAttributes.getmAttributeType());
+                    } else {
+                        filerHaspMap.put(productAttributes.getmAttributeType(), newValue);
+                    }
+
+
+                } else {
+                    filerHaspMap.remove(productAttributes.getmAttributeType());
+
+                }
+
+            }
+
+
+        }
+
+
+        int size = filerHaspMap.size();
+        Log.d("size", size + "");
     }
 }

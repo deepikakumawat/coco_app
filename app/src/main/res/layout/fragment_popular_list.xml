@@ -10,11 +10,6 @@
 
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/pullDownRefreshCall"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
@@ -23,7 +18,7 @@
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
         android:paddingTop="8dp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
         android:id="@+id/txtNoDataFound"
