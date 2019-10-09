@@ -31,84 +31,90 @@
             app:tabTextAppearance="@style/MyMenuTextAppearance3"
             app:tabTextColor="#8b8a8a" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSelectedAttributes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:paddingTop="8dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rvSelectedAttributes"
+            android:focusableInTouchMode="true"
+
+            android:orientation="vertical">
 
 
-            <RelativeLayout
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/pullDownRefreshCall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:background="@android:color/white">
 
-
-
-
-                <android.support.v4.widget.SwipeRefreshLayout
-                    android:id="@+id/pullDownRefreshCall"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/white">
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingTop="8dp" />
+            </android.support.v4.widget.SwipeRefreshLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingTop="8dp" />
-                </android.support.v4.widget.SwipeRefreshLayout>
+            <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/txtNoDataFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/no_data_found"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:ignore="MissingConstraints" />
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
-                    android:id="@+id/txtNoDataFound"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/no_data_found"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:visibility="gone"
-                    tools:ignore="MissingConstraints" />
+            <include layout="@layout/not_found" />
 
-                <include layout="@layout/not_found" />
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:visibility="gone"
+                shimmer:duration="800">
 
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_view_container"
+                <!-- Adding 7 rows of placeholders -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@android:color/white"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    shimmer:duration="800">
+                    android:orientation="vertical">
 
-                    <!-- Adding 7 rows of placeholders -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                    <include layout="@layout/shimmer_place_holder_list_item_cart" />
+                </LinearLayout>
 
-                        <include layout="@layout/shimmer_place_holder_list_item_cart" />
-                    </LinearLayout>
-
-                </com.facebook.shimmer.ShimmerFrameLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-            </RelativeLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

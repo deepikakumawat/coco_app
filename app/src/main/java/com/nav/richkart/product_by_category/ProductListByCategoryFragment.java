@@ -28,8 +28,11 @@ import com.nav.richkart.interfaces.IFilterListener;
 import com.nav.richkart.interfaces.IFragmentListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 import com.nav.richkart.fragment.FragmentManagerUtils;
 import com.nav.richkart.product_details.AddToCartResponse;
@@ -54,9 +57,13 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private String catId;
     private IFragmentListener mListener;
     ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
+    private ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList = new ArrayList<>();
+    private SelectedAttributesAdapter selectedAttributesAdapter;
+
     private String[] filterAttribues;
     private String maximumValue;
     private String minimumValue;
+    HashMap<String, String> filerHaspMap = new HashMap<String, String>();
 
 
     private ArrayList<ProductData> productGridModellClasses;
@@ -75,6 +82,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private boolean loading = false;
     private boolean isFliter = false;
     private SwipeRefreshLayout pullDownRefreshCall;
+    private RecyclerView rvSelectedAttributes;
 
 
     @Nullable
@@ -132,6 +140,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("productAttribueDataArrayList", productAttribueDataArrayList);
+                bundle.putSerializable("selectedAttributesArrayList", selectedAttributesArrayList);
                 FilterFragment filterFragment = new FilterFragment();
                 filterFragment.setmIFilterListener(ProductListByCategoryFragment.this);
                 filterFragment.setArguments(bundle);
@@ -165,6 +174,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
 
         ryParent = view.findViewById(R.id.ryParent);
+        rvSelectedAttributes = view.findViewById(R.id.rvSelectedAttributes);
         recyclerview = view.findViewById(R.id.recyclerview);
         svNotFound = view.findViewById(R.id.svNotFound);
         btnGoToHome = view.findViewById(R.id.btnGoToHome);
@@ -176,6 +186,11 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(mLayoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvSelectedAttributes.setLayoutManager(layoutManager);
+        selectedAttributesAdapter = new SelectedAttributesAdapter(getActivity(), selectedAttributesArrayList, ProductListByCategoryFragment.this);
+        rvSelectedAttributes.setAdapter(selectedAttributesAdapter);
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
@@ -248,17 +263,25 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     }
 
     @Override
-    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String[] filterAttribues, String minimumValue, String maximumValue) {
+    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList,  String minimumValue, String maximumValue,ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList) {
         this.productAttribueDataArrayList = mproductAttribueDataArrayList;
-        this.filterAttribues = filterAttribues;
+//        this.filterAttribues = filterAttribues;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
+        this.selectedAttributesArrayList = selectedAttributesArrayList;
+
+        for(ProductByCategoryResponse.Attribtues attribtues : selectedAttributesArrayList){
+            addFilterDataInHashmap(attribtues);
+        }
+
+        this.filterAttribues = filerHaspMap.values().toArray(new String[0]);
+
         isFliter =  true;
 
     }
 
     public ProductByCategoryRequest getSearchFilter() {
-        ProductByCategoryRequest productByCategoryRequest = new ProductByCategoryRequest();
+        productByCategoryRequest = new ProductByCategoryRequest();
         productByCategoryRequest.setmFAttributes(filterAttribues);
         productByCategoryRequest.setMinValue(minimumValue);
         productByCategoryRequest.setMaxValue(maximumValue);
@@ -365,12 +388,15 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                     }
 
 
-                    if (mAdapter2 == null) {
+                   /* if (mAdapter2 == null) {
                         mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
                         recyclerview.setAdapter(mAdapter2);
                     }else{
                         mAdapter2.notifyDataSetChanged();
-                    }
+                    }*/
+
+                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
+                    recyclerview.setAdapter(mAdapter2);
 
 
                 }
@@ -419,8 +445,41 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                             productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
 
                         } else {
-//                            showCenteredToast(ryParent, getActivity(), getString(R.string.network_connection), "");
                             Util.showNoInternetDialog(getActivity());
+                        }
+
+                    }
+                    break;
+                case R.id.lyRemoveAttribute:
+
+
+                    ProductByCategoryResponse.Attribtues attribtues = ((ProductByCategoryResponse.Attribtues) view.getTag());
+
+                    if (attribtues != null) {
+
+
+                        selectedAttributesArrayList.remove(attribtues);
+
+                        if (selectedAttributesAdapter != null) {
+                            selectedAttributesAdapter.notifyDataSetChanged();
+
+                        }
+
+                        filterAttribues = null;
+                        filerHaspMap.clear();
+
+                        if (!selectedAttributesArrayList.isEmpty()) {
+                            for(ProductByCategoryResponse.Attribtues attribtuesData : selectedAttributesArrayList){
+                                addFilterDataInHashmap(attribtuesData);
+                            }
+                            if (!filerHaspMap.isEmpty()) {
+                                filterAttribues = filerHaspMap.values().toArray(new String[0]);
+                                productByCategoryRequest.setmFAttributes(filterAttribues);
+                                callProductByCategoryAPI();
+                            }
+                        }else{
+                            productByCategoryRequest.setmFAttributes(null);
+                            callProductByCategoryAPI();
                         }
 
                     }
@@ -509,4 +568,52 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         offset = 0;
         callProductByCategoryAPI();
     }
+
+    private void addFilterDataInHashmap(ProductByCategoryResponse.Attribtues productAttributes) {
+        if (filerHaspMap.isEmpty()) {
+            if (productAttributes.isSelected()) {
+                filerHaspMap.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeId());
+            }
+        } else {
+
+            if (productAttributes.isSelected()) {
+                if (filerHaspMap.containsKey(productAttributes.getmAttributeType())) {
+                    String value = filerHaspMap.get(productAttributes.getmAttributeType());
+                    value = value + "," + productAttributes.getmAttributeId();
+
+                    filerHaspMap.put(productAttributes.getmAttributeType(), value);
+                } else {
+                    filerHaspMap.put(productAttributes.getmAttributeType(), productAttributes.getmAttributeId());
+
+                }
+            } else {
+                if (filerHaspMap.containsKey(productAttributes.getmAttributeType())) {
+                    String value = filerHaspMap.get(productAttributes.getmAttributeType());
+                    String removeValue = productAttributes.getmAttributeId();
+
+                    List<String> items = Arrays.asList(value.split("\\s*,\\s*"));
+                    List<String> newItems = new ArrayList<>();
+                    for (String item : items) {
+                        if (!removeValue.equalsIgnoreCase(item)) {
+                            newItems.add(item);
+                        }
+                    }
+
+                    String newValue = android.text.TextUtils.join(",", newItems);
+                    if (TextUtils.isEmpty(newValue)) {
+                        filerHaspMap.remove(productAttributes.getmAttributeType());
+                    } else {
+                        filerHaspMap.put(productAttributes.getmAttributeType(), newValue);
+                    }
+
+                } else {
+                    filerHaspMap.remove(productAttributes.getmAttributeType());
+                }
+            }
+        }
+        int size = filerHaspMap.size();
+        Log.d("size", size + "");
+
+    }
+
 }
