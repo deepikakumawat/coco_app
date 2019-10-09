@@ -247,6 +247,11 @@ public class SubSubCategoryProductListFragment extends Fragment implements View.
         }
     }
 
+    @Override
+    public void getSubCatProductByCategory(SubSubCategoriesResponse subSubCategoriesResponse) {
+        // do nothing
+    }
+
 
     private void sortByRating(ArrayList<ProductData> productDataArrayList) {
         try {

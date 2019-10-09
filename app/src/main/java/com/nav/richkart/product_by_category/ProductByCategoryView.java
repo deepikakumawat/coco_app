@@ -2,6 +2,7 @@ package com.nav.richkart.product_by_category;
 
 
 import com.nav.richkart.product_details.AddToCartResponse;
+import com.nav.richkart.sub_sub_category.SubSubCategoriesResponse;
 
 public interface ProductByCategoryView {
 
@@ -15,4 +16,7 @@ public interface ProductByCategoryView {
 
 
     void addToCart(AddToCartResponse addToCartResponse);
+
+    void getSubCatProductByCategory(SubSubCategoriesResponse subSubCategoriesResponse);
+
 }

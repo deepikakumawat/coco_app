@@ -38,6 +38,7 @@ import com.nav.richkart.fragment.FragmentManagerUtils;
 import com.nav.richkart.product_details.AddToCartResponse;
 import com.nav.richkart.product_details.ProductDetailFragment;
 import com.nav.richkart.shared_preference.CocoPreferences;
+import com.nav.richkart.sub_sub_category.SubSubCategoriesResponse;
 import com.nav.richkart.utility.Constant;
 import com.nav.richkart.utility.Util;
 
@@ -56,9 +57,10 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private View mView;
     private String catId;
     private IFragmentListener mListener;
-    ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
+    private ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList = new ArrayList<>();
     private ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList = new ArrayList<>();
     private SelectedAttributesAdapter selectedAttributesAdapter;
+    private ArrayList<SubSubCategoriesResponse.MainSubCategoriesData> mainSubCategoriesDataArrayList = new ArrayList<>();
 
     private String[] filterAttribues;
     private String maximumValue;
@@ -70,10 +72,10 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private RecyclerView recyclerview;
     private ProductByCategoryAdapter mAdapter2;
     private ProductByCategoryPresenter productByCategoryPresenter;
-//    private String catId;
+    //    private String catId;
     private ShimmerFrameLayout mShimmerViewContainer;
     private RelativeLayout ryParent;
-    private int tabPostion =0 ;
+    private int tabPostion = 0;
     boolean isShimmerShow = true;
     private ProductByCategoryRequest productByCategoryRequest;
     private ScrollView svNotFound;
@@ -83,6 +85,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     private boolean isFliter = false;
     private SwipeRefreshLayout pullDownRefreshCall;
     private RecyclerView rvSelectedAttributes;
+    private String screen;
 
 
     @Nullable
@@ -95,6 +98,12 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         Bundle bundle = getArguments();
         if (bundle != null) {
             catId = bundle.getString("catId");
+
+            if (bundle.containsKey("screen")) {
+                screen = bundle.getString("screen");
+
+            }
+
         }
 
         return mView;
@@ -107,11 +116,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
         tabLayout = mView.findViewById(R.id.tab_layout);
 
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.addTab(tabLayout.newTab().setText("Popular"));
-        tabLayout.addTab(tabLayout.newTab().setText("Low Price"));
-        tabLayout.addTab(tabLayout.newTab().setText("High Price"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sale"));
+
+
+
 
         Typeface mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
 
@@ -156,6 +163,11 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                 tabPostion = tab.getPosition();
                 offset = 0;
                 productGridModellClasses.clear();
+
+                if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("Department")) {
+                    catId = mainSubCategoriesDataArrayList.get(tab.getPosition()).getmCatId();
+                }
+
                 callProductByCategoryAPI();
             }
 
@@ -170,7 +182,6 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
 
         productByCategoryRequest = getSearchFilter();
-
 
 
         ryParent = view.findViewById(R.id.ryParent);
@@ -197,27 +208,36 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         productGridModellClasses = new ArrayList<>();
 
         offset = 0;
-        if(productGridModellClasses != null)
-        productGridModellClasses.clear();
+        if (productGridModellClasses != null)
+            productGridModellClasses.clear();
 
-        callProductByCategoryAPI();
+        if (!TextUtils.isEmpty(screen) && screen.equalsIgnoreCase("Department")) {
+
+            callAPI();
+        } else {
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
+            tabLayout.addTab(tabLayout.newTab().setText("Popular"));
+            tabLayout.addTab(tabLayout.newTab().setText("Low Price"));
+            tabLayout.addTab(tabLayout.newTab().setText("High Price"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sale"));
+
+            callProductByCategoryAPI();
+        }
 
 
-        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener()
-        {
+
+
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
-            {
-                if(dy > 0) //check for scroll down
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) //check for scroll down
                 {
-                   int visibleItemCount = mLayoutManager.getChildCount();
-                  int  totalItemCount = mLayoutManager.getItemCount();
-                  int  pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                    int visibleItemCount = mLayoutManager.getChildCount();
+                    int totalItemCount = mLayoutManager.getItemCount();
+                    int pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
 
-                    if (!loading)
-                    {
-                        if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount)
-                        {
+                    if (!loading) {
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             loading = true;
                             offset = offset + 20;
                             callProductByCategoryAPI();
@@ -230,9 +250,17 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         });
 
 
-
     }
 
+    private void callAPI() {
+
+        if (Util.isDeviceOnline(getActivity())) {
+            productByCategoryPresenter.getSubCateProductByCat(catId);
+        } else {
+            Util.showNoInternetDialog(getActivity());
+        }
+
+    }
 
 
     private void setCustomFontAndStyle(TabLayout tabLayout, Integer position) {
@@ -263,20 +291,20 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     }
 
     @Override
-    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList,  String minimumValue, String maximumValue,ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList) {
+    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String minimumValue, String maximumValue, ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList) {
         this.productAttribueDataArrayList = mproductAttribueDataArrayList;
 //        this.filterAttribues = filterAttribues;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
         this.selectedAttributesArrayList = selectedAttributesArrayList;
 
-        for(ProductByCategoryResponse.Attribtues attribtues : selectedAttributesArrayList){
+        for (ProductByCategoryResponse.Attribtues attribtues : selectedAttributesArrayList) {
             addFilterDataInHashmap(attribtues);
         }
 
         this.filterAttribues = filerHaspMap.values().toArray(new String[0]);
 
-        isFliter =  true;
+        isFliter = true;
 
     }
 
@@ -314,9 +342,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         if (Util.isDeviceOnline(getActivity())) {
             productByCategoryRequest.setCateId(catId);
             productByCategoryRequest.setOffset(offset);
-            if(offset > 1) {
+            if (offset > 1) {
                 isShimmerShow = false;
-            }else{
+            } else {
                 isShimmerShow = true;
             }
             productByCategoryPresenter.getProductByCat(productByCategoryRequest);
@@ -354,8 +382,8 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
     @Override
     public void onFailure(String appErrorMessage) {
-        if(productGridModellClasses.size() == 0)
-        nodataFound(appErrorMessage);
+        if (productGridModellClasses.size() == 0)
+            nodataFound(appErrorMessage);
     }
 
 
@@ -380,11 +408,11 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                         sortByHighPrice(productGridModellClasses);
                     }
 
-                    if(!isFliter) {
+                    if (!isFliter) {
 
                         getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
                     } else {
-                        isFliter =  false;
+                        isFliter = false;
                     }
 
 
@@ -469,7 +497,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                         filerHaspMap.clear();
 
                         if (!selectedAttributesArrayList.isEmpty()) {
-                            for(ProductByCategoryResponse.Attribtues attribtuesData : selectedAttributesArrayList){
+                            for (ProductByCategoryResponse.Attribtues attribtuesData : selectedAttributesArrayList) {
                                 addFilterDataInHashmap(attribtuesData);
                             }
                             if (!filerHaspMap.isEmpty()) {
@@ -477,7 +505,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                                 productByCategoryRequest.setmFAttributes(filterAttribues);
                                 callProductByCategoryAPI();
                             }
-                        }else{
+                        } else {
                             productByCategoryRequest.setmFAttributes(null);
                             callProductByCategoryAPI();
                         }
@@ -615,5 +643,25 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         Log.d("size", size + "");
 
     }
+
+    @Override
+    public void getSubCatProductByCategory(SubSubCategoriesResponse subSubCategoriesResponse) {
+        if (subSubCategoriesResponse != null) {
+
+            mainSubCategoriesDataArrayList.clear();
+            mainSubCategoriesDataArrayList.addAll(subSubCategoriesResponse.getmData().getmMainSubCategories());
+
+            for (SubSubCategoriesResponse.MainSubCategoriesData mainSubCategoriesData : mainSubCategoriesDataArrayList) {
+                tabLayout.addTab(tabLayout.newTab().setText(mainSubCategoriesData.getmCatName()));
+            }
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+            catId = mainSubCategoriesDataArrayList.get(0).getmCatId();
+            callProductByCategoryAPI();
+
+        }
+
+    }
+
 
 }

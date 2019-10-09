@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.nav.richkart.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nav.richkart.base_fragment.BaseFragment;
+import com.nav.richkart.product_by_category.ProductListByCategoryFragment;
 import com.nav.richkart.sub_sub_category.SubSubProductCategoryFragment;
 import com.nav.richkart.utility.Util;
 
@@ -171,19 +172,18 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
                     if (subCategoriesData != null) {
                         Bundle bundle = new Bundle();
                         bundle.putString("catId", subCategoriesData.getmCatId());
-                        bundle.putString("catName", subCategoriesData.getmCatName());
+//                        bundle.putString("catName", subCategoriesData.getmCatName());
+                        bundle.putString("screen", "Department");
 
-
-                     /*   SubCategoryFragment subCategoryFragment = new SubCategoryFragment();
-                        subCategoryFragment.setArguments(bundle);
-
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), subCategoryFragment, "ProductListByCategoryFragment", true, false);
-*/
-
-                        SubSubProductCategoryFragment subSubProductCategoryFragment = new SubSubProductCategoryFragment();
+                      /*  SubSubProductCategoryFragment subSubProductCategoryFragment = new SubSubProductCategoryFragment();
                         subSubProductCategoryFragment.setArguments(bundle);
 
                         FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), subSubProductCategoryFragment, "ProductListByCategoryFragment", true, false);
+*/
+                        ProductListByCategoryFragment productListByCategoryFragment = new ProductListByCategoryFragment();
+                        productListByCategoryFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productListByCategoryFragment, "ProductListByCategoryFragment", true, false);
 
 
                     }
