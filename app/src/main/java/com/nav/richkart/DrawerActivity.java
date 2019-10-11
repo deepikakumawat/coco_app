@@ -541,7 +541,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
         String thumbnail = CocoPreferences.getProfilePic();
 //        Glide.with(this).load(thumbnail).placeholder(R.drawable.user_dp).into(imgProfileImage);
-        Glide.with(imgProfileImage.getContext()).load(thumbnail).placeholder(R.drawable.user_dp).dontAnimate().into(imgProfileImage);
+        Glide.with(imgProfileImage.getContext()).load(thumbnail).placeholder(R.drawable.sidebar_non_loginimg).dontAnimate().into(imgProfileImage);
 
 
         if (TextUtils.isEmpty(CocoPreferences.getUserId())) {
@@ -577,6 +577,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             CocoPreferences.removeValueForKey("UserPhone");
                             CocoPreferences.removeValueForKey("FirstName");
                             CocoPreferences.removeValueForKey("LastName");
+                            CocoPreferences.removeValueForKey("UserPic");
 
                             txtUserName.setVisibility(View.GONE);
                             txtUserEmail.setVisibility(View.GONE);

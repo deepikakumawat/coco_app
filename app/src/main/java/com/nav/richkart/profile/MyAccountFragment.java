@@ -222,6 +222,7 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
                             CocoPreferences.removeValueForKey("UserPhone");
                             CocoPreferences.removeValueForKey("FirstName");
                             CocoPreferences.removeValueForKey("LastName");
+                            CocoPreferences.removeValueForKey("UserPic");
 
 
                             txtUserName.setText("");

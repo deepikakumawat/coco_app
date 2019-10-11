@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -48,6 +49,7 @@ public class FilterExpandableAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_child_item_filter, null);
         }
         TextView txtAttributeName = convertView.findViewById(R.id.txtAttributeName);
+        LinearLayout lyPaymentType = convertView.findViewById(R.id.lyPaymentType);
         RadioButton rbChildItem = convertView.findViewById(R.id.rbChildItem);
 
         txtAttributeName.setText(productAttributes.getmAttributeName());
@@ -58,8 +60,12 @@ public class FilterExpandableAdapter extends BaseExpandableListAdapter {
             rbChildItem.setChecked(false);
         }
 
-        txtAttributeName.setTag(productAttributes);
-        txtAttributeName.setOnClickListener(filterFragment);
+       /* txtAttributeName.setTag(productAttributes);
+        txtAttributeName.setOnClickListener(filterFragment); */
+
+        lyPaymentType.setTag(productAttributes);
+        lyPaymentType.setOnClickListener(filterFragment);
+
 
         return convertView;
     }

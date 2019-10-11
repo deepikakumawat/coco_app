@@ -126,7 +126,8 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
         try {
             int vId = view.getId();
             switch (vId) {
-                case R.id.txtAttributeName:
+//                case R.id.txtAttributeName:
+                case R.id.lyPaymentType:
                     ProductByCategoryResponse.Attribtues productAttributes = ((ProductByCategoryResponse.Attribtues) view.getTag());
                     if (productAttributes != null) {
 
