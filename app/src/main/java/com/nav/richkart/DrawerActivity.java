@@ -587,7 +587,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
                             mAdapter.notifyDataSetChanged();
 
                             Util.showCenteredToast(drawer, DrawerActivity.this, "Logout Successfully!", Constant.API_SUCCESS);
-
                             init();
 
                         }
