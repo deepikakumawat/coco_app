@@ -44,6 +44,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     private IFilterListener iFilterListener;
     private String minimumValue;
     private String maximumValue;
+    private int tabPostion;
 
     public void setmIFilterListener(IFilterListener iFilterListener) {
         this.iFilterListener = iFilterListener;
@@ -68,6 +69,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
             if (bundle != null) {
                 productAttribueDataArrayList = (ArrayList<ProductByCategoryResponse.ProductAttribueData>) bundle.getSerializable("productAttribueDataArrayList");
                 selectedAttributesArrayList = (ArrayList<ProductByCategoryResponse.Attribtues>) bundle.getSerializable("selectedAttributesArrayList");
+                tabPostion = bundle.getInt("tabPostion");
 //                setFilterHaspMap(productAttribueDataArrayList);
             }
 
@@ -166,7 +168,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 */
 
                     if (!selectedAttributesArrayList.isEmpty() || !TextUtils.isEmpty(minimumValue) || !TextUtils.isEmpty(maximumValue)) {
-                        iFilterListener.setSearchFilter(productAttribueDataArrayList, minimumValue, maximumValue,selectedAttributesArrayList);
+                        iFilterListener.setSearchFilter(productAttribueDataArrayList, minimumValue, maximumValue,selectedAttributesArrayList, tabPostion);
                         FragmentManagerUtils.popFragment(getFragmentManager());
                     } else {
                         Util.showCenteredToast(lyParent, getActivity(), getString(R.string.select_filter), "");

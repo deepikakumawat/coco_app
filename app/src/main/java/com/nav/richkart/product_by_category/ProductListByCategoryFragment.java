@@ -117,9 +117,6 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         tabLayout = mView.findViewById(R.id.tab_layout);
 
 
-
-
-
         Typeface mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
 
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
@@ -148,6 +145,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("productAttribueDataArrayList", productAttribueDataArrayList);
                 bundle.putSerializable("selectedAttributesArrayList", selectedAttributesArrayList);
+                bundle.putInt("tabPostion", tabPostion);
                 FilterFragment filterFragment = new FilterFragment();
                 filterFragment.setmIFilterListener(ProductListByCategoryFragment.this);
                 filterFragment.setArguments(bundle);
@@ -221,11 +219,16 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
             tabLayout.addTab(tabLayout.newTab().setText("High Price"));
             tabLayout.addTab(tabLayout.newTab().setText("Sale"));
 
-            callProductByCategoryAPI();
+            // callProductByCategoryAPI();
         }
 
+       /* if (isFliter) {
+            TabLayout.Tab tab = tabLayout.getTabAt(tabPostion);
+            tab.select();
 
+          //  tabLayout.setScrollPosition(tabPostion,0f,true);
 
+        }*/
 
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -291,8 +294,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
     }
 
     @Override
-    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String minimumValue, String maximumValue, ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList) {
+    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String minimumValue, String maximumValue, ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList, int tabPostion) {
         this.productAttribueDataArrayList = mproductAttribueDataArrayList;
+        this.tabPostion = tabPostion;
 //        this.filterAttribues = filterAttribues;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
@@ -399,21 +403,29 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
                     recyclerview.setVisibility(View.VISIBLE);
                     svNotFound.setVisibility(View.GONE);
 
-                    if (tabPostion == 0) {
-                        sortByRating(productGridModellClasses);
+                    if (TextUtils.isEmpty(screen)) {
+                        if (tabPostion == 0) {
+                            sortByRating(productGridModellClasses);
 
-                    } else if (tabPostion == 1) {
-                        sortByLowPrice(productGridModellClasses);
-                    } else if (tabPostion == 2) {
-                        sortByHighPrice(productGridModellClasses);
+                        } else if (tabPostion == 1) {
+                            sortByLowPrice(productGridModellClasses);
+                        } else if (tabPostion == 2) {
+                            sortByHighPrice(productGridModellClasses);
+                        }
                     }
 
                     if (!isFliter) {
 
                         getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
+                    }
+
+                  /*  if (!isFliter) {
+
+                        getProductByCategory(productByCategoryResponse.getmData().getmProductAttributeData());
                     } else {
                         isFliter = false;
-                    }
+                    }*/
+
 
 
                    /* if (mAdapter2 == null) {
@@ -495,6 +507,9 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
                         filterAttribues = null;
                         filerHaspMap.clear();
+                        productGridModellClasses.clear();
+                        offset = 0;
+
 
                         if (!selectedAttributesArrayList.isEmpty()) {
                             for (ProductByCategoryResponse.Attribtues attribtuesData : selectedAttributesArrayList) {

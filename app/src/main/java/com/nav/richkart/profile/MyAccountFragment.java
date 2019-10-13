@@ -44,7 +44,6 @@ import com.nav.richkart.address.AddressListActivity;
 import com.nav.richkart.base_fragment.BaseFragment;
 import com.nav.richkart.home.HomeFragment;
 import com.nav.richkart.my_order.MyOrderFragment;
-import com.nav.richkart.product_by_category.ProductListByCategoryFragment;
 import com.nav.richkart.shared_preference.CocoPreferences;
 import com.nav.richkart.utility.Constant;
 import com.nav.richkart.utility.MarshMallowPermissions;
