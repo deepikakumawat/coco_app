@@ -287,38 +287,94 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         }
     }
 
-
-    public void getProductByCategory(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
-        this.productAttribueDataArrayList.clear();
-        this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
-    }
-
     @Override
-    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String minimumValue, String maximumValue, ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList, int tabPostion) {
-        this.productAttribueDataArrayList = mproductAttribueDataArrayList;
-        this.tabPostion = tabPostion;
-//        this.filterAttribues = filterAttribues;
-        this.minimumValue = minimumValue;
-        this.maximumValue = maximumValue;
-        this.selectedAttributesArrayList = selectedAttributesArrayList;
+    public void onClick(View view) {
+        try {
+            int vId = view.getId();
+            switch (vId) {
+                case R.id.lyProduct:
 
-        for (ProductByCategoryResponse.Attribtues attribtues : selectedAttributesArrayList) {
-            addFilterDataInHashmap(attribtues);
+                    ProductData productData = (ProductData) view.getTag();
+                    if (productData != null) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("productSlug", productData.getmProductSlug());
+                        bundle.putString("productId", productData.getmProductId());
+                        bundle.putString("productQty", productData.getmProductQty());
+
+                        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+                        productDetailFragment.setArguments(bundle);
+
+                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
+
+                    }
+
+                    break;
+                case R.id.lyAddToCart:
+
+
+                    productData = ((ProductData) view.getTag());
+
+                    if (productData != null) {
+
+                        if (Util.isDeviceOnline(getActivity())) {
+                            isShimmerShow = false;
+                            productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
+
+                        } else {
+                            Util.showNoInternetDialog(getActivity());
+                        }
+
+                    }
+                    break;
+                case R.id.lyRemoveAttribute:
+
+
+                    ProductByCategoryResponse.Attribtues attribtues = ((ProductByCategoryResponse.Attribtues) view.getTag());
+
+                    if (attribtues != null) {
+
+
+                        selectedAttributesArrayList.remove(attribtues);
+
+                        if (selectedAttributesAdapter != null) {
+                            selectedAttributesAdapter.notifyDataSetChanged();
+
+                        }
+
+                        filterAttribues = null;
+                        filerHaspMap.clear();
+                        productGridModellClasses.clear();
+                        offset = 0;
+
+
+                        if (!selectedAttributesArrayList.isEmpty()) {
+                            for (ProductByCategoryResponse.Attribtues attribtuesData : selectedAttributesArrayList) {
+                                addFilterDataInHashmap(attribtuesData);
+                            }
+                            if (!filerHaspMap.isEmpty()) {
+                                filterAttribues = filerHaspMap.values().toArray(new String[0]);
+                                productByCategoryRequest.setmFAttributes(filterAttribues);
+                                callProductByCategoryAPI();
+                            }
+                        } else {
+                            productByCategoryRequest.setmFAttributes(null);
+                            callProductByCategoryAPI();
+                        }
+
+                    }
+                    break;
+
+                case R.id.btnGoToHome:
+                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
+
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        this.filterAttribues = filerHaspMap.values().toArray(new String[0]);
-
-        isFliter = true;
-
-    }
-
-    public ProductByCategoryRequest getSearchFilter() {
-        productByCategoryRequest = new ProductByCategoryRequest();
-        productByCategoryRequest.setmFAttributes(filterAttribues);
-        productByCategoryRequest.setMinValue(minimumValue);
-        productByCategoryRequest.setMaxValue(maximumValue);
-        return productByCategoryRequest;
-
     }
 
     @Override
@@ -428,15 +484,15 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
 
 
 
-                   /* if (mAdapter2 == null) {
+                    if (mAdapter2 == null) {
                         mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
                         recyclerview.setAdapter(mAdapter2);
                     }else{
                         mAdapter2.notifyDataSetChanged();
-                    }*/
+                    }
 
-                    mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
-                    recyclerview.setAdapter(mAdapter2);
+                  /*  mAdapter2 = new ProductByCategoryAdapter(getActivity(), productGridModellClasses, ProductListByCategoryFragment.this);
+                    recyclerview.setAdapter(mAdapter2);*/
 
 
                 }
@@ -450,95 +506,42 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         recyclerview.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onClick(View view) {
-        try {
-            int vId = view.getId();
-            switch (vId) {
-                case R.id.lyProduct:
-
-                    ProductData productData = (ProductData) view.getTag();
-                    if (productData != null) {
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString("productSlug", productData.getmProductSlug());
-                        bundle.putString("productId", productData.getmProductId());
-                        bundle.putString("productQty", productData.getmProductQty());
-
-                        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
-                        productDetailFragment.setArguments(bundle);
-
-                        FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), productDetailFragment, "ProductDetailFragment", true, false);
-
-                    }
-
-                    break;
-                case R.id.lyAddToCart:
-
-
-                    productData = ((ProductData) view.getTag());
-
-                    if (productData != null) {
-
-                        if (Util.isDeviceOnline(getActivity())) {
-                            isShimmerShow = false;
-                            productByCategoryPresenter.addToCart(CocoPreferences.getUserId(), productData.getmProductId(), "1", "");
-
-                        } else {
-                            Util.showNoInternetDialog(getActivity());
-                        }
-
-                    }
-                    break;
-                case R.id.lyRemoveAttribute:
-
-
-                    ProductByCategoryResponse.Attribtues attribtues = ((ProductByCategoryResponse.Attribtues) view.getTag());
-
-                    if (attribtues != null) {
-
-
-                        selectedAttributesArrayList.remove(attribtues);
-
-                        if (selectedAttributesAdapter != null) {
-                            selectedAttributesAdapter.notifyDataSetChanged();
-
-                        }
-
-                        filterAttribues = null;
-                        filerHaspMap.clear();
-                        productGridModellClasses.clear();
-                        offset = 0;
-
-
-                        if (!selectedAttributesArrayList.isEmpty()) {
-                            for (ProductByCategoryResponse.Attribtues attribtuesData : selectedAttributesArrayList) {
-                                addFilterDataInHashmap(attribtuesData);
-                            }
-                            if (!filerHaspMap.isEmpty()) {
-                                filterAttribues = filerHaspMap.values().toArray(new String[0]);
-                                productByCategoryRequest.setmFAttributes(filterAttribues);
-                                callProductByCategoryAPI();
-                            }
-                        } else {
-                            productByCategoryRequest.setmFAttributes(null);
-                            callProductByCategoryAPI();
-                        }
-
-                    }
-                    break;
-
-                case R.id.btnGoToHome:
-                    FragmentManagerUtils.replaceFragmentInRoot(getActivity().getSupportFragmentManager(), new HomeFragment(), "HomeFragment", true, false);
-
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void getProductByCategory(ArrayList<ProductByCategoryResponse.ProductAttribueData> productAttribueDataArrayList) {
+        this.productAttribueDataArrayList.clear();
+        this.productAttribueDataArrayList.addAll(productAttribueDataArrayList);
     }
+
+    @Override
+    public void setSearchFilter(ArrayList<ProductByCategoryResponse.ProductAttribueData> mproductAttribueDataArrayList, String minimumValue, String maximumValue, ArrayList<ProductByCategoryResponse.Attribtues> selectedAttributesArrayList, int tabPostion) {
+        this.productAttribueDataArrayList = mproductAttribueDataArrayList;
+        this.tabPostion = tabPostion;
+//        this.filterAttribues = filterAttribues;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
+        this.selectedAttributesArrayList = selectedAttributesArrayList;
+
+        for (ProductByCategoryResponse.Attribtues attribtues : selectedAttributesArrayList) {
+            addFilterDataInHashmap(attribtues);
+        }
+
+        this.filterAttribues = filerHaspMap.values().toArray(new String[0]);
+
+        mAdapter2 = null;
+        isFliter = true;
+
+    }
+
+    public ProductByCategoryRequest getSearchFilter() {
+        productByCategoryRequest = new ProductByCategoryRequest();
+        productByCategoryRequest.setmFAttributes(filterAttribues);
+        productByCategoryRequest.setMinValue(minimumValue);
+        productByCategoryRequest.setMaxValue(maximumValue);
+        return productByCategoryRequest;
+
+    }
+
+
+
 
     @Override
     public void addToCart(AddToCartResponse addToCartResponse) {
