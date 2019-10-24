@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:668030816880:android:5970c4ea10d10904",
         "android_client_info": {
-          "package_name": "com.nav.richkart"
+          "package_name": "com.richkart.android"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "668030816880-g4vmebhhasfiir3r446vf76cag63ld00.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.nav.richkart",
+            "package_name": "com.richkart.android",
             "certificate_hash": "ef39a76e9620ef0aa55f074fbd96b28a3f426456"
           }
         },

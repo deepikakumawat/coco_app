@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+    <com.richkart.android.customfonts.MyTextView_Roboto_Bold
         android:id="@+id/txtAttributeType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

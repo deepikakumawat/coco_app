@@ -31,7 +31,7 @@
 
                 <!--Order Details-->
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
@@ -52,7 +52,7 @@
                     android:orientation="vertical"
                     android:padding="@dimen/dimen_10dp">
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtOrderId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                         tools:ignore="MissingConstraints" />
 
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtPAYMENTId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                         tools:ignore="MissingConstraints" />
 
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtOrderDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                         android:textSize="@dimen/txt_14sp"
                         tools:ignore="MissingConstraints" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
 
                 <!--Sender Data-->
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="11sp"
@@ -123,7 +123,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:id="@+id/txtSenderName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                             android:textSize="15sp"
                             tools:ignore="MissingConstraints" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:id="@+id/txtSenderContact"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                             android:textSize="15sp"
                             tools:ignore="MissingConstraints" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:id="@+id/txtSenderAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                             android:textSize="15sp"
                             tools:ignore="MissingConstraints" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:id="@+id/txtSenderEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                 android:orientation="vertical">
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
@@ -233,7 +233,7 @@
             </LinearLayout>
 
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"
@@ -255,7 +255,7 @@
 
                 android:padding="@dimen/dimen_10dp">
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtDeliveryContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -264,7 +264,7 @@
                     android:textSize="@dimen/txt_14sp"
                     tools:ignore="MissingConstraints" />
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtDeliveryAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -281,7 +281,7 @@
                     android:layout_marginTop="@dimen/dimen_2dp"
                     android:orientation="horizontal">
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtDeliveryCity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtDeliveryState"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -299,7 +299,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtDeliveryPincode"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -311,7 +311,7 @@
                 </LinearLayout>
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtDeliveryLandmark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
 
             </LinearLayout>
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"
@@ -346,7 +346,7 @@
 
                 android:padding="@dimen/dimen_10dp">
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtDeliveryContactB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -355,7 +355,7 @@
                     android:textSize="@dimen/txt_14sp"
                     tools:ignore="MissingConstraints" />
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtDeliveryAddressB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -372,7 +372,7 @@
                     android:layout_marginTop="@dimen/dimen_2dp"
                     android:orientation="horizontal">
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtDeliveryCityB"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -381,7 +381,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtDeliveryStateB"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -390,7 +390,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtDeliveryPincodeB"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -402,7 +402,7 @@
                 </LinearLayout>
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtDeliveryLandmarkB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -414,7 +414,7 @@
 
             </LinearLayout>
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"
@@ -437,7 +437,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tax"
@@ -445,7 +445,7 @@
                     android:textSize="@dimen/txt_14sp"
                     tools:ignore="MissingConstraints" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00"
@@ -460,14 +460,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Shipping charge"
                     android:textColor="@color/black"
                     android:textSize="@dimen/txt_14sp"
                     tools:ignore="MissingConstraints" />
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00"
@@ -481,7 +481,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_2dp"
@@ -489,7 +489,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/txt_14sp"
                     tools:ignore="MissingConstraints" />
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:id="@+id/txtPriceTotal"
                         android:layout_height="wrap_content"
@@ -504,7 +504,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_2dp"
@@ -512,7 +512,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/txt_14sp"
                     tools:ignore="MissingConstraints" />
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:id="@+id/txtPriceTotalB"
                         android:layout_height="wrap_content"
@@ -532,7 +532,7 @@
     </ScrollView>
 
 
-    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
         android:id="@+id/txtNoDataFound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

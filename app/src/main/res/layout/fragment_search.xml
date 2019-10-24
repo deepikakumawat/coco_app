@@ -25,7 +25,7 @@
             android:orientation="vertical"
             android:paddingBottom="10dp">
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search"
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11sp"
@@ -149,7 +149,7 @@
             android:id="@+id/lyTrendings"
             android:orientation="vertical">
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="11sp"

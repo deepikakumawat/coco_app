@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
 
-        <com.nav.richkart.customfonts.Button_Roboto_Medium
+        <com.richkart.android.customfonts.Button_Roboto_Medium
             android:id="@+id/btnFilter"
             style="@style/smallbuttonStyle"
             android:layout_margin="@dimen/dimen_5dp"
@@ -23,7 +23,7 @@
             android:text="@string/filer" />
 
 
-        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -56,7 +56,7 @@
             android:layout_marginBottom="25dp"
             android:gravity="center">
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/textMin1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:background="#95989a" />
 
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/textMin2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"

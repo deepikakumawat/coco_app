@@ -37,7 +37,7 @@
                     android:layout_marginTop="22dp"
                     android:orientation="vertical">
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtProductName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                             android:paddingBottom="5dp"
                             android:textSize="14.3sp" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Black
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Black
                             android:id="@+id/txtProductPrice"
                             android:layout_marginLeft="7.2dp"
                             android:layout_gravity="center"

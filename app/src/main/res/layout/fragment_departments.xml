@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+    <com.richkart.android.customfonts.MyTextView_Roboto_Medium
         style="@style/textTitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

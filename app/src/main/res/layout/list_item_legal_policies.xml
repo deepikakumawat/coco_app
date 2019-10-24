@@ -15,7 +15,7 @@
         android:paddingBottom="17dp">
 
 
-        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
             android:id="@+id/txtLegalPolicies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

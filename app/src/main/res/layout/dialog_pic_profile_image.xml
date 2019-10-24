@@ -29,7 +29,7 @@
 
 
 
-            <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+            <com.richkart.android.customfonts.TextViewSFProDisplayMedium
                 android:id="@+id/txtCamera"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="13.7sp" />
 
-            <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+            <com.richkart.android.customfonts.TextViewSFProDisplayMedium
                 android:id="@+id/txtGallery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="13.7sp" />
 
-            <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+            <com.richkart.android.customfonts.TextViewSFProDisplayMedium
                 android:id="@+id/txtCancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

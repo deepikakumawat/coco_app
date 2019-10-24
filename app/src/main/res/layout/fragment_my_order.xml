@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -67,14 +67,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="You can"
                             android:textColor="@color/white"
                             android:textSize="12.3sp" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -82,7 +82,7 @@
                             android:textColor="#f8c312"
                             android:textSize="12.3sp" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -90,7 +90,7 @@
                             android:textColor="@color/white"
                             android:textSize="12.3sp" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -98,7 +98,7 @@
                             android:textColor="#f8c312"
                             android:textSize="12.3sp" />
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -108,7 +108,7 @@
 
                     </LinearLayout>
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="from order detail."
@@ -130,7 +130,7 @@
         android:layout_below="@+id/svTop"
         android:layout_gravity="center" />
 
-    <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
         android:id="@+id/txtNoDataFound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

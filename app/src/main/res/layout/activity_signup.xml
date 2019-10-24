@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/txtProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
 
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etEmail"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtProductName" />
 
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etFname"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                 android:inputType="text"
                 app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etLname"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -117,7 +117,7 @@
 
             </RadioGroup>
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etPhone"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -129,7 +129,7 @@
                 app:layout_constraintTop_toBottomOf="@id/rgPayment" />
 
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etPassword"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                 android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@id/etPhone" />
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etConfirmPassword"
                 style="@style/edittextStyle"
                 android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                 app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
 
-            <com.nav.richkart.customfonts.Button_Roboto_Medium
+            <com.richkart.android.customfonts.Button_Roboto_Medium
                 android:id="@+id/btnSignup"
                 style="@style/buttonStyle"
                 android:layout_width="match_parent"

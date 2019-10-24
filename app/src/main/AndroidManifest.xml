@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nav.richkart">
+    package="com.richkart.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,13 +10,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name="com.nav.richkart.CocoApp"
+        android:name="com.richkart.android.CocoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.nav.richkart.SplashActivity">
+        <activity android:name="com.richkart.android.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,28 +25,28 @@
 
         </activity>
         <activity
-            android:name="com.nav.richkart.VideoActivity"
+            android:name="com.richkart.android.VideoActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true" />
-        <activity android:name="com.nav.richkart.StartActivity" />
-        <activity android:name="com.nav.richkart.DrawerActivity" />
-        <activity android:name="com.nav.richkart.profile.ChangePasswordActivity" />
-        <activity android:name="com.nav.richkart.my_order.LoginAlertOnMyOrderActivity" />
-        <activity android:name="com.nav.richkart.address.LoginAlertOnAddressActivity" />
-        <activity android:name="com.nav.richkart.my_cart.LoginAlertOnCartActivity" />
-        <activity android:name="com.nav.richkart.my_wishlist.LoginAlertOnWishlistActivity" />
-        <activity android:name="com.nav.richkart.profile.LoginAlertOnMyAccountActivity" />
-        <activity android:name="com.nav.richkart.login.ForgotPasswordActivity" />
-        <activity android:name="com.nav.richkart.profile.ProfileActivity" />
-        <activity android:name="com.nav.richkart.login.LoginActivity" />
-        <activity android:name="com.nav.richkart.address.AddressListActivity" />
+        <activity android:name="com.richkart.android.StartActivity" />
+        <activity android:name="com.richkart.android.DrawerActivity" />
+        <activity android:name="com.richkart.android.profile.ChangePasswordActivity" />
+        <activity android:name="com.richkart.android.my_order.LoginAlertOnMyOrderActivity" />
+        <activity android:name="com.richkart.android.address.LoginAlertOnAddressActivity" />
+        <activity android:name="com.richkart.android.my_cart.LoginAlertOnCartActivity" />
+        <activity android:name="com.richkart.android.my_wishlist.LoginAlertOnWishlistActivity" />
+        <activity android:name="com.richkart.android.profile.LoginAlertOnMyAccountActivity" />
+        <activity android:name="com.richkart.android.login.ForgotPasswordActivity" />
+        <activity android:name="com.richkart.android.profile.ProfileActivity" />
+        <activity android:name="com.richkart.android.login.LoginActivity" />
+        <activity android:name="com.richkart.android.address.AddressListActivity" />
         <activity
-            android:name="com.nav.richkart.address.AddAddressActivity"
+            android:name="com.richkart.android.address.AddAddressActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="com.nav.richkart.MobileVerificationActivity" />
-        <activity android:name="com.nav.richkart.signup.SignupActivity" />
-        <activity android:name="com.nav.richkart.product_rating_list.ReviewActivity" />
+        <activity android:name="com.richkart.android.MobileVerificationActivity" />
+        <activity android:name="com.richkart.android.signup.SignupActivity" />
+        <activity android:name="com.richkart.android.product_rating_list.ReviewActivity" />
 
 
 
@@ -58,7 +58,7 @@
 
         <!--FCM -->
         <service
-            android:name="com.nav.richkart.fcm.MyFirebaseMessagingService"
+            android:name="com.richkart.android.fcm.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -76,7 +76,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <service android:name="com.nav.richkart.fcm.MyFirebaseId">
+        <service android:name="com.richkart.android.fcm.MyFirebaseId">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

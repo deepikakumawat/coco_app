@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/txtProductName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                             android:orientation="horizontal">
 
 
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                            <com.richkart.android.customfonts.MyTextView_Roboto_Bold
                                 android:id="@+id/txtRating"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                                 android:src="@drawable/star" />
 
 
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Black
+                            <com.richkart.android.customfonts.MyTextView_Roboto_Black
                                 android:id="@+id/txtProductPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

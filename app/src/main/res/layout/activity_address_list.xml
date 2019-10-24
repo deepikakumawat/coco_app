@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.nav.richkart.address.AddressListActivity">
+    tools:context="com.richkart.android.address.AddressListActivity">
 
 
     <include
@@ -39,7 +39,7 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-                    <com.nav.richkart.customfonts.Button_Roboto_Medium
+                    <com.richkart.android.customfonts.Button_Roboto_Medium
                         android:id="@+id/btnAddAddress"
                         style="@style/buttonStyle"
                         android:layout_width="wrap_content"

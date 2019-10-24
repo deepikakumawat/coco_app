@@ -52,7 +52,7 @@
             android:orientation="vertical"
             android:paddingBottom="10dp">
 
-            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/txtEmptyCart"
                 android:layout_width="158dp"
                 android:layout_height="40dp"

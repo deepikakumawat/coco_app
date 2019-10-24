@@ -29,14 +29,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Bold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Customer Review And "
                         android:textColor="@color/black"
                         android:textSize="12.7sp" />
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Bold
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Bold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qa"
@@ -67,7 +67,7 @@
                             android:paddingRight="15dp"
                             android:paddingBottom="5dp">
 
-                            <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtReview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
 
                     </LinearLayout>
 
-                    <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                         android:id="@+id/txtRatingCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -125,14 +125,14 @@
                 android:orientation="vertical">
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Top Review"
                     android:textColor="#241f1f" />
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Medium
+                <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                     android:id="@+id/txtUserNameDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                     android:textSize="10.3sp" />
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtUserComment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                     android:textSize="11.3sp" />
 
 
-                <com.nav.richkart.customfonts.MyTextView_Roboto_Regular
+                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                     android:id="@+id/txtViewAllReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

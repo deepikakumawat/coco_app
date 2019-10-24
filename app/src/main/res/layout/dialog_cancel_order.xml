@@ -48,7 +48,7 @@
             android:visibility="gone">
 
 
-            <com.nav.richkart.customfonts.EditText_Roboto_Meidum
+            <com.richkart.android.customfonts.EditText_Roboto_Meidum
                 android:id="@+id/etxtReason"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -70,7 +70,7 @@
             android:layout_margin="5dp"
             android:orientation="horizontal">
 
-            <com.nav.richkart.customfonts.Button_Roboto_Medium
+            <com.richkart.android.customfonts.Button_Roboto_Medium
                 android:id="@+id/txtCancel"
                 style="@style/smallbuttonStyle"
                 android:layout_marginTop="9dp"
@@ -80,7 +80,7 @@
                 android:textAllCaps="false" />
 
 
-            <com.nav.richkart.customfonts.Button_Roboto_Medium
+            <com.richkart.android.customfonts.Button_Roboto_Medium
                 android:id="@+id/txtSubmit"
                 style="@style/smallbuttonStyle"
                 android:layout_marginLeft="5dp"

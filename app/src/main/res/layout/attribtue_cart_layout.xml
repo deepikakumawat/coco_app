@@ -8,7 +8,7 @@
     android:weightSum="2.5"
     android:orientation="horizontal">
 
-    <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+    <com.richkart.android.customfonts.TextViewSFProDisplayMedium
         android:id="@+id/txtAttributeType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:textColorHint="@color/black"
         android:textSize="@dimen/txt_14sp" />
 
-    <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+    <com.richkart.android.customfonts.TextViewSFProDisplayMedium
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,7 +29,7 @@
         android:textColorHint="@color/black"
         android:textSize="@dimen/txt_14sp" />
 
-    <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+    <com.richkart.android.customfonts.TextViewSFProDisplayMedium
         android:id="@+id/txtAttributeName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

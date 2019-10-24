@@ -19,7 +19,7 @@
         android:paddingRight="@dimen/dimen_12dp"
         android:paddingBottom="@dimen/dimen_8dp">
 
-        <com.nav.richkart.customfonts.TextViewSFProDisplayMedium
+        <com.richkart.android.customfonts.TextViewSFProDisplayMedium
             android:id="@+id/txtAttributeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         </LinearLayout>
 
 
-        <com.nav.richkart.customfonts.TextViewSFProDisplayRegular
+        <com.richkart.android.customfonts.TextViewSFProDisplayRegular
             android:layout_width="wrap_content"
             android:id="@+id/name"
             android:layout_marginTop="@dimen/dimen_5dp"
