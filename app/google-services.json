@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "668030816880",
-    "firebase_url": "https://cocoapp-1562843055834.firebaseio.com",
-    "project_id": "cocoapp-1562843055834",
-    "storage_bucket": "cocoapp-1562843055834.appspot.com"
+    "project_number": "768346859552",
+    "firebase_url": "https://richkart-b934d.firebaseio.com",
+    "project_id": "richkart-b934d",
+    "storage_bucket": "richkart-b934d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:668030816880:android:5970c4ea10d10904",
+        "mobilesdk_app_id": "1:768346859552:android:f44cd8e07e5da56eeff445",
         "android_client_info": {
           "package_name": "com.richkart.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "668030816880-g4vmebhhasfiir3r446vf76cag63ld00.apps.googleusercontent.com",
+          "client_id": "768346859552-dvtj2bcsnncj5tc1uotcaf3md9jvcffk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.richkart.android",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "668030816880-qgdk9345l5tefoftc5bk2ojmmk8q83ud.apps.googleusercontent.com",
+          "client_id": "768346859552-0ic6r4b4hv85j70o3t2t4qimg7k7is0h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyArJeV9nAZ5pJh9em20p2VuxmVLIXNMPJ4"
+          "current_key": "AIzaSyDXNOgN24eHXqccVMwIa8aRInDp9aMvNwU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "668030816880-qgdk9345l5tefoftc5bk2ojmmk8q83ud.apps.googleusercontent.com",
+              "client_id": "768346859552-0ic6r4b4hv85j70o3t2t4qimg7k7is0h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
