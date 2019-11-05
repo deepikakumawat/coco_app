@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 27
@@ -95,6 +96,14 @@ dependencies {
     compile 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
 
 
+    // Add dependency
+//    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    implementation 'com.google.android.gms:play-services-analytics:9.0.1'
+
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true
+    }
 
 }
 repositories {

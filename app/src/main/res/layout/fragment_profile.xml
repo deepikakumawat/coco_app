@@ -67,7 +67,7 @@
                 android:id="@+id/darkModeSwitch"
                 style="@style/settingsText"
                 android:drawableLeft="@drawable/ic_dark_mode"
-                android:text="Dark Mode" />
+                android:text="Rich Mode" />
 
             <TextView
                 style="@style/viewParent.headerText.settingsMiniTitle"
