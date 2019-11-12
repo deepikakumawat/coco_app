@@ -547,10 +547,7 @@ public class CheckoutFragment extends BaseFragment implements CheckoutView, View
         }
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.checkout);
-    }
+
 
     @Override
     protected boolean isSearchIconVisible() {

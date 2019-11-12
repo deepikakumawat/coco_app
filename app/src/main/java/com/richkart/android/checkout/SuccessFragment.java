@@ -160,8 +160,4 @@ public class SuccessFragment extends BaseFragment implements View.OnClickListene
         return false;
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.order_status);
-    }
 }

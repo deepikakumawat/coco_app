@@ -175,10 +175,7 @@ public class SubSubProductCategoryFragment extends BaseFragment implements SubCa
     }
 
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.trandings);
-    }
+
 
     @Override
     protected boolean isSearchIconVisible() {

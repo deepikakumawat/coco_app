@@ -70,9 +70,7 @@ class LegalPoliciesFragment : BaseFragment(), View.OnClickListener {
         return false
     }
 
-    override fun getActionbarTitle(): String? {
-        return ""
-    }
+
 
     fun openWebView(webUrl: String) {
         var bundle = Bundle()

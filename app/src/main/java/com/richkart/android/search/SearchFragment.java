@@ -313,10 +313,7 @@ public class SearchFragment extends BaseFragment implements SearchView, TextWatc
         return false;
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.search_title);
-    }
+
 
     @Override
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {

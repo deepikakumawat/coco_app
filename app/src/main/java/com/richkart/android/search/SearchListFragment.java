@@ -174,11 +174,5 @@ public class SearchListFragment extends BaseFragment implements SearchView, View
         return false;
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        if (!TextUtils.isEmpty(searchTerm)) {
-            return searchTerm;
-        }
-        return getString(R.string.search_title);
-    }
+
 }

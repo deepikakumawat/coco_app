@@ -208,15 +208,7 @@ public class DealsProductFragment extends BaseFragment implements DealsView, Vie
         }
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        if (!TextUtils.isEmpty(sellerName)) {
-            return sellerName;
 
-        }
-        return getString(R.string.products);
-
-    }
 
     @Override
     protected boolean isSearchIconVisible() {

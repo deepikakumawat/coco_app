@@ -404,10 +404,7 @@ public class ProductListByCategoryFragment extends BaseFragment implements View.
         }
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.trandings);
-    }
+
 
     @Override
     protected boolean isSearchIconVisible() {

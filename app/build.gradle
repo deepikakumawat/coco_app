@@ -61,13 +61,15 @@ dependencies {
     compile 'me.relex:circleindicator:1.2.1@aar'
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
     compile 'com.github.iffa:wrapping-viewpager:1.0.1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 //    compile 'com.google.code.gson:gson:2.6.2'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     provided 'javax.annotation:jsr250-api:1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 
     //seekbar
     compile 'com.crystal:crystalrangeseekbar:1.1.1'

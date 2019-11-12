@@ -67,7 +67,5 @@ class LegalPoliciesWebPages : BaseFragment(){
         return false
     }
 
-    override fun getActionbarTitle(): String? {
-        return null
-    }
+
 }

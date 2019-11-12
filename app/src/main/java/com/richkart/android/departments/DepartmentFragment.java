@@ -78,10 +78,7 @@ public class DepartmentFragment extends BaseFragment implements DepartmentView, 
     }
 
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.departments);
-    }
+
 
     @Override
     protected boolean isCartIconVisible() {

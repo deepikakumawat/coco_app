@@ -12,7 +12,6 @@ abstract class BaseFragment : ToolbarBaseFragment() {
     override fun onResume() {
         super.onResume()
         if (this.mListener != null) {
-            this.mListener!!.setScreenTitle(getActionbarTitle())
             this.mListener!!.isCartIconVisible(isCartIconVisible())
             this.mListener!!.isSearchIconVisible(isSearchIconVisible())
 
@@ -32,9 +31,6 @@ abstract class BaseFragment : ToolbarBaseFragment() {
         return true
     }
 
-    protected open fun getActionbarTitle(): String? {
-        return ""
-    }
 
 
 }

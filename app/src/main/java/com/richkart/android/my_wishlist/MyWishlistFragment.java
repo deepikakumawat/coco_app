@@ -221,10 +221,7 @@ public class MyWishlistFragment extends BaseFragment implements MyWishListView, 
     }
 
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.my_wishlist);
-    }
+
 
     @Override
     protected boolean isCartIconVisible() {

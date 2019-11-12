@@ -207,7 +207,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
                 } else if (position == 3) {
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        setScreenTitle(getString(R.string.my_cart));
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnCartActivity.class));
@@ -227,7 +226,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
 
                     if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                        setScreenTitle(getString(R.string.my_wishlist));
                         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new MyWishlistFragment(), "MyWishlistFragment", true, false);
                     } else {
                         startActivity(new Intent(DrawerActivity.this, LoginAlertOnWishlistActivity.class));
@@ -315,7 +313,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
         invalidateOptionsMenu();
 
-        setScreenTitle(getString(R.string.home));
         FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 //        FragmentManagerUtils.addFragmentInRoot(getSupportFragmentManager(), new HomeFragment(), "HomeFragment", false, false);
 
@@ -403,7 +400,6 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(CocoPreferences.getUserId())) {
-                    setScreenTitle(getString(R.string.my_cart));
                     FragmentManagerUtils.replaceFragmentInRoot(getSupportFragmentManager(), new CartFragment(), "CartFragment", true, false);
                 } else {
                     startActivity(new Intent(DrawerActivity.this, LoginAlertOnCartActivity.class));
@@ -467,12 +463,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
 
     }
 
-    @Override
-    public void setScreenTitle(String title) {
-        if (!TextUtils.isEmpty(title)) {
-            txtTitle.setText(title);
-        }
-    }
+
 
     @Override
     public void isCartIconVisible(boolean isCartIconVisible) {

@@ -91,10 +91,7 @@ public class SubCategoryFragment extends BaseFragment implements SubCatProductBy
     }
 
 
-    @Override
-    protected String getActionbarTitle() {
-        return catName;
-    }
+
 
     @Override
     protected boolean isCartIconVisible() {

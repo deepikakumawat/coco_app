@@ -80,10 +80,7 @@ public class ProductImagesFragment extends BaseFragment implements View.OnClickL
     }
 
 
-    @Override
-    protected String getActionbarTitle() {
-        return "Product Images";
-    }
+
 
     @Override
     protected boolean isSearchIconVisible() {

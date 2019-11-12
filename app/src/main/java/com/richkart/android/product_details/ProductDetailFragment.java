@@ -1315,11 +1315,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
 
     @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.product_details);
-    }
-
-    @Override
     protected boolean isSearchIconVisible() {
         return true;
     }

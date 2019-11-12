@@ -236,15 +236,7 @@ public class SellerProductFragment extends BaseFragment implements SellerView, V
         }
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        if (!TextUtils.isEmpty(sellerName)) {
-            return sellerName;
 
-        }
-        return getString(R.string.products);
-
-    }
 
     @Override
     protected boolean isSearchIconVisible() {

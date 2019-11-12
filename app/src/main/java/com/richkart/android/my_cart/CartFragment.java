@@ -455,8 +455,5 @@ public class CartFragment extends BaseFragment implements CartView, View.OnClick
         return false;
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.my_cart);
-    }
+
 }

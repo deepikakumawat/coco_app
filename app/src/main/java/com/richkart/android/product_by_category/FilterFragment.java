@@ -180,10 +180,6 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.filer);
-    }
 
     @Override
     protected boolean isSearchIconVisible() {

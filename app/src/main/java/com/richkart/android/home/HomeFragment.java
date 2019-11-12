@@ -314,10 +314,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         return true;
     }
 
-    @Override
-    protected String getActionbarTitle() {
-        return getString(R.string.home);
-    }
 
     @Override
     public void onRefresh() {
