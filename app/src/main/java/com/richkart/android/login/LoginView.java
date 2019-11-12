@@ -8,7 +8,7 @@ public interface LoginView {
 
     void onFailure(String appErrorMessage);
 
-    void onLoginSuccess(LoginResponse loginResponse);
+    void onLoginSuccess(LoginResponse loginResponse );
 
     void forgotPassword(ForgotPasswordResponse forgotPasswordResponse);
 }
