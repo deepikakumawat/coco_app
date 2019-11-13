@@ -58,7 +58,6 @@ import com.richkart.android.my_wishlist.MyWishlistFragment;
 import com.richkart.android.profile.MyAccountFragment;
 import com.richkart.android.search.SearchFragment;
 import com.richkart.android.shared_preference.CocoPreferences;
-import com.richkart.android.signup.SignupActivity;
 import com.richkart.android.utility.Constant;
 import com.richkart.android.utility.Util;
 

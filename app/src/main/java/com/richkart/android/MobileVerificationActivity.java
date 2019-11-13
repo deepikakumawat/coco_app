@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.richkart.android.R;
 import com.richkart.android.shared_preference.CocoPreferences;
 import com.richkart.android.signup.GetOTPResponse;
 import com.richkart.android.signup.SignUpPresenter;
@@ -139,14 +138,16 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
     @Override
     public void onSignSuccess(SignUpResponse signUpResponse) {
 
-        if (!TextUtils.isEmpty(signUpResponse.getmStatus()) && ("1".equalsIgnoreCase(signUpResponse.getmStatus()))) {
+        if (!TextUtils.isEmpty(signUpResponse.getMStatus()) && ("1".equalsIgnoreCase(signUpResponse.getMStatus()))) {
 
-            CocoPreferences.setUserId(TextUtils.isEmpty(signUpResponse.getmLoginData().getmId()) ? "" : signUpResponse.getmLoginData().getmId());
-            CocoPreferences.setUserEmail(TextUtils.isEmpty(signUpResponse.getmLoginData().getmEmail()) ? "" : signUpResponse.getmLoginData().getmEmail());
-            CocoPreferences.setUserPhone(TextUtils.isEmpty(signUpResponse.getmLoginData().getmMobileNo()) ? "" : signUpResponse.getmLoginData().getmMobileNo());
-            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmName()) ? "" : signUpResponse.getmLoginData().getmName());
-            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmGender()) ? "" : signUpResponse.getmLoginData().getmGender());
-            CocoPreferences.setLastName(TextUtils.isEmpty(signUpResponse.getmLoginData().getmLastName()) ? "" : signUpResponse.getmLoginData().getmLastName());
+
+
+            CocoPreferences.setUserId(TextUtils.isEmpty(signUpResponse.getMLoginData().getMId()) ? "" : signUpResponse.getMLoginData().getMId());
+            CocoPreferences.setUserEmail(TextUtils.isEmpty(signUpResponse.getMLoginData().getMEmail()) ? "" : signUpResponse.getMLoginData().getMEmail());
+            CocoPreferences.setUserPhone(TextUtils.isEmpty(signUpResponse.getMLoginData().getMMobileNo()) ? "" : signUpResponse.getMLoginData().getMMobileNo());
+            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getMLoginData().getMName()) ? "" : signUpResponse.getMLoginData().getMName());
+            CocoPreferences.setFirstName(TextUtils.isEmpty(signUpResponse.getMLoginData().getMGender()) ? "" : signUpResponse.getMLoginData().getMGender());
+            CocoPreferences.setLastName(TextUtils.isEmpty(signUpResponse.getMLoginData().getMLastName()) ? "" : signUpResponse.getMLoginData().getMLastName());
             CocoPreferences.savePreferencese();
 
 
@@ -165,9 +166,9 @@ public class MobileVerificationActivity extends AppCompatActivity implements Vie
         try {
             showCenteredToast(ryParent, this, getOTPResponse.getMessage(), "");
 
-            if (getOTPResponse.getmOTPData() != null) {
-                if (!TextUtils.isEmpty(getOTPResponse.getmOTPData().getmVcToken())) {
-                    VCToken = getOTPResponse.getmOTPData().getmVcToken();
+            if (getOTPResponse.getMOTPData() != null) {
+                if (!TextUtils.isEmpty(getOTPResponse.getMOTPData().getMVcToken())) {
+                    VCToken = getOTPResponse.getMOTPData().getMVcToken();
 
                 } else {
                     showCenteredToast(ryParent, this, getString(R.string.no_vc_token_found), "");

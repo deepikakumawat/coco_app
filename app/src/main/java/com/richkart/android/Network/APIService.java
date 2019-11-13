@@ -32,7 +32,6 @@ import com.richkart.android.profile.UpdateProfileResponse;
 import com.richkart.android.search.SearchResponse;
 import com.richkart.android.search.TrendingResponse;
 import com.richkart.android.seller.SellerResponse;
-import com.richkart.android.signup.GetOTPResponse;
 import com.richkart.android.signup.SignUpResponse;
 import com.richkart.android.sub_sub_category.SubSubCategoriesResponse;
 
