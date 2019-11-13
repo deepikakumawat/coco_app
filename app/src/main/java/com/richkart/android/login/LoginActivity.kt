@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
 
 
+
     private lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,14 +39,14 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
         dismissProDialog()
     }
 
-    override fun onFailure(appErrorMessage: String?) {
+    override fun onFailure(appErrorMessage: String) {
         showCenteredToast(clParent, this, appErrorMessage, "")
     }
 
-    override fun onLoginSuccess(loginResponse: LoginResponse?) {
+    override fun onLoginSuccess(loginResponse: LoginResponse) {
         try {
             if (loginResponse != null) {
-                if (!TextUtils.isEmpty(loginResponse.mStatus) && ("1".equals(loginResponse.mStatus))) {
+                if (!TextUtils.isEmpty(loginResponse.mStatus) && ("1".equals(loginResponse.mStatus, ignoreCase = true))) {
 
                     CocoPreferences.setUserId(if (TextUtils.isEmpty(loginResponse.loginData!!.mId)) "" else loginResponse.loginData!!.mId)
                     CocoPreferences.setUserEmail(if (TextUtils.isEmpty(loginResponse.loginData!!.mEmail)) "" else loginResponse.loginData!!.mEmail)
@@ -65,12 +66,15 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
         } catch (e : Exception) {
             e.printStackTrace()
         }
-
     }
 
-    override fun forgotPassword(forgotPasswordResponse: ForgotPasswordResponse?) {
+    override fun forgotPassword(forgotPasswordResponse: ForgotPasswordResponse) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+
+
+
 
     override fun onClick(view: View?) = try {
         var vId = view?.id
