@@ -245,6 +245,8 @@
     <string name="password">Password</string>
     <string name="email_id">Email Id</string>
     <string name="richkart_provide_the_ability">Richkart provide the ability to shop in multiple countries. Select your desire country store to begin your shopping experience. \n\nWhen you change country store, the new store automatically  open in the app instantly.</string>
+    <string name="invoice">Invoice</string>
+    <string name="please_select_ship_type">Please select ship type.</string>
 
 
 </resources>

@@ -30,8 +30,7 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="20dp"
-               >
+                    android:paddingBottom="20dp">
 
                 </android.support.v7.widget.RecyclerView>
 
@@ -39,11 +38,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/rect_recycler"
-                android:elevation="3dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8.3dp"
                 android:layout_marginRight="8.9dp"
+                android:background="@drawable/rect_recycler"
+                android:elevation="3dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -69,9 +68,9 @@
                     </LinearLayout>
 
                     <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                        android:id="@+id/txtSubTotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtSubTotalPrice"
                         android:layout_marginTop="21dp"
                         android:layout_marginRight="21dp"
                         android:letterSpacing="0"
@@ -125,8 +124,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15.7dp"
                         android:layout_marginTop="12dp"
-                        android:layout_weight="1"
                         android:layout_marginBottom="@dimen/dimen_20dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <com.richkart.android.customfonts.TextViewSFProDisplayRegular
@@ -162,20 +161,13 @@
             </LinearLayout>
 
 
-            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="11dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="13.3dp"
-                android:text="Ship To"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8.3dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
                 android:layout_marginRight="8.9dp"
                 android:background="@drawable/rect_recycler"
                 android:elevation="3dp"
@@ -184,43 +176,53 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_5dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_5dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:src="@drawable/pin_code"
-                            android:layout_height="50dp" />
 
-
-
-                        <com.richkart.android.customfonts.Button_Roboto_Medium
-                            android:id="@+id/btnChange"
-                            style="@style/buttonStyle"
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
+                            android:letterSpacing="0.03"
+                            android:text="Shipping Address"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="17sp" />
+
+
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                            android:id="@+id/btnChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
+                            android:layout_gravity="center"
+                            android:textColor="@color/dark_red"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textSize="@dimen/txt_14sp"
                             android:text="Change" />
 
-                        <com.richkart.android.customfonts.Button_Roboto_Medium
+                        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/btnAddAddress"
-                            style="@style/buttonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:visibility="gone"
                             android:text="Add Address"
-                          />
+                            android:textColor="@color/dark_red"
+                            android:textSize="@dimen/txt_14sp"
+
+                            android:textStyle="bold"
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 
@@ -228,8 +230,8 @@
                         android:id="@+id/txtAddress1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address1"
                         android:layout_marginTop="@dimen/dimen_5dp"
+                        android:text="Address1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp" />
 
@@ -243,8 +245,8 @@
                             android:id="@+id/txtAddress2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Address2"
                             android:layout_marginTop="@dimen/dimen_2dp"
+                            android:text="Address2"
                             android:textColor="@color/black"
                             android:textSize="@dimen/txt_14sp" />
 
@@ -252,7 +254,7 @@
                             android:id="@+id/txtLandmark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-android:layout_marginTop="@dimen/dimen_2dp"
+                            android:layout_marginTop="@dimen/dimen_2dp"
                             android:text="Landmark"
                             android:textColor="@color/black"
                             android:textSize="@dimen/txt_14sp" />
@@ -265,27 +267,26 @@ android:layout_marginTop="@dimen/dimen_2dp"
 
                             <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtCity"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="City"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_14sp" />
 
                             <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtState"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginRight="@dimen/dimen_5dp"
                                 android:text="State"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_14sp" />
 
                             <com.richkart.android.customfonts.MyTextView_Roboto_Medium
                                 android:id="@+id/txtZipcode"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Zipcode"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/txt_14sp" />
@@ -298,8 +299,8 @@ android:layout_marginTop="@dimen/dimen_2dp"
                             android:id="@+id/txtCountry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Country"
                             android:layout_marginTop="@dimen/dimen_2dp"
+                            android:text="Country"
                             android:textColor="@color/black"
                             android:textSize="@dimen/txt_14sp" />
 

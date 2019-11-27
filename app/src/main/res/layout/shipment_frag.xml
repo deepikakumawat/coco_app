@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lyParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+
+    <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+        android:id="@+id/txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="0.03"
+        android:text="Shipping Type"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/rect_recycler"
+        android:elevation="3dp"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_2dp"
+            android:orientation="horizontal">
+
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtAddress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtAddress2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:text="Address2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+        </LinearLayout>
+
+        <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/txtLandmark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_2dp"
+            android:text="Landmark"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_2dp"
+            android:orientation="horizontal">
+
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:text="State"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtZipcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:text="Zipcode"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+
+            <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/txtCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Country"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_14sp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:background="#ebeced" />
+
+        <LinearLayout
+            android:id="@+id/lyShipping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt"
+            android:orientation="vertical" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txtConfirmPlaceOrder" />
+
+
+    <com.richkart.android.customfonts.Button_Roboto_Medium
+        android:id="@+id/txtConfirmPlaceOrder"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="25dp"
+        android:text="Confirm and place order" />
+
+
+</RelativeLayout>

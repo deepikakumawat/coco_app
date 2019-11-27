@@ -45,8 +45,10 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp"
+
+
                  />
 
             <View
@@ -81,7 +83,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View
@@ -115,7 +117,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View
@@ -149,7 +151,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View
@@ -182,7 +184,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View
@@ -216,7 +218,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View
@@ -249,7 +251,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View
@@ -283,7 +285,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColorHint="#7137474f"
-                android:textCursorDrawable="@color/yellow"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="12sp" />
 
             <View

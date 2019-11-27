@@ -58,6 +58,8 @@ import com.richkart.android.my_wishlist.MyWishlistFragment;
 import com.richkart.android.profile.MyAccountFragment;
 import com.richkart.android.search.SearchFragment;
 import com.richkart.android.shared_preference.CocoPreferences;
+import com.richkart.android.shipping.ShippingFragment;
+import com.richkart.android.signup.SignupActivity;
 import com.richkart.android.utility.Constant;
 import com.richkart.android.utility.Util;
 
@@ -479,7 +481,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     public void onPaymentSuccess(String s) {
         try {
             Fragment f = getCurrentFragmentInRootLayout();
-            ((CheckoutFragment) f).onPaymentSuccess(s);
+            ((ShippingFragment) f).onPaymentSuccess(s);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -490,7 +492,7 @@ public class DrawerActivity extends AppCompatActivity implements IFragmentListen
     public void onPaymentError(int i, String s) {
         try {
             Fragment f = getCurrentFragmentInRootLayout();
-            ((CheckoutFragment) f).onPaymentError(i, s);
+            ((ShippingFragment) f).onPaymentError(i, s);
         } catch (Exception e) {
             e.printStackTrace();
         }

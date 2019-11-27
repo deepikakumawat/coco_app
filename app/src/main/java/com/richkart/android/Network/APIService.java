@@ -32,8 +32,12 @@ import com.richkart.android.profile.UpdateProfileResponse;
 import com.richkart.android.search.SearchResponse;
 import com.richkart.android.search.TrendingResponse;
 import com.richkart.android.seller.SellerResponse;
+import com.richkart.android.shipping.ShippingListResponse;
+import com.richkart.android.signup.GetOTPResponse;
 import com.richkart.android.signup.SignUpResponse;
 import com.richkart.android.sub_sub_category.SubSubCategoriesResponse;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -200,7 +204,7 @@ public interface APIService {
                                       @Field("prod_rate") String productRate
     );
 
-    @POST("checkout-payment")
+   /* @POST("checkout-payment")
     @FormUrlEncoded
     Call<CheckoutPaymentResponse> getCheckoutPayment(@Field("user_id") String userId,
                                                      @Field("razorpay_payment_id") String razorPaymentId,
@@ -225,7 +229,7 @@ public interface APIService {
                                                      @Field("szip") String sZip,
                                                      @Field("sstate") String sState,
                                                      @Field("scity") String sCity
-    );
+    );*/
 
 
     @POST("get-products-by-category")
@@ -286,6 +290,45 @@ public interface APIService {
 
     @POST("get_all_trending")
     Call<TrendingResponse> getTrendings();
+
+    @POST("checkout-payment")
+    @FormUrlEncoded
+    Call<CheckoutPaymentResponse> getCheckoutPayment(@Field("user_id") String userId,
+                                                     @Field("razorpay_payment_id") String razorPaymentId,
+                                                     @Field("shipcharge") String shipCharge,
+                                                     @Field("amount") String amount,
+                                                     @Field("sameinfo") String sameInfo,
+                                                     @Field("rfname") String rFname,
+                                                     @Field("rlname") String rLname,
+                                                     @Field("remail") String rEmail,
+                                                     @Field("rlandmark") String rLandmark,
+                                                     @Field("rnumber") String rNumber,
+                                                     @Field("radress") String rAddress,
+                                                     @Field("rzip") String rZip,
+                                                     @Field("rstate") String rState,
+                                                     @Field("rcity") String rCity,
+                                                     @Field("sfname") String sFname,
+                                                     @Field("slname") String sLname,
+                                                     @Field("semail") String sEmail,
+                                                     @Field("slandmark") String sLandmark,
+                                                     @Field("snumber") String sNumber,
+                                                     @Field("sadress") String sAddress,
+                                                     @Field("szip") String sZip,
+                                                     @Field("sstate") String sState,
+                                                     @Field("scity") String sCity,
+                                                     @Field("shipType") String sShipType,
+                                                     @Field("shipBy") String sShipBy
+    );
+
+    @POST("shipping_calculate")
+    @FormUrlEncoded
+    Call<List<ShippingListResponse>> getShippingList(@Field("user_id") String userID,
+                                                     @Field("radress") String radress,
+                                                     @Field("rzip") String rzip,
+                                                     @Field("rstate") String rstate,
+                                                     @Field("rcity") String rcity
+    );
+
 
 }
 

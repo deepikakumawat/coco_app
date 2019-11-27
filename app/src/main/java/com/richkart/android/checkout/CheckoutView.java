@@ -13,7 +13,6 @@ public interface CheckoutView {
 
     void getAddressList(AddressListResponse addressListResponse);
 
-    void getCheckoutPayment(CheckoutPaymentResponse checkoutPaymentResponse);
 
 
 

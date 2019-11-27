@@ -35,9 +35,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_marginRight="@dimen/dimen_10dp"
                     android:layout_marginTop="@dimen/dimen_5dp"
-                    android:layout_marginBottom="@dimen/dimen_5dp"                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:layout_weight="1"
                     android:text="@string/order_details"
                     android:textColor="@color/black"
                     android:textSize="@dimen/txt_20sp"
@@ -172,15 +173,12 @@
                 <!--Reciver data-->
 
 
-
                 <!--Delivery Data-->
-
 
 
             </LinearLayout>
 
             <!--track shipment-->
-
 
 
             <!--product list-->
@@ -195,38 +193,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_marginRight="@dimen/dimen_10dp"
                     android:layout_marginTop="@dimen/dimen_5dp"
-                    android:layout_marginBottom="@dimen/dimen_5dp"                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:layout_weight="1"
                     android:text="@string/product_details"
                     android:textColor="@color/black"
                     android:textSize="@dimen/txt_20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:padding="@dimen/dimen_10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rect_gray"
                     android:layout_margin="@dimen/dimen_10dp"
-                    android:orientation="vertical">
+                    android:background="@drawable/rect_gray"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_10dp">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvMyOrder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvMyOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#d7d4d4" />
+
                     <TextView
                         android:id="@+id/txtTrackShipment"
                         style="@style/viewParent.headerText.settingsTextIcon"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:padding="@dimen/dimen_5dp"
                         android:layout_margin="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
                         android:text="Track Shipment" />
 
                 </LinearLayout>
@@ -237,9 +238,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
                 android:layout_marginTop="@dimen/dimen_5dp"
-                android:layout_marginBottom="@dimen/dimen_5dp"                android:layout_weight="1"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:layout_weight="1"
                 android:text="@string/delivery_details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/txt_20sp"
@@ -327,8 +329,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
                 android:layout_marginBottom="@dimen/dimen_5dp"
                 android:layout_weight="1"
                 android:text="Billing Address"
@@ -418,13 +420,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
                 android:layout_marginTop="@dimen/dimen_5dp"
-                android:layout_marginBottom="@dimen/dimen_5dp"                android:layout_weight="1"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:layout_weight="1"
                 android:text="Order Summary"
                 android:textColor="@color/black"
                 android:textSize="@dimen/txt_20sp"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -437,19 +441,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tax"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/txt_14sp"
-                    tools:ignore="MissingConstraints" />
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tax"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
 
                     <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"
                         android:layout_alignParentRight="true"
+                        android:text="0.00"
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp"
                         tools:ignore="MissingConstraints" />
@@ -460,69 +464,97 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Shipping charge"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/txt_14sp"
-                    tools:ignore="MissingConstraints" />
                     <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"
+                        android:text="Shipping charge"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:text="0.00"
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp"
                         tools:ignore="MissingConstraints" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_2dp"
-                    android:text="Sub Total"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/txt_14sp"
-                    tools:ignore="MissingConstraints" />
                     <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="Sub Total"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
                         android:id="@+id/txtPriceTotal"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"
                         android:layout_alignParentRight="true"
+                        android:text="0.00"
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp"
                         tools:ignore="MissingConstraints" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.richkart.android.customfonts.MyTextView_Roboto_Regular
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_2dp"
-                    android:text="Price"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/txt_14sp"
-                    tools:ignore="MissingConstraints" />
                     <com.richkart.android.customfonts.MyTextView_Roboto_Regular
-                        android:layout_width="wrap_content"
-                        android:id="@+id/txtPriceTotalB"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0.00"
+                        android:layout_marginTop="@dimen/dimen_2dp"
+                        android:text="Price"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txt_14sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <com.richkart.android.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/txtPriceTotalB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:text="0.00"
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_14sp"
                         tools:ignore="MissingConstraints" />
 
                 </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="11dp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_10dp">
+
+                <com.richkart.android.customfonts.Button_Roboto_Medium
+                    style="@style/buttonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+
+                    android:gravity="center"
+                    android:text="@string/invoice" />
+
+
             </LinearLayout>
 
 

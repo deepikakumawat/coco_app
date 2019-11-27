@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            android:id="@+id/ly_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <RadioButton
+                    android:id="@+id/rbShippingName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:text="I Phone X, 128GB (Black and Silver Color)"
+
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14sp" />
+
+
+
+
+                <com.richkart.android.customfonts.MyTextView_Roboto_Medium
+                    android:id="@+id/txtProductSalePrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12sp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="$ 343"
+
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14sp" />
+
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="#ebeced" />
+
+
+        </LinearLayout>
+
+
+
+
+</LinearLayout>
